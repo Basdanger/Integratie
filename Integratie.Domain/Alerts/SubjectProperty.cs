@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Alerts
 {
-    public abstract class Alert
+    //Extends Subject class
+   public class SubjectProperty 
     {
-        public bool Ring { get; set; }
-        public virtual void Check()
-        {
-
-        }
     }
 }

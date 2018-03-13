@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Alerts
 {
-    public abstract class Alert
+    //Basic Alert
+    public class CheckAlert : Alert
     {
-        public bool Ring { get; set; }
-        public virtual void Check()
+        public Subject Subject { get; set; }
+
+        public int MyProperty { get; set; }
+        public override void Check()
         {
 
         }

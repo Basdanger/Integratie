@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Alerts
 {
-    public abstract class Alert
+    public static class SubjectExtensions
     {
-        public bool Ring { get; set; }
-        public virtual void Check()
+        public static int Gender(this Subject subject, Gender gender, DateTime begin, DateTime end)
         {
-
+            return 0;
         }
     }
 }

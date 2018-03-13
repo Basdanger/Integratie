@@ -8,14 +8,14 @@ namespace Integratie.Domain
 {
     public class Feed
     {
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
         public int Sentiment { get; set; }
         public int Age { get; set; }
         public Gender Gender { get; set; }
 
         public Feed(DateTime date, int sentiment, int age, Gender gender)
         {
-            this.date = date;
+            Date = date;
             Sentiment = sentiment;
             Age = age;
             Gender = gender;
