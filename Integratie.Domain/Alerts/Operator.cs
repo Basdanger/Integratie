@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Alerts
 {
-    //Extends Subject class
-   public enum SubjectProperty 
+    public enum  Operator
     {
-        geo,
-        mentions,
-        date,
-
+        GT,
+        LT,
+        EQ
     }
 }

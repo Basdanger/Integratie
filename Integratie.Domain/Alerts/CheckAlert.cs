@@ -9,12 +9,10 @@ namespace Integratie.Domain.Alerts
     //Basic Alert
     public class CheckAlert : Alert
     {
+        public object SubjectPropertyValue { get; set; }
+        public SubjectProperty SubjectProperty { get; set; }
+        public Operator Operator { get; set; }
+        public int value { get; set; }
         public Subject Subject { get; set; }
-
-        public int MyProperty { get; set; }
-        public override void Check()
-        {
-
-        }
     }
 }
