@@ -15,9 +15,5 @@ namespace Integratie.Domain.Alerts
 
 
         public int MyProperty { get; set; }
-        public override void Check()
-        {
-            SubjectA.Gender(Gender.male, DateTime.Now, DateTime.Now);
-        }
     }
 }

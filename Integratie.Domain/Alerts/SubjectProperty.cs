@@ -12,6 +12,7 @@ namespace Integratie.Domain.Alerts
         geo,
         mentions,
         date,
+        count
 
     }
 }

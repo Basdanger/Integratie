@@ -10,15 +10,12 @@ namespace Integratie.Domain
     {
         public DateTime Date { get; set; }
         public int Sentiment { get; set; }
-        public int Age { get; set; }
-        public Gender Gender { get; set; }
+        public bool Repost { get; set; }
 
-        public Feed(DateTime date, int sentiment, int age, Gender gender)
+        public Feed(DateTime date, int sentiment)
         {
             Date = date;
             Sentiment = sentiment;
-            Age = age;
-            Gender = gender;
         }
         public Feed()
         {
