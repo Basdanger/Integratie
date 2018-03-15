@@ -137,6 +137,7 @@ namespace Integratie.DAL
             S1.AddFeed(F8);
             S1.AddFeed(F9);
             S1.AddFeed(F10);
+            S1.AddFeed(F11);
 
             Subject S2 = new Subject(2, "Maggie De Block");
             S2.AddFeed(F11);
@@ -179,11 +180,15 @@ namespace Integratie.DAL
             CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, S2);
             CheckAlert CH3 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, S3);
             CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, S4);
+            CompareAlert CO1 = new CompareAlert(S1, S2, Operator.GT);
+            CompareAlert CO2 = new CompareAlert(S1, S2, Operator.LT);
 
             alerts.Add(CH1);
             alerts.Add(CH2);
             alerts.Add(CH3);
             alerts.Add(CH4);
+            alerts.Add(CO1);
+            alerts.Add(CO2);
         }
         public Alert AddAlert(Alert alert)
         {
