@@ -32,9 +32,8 @@ namespace Integratie.UI.Con
                     if (result == true) Console.ForegroundColor = ConsoleColor.Green;
                     else Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(result.ToString());
-                    Console.ForegroundColor = ConsoleColor.White;
-
-
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
                 }
             }
 
