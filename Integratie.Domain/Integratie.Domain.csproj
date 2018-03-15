@@ -46,6 +46,7 @@
     <Compile Include="Alerts\CompareAlert.cs" />
     <Compile Include="Alerts\Operator.cs" />
     <Compile Include="Alerts\SubjectProperty.cs" />
+    <Compile Include="Alerts\TrendAlert.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subject.cs" />

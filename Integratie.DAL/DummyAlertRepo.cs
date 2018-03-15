@@ -182,6 +182,7 @@ namespace Integratie.DAL
             CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, S4);
             CompareAlert CO1 = new CompareAlert(S1, S2, Operator.GT);
             CompareAlert CO2 = new CompareAlert(S1, S2, Operator.LT);
+            TrendAlert TR1 = new TrendAlert(S1);
 
             alerts.Add(CH1);
             alerts.Add(CH2);
@@ -189,6 +190,7 @@ namespace Integratie.DAL
             alerts.Add(CH4);
             alerts.Add(CO1);
             alerts.Add(CO2);
+            alerts.Add(TR1);
         }
         public Alert AddAlert(Alert alert)
         {

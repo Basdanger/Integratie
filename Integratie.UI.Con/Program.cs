@@ -49,6 +49,19 @@ namespace Integratie.UI.Con
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                 }
+                if (a.GetType() == typeof(TrendAlert))
+                {
+                    TrendAlert ca = (TrendAlert)a;
+                    Console.WriteLine("Alert ID: " + ca.ID);
+                    Console.WriteLine("Alert SubjectA: " + ca.Subject.Name);
+                    bool result = am.CheckTrendAlert(ca);
+                    Console.Write("Alert Ring: ");
+                    if (result == true) Console.ForegroundColor = ConsoleColor.Green;
+                    else Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(result.ToString());
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
+                }
             }
 
             Console.ReadLine();
