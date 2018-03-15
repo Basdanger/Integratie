@@ -8,10 +8,16 @@ namespace Integratie.Domain.Alerts
 {
     public class CompareAlert : Alert
     {
+        public CompareAlert(Subject subjectA, Subject subjectB, Operator @operator)
+        {
+            SubjectA = subjectA;
+            SubjectB = subjectB;
+            Operator = @operator;
+        }
+
         public Subject SubjectA { get; set; }
         public Subject SubjectB { get; set; }
-        public DateTime BeginDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public Operator Operator { get; set; }
 
 
         public int MyProperty { get; set; }

@@ -19,6 +19,9 @@ namespace Integratie.BL
                 if  (a.GetType() == typeof(CheckAlert))
                 {
                     CheckCheckAlert((CheckAlert)a);
+                } else if (a.GetType() == typeof(CompareAlert))
+                {
+                    CheckCompareAlert((CompareAlert)a);
                 }
             }
         }
@@ -71,9 +74,52 @@ namespace Integratie.BL
             
             return false;
         }
-        public void CheckCompareAlert(CompareAlert alert)
+        public bool CheckCompareAlert(CompareAlert alert)
         {
+            Subject subjectA = alert.SubjectA;
+            Subject subjectB = alert.SubjectB;
 
+            int fcA = 0;
+            int fcB = 0;
+
+            foreach(Feed f in subjectA.Feeds)
+            {
+                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.Ticks)
+                {
+                    fcA++;
+                }
+            }
+
+            foreach (Feed f in subjectB.Feeds)
+            {
+                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.Ticks)
+                {
+                    fcB++;
+                }
+            }
+
+            switch (alert.Operator)
+            {
+                case Operator.GT:
+                    if (fcA > fcB)
+                    {
+                        return true;
+                    }
+                    break;
+                case Operator.LT:
+                    if (fcA < fcB)
+                    {
+                        return true;
+                    }
+                    break;
+                case Operator.EQ:
+                    if (fcA == fcB)
+                    {
+                        return true;
+                    }
+                    break;
+            }
+            return false;
         }
     }
 }
