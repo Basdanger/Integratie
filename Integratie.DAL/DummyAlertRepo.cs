@@ -14,13 +14,13 @@ namespace Integratie.DAL
         public DummyAlertRepo()
         {
             //DUMMY FEEDS
-            Feed F1 = new Feed(DateTime.Now, 3);
-            Feed F2 = new Feed(DateTime.Now, 3);
-            Feed F3 = new Feed(DateTime.Now, 3);
-            Feed F4 = new Feed(DateTime.Now, 3);
-            Feed F5 = new Feed(DateTime.Now, 3);
-            Feed F6 = new Feed(DateTime.Now, 3);
-            Feed F7 = new Feed(DateTime.Now, 3);
+            Feed F1 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F2 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F3 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F4 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F5 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F6 = new Feed(DateTime.Now.AddDays(-3), 3);
+            Feed F7 = new Feed(DateTime.Now.AddDays(-3), 3);
             Feed F8 = new Feed(DateTime.Now, 3);
             Feed F9 = new Feed(DateTime.Now, 3);
             Feed F10 = new Feed(DateTime.Now, 3);
@@ -39,7 +39,7 @@ namespace Integratie.DAL
             S1.AddFeed(F10);
 
             //DUMMY ALERTS
-            CheckAlert CH1 = new CheckAlert(null,SubjectProperty.count,Operator.GT,30,S1);
+            CheckAlert CH1 = new CheckAlert(null,SubjectProperty.relativeCount,Operator.GT,1.5,S1);
 
             alerts.Add(CH1);
         }

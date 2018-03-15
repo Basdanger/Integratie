@@ -9,23 +9,19 @@ namespace Integratie.Domain.Alerts
     //Basic Alert
     public class CheckAlert : Alert
     {
-        public CheckAlert(object subjectPropertyValue, SubjectProperty subjectProperty, Operator @operator, int value, Subject subject)
+        public CheckAlert(object subjectPropertyValue, SubjectProperty subjectProperty, Operator @operator, double value, Subject subject)
         {
             SubjectPropertyValue = subjectPropertyValue;
             SubjectProperty = subjectProperty;
             Operator = @operator;
-            this.value = value;
+            this.Value = value;
             Subject = subject;
-        }
-        public CheckAlert()
-        {
-
         }
 
         public object SubjectPropertyValue { get; set; }
         public SubjectProperty SubjectProperty { get; set; }
         public Operator Operator { get; set; }
-        public int value { get; set; }
+        public double Value { get; set; }
         public Subject Subject { get; set; }
     }
 }

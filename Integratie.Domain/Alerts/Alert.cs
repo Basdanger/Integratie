@@ -10,9 +10,5 @@ namespace Integratie.Domain.Alerts
     {
         public int ID { get; set; }
         public bool Ring { get; set; }
-        public virtual void Check()
-        {
-
-        }
     }
 }

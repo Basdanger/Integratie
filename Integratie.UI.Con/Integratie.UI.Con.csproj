@@ -48,5 +48,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Integratie.BL\Integratie.BL.csproj">
+      <Project>{3FD01405-B1DA-4438-B187-4847DBE9CD0F}</Project>
+      <Name>Integratie.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Integratie.DAL\Integratie.DAL.csproj">
+      <Project>{9C8D0A22-C1F8-46B6-806F-A86C648C12E9}</Project>
+      <Name>Integratie.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">
+      <Project>{DF80B85D-60DE-4B74-9666-352754077BE6}</Project>
+      <Name>Integratie.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
