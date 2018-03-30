@@ -13,14 +13,17 @@ namespace Integratie.Domain
             ID = iD;
             Name = name;
             Feeds = new List<Feed>();
-        }
+            feedCount = Feeds.Count();
+    }
         public void AddFeed(Feed feed)
         {
             Feeds.Add(feed);
+            feedCount = Feeds.Count();
         }
 
         public int ID { get; set; }
         public String Name { get; set; }
         public List<Feed> Feeds { get; set; }
+        public int feedCount { get; set; }
     }
 }
