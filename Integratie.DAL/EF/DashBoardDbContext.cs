@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    internal class DashBoardDbContext : DbContext
+    [DbConfigurationType(typeof(DashboardDbConfiguration))]
+    public class DashBoardDbContext : DbContext
     {
         public DashBoardDbContext() : base("IntegratieDB")
         {

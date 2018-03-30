@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    internal class DashboardDbConfiguration : DbConfiguration
+    public class DashboardDbConfiguration : DbConfiguration
     {
         public DashboardDbConfiguration()
         {
