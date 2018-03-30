@@ -40,7 +40,9 @@ namespace Integratie.UI.Con
                 {
                     CompareAlert ca = (CompareAlert)a;
                     Console.WriteLine("Alert ID: " + ca.ID);
-                    Console.WriteLine("Alert SubjectA: " + ca.SubjectA.Name + " Operator: " + ca.Operator + " Alert SubjectB: " + ca.SubjectB.Name);
+                    Console.WriteLine("Alert Subject A: " + ca.SubjectA.Name);
+                    Console.WriteLine("Alert Subject B: " + ca.SubjectB.Name);
+                    Console.WriteLine("Alert Expression: " + "A " + ca.Operator + " B");
                     bool result = am.CheckCompareAlert(ca);
                     Console.Write("Alert Ring: ");
                     if (result == true) Console.ForegroundColor = ConsoleColor.Green;
