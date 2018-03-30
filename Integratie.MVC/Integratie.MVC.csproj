@@ -280,6 +280,16 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Integratie.BL\Integratie.BL.csproj">
+      <Project>{3fd01405-b1da-4438-b187-4847dbe9cd0f}</Project>
+      <Name>Integratie.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">
+      <Project>{df80b85d-60de-4b74-9666-352754077be6}</Project>
+      <Name>Integratie.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
