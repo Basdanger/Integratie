@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.Domain", "Integratie.Domain\Integratie.Domain.csproj", "{DF80B85D-60DE-4B74-9666-352754077BE6}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.UI.Con", "Integratie.UI.Con\Integratie.UI.Con.csproj", "{4A974C90-271F-4164-ABF0-43472783A411}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.BL", "Integratie.BL\Integratie.BL.csproj", "{3FD01405-B1DA-4438-B187-4847DBE9CD0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.MVC", "Integratie.MVC\Integratie.MVC.csproj", "{2DAA7840-B93C-4155-8323-1B6E593B9CD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
