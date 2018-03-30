@@ -12,7 +12,7 @@ namespace Integratie.DAL.EF
 {
     internal class DashBoardDbContext : DbContext
     {
-        public DashBoardDbContext() : base("DashboardDb_SqlClient")
+        public DashBoardDbContext() : base("IntegratieDB")
         {
 
         }
