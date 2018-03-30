@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.UI.Con", "Integr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.BL", "Integratie.BL\Integratie.BL.csproj", "{3FD01405-B1DA-4438-B187-4847DBE9CD0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.MVC", "Integratie.MVC\Integratie.MVC.csproj", "{2DAA7840-B93C-4155-8323-1B6E593B9CD7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD01405-B1DA-4438-B187-4847DBE9CD0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DAA7840-B93C-4155-8323-1B6E593B9CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
