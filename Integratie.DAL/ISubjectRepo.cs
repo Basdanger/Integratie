@@ -1,4 +1,5 @@
 ﻿using Integratie.Domain;
+using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

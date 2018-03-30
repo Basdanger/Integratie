@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Integratie.Domain.Entities.Subjects;
 
-namespace Integratie.Domain.Alerts
+namespace Integratie.Domain.Entities.Alerts
 {
     //Basic Alert
     public class CheckAlert : Alert

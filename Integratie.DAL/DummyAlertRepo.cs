@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Integratie.Domain.Alerts;
+using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain;
 
 namespace Integratie.DAL

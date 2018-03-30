@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.Domain
+namespace Integratie.Domain.Entities.Subjects
 {
     public class Theme : Subject
     {
-        public List<String> termen { get; set; }
+        public List<String> Terms { get; set; }
 
         public Theme(int iD, string name) : base(iD, name)
         {

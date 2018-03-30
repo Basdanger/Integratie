@@ -1,4 +1,4 @@
-﻿using Integratie.Domain.Alerts;
+﻿using Integratie.Domain.Entities.Alerts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

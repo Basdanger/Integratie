@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Integratie.Domain;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.DAL
 {

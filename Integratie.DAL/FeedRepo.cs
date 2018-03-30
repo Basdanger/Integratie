@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.Domain;
+using Integratie.Domain.Entities;
 
 namespace Integratie.DAL
 {

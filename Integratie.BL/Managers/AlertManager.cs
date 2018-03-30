@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Integratie.Domain.Alerts;
 using Integratie.DAL;
 using Integratie.Domain;
+using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Subjects;
+using Integratie.Domain.Entities;
 
-namespace Integratie.BL
+namespace Integratie.BL.Managers
 {
     public class AlertManager
     {

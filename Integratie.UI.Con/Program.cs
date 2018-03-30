@@ -1,12 +1,13 @@
 ﻿using Integratie.BL;
 using Integratie.DAL;
-using Integratie.Domain.Alerts;
+using Integratie.Domain.Entities.Alerts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
+using Integratie.BL.Managers;
 
 namespace Integratie.UI.Con
 {
@@ -18,7 +19,7 @@ namespace Integratie.UI.Con
         static void Main(string[] args)
         {
             PrintAllFeeds();
-            rcdmgr.ReadFile();
+            //rcdmgr.ReadFile();
             Console.ReadLine();
         }
 

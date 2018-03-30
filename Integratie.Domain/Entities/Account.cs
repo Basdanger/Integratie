@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.Domain
+namespace Integratie.Domain.Entities
 {
     public class Account
     {

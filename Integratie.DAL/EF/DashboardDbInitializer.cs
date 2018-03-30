@@ -1,5 +1,7 @@
 ﻿using Integratie.Domain;
-using Integratie.Domain.Alerts;
+using Integratie.Domain.Entities;
+using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

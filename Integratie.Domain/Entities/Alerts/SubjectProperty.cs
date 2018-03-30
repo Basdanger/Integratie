@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.Domain.Alerts
+namespace Integratie.Domain.Entities.Alerts
 {
     //Extends Subject class
    public enum SubjectProperty 

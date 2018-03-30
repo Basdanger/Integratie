@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.BL
+namespace Integratie.BL.Managers.Interfaces
 {
     public interface IRecordManager
     {

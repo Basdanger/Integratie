@@ -1,5 +1,7 @@
-﻿using Integratie.DAL;
+﻿using Integratie.BL.Managers.Interfaces;
+using Integratie.DAL;
 using Integratie.Domain;
+using Integratie.Domain.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.BL
+namespace Integratie.BL.Managers
 {
     public class RecordManager : IRecordManager
     {
