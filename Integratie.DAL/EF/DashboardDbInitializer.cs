@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    internal class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
         protected override void Seed(DashBoardDbContext context)
         {

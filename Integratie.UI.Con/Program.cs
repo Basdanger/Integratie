@@ -6,67 +6,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Integratie.DAL.EF;
 
 namespace Integratie.UI.Con
 {
     class Program
     {
+        private static FeedManager mgr = new FeedManager();
+        private static RecordManager rcdmgr = new RecordManager();
+
         static void Main(string[] args)
         {
-            Console.Title = "Proof of Concept";
-            IAlertRepo ar = new DummyAlertRepo();
-            AlertManager am = new AlertManager();
-            Console.WriteLine("Proof Of Concept");
-            Console.WriteLine("Team Tesla");
-            Console.WriteLine("-----------------");
-            foreach (Alert a in ar.GetAlerts())
-            {
-                Console.WriteLine("Alert Type: " + a.GetType().Name);
-                if (a.GetType() == typeof(CheckAlert))
-                {
-                    CheckAlert ca = (CheckAlert)a;
-                    Console.WriteLine("Alert ID: " + a.ID);
-                    Console.WriteLine("Alert Subject: " + ca.Subject.Name);
-                    Console.WriteLine("Alert Expression: "+ ca.SubjectProperty.ToString() + " " + ca.Operator.ToString() + " " + ca.Value.ToString());
-                    bool result = am.CheckCheckAlert((CheckAlert)a);
-                    Console.Write("Alert Ring: ");
-                    if (result == true) Console.ForegroundColor = ConsoleColor.Green;
-                    else Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(result.ToString());
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
-                }
-                if (a.GetType() == typeof(CompareAlert))
-                {
-                    CompareAlert ca = (CompareAlert)a;
-                    Console.WriteLine("Alert ID: " + ca.ID);
-                    Console.WriteLine("Alert Subject A: " + ca.SubjectA.Name);
-                    Console.WriteLine("Alert Subject B: " + ca.SubjectB.Name);
-                    Console.WriteLine("Alert Expression: " + "A " + ca.Operator + " B");
-                    bool result = am.CheckCompareAlert(ca);
-                    Console.Write("Alert Ring: ");
-                    if (result == true) Console.ForegroundColor = ConsoleColor.Green;
-                    else Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(result.ToString());
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
-                }
-                if (a.GetType() == typeof(TrendAlert))
-                {
-                    TrendAlert ca = (TrendAlert)a;
-                    Console.WriteLine("Alert ID: " + ca.ID);
-                    Console.WriteLine("Alert SubjectA: " + ca.Subject.Name);
-                    bool result = am.CheckTrendAlert(ca);
-                    Console.Write("Alert Ring: ");
-                    if (result == true) Console.ForegroundColor = ConsoleColor.Green;
-                    else Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(result.ToString());
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
-                }
-            }
-
+            PrintAllFeeds();
+            rcdmgr.ReadFile();
             Console.ReadLine();
+        }
+
+        private static void PrintAllFeeds()
+        {
+            foreach (var t in mgr.GetFeeds())
+                Console.WriteLine(t.ID);
         }
     }
 }
