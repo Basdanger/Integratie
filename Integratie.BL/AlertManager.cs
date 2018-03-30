@@ -11,6 +11,7 @@ namespace Integratie.BL
 {
     public class AlertManager
     {
+        // test
         IAlertRepo ar = new DummyAlertRepo();
         public void CheckAlerts()
         {
