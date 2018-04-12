@@ -24,6 +24,7 @@ namespace Integratie.DAL.EF
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Alert> Alerts { get; set; }
+        public DbSet<Resource> Resources { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,6 +33,8 @@ namespace Integratie.DAL.EF
             
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            modelBuilder.Entity<Resource>().HasKey(t => new { t.Culture, t.Name });
         }
     }
 }

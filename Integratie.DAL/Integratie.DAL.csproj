@@ -59,8 +59,10 @@
     <Compile Include="FeedRepo.cs" />
     <Compile Include="IAlertRepo.cs" />
     <Compile Include="IFeedRepo.cs" />
+    <Compile Include="IResourceRepo.cs" />
     <Compile Include="ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">

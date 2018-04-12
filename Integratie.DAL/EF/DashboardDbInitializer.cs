@@ -175,6 +175,12 @@ namespace Integratie.DAL.EF
             context.Alerts.Add(CO2);
             context.Alerts.Add(TR1);
 
+            //DUMMY RESOURCE
+            Resource enTest = new Resource("en", "test", "engels");
+            Resource nlTest = new Resource("nl", "test", "nederlands");
+            context.Resources.Add(enTest);
+            context.Resources.Add(nlTest);
+
             context.SaveChanges();
         }
     }
