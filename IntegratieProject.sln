@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.BL", "Integratie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.MVC", "Integratie.MVC\Integratie.MVC.csproj", "{117CB7A6-E960-42B2-B7BB-3804EFD77F5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceBuilder", "ResourceBuilder\ResourceBuilder.csproj", "{4F7CEA63-1C08-479E-92CB-6069A9CD8B4F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{117CB7A6-E960-42B2-B7BB-3804EFD77F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117CB7A6-E960-42B2-B7BB-3804EFD77F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117CB7A6-E960-42B2-B7BB-3804EFD77F5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F7CEA63-1C08-479E-92CB-6069A9CD8B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F7CEA63-1C08-479E-92CB-6069A9CD8B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F7CEA63-1C08-479E-92CB-6069A9CD8B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F7CEA63-1C08-479E-92CB-6069A9CD8B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
