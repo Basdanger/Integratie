@@ -30,5 +30,25 @@ namespace Integratie.DAL
 
             return resource;
         }
+
+        public void AddResource(Resource resource)
+        {
+            context.Resources.Add(resource);
+            context.SaveChanges();
+        }
+
+        public void UpdateResource(string culture, string name, string value)
+        {
+            Resource update = ReadResource(culture, name);
+            update.Value = value;
+            context.SaveChanges();
+        }
+
+        public void RemoveResource(string culture, string name)
+        {
+            Resource remove = ReadResource(culture, name);
+            context.Resources.Remove(remove);
+            context.SaveChanges();
+        }
     }
 }
