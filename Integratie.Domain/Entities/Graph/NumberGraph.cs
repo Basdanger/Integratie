@@ -8,5 +8,8 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class NumberGraph : Graph
     {
+        public NumberGraph() : base(0, null){
+
+        }
     }
 }

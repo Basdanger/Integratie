@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Managers\AlertManager.cs" />
     <Compile Include="Managers\FeedManager.cs" />
+    <Compile Include="Managers\GraphManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
     <Compile Include="Managers\Interfaces\IRecordManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

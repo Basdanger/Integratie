@@ -8,5 +8,8 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class PieGraph : Graph
     {
+        public PieGraph() : base(0, null){
+
+        }
     }
 }

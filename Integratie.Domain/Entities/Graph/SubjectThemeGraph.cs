@@ -8,6 +8,9 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class SubjectThemeGraph : Graph
     {
+        public SubjectThemeGraph() : base(0, null){
+
+        }
 
     }
 }

@@ -8,6 +8,8 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class TrendNumberGraph : Graph
     {
+        public TrendNumberGraph() : base(0, null){
 
+        }
     }
 }
