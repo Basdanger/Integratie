@@ -13,11 +13,13 @@ namespace Integratie.UI.Con
 {
     class Program
     {
+        private static DashBoardDbTextGain api = new DashBoardDbTextGain();
         private static FeedManager mgr = new FeedManager();
         private static RecordManager rcdmgr = new RecordManager();
 
         static void Main(string[] args)
         {
+            Console.WriteLine(api.postJson());
             PrintAllFeeds();
             //rcdmgr.ReadFile();
             Console.ReadLine();
