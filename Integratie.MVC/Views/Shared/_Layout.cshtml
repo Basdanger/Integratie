@@ -4,31 +4,55 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="~/Content/menu.css" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @*<div class="container">*@
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Team Tesla", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <input type="text" onkeyup="myFunction()">
+                    <input type="submit">
+                </div>
+                <div class="navbar-collapse collapse">
+                    @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>*@
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+        @*</div>*@
+    @*<div class="topnav">
+        @Html.ActionLink("Team Tesla", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <input type="text">
+        <input type="submit">
+        @Html.Partial("_LoginPartial")
+    </div>*@
+    <aside class="sidebar">
+        <div id="leftside-navigation" class="nano">
+            <ul class="nano-content">
+                <li><br /></li>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Politici", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Organisatie", "Organisatie", "Home")</li>
+                <li>@Html.ActionLink("Weekly Review", "WeeklyReview", "Home")</li>
+                <li>@Html.ActionLink("Gemeente", "Gemeente", "Home")</li>
+                <li>@Html.ActionLink("Thema", "Thema", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
             </div>
-        </div>
-    </div>
+    </aside>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
