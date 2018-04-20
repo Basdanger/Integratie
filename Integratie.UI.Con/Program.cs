@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
+using Integratie.Domain.Entities;
 
 namespace Integratie.UI.Con
 {
@@ -15,20 +16,17 @@ namespace Integratie.UI.Con
     {
         private static DashBoardDbTextGain api = new DashBoardDbTextGain();
         private static FeedManager mgr = new FeedManager();
-        private static RecordManager rcdmgr = new RecordManager();
-
         static void Main(string[] args)
         {
             Console.WriteLine(api.postJson());
-            PrintAllFeeds();
+            Console.WriteLine(PrintAllFeeds(mgr.GetFeed(987053307431673856)));
             //rcdmgr.ReadFile();
             Console.ReadLine();
         }
 
-        private static void PrintAllFeeds()
+        private static String PrintAllFeeds(Feed feed)
         {
-            foreach (var t in mgr.GetFeeds())
-                Console.WriteLine(t.ID);
+            return String.Format("{0} {1}", feed.ID, feed.Geo[0]);
         }
     }
 }

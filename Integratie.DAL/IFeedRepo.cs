@@ -12,5 +12,7 @@ namespace Integratie.DAL
     {
         IEnumerable<Feed> ReadFeeds();
         void CreateFeed(Feed feed);
+
+        Feed ReadFeed(double ID);
     }
 }
