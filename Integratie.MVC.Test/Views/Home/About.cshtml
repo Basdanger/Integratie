@@ -1,54 +1,71 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿@model IEnumerable<Integratie.Domain.Entities.Graph.Graph>
+@using Integratie.Domain.Entities.Graph;
+@{ 
+    int i = 0;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<link href="@Url.Content("~/Content/jquery.gridster.min.css")" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="@Url.Content("~/Scripts/jquery.gridster.min.js")"></script>
-
-<h1>Add widgets dynamically</h1>
-<p>Create a grid adding widgets from an Array (not from HTML) using <code>add_widget</code> method. Widget position (col, row) not specified.</p>
-<div class="gridster">
-    <ul>
-        <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">0</li>
-        <li data-row="1" data-col="3" data-sizex="1" data-sizey="2">1</li>
-        <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">2</li>
-        <li data-row="3" data-col="2" data-sizex="3" data-sizey="1">3</li>
-        <li data-row="4" data-col="1" data-sizex="1" data-sizey="1">4</li>
-        <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">5</li>
-        <li data-row="4" data-col="2" data-sizex="1" data-sizey="1">6</li>
-        <li data-row="5" data-col="2" data-sizex="1" data-sizey="1">7</li>
-        <li data-row="4" data-col="4" data-sizex="1" data-sizey="1">8</li>
-        <li data-row="1" data-col="5" data-sizex="1" data-sizey="3">9</li>
-    </ul>
-</div>
-<script type="text/javascript">
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-</script>
-<script type="text/javascript">
-    var gridster;
-
-    $(function () {
-
-        gridster = $(".gridster ul").gridster({
-            widget_base_dimensions: [100, 100],
-            widget_margins: [5, 5],
-            helper: 'clone',
-            resize: {
-                enabled: true
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GraphId)
+        </td>
+        <td>
+            null
+        </td>
+        <td>
+            @if (item.GetType() == typeof(BarChartGraph))
+            {
+                BarChartGraph graph = (BarChartGraph)item;
+                <span>Bar</span>
             }
-        }).data('gridster');
+
+        </td>
+    </tr>
+}
+    </table>
+@foreach (var item in Model)
+{
+    if (item.GetType() == typeof(BarChartGraph))
+    {
+        BarChartGraph graph = (BarChartGraph)item;
+        <div style="width:50%; height:auto;">
+            <canvas id="c@(i)" width="1000" height="400" style="max-width:100%; max-height:100%;"></canvas>
+
+        </div>
+    }
+    i = i + 1;
+}
 
 
-        $('.js-resize-random').on('click', function () {
-            gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
-                getRandomInt(1, 4), getRandomInt(1, 4))
-        });
 
+
+<script src="https://nodebox.live/api/v1/ndbx.js"></script>
+@for (int x = 0; x < i; x++)
+{
+<script>
+    // Again, replace these with your own userId / projectId / functionId / canvasId
+
+    var c = document.getElementById("c@(x)");
+    var ctx = c.getContext("2d");
+
+        var options@(x) = {
+        userId: 'JanVH',
+        projectId: 'demo',
+        functionId: 'main',
+        canvasId: 'c@(x)',
+        autoplay: true
+    };
+    // Initialize the NodeBox player object
+
+    ndbx.embed(options@(x), function (err, player) {
+        if (err) {
+            throw new Error(err);
+        } else {
+            window.player = player;
+        }
     });
+    
 </script>
-
+}

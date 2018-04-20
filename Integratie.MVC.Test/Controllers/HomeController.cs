@@ -21,8 +21,8 @@ namespace Integratie.MVC.Test.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            List<Graph> Graphs = manager.GetAllFilledGraphs();
+            return View(Graphs);
         }
 
         public ActionResult Contact()
