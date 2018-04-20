@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Graph.Graph>
+@using Integratie.Domain.Entities.Graph;
+@{ 
+    int i = 0;
+}
+
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GraphId)
+        </td>
+        <td>
+            null
+        </td>
+        <td>
+            @if (item.GetType() == typeof(BarChartGraph))
+            {
+                BarChartGraph graph = (BarChartGraph)item;
+                <span>Bar</span>
+            }
+
+        </td>
+    </tr>
+}
+    </table>
+@foreach (var item in Model)
+{
+    if (item.GetType() == typeof(BarChartGraph))
+    {
+        BarChartGraph graph = (BarChartGraph)item;
+        <div style="width:50%; height:auto;">
+            <canvas id="c@(i)" width="1000" height="400" style="max-width:100%; max-height:100%;"></canvas>
+
+        </div>
+    }
+    i = i + 1;
+}
+
+
+
+
+<script src="https://nodebox.live/api/v1/ndbx.js"></script>
+@for (int x = 0; x < i; x++)
+{
+<script>
+    // Again, replace these with your own userId / projectId / functionId / canvasId
+
+    var c = document.getElementById("c@(x)");
+    var ctx = c.getContext("2d");
+
+        var options@(x) = {
+        userId: 'JanVH',
+        projectId: 'demo',
+        functionId: 'main',
+        canvasId: 'c@(x)',
+        autoplay: true
+    };
+    // Initialize the NodeBox player object
+
+    ndbx.embed(options@(x), function (err, player) {
+        if (err) {
+            throw new Error(err);
+        } else {
+            window.player = player;
+        }
+    });
+    
+</script>
+}

@@ -57,8 +57,10 @@
     <Compile Include="EF\DashBoardDbContext.cs" />
     <Compile Include="EF\DashboardDbInitializer.cs" />
     <Compile Include="FeedRepo.cs" />
+    <Compile Include="GraphRepo.cs" />
     <Compile Include="IAlertRepo.cs" />
     <Compile Include="IFeedRepo.cs" />
+    <Compile Include="IGraphRepo.cs" />
     <Compile Include="ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
