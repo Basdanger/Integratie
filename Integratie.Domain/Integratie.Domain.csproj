@@ -61,7 +61,6 @@
     <Compile Include="Entities\Feed.cs" />
     <Compile Include="Entities\Subjects\Organisation.cs" />
     <Compile Include="Entities\Subjects\Person.cs" />
-    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Record.cs" />
     <Compile Include="Entities\Subjects\Subject.cs" />

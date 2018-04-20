@@ -19,10 +19,14 @@ namespace Integratie.DAL.EF
         protected override void Seed(DashBoardDbContext context)
         {
             List<Feed> feeds = new List<Feed>();
-            RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(dashBoardDbTextgain.postJson());
-            foreach (var item in rootObject.Feeds)
+            IEnumerable<Feed> results = JsonConvert.DeserializeObject<IEnumerable<Feed>>(dashBoardDbTextgain.postJson());
+            foreach (var item in results)
             {
-                feeds.Add(new Feed(item.ID, item.Gender, item.Age, item.Education, item.Language, item.Personality, item.Words, item.Sentiment, item.Source, item.Hashtags, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+                if (item.Geo.GetType().Equals(typeof(bool)))
+                {
+                    item.Geo = new List<double>() { 0, 0 };
+                }
+                feeds.Add(new Feed(item.ID, new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
             foreach (var feed in feeds)
             {
