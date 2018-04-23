@@ -22,17 +22,14 @@ namespace Integratie.DAL.EF
             IEnumerable<Feed> results = JsonConvert.DeserializeObject<IEnumerable<Feed>>(dashBoardDbTextgain.postJson());
             foreach (var item in results)
             {
-                if (item.Geo.GetType().Equals(typeof(bool)))
-                {
-                    item.Geo = new double?[2] {0,0};
-                }
                 feeds.Add(new Feed(item.ID, new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
             foreach (var feed in feeds)
             {
                 context.Feeds.Add(feed);
-                context.SaveChanges();
+                
             }
-            }
+            context.SaveChanges();
+        }
     }
 }

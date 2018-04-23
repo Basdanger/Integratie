@@ -12,24 +12,20 @@ namespace Integratie.Domain.Entities
         [Key]
         public double ID { get; set; }
         public Profile Profile { get; set; }
-        public List<String> Words { get; set; }
-        public List<double> Sentiment { get; set; }
+        public String Words { get; set; }
+        public String Sentiment { get; set; }
         public String Source { get; set; }
-        public List<String> Hashtags { get; set; }
-        public List<String> Themes { get; set; }
-        public List<String> Persons { get; set; }
-        public List<String> Urls { get; set; }
+        public String Hashtags { get; set; }
+        public String Themes { get; set; }
+        public String Persons { get; set; }
+        public String Urls { get; set; }
         public DateTime Date { get; set; }
-        public List<String> Mentions { get; set; }
-        public double?[] Geo { get; set; }
+        public String Mentions { get; set; }
+        public String Geo { get; set; }
         public bool Retweet { get; set; }
 
         
-        public Feed(DateTime date, List<double> sentiment)
-        {
-            Date = date;
-            Sentiment = sentiment;
-        }
+        
         public Feed(DateTime date)
         {
             Date = date;
@@ -40,10 +36,10 @@ namespace Integratie.Domain.Entities
 
         }
 
-        public Feed(double id, Profile profile ,List<String> words, List<double> sentiment,
-                    String source, List<String> hashtags, List<String> themes, 
-                    List<String> persons, List<String> urls, DateTime date, 
-                    List<String> mentions, double?[] geo, bool retweet)
+        public Feed(double id, Profile profile, String words, String sentiment,
+                    String source, String hashtags, String themes, 
+                    String persons, String urls, DateTime date, 
+                    String mentions, String geo, bool retweet)
         {
             ID = id;
             Profile = profile;
@@ -88,6 +84,18 @@ namespace Integratie.Domain.Entities
             Education = education;
             Language = language;
             Personality = personality;
+        }
+    }
+
+    public class Sentiment
+    {
+        public double sentimentUpper { get; set; }
+        public double sentimentLower { get; set; }
+
+        public Sentiment(double sentimentlower, double sentimentupper)
+        {
+            sentimentLower = sentimentlower;
+            sentimentUpper = sentimentUpper;
         }
     }
 }

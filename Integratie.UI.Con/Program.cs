@@ -26,7 +26,7 @@ namespace Integratie.UI.Con
 
         private static String PrintAllFeeds(Feed feed)
         {
-            return String.Format("{0} {1}", feed.ID, feed.Geo);
+            return String.Format("{0} {1} {2}", feed.ID, feed.Profile.Age, feed.Profile.Personality);
         }
     }
 }

@@ -28,7 +28,5 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadFeeds();
         }
-
-        
     }
 }

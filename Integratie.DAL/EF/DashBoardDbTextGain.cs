@@ -27,7 +27,7 @@ namespace Integratie.DAL.EF
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                return streamReader.ReadToEnd();
+                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("\"urls\": []", "\"urls\": null");
             }
         }
     }
