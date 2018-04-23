@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
+using System.IO;
 
 namespace Integratie.UI.Con
 {
@@ -20,6 +21,7 @@ namespace Integratie.UI.Con
         {
             PrintAllFeeds();
             //rcdmgr.ReadFile();
+
             Console.ReadLine();
         }
 

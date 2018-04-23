@@ -178,9 +178,10 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3c3c3c', endColorstr='#ff222222', GradientType=0);
 }
 
-.navbar-inverse .navbar-nav > .active > a {
-  background-color: #222222;
-}
+    .navbar-inverse .navbar-nav > .active > a {
+        /*#222222;*/
+        background-color: #23313f;
+    }
 
 .navbar-inverse .navbar-brand,
 .navbar-inverse .navbar-nav > li > a {

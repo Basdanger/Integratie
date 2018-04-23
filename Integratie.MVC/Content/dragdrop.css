@@ -1,0 +1,41 @@
+﻿.resize {
+    border: 2px solid;
+    padding: 20px;
+    width: 300px;
+    resize: both;
+    overflow: auto;
+}
+
+
+.panel {
+    width: 200px;
+    height: 200px;
+}
+
+#panel2 {
+    left: 300px
+}
+
+#panel3 {
+    left: 550px
+}
+
+.resizable {
+    overflow: hidden;
+    resize: both
+}
+
+.draggable-handler {
+    cursor: pointer
+}
+
+.dragging {
+    cursor: move;
+    z-index: 200 !important
+}
+
+#action{
+    height: 200px;
+    width: 200px;
+    border-style: solid;
+}
