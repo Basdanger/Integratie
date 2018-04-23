@@ -21,7 +21,7 @@ namespace Integratie.Domain.Entities
         public List<String> Urls { get; set; }
         public DateTime Date { get; set; }
         public List<String> Mentions { get; set; }
-        public dynamic Geo { get; set; }
+        public double?[] Geo { get; set; }
         public bool Retweet { get; set; }
 
         
@@ -43,7 +43,7 @@ namespace Integratie.Domain.Entities
         public Feed(double id, Profile profile ,List<String> words, List<double> sentiment,
                     String source, List<String> hashtags, List<String> themes, 
                     List<String> persons, List<String> urls, DateTime date, 
-                    List<String> mentions, dynamic geo, bool retweet)
+                    List<String> mentions, double?[] geo, bool retweet)
         {
             ID = id;
             Profile = profile;

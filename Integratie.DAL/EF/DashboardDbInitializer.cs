@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         private DashBoardDbTextGain dashBoardDbTextgain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -24,7 +24,7 @@ namespace Integratie.DAL.EF
             {
                 if (item.Geo.GetType().Equals(typeof(bool)))
                 {
-                    item.Geo = new List<double>() { 0, 0 };
+                    item.Geo = new double?[2] {0,0};
                 }
                 feeds.Add(new Feed(item.ID, new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
