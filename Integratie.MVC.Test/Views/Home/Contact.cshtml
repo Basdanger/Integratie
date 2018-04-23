@@ -1,8 +1,59 @@
-﻿@{
-    
-}
+﻿
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="@Url.Content("~/Scripts/jquery.gridster.min.js")"></script>
+
+<!-- MARNICK CHART-->
+
+
+
+<!-- Jan -->
+    <div class="gridster" style="width:100%;">
+        <ul style="width:100%; margin:0; padding:0;">
+
+            <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="1" data-col="3" data-sizex="1" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="3" data-col="2" data-sizex="3" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="4" data-col="1" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="4" data-col="2" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="5" data-col="2" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="4" data-col="4" data-sizex="1" data-sizey="1"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+            <li data-row="1" data-col="5" data-sizex="1" data-sizey="3"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+        </ul>
+    </div>
+<script type="text/javascript">
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+</script>
+<script type="text/javascript">
+    var gridster;
+
+    $(function () {
+
+        gridster = $(".gridster ul").gridster({
+            widget_base_dimensions: [100, 100],
+            widget_margins: [5, 5],
+            helper: 'clone',
+            resize: {
+                enabled: true
+            }
+        }).data('gridster');
+
+
+        $('.js-resize-random').on('click', function () {
+            gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
+                getRandomInt(1, 4), getRandomInt(1, 4))
+        });
+        $(".gridster ul").gridster(options).width("auto");
+        
+    });
+</script>
+<!--Marnick-->
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
@@ -42,3 +93,6 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
+
+
+
