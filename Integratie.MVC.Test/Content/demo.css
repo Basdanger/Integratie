@@ -52,11 +52,12 @@ body {
     background-repeat: no-repeat;
     background-position: 37px -169px;
   }
-  .gridster .preview-holder {
-    border: none !important;
+.gridster .preview-holder {
+    border: green !important;
     border-radius: 0 !important;
-    background: red !important;
-  }
+    background: green !important;
+    border-radius: 7px !important;
+}
   .gridster ul {
     background-color: none;
   }
