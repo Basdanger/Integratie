@@ -1,0 +1,32 @@
+﻿ul {
+    overflow: auto;
+}
+   
+.container {
+    list-style: none;
+}
+
+.item {
+    padding: 5px;
+    margin: 10px;
+    line-height: 30px;
+    font-size: 3em;
+    text-align: center;
+}
+
+/*float layout*/
+.float {
+    max-width: 1200px;
+}
+
+    .float:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+.float-item {
+    float: left;
+}

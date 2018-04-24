@@ -211,12 +211,20 @@
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap2.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap4.css" />
+    <Content Include="Content\easy-autocomplete.css" />
+    <Content Include="Content\easy-autocomplete.min.css" />
+    <Content Include="Content\easy-autocomplete.themes.css" />
+    <Content Include="Content\easy-autocomplete.themes.min.css" />
+    <Content Include="Content\floatingList.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\menu.css" />
+    <Content Include="Scripts\jquery.easy-autocomplete.js" />
+    <Content Include="Scripts\jquery.easy-autocomplete.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -324,6 +332,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\WeeklyReview.cshtml" />
+    <Content Include="Views\Home\Organisatie.cshtml" />
+    <Content Include="Views\Home\Politici.cshtml" />
+    <Content Include="Views\Home\Politieker.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
+    <Content Include="Views\Home\Themas.cshtml" />
+    <Content Include="Views\Home\Gemeente.cshtml" />
+    <Content Include="Views\Home\GemeentePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

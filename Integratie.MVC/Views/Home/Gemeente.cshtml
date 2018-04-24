@@ -1,0 +1,41 @@
+﻿@model IEnumerable<string>
+@using Newtonsoft.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/floatingList.css")
+@Styles.Render("~/Content/bootstrap.css")
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.easy-autocomplete.js"></script>
+
+
+
+<script>
+    $(function () {
+        var availableTags = @Html.Raw(JsonConvert.SerializeObject(this.Model))
+            console.log(availableTags);
+        $("#tags").easyAutocomplete(availableTags);
+    });
+</script>
+<div class="jumbotron">
+    <h1>Gemeenten</h1>
+    <p class="lead">Dit is een lijst met alle gemeenten</p>
+</div>
+
+<div class="ui-widget">
+    <label for="tags">Gemeente </label>
+    <input id="tags">
+</div>
+
+<ul class="container float">
+    @foreach (var item in Model)
+    {
+        <li class="item float-item">
+            <a href="@Url.Action("GemeentePage","Home", new {gemeente=item})"><p>@item</p></a>
+        </li>
+    }
+</ul>
+
+

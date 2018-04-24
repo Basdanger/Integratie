@@ -1,0 +1,26 @@
+﻿@model IEnumerable<string>
+    @*string -> person enzo en dan alles opnieuw mogen doen*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/floatingList.css")
+
+
+<div class="jumbotron">
+    <h1>Politiekers</h1>
+    <p class="lead">Dit is een lijst met alle politiekers</p>
+</div>
+<div>
+    <ul class="container float">
+        <li class="float-item item">
+        @foreach (var item in Model)
+        {
+        <li class="item float-item">
+            
+            <a href="@Url.Action("Politieker","Home")" id="1"><img src="~/Content/Images/Bartje.jpg" width="200" height="200" /></a>
+            <h2>@item</h2>
+        </li>
+        }
+            
+        </ul>
+</div>
