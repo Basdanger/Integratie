@@ -21,10 +21,11 @@ namespace Integratie.DAL.EF
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             httpWebRequest.Headers.Add("X-API-Key", "aEN3K6VJPEoh3sMp9ZVA73kkr");
-    }
+        }
         
         public String postJson()
         {   
+<<<<<<< Updated upstream
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -44,6 +45,19 @@ namespace Integratie.DAL.EF
                
                 return string.Join("",filter);
          
+=======
+            string pattern = @"^((?!(source | id | mentions | geo | words | profile | persons | education | hashtags | language | sentiment | urls | date | age | gender | themes | personality | retweet)).)*$";
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                foreach (Match m in Regex.Matches(streamReader.ReadToEnd(), "\\[(\".*\"), *\\]"))
+                {
+                    Regex.Replace(m, "\"", String.Empty);
+                }
+                
+                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("[","\"[").Replace("]", "]\"").Trim('"');
+>>>>>>> Stashed changes
             }
         }
 
