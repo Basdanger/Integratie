@@ -142,7 +142,7 @@ namespace Integratie.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("SuperAdmin"))
                 .ToList(), "Name", "Name");
             return View();
         }

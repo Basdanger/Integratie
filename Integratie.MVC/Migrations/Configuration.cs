@@ -55,7 +55,7 @@ namespace Integratie.MVC.Migrations
                 var user = new ApplicationUser
                 {
                     Email = "admin@tesla.be",
-                    UserName = "tesla admin",
+                    UserName = "TeslaAdmin",
                 };
                 userManager.Create(user, "Test1234(");
                 userManager.AddToRole(user.Id, "SuperAdmin");
