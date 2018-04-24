@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
@@ -23,11 +24,13 @@ namespace Integratie.DAL.EF
     }
         
         public String postJson()
-        {
+        {   
+            string pattern = @"/\[(.*)\]/";
+
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("\"urls\": []", "\"urls\": null");
+                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]")/*.Replace("/\\[[^a-zA-Z][a-z A-Z]*[^a-zA-Z]\\]/", "/\\[[a-z A-Z]*\\]/")*/.Replace("[","\"[").Replace("]", "]\"").Trim('"');
             }
         }
     }

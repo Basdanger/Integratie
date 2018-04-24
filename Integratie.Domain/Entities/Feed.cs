@@ -86,16 +86,4 @@ namespace Integratie.Domain.Entities
             Personality = personality;
         }
     }
-
-    public class Sentiment
-    {
-        public double sentimentUpper { get; set; }
-        public double sentimentLower { get; set; }
-
-        public Sentiment(double sentimentlower, double sentimentupper)
-        {
-            sentimentLower = sentimentlower;
-            sentimentUpper = sentimentUpper;
-        }
-    }
 }
