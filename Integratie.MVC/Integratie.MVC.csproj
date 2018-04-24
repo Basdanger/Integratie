@@ -353,6 +353,10 @@
       <Project>{9c8d0a22-c1f8-46b6-806f-a86c648c12e9}</Project>
       <Name>Integratie.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">
+      <Project>{DF80B85D-60DE-4B74-9666-352754077BE6}</Project>
+      <Name>Integratie.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

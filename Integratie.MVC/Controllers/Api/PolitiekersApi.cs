@@ -4,15 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Integratie.BL.Managers.Interfaces;
+using Integratie.BL.Managers;
+using Integratie.Domain.Entities;
 
 namespace Integratie.MVC.Controllers.Api
 {
     public class PolitiekersApi : ApiController
     {
+        private IFeedManager mgr = new FeedManager();
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public IEnumerable<Feed> Get()
         {
-            return new string[] { "value1", "value2" };
+            var feeds = mgr.GetFeeds();
+            return feeds;
         }
 
         // GET api/<controller>/5
