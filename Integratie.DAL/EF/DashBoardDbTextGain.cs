@@ -25,13 +25,27 @@ namespace Integratie.DAL.EF
         
         public String postJson()
         {   
-            string pattern = @"/\[(.*)\]/";
-
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]")/*.Replace("/\\[[^a-zA-Z][a-z A-Z]*[^a-zA-Z]\\]/", "/\\[[a-z A-Z]*\\]/")*/.Replace("[","\"[").Replace("]", "]\"").Trim('"');
+                //Dit fixt all Geo en de lege arrays, zoek manier om aanhalingstekens te verwijderen in gevulde arrays
+
+                string stream=streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]")
+                    /*.Replace("/\\[[^a-zA-Z][a-z A-Z]*[^a-zA-Z]\\]/", "/\\[[a-z A-Z]*\\]/")*/
+                    .Replace("[","\"[").Replace("]", "]\"").Trim('"');
+
+                char[] test = new char[] { '[',']'};
+                string[] filter = stream.Split(test);
+                
+                for (int i = 0; i < filter.Length; i = i + 2)
+                {
+                    filter[i]=filter[i].Replace("\"",string.Empty);
+                }
+               
+                return string.Join("",filter);
+         
             }
         }
+
     }
 }
