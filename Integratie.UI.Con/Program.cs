@@ -16,11 +16,13 @@ namespace Integratie.UI.Con
     {
         private static FeedManager mgr = new FeedManager();
         private static RecordManager rcdmgr = new RecordManager();
+        private static MailManager mailManager = new MailManager();
 
         static void Main(string[] args)
         {
-            PrintAllFeeds();
+            //PrintAllFeeds();
             //rcdmgr.ReadFile();
+            SendMail();
 
             Console.ReadLine();
         }
@@ -29,6 +31,13 @@ namespace Integratie.UI.Con
         {
             foreach (var t in mgr.GetFeeds())
                 Console.WriteLine(t.ID);
+        }
+
+        private static void SendMail()
+        {
+            Console.WriteLine("Type mail to send: ");
+            string body = Console.ReadLine();
+            mailManager.SendMail(body);
         }
     }
 }
