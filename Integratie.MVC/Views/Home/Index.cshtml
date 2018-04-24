@@ -1,54 +1,140 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-<head>
-    <link rel="stylesheet" href="~/Content/dragdrop.css">
-</head>
-<div class="jumbotron">
-    <h1>De Politieke barometer</h1>
-    <p class="lead">biedt informatie over politiek in een handige dashboard</p>
-    <p>
-        Maak een account en krijg nu toegang tot je eigen gepersonaliseerde dashboard.
-    </p>
+﻿
+
+<link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.gridster.min.js")"></script>
+
+<!-- MARNICK CHART-->
+<!-- Jan -->
+<div class="gridster" style="width:100%;">
+    <ul id="gridul" style="width:100%; margin:0; padding:0;">
+
+        <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>
+    </ul>
 </div>
-<div class="grid">
-    <div class="row">
-        <div class="col-md-4 grid-item resize">
-                <h2>Positieve politici</h2>
-                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+<button id="js" class="btn btn-primary">RandomResize</button>
+<button id="js2" class="btn btn-primary">add</button>
+<button id="js3" class="btn btn-primary">Open Popup</button>
+
+<div class="tesla-popup">
+    <div class="tesla-popup-window">
+        <div class="tesla-popup-header">
+            <span style="float:left;margin-left:10px;margin-top:3px;">New Graph</span>
+            <button id="close" style="float:right; margin-top:-3px; color:darkred" type="button" class="btn btn-link"><i class="fa fa-fw fa-close tesla-bar-icon"></i></button>
         </div>
-        <div class="col-md-4 grid-item resize">
-            <h2>Positieve thema's</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4 grid-item resize">
-            <h2>Positieve partijen</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <div class="tesla-popup-container">
+            <form>
+                <div class="form-group">
+                    <label for="exampleSelect1">Select Graph</label>
+                    <select class="form-control" id="exampleSelect1">
+                        <option>Barchart (count)</option>
+                        <option>Linechart</option>
+                        <option>Piechart</option>
+                        <option>other</option>
+                        <option>other other</option>
+                    </select>
+                    <div class="form-group">
+                        <label for="exampleSelect2">Example multiple select</label>
+                        <select multiple class="form-control" id="exampleSelect2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 grid-item">
-            <h2>Negatieve politici</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4 grid-item">
-            <h2>Negatieve thema's</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4 grid-item">
-            <h2>Negatieve partijen</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>
-</div>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://unpkg.com/packery@2/dist/packery.pkgd.js'></script>
-<script src='https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.js'></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="~/Scripts/dragdrop.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#js3').on('click', function () {
+            $('.tesla-popup').addClass('open');
+            $('.tesla-popup-window').addClass('open');
+            console.log('clicked');
+        });
+        $('#close').on('click', function () {
+            $('.tesla-popup').removeClass('open');
+            $('.tesla-popup-window').removeClass('open');
+            console.log('clicked');
+        });
+    });
+</script>
+<script type="text/javascript">
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+</script>
+<script type="text/javascript">
+    var gridster;
+    $(document).ready(function () { console.log("Doc Ready");});
+    $(function () {
+        console.log("function execute");
+        gridster = $(".gridster ul").gridster({
+            widget_base_dimensions: [100, 100],
+            widget_margins: [5, 5],
+            helper: 'clone',
+            resize: {
+                enabled: true
+            }
+        }).data('gridster');
+
+
+        $('#js').on('click', function () {
+            gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
+                getRandomInt(1, 4), getRandomInt(1, 4));
+            console.log("clicked");
+        });
+
+        $('#js2').on('click', function () {
+            var widget = ['<li data-row="1" data-col="1" data-sizex="2" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>', 1, 2];
+            gridster.add_widget.apply(gridster, widget)});
+        //$(".gridster ul").gridster(options).width("auto");
+
+    });
+</script>
+<!--Marnick-->
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: @Html.Raw(ViewBag.DataKeys),
+        datasets: [{
+            label: '# of Votes',
+            data: @Html.Raw(ViewBag.DataValues),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+

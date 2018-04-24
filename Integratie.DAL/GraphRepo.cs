@@ -32,7 +32,14 @@ namespace Integratie.DAL
         }
         public int GetTotalCount()
         {
-            return context.Graphs.Count();
+            try {
+                return context.Graphs.Count();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
         }
     }
 }

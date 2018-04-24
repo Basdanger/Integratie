@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DashboardRepo.cs" />
     <Compile Include="DummyAlertRepo.cs" />
     <Compile Include="DummySubjectRepo.cs" />
     <Compile Include="EF\DashboardDbConfiguration.cs" />
