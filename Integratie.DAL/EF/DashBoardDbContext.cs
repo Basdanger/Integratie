@@ -1,6 +1,7 @@
 ﻿using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Integratie.DAL.EF
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Alert> Alerts { get; set; }
+        public DbSet<Graph> Graphs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
