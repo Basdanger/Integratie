@@ -30,10 +30,32 @@ namespace Integratie.DAL.EF
             {
                 //Dit fixt all Geo en de lege arrays, zoek manier om aanhalingstekens te verwijderen in gevulde arrays
 
-                string stream=streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]")
-                    /*.Replace("/\\[[^a-zA-Z][a-z A-Z]*[^a-zA-Z]\\]/", "/\\[[a-z A-Z]*\\]/")*/
-                    .Replace("[","\"[").Replace("]", "]\"").Trim('"');
+                return streamReader.ReadToEnd();
+                    /*.Replace("\"geo\": false", "\"geo\": [null, null]")
+                    .Replace("\"", String.Empty)
+                    .Replace("profile", "\"profile\"")
+                    .Replace("gender: ", "\"gender\": \"")
+                    .Replace(", age: ", "\", \"age\": \"")
+                    .Replace(", education: ", "\", \"education\": \"")
+                    .Replace(", language: ", "\", \"language\": \"")
+                    .Replace(", personality: ", "\", \"personality\": \"")
+                    .Replace("}, words: ", "\"}, \"words\": \"")
+                    .Replace(", sentiment: ", "\", \"sentiment\": \"")
+                    .Replace(", hashtags: ", "\", \"hashtags\": \"")
+                    .Replace(", id: ", "\", \"id\": ")
+                    .Replace(", themes: ", ", \"themes\": \"")
+                    .Replace(", persons: ", "\", \"persons\": \"")
+                    .Replace(", sentiment: ", "\", \"sentiment\": \"")
+                    .Replace(", urls: ", "\", \"urls\": \"")
+                    .Replace(", date: ", "\", \"date\": \"")
+                    .Replace(", mentions: ", "\", \"mentions\": \"")
+                    .Replace(", geo: ", "\", \"geo\": \"")
+                    .Replace(", retweet: ", "\", \"retweet\": ");
 
+
+
+
+                /*
                 char[] test = new char[] { '[',']'};
                 string[] filter = stream.Split(test);
                 
@@ -43,7 +65,7 @@ namespace Integratie.DAL.EF
                 }
                
                 return string.Join("",filter);
-         
+                */
             }
         }
 
