@@ -12,9 +12,6 @@ namespace Integratie.Domain.Entities.Graph
     {
         public List<Subject> Subjects { get; set; }
 
-        public BarChartXType XType { get; set; }
-        public BarChartYType YType { get; set; }
-
         public int MyProperty { get; set; }
         [NotMapped]
         public Dictionary<string,double> Values { get; set; }
@@ -27,7 +24,6 @@ namespace Integratie.Domain.Entities.Graph
         {
 
             Subjects = subjects;
-            Type = type;
         }
     }
    

@@ -36,6 +36,12 @@ namespace Integratie.DAL.EF
             
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<Graph>()
+            .Property(f => f.EndDate)
+            .HasColumnType("datetime2");
+            modelBuilder.Entity<Graph>()
+            .Property(f => f.StartDate)
+            .HasColumnType("datetime2");
         }
     }
 }
