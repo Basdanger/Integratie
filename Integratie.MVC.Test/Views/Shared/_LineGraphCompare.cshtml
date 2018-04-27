@@ -1,0 +1,37 @@
+﻿<canvas id="LineGraphCompare" style="max-height:100%"></canvas>
+<script>
+    var ctx = document.getElementById("LineGraphCompare").getContext("2d");
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["maandag", "dinsdag", "woensdag"],
+            datasets: [{
+                label: 'Bart',
+                data: [75, 60, 70],
+                borderColor: 'rgba(255,99,132,1)',
+                pointBackgroundColor: 'rgba(255,99,132,1)',
+                borderWidth: 2,
+                fill: false
+            }, {
+                    label: 'Maggie',
+                    data: [100, 75, 80],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+        },
+        options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+            },
+            tooltips: {
+                mode: 'index'
+            }
+    }
+    });
+</script>
