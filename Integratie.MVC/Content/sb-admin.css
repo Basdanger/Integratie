@@ -204,7 +204,7 @@ body.fixed-nav {
 
 @media (min-width: 992px) {
   #mainNav.fixed-top .navbar-sidenav {
-    height: calc(100vh - 112px);
+    height: 100vh;
   }
   #mainNav.fixed-top .sidenav-toggler {
     position: absolute;
@@ -230,7 +230,7 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
-  color: #adb5bd;
+  color: red;
 }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler {
@@ -350,7 +350,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:hover,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:focus,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:hover {
-  color: #adb5bd;
+  color: red;
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
@@ -359,7 +359,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 @media (min-width: 992px) {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
-    background: #343a40;
+    background: red;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
     color: white !important;
@@ -370,7 +370,7 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-    background: #343a40;
+    background: red;
   }
 }
 

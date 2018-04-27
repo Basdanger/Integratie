@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Graph.Graph>
+@using Integratie.Domain.Entities.Graph;
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+<script src="@Url.Content("~/Scripts/gridstack.js")"></script>
+<script src="@Url.Content("~/Scripts/gridstack.jQueryUI.js")"></script>
+<script src="https://nodebox.live/api/v1/ndbx.js"></script>
+
+<style type="text/css">
+    .grid-stack {
+        background: lightgoldenrodyellow;
+    }
+
+    .grid-stack-item-content {
+        color: #2c3e50;
+        text-align: center;
+        background-color: #18bc9c;
+    }
+    canvas{
+        border:1px solid red;
+    }
+</style>
+
+<div>
+    @ViewBag.Message;
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GraphId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                Sort
+            </th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GraphId)
+                </td>
+                <td>
+                    null
+                </td>
+                <td>
+                    @if(item.GetType() == typeof(BarChartGraph))
+                    {
+                        BarChartGraph graph = (BarChartGraph)item;
+                        <span>Bar</span>
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+@foreach (var item in Model)
+{
+    if (item.GetType() == typeof(BarChartGraph))
+    {
+        BarChartGraph graph = (BarChartGraph)item;
+        <div>
+            <canvas id="c" style="width:200px; height: 200px;"></canvas>
+            
+        </div>
+    }
+}
+
+
+
+
+    <div class="container-fluid">
+        <h1>Float grid demo</h1>
+        <div>
+            <a class="btn btn-default" id="add-new-widget" href="#">Add Widget</a>
+        </div>
+        <br />
+        <div class="grid-stack">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            var options = {
+                float: true
+            };
+            $('.grid-stack').gridstack(options);
+
+            new function () {
+                this.items = [
+                    { x: 0, y: 0, width: 2, height: 2 },
+                    { x: 3, y: 1, width: 1, height: 2 },
+                    { x: 4, y: 1, width: 1, height: 1 },
+                    { x: 2, y: 3, width: 3, height: 1 },
+                    //                    {x: 1, y: 4, width: 1, height: 1},
+                    //                    {x: 1, y: 3, width: 1, height: 1},
+                    //                    {x: 2, y: 4, width: 1, height: 1},
+                    { x: 2, y: 5, width: 1, height: 1 }
+                ];
+
+                this.grid = $('.grid-stack').data('gridstack');
+
+                this.addNewWidget = function () {
+                    var node = this.items.pop() || {
+                        x: 12 * Math.random(),
+                        y: 5 * Math.random(),
+                        width: 1 + 3 * Math.random(),
+                        height: 1 + 3 * Math.random()
+                    };
+                    this.grid.addWidget($('<div><div class="grid-stack-item-content"><canvas id="c2" style="width:200px; height: 200px;"></canvas></div><div/>'),
+                        node.x, node.y, node.width, node.height);
+                    return false;
+                }.bind(this);
+
+                $('#add-new-widget').click(this.addNewWidget);
+                
+            };
+            var options2 = {
+                userId: 'JanVH',
+                projectId: 'demo',
+                functionId: 'debtris',
+                canvasId: 'c2',
+                autoplay: true
+            };
+
+            // Initialize the NodeBox player object
+            ndbx.embed(options2, function (err, player) {
+                if (err) {
+                    throw new Error(err);
+                } else {
+                    window.player = player;
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+</div>
+<script>
+    // Again, replace these with your own userId / projectId / functionId / canvasId
+    var options = {
+        userId: 'JanVH',
+        projectId: 'demo',
+        functionId: 'debtris',
+        canvasId: 'c',
+        autoplay: true
+    };
+
+    // Initialize the NodeBox player object
+    ndbx.embed(options, function (err, player) {
+        if (err) {
+            throw new Error(err);
+        } else {
+            window.player = player;
+        }
+    });
+
+    // This function is called when the size slider is dragged.
+    function changeSize(e) {
+        window.player.setValue('rect1', 'width', e.value);
+        window.player.setValue('rect1', 'height', e.value);
+    }
+
+    // This function is called when the hue slider is dragged.
+    function changeGrid(e) {
+        window.player.setValue('grid1', 'columns', e.value);
+        window.player.setValue('grid1', 'rows', e.value);
+    }
+</script>

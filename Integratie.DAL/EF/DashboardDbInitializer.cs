@@ -1,6 +1,7 @@
 ﻿using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
@@ -174,6 +175,16 @@ namespace Integratie.DAL.EF
             context.Alerts.Add(CO1);
             context.Alerts.Add(CO2);
             context.Alerts.Add(TR1);
+
+            //ACCOUNTS
+            Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
+            
+
+            //GRAPHS
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { S1, S2 }, BarChartType.Count, A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { S3, S4 }, BarChartType.Count, A1);
+            context.Graphs.Add(BCG1);
+            context.Graphs.Add(BCG2);
 
             context.SaveChanges();
         }

@@ -1,0 +1,135 @@
+﻿body {
+}
+.tesla-nav {
+    background-color: #007bff !important;
+    color: white !important;
+    box-shadow: 0px 1px 4px gray;
+    position:absolute;
+}
+.tesla-brand{
+     color:white!important;
+}
+.tesla-nav-toggle{
+    color:white;
+    background-color:white;
+}
+.tesla-bar-icon{
+    color:white;
+}
+.tesla-container {
+    margin-top: 60px;
+}
+@media only screen and (min-width: 992px){
+    .tesla-side-nav {
+        color: #007bff;
+        background-color: #007bff1f !important;
+        overflow:hidden;
+        font-weight:normal!important;
+        
+    }
+    li{
+        font-weight:normal!important;
+    }
+}
+
+a {
+    color: #007bff;
+}
+
+
+.collapse.show  {
+}
+.collapse.show > ul > li > *,
+.collapse.show > ul > li > ul > li > *,
+.collapse.show > ul > li > ul > li > ul > li > * {
+    color:white;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+.tesla-popup {
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    border: 1px solid #007bff;
+    position: absolute;
+    top: 00px;
+    left: 00vw;
+    z-index: -1;
+    background-color: #80808069;
+    opacity:0;
+}
+.tesla-popup-window {
+    height: 70vh;
+    width: 70vw;
+    position: absolute;
+    top: -100vh;
+    left: 15vw;
+    z-index: 9999;
+    border-radius: 10px;
+    background-color: white;
+    padding:0;
+    overflow:hidden;
+
+}
+.tesla-popup-header {
+    width: 100%;
+    height: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #007bff;
+    position:absolute;
+}
+.tesla-popup.open {
+    animation: tesla-popup-open;
+    animation-duration:1s;
+    animation-fill-mode:forwards;
+}
+.tesla-popup-window.open {
+    animation: tesla-popup-window-open;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@-webkit-keyframes tesla-popup-window-open{
+    from {
+        top: -100vh;
+    }
+    to {
+        top: 15vh;
+    }
+}
+@-webkit-keyframes tesla-popup-open {
+    from {
+        z-index: 0;
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        z-index: 9999;
+    }
+}
+.tesla-popup-container {
+    margin-top: 30px;
+    padding: 7px;
+    color: #007bff;
+    font-size:14px;
+    overflow:scroll;
+    height:95%;
+    overflow-x:hidden;
+}
