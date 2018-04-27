@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories.Interfaces
 {
     public interface IFeedRepo
     {

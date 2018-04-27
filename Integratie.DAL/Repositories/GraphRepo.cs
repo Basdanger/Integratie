@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.Domain.Entities.Graph;
 using Integratie.DAL.EF;
+using Integratie.DAL.Repositories.Interfaces;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class GraphRepo : IGraphRepo
     {

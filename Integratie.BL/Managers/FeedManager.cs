@@ -7,6 +7,8 @@ using Integratie.DAL;
 using Integratie.Domain;
 using Integratie.BL.Managers.Interfaces;
 using Integratie.Domain.Entities;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 
 namespace Integratie.BL.Managers
 {

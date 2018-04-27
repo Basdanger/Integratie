@@ -1,5 +1,7 @@
 ﻿using Integratie.BL.Managers.Interfaces;
 using Integratie.DAL;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Newtonsoft.Json;

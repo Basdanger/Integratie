@@ -1,4 +1,5 @@
 ﻿using Integratie.DAL;
+using Integratie.DAL.Repositories;
 using Integratie.Domain.Entities.Dashboard;
 using System;
 using System.Collections.Generic;

@@ -51,18 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DashboardRepo.cs" />
-    <Compile Include="DummyAlertRepo.cs" />
-    <Compile Include="DummySubjectRepo.cs" />
+    <Compile Include="Repositories\DashboardRepo.cs" />
+    <Compile Include="Repositories\DummyAlertRepo.cs" />
+    <Compile Include="Repositories\DummySubjectRepo.cs" />
     <Compile Include="EF\DashboardDbConfiguration.cs" />
     <Compile Include="EF\DashBoardDbContext.cs" />
     <Compile Include="EF\DashboardDbInitializer.cs" />
-    <Compile Include="FeedRepo.cs" />
-    <Compile Include="GraphRepo.cs" />
-    <Compile Include="IAlertRepo.cs" />
-    <Compile Include="IFeedRepo.cs" />
-    <Compile Include="IGraphRepo.cs" />
-    <Compile Include="ISubjectRepo.cs" />
+    <Compile Include="Repositories\FeedRepo.cs" />
+    <Compile Include="Repositories\GraphRepo.cs" />
+    <Compile Include="Repositories\Interfaces\IAlertRepo.cs" />
+    <Compile Include="Repositories\Interfaces\IFeedRepo.cs" />
+    <Compile Include="Repositories\Interfaces\IGraphRepo.cs" />
+    <Compile Include="Repositories\Interfaces\ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,8 +75,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

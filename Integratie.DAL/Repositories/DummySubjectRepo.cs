@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.Domain;
 using Integratie.Domain.Entities.Subjects;
+using Integratie.DAL.Repositories.Interfaces;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class DummySubjectRepo : ISubjectRepo
     {

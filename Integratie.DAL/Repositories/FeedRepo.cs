@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.Domain;
 using Integratie.Domain.Entities;
+using Integratie.DAL.Repositories.Interfaces;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class FeedRepo : IFeedRepo
     {
