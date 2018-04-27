@@ -29,42 +29,18 @@ namespace Integratie.DAL.EF
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                //Dit fixt all Geo en de lege arrays, zoek manier om aanhalingstekens te verwijderen in gevulde arrays
 
-                return streamReader.ReadToEnd();
-                    /*.Replace("\"geo\": false", "\"geo\": [null, null]")
-                    .Replace("\"", String.Empty)
-                    .Replace("profile", "\"profile\"")
-                    .Replace("gender: ", "\"gender\": \"")
-                    .Replace(", age: ", "\", \"age\": \"")
-                    .Replace(", education: ", "\", \"education\": \"")
-                    .Replace(", language: ", "\", \"language\": \"")
-                    .Replace(", personality: ", "\", \"personality\": \"")
-                    .Replace("}, words: ", "\"}, \"words\": \"")
-                    .Replace(", sentiment: ", "\", \"sentiment\": \"")
-                    .Replace(", hashtags: ", "\", \"hashtags\": \"")
-                    .Replace(", id: ", "\", \"id\": ")
-                    .Replace(", themes: ", ", \"themes\": \"")
-                    .Replace(", persons: ", "\", \"persons\": \"")
-                    .Replace(", sentiment: ", "\", \"sentiment\": \"")
-                    .Replace(", urls: ", "\", \"urls\": \"")
-                    .Replace(", date: ", "\", \"date\": \"")
-                    .Replace(", mentions: ", "\", \"mentions\": \"")
-                    .Replace(", geo: ", "\", \"geo\": \"")
-                    .Replace(", retweet: ", "\", \"retweet\": ");
+                string stream=streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("[","\"[").Replace("]", "]\"").Trim('"');
 
-
-
-
-                /*
                 char[] test = new char[] { '[',']'};
                 string[] filter = stream.Split(test);
                 
-                for (int i = 0; i < filter.Length; i = i + 2)
+                for (int i = 2; i < filter.Length; i = i + 2)
                 {
                     filter[i]=filter[i].Replace("\"",string.Empty);
                 }
                
+<<<<<<< HEAD
                 return string.Join("",filter);
 <<<<<<< HEAD
          
@@ -83,6 +59,10 @@ namespace Integratie.DAL.EF
 >>>>>>> Stashed changes
 =======
                 */
+>>>>>>> TA_Geo
+=======
+                stream="[" + string.Join("", filter)+"]";
+                return stream;
 >>>>>>> TA_Geo
             }
         }
