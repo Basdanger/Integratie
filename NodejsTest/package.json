@@ -1,0 +1,12 @@
+{
+  "name": "nodejs-test",
+  "version": "0.0.0",
+  "description": "NodejsTest",
+  "main": "server.js",
+  "author": {
+    "name": "Marnick"
+  },
+  "dependencies": {
+    "chart.js": "^2.7.2"
+  }
+}
