@@ -36,8 +36,8 @@ namespace Integratie.Domain.Entities
 
         }
 
-        public Feed(double id, Profile profile, String words, String sentiment,
-                    String source, String hashtags, String themes, 
+        public Feed(Profile profile, String words, String sentiment,
+                    String source, String hashtags, double id, String themes, 
                     String persons, String urls, DateTime date, 
                     String mentions, String geo, bool retweet)
         {

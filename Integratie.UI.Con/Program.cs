@@ -18,7 +18,7 @@ namespace Integratie.UI.Con
         private static FeedManager mgr = new FeedManager();
         static void Main(string[] args)
         {
-            Console.WriteLine(api.postJson());
+            Console.WriteLine(api.postJson().Substring(7000,2000));
             Console.WriteLine(PrintAllFeeds(mgr.GetFeed(987053307431673856)));
             //rcdmgr.ReadFile();
             Console.ReadLine();
