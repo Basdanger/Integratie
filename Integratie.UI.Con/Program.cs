@@ -8,17 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
-using Integratie.Domain.Entities;
+using System.IO;
 
 namespace Integratie.UI.Con
 {
     class Program
     {
-        private static DashBoardDbTextGain api = new DashBoardDbTextGain();
         private static FeedManager mgr = new FeedManager();
+        private static RecordManager rcdmgr = new RecordManager();
+
         static void Main(string[] args)
         {
+            PrintAllFeeds();
+            //rcdmgr.ReadFile();
+
             Console.ReadLine();
+        }
+
+        private static void PrintAllFeeds()
+        {
+            foreach (var t in mgr.GetFeeds())
+                Console.WriteLine(t.ID);
         }
     }
 }

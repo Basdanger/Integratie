@@ -8,6 +8,8 @@ using Integratie.Domain;
 using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.Domain.Entities;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 
 namespace Integratie.BL.Managers
 {

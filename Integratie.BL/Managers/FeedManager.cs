@@ -7,6 +7,8 @@ using Integratie.DAL;
 using Integratie.Domain;
 using Integratie.BL.Managers.Interfaces;
 using Integratie.Domain.Entities;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 
 namespace Integratie.BL.Managers
 {
@@ -18,12 +20,6 @@ namespace Integratie.BL.Managers
         {
             repo = new FeedRepo();
         }
-
-        public Feed GetFeed(double ID)
-        {
-            return repo.ReadFeed(ID);
-        }
-
         public IEnumerable<Feed> GetFeeds()
         {
             return repo.ReadFeeds();

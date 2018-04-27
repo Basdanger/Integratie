@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.Domain;
 using Integratie.Domain.Entities;
+using Integratie.DAL.Repositories.Interfaces;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class FeedRepo : IFeedRepo
     {
@@ -28,11 +29,6 @@ namespace Integratie.DAL
         {
             context.Feeds.Add(feed);
             context.SaveChanges();
-        }
-
-        public Feed ReadFeed(double ID)
-        {
-            return context.Feeds.Single(h => h.ID == ID);
         }
     }
 }

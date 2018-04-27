@@ -23,28 +23,7 @@
             <button id="close" style="float:right; margin-top:-3px; color:darkred" type="button" class="btn btn-link"><i class="fa fa-fw fa-close tesla-bar-icon"></i></button>
         </div>
         <div class="tesla-popup-container">
-            <form>
-                <div class="form-group">
-                    <label for="exampleSelect1">Select Graph</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>Barchart (count)</option>
-                        <option>Linechart</option>
-                        <option>Piechart</option>
-                        <option>other</option>
-                        <option>other other</option>
-                    </select>
-                    <div class="form-group">
-                        <label for="exampleSelect2">Example multiple select</label>
-                        <select multiple class="form-control" id="exampleSelect2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-                </form>
+            @Html.Partial("~/Views/Graph Inits/_BarChart.cshtml");
             </div>
         </div>
     </div>

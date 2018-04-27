@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Integratie.DAL.EF;
+using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities.Graph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Integratie.Domain.Entities.Graph;
-using Integratie.DAL.EF;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class GraphRepo : IGraphRepo
     {
@@ -32,10 +33,11 @@ namespace Integratie.DAL
         }
         public int GetTotalCount()
         {
-            try {
+            try
+            {
                 return context.Graphs.Count();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return 0;

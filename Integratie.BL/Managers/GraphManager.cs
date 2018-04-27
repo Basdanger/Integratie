@@ -1,4 +1,6 @@
 ﻿using Integratie.DAL;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Graph;
 using System;
 using System.Collections.Generic;
