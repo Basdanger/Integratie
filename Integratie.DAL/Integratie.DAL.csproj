@@ -51,16 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DashboardRepo.cs" />
     <Compile Include="DummyAlertRepo.cs" />
     <Compile Include="DummySubjectRepo.cs" />
     <Compile Include="EF\DashboardDbConfiguration.cs" />
     <Compile Include="EF\DashBoardDbContext.cs" />
     <Compile Include="EF\DashboardDbInitializer.cs" />
     <Compile Include="EF\DashBoardDbTextGain.cs" />
-    <Compile Include="Repositories\FeedRepo.cs" />
-    <Compile Include="Repositories\Interfaces\IAlertRepo.cs" />
-    <Compile Include="Repositories\Interfaces\IFeedRepo.cs" />
-    <Compile Include="Repositories\Interfaces\ISubjectRepo.cs" />
+    <Compile Include="FeedRepo.cs" />
+    <Compile Include="GraphRepo.cs" />
+    <Compile Include="IAlertRepo.cs" />
+    <Compile Include="IFeedRepo.cs" />
+    <Compile Include="IGraphRepo.cs" />
+    <Compile Include="ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
