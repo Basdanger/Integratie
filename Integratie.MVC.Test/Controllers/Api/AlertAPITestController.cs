@@ -13,7 +13,7 @@ namespace Integratie.MVC.Test.Controllers.Api
         
         [HttpGet]
         public IHttpActionResult GetPolById(int id) {
-            string politieker = politiekers;
+            string politieker = politiekers[id];
             if (politieker == null) {
                 return NotFound();
             }
@@ -26,9 +26,9 @@ namespace Integratie.MVC.Test.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult PostSomething([FromBody] string politieker) {
+        public IHttpActionResult PostSomething([FromUri] string politieker) {
             politiekers.Add(politieker);
-            return CreatedAtRoute("DefaultApi",new { controller = "AlertAPITest", id = politiekers.IndexOf(politieker) },politieker);
+            return CreatedAtRoute("DefaultApiPost",new { controller = "AlertAPITest", id = politiekers.IndexOf(politieker) },politieker);
         }
 
         [HttpPut]
