@@ -28,11 +28,8 @@ namespace Integratie.DAL.EF
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                //Dit fixt all Geo en de lege arrays, zoek manier om aanhalingstekens te verwijderen in gevulde arrays
 
-                string stream=streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]")
-                    /*.Replace("/\\[[^a-zA-Z][a-z A-Z]*[^a-zA-Z]\\]/", "/\\[[a-z A-Z]*\\]/")*/
-                    .Replace("[","\"[").Replace("]", "]\"").Trim('"');
+                string stream=streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("[","\"[").Replace("]", "]\"").Trim('"');
 
                 char[] test = new char[] { '[',']'};
                 string[] filter = stream.Split(test);
