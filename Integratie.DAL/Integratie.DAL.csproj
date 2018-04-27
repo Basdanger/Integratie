@@ -57,6 +57,7 @@
     <Compile Include="EF\DashboardDbConfiguration.cs" />
     <Compile Include="EF\DashBoardDbContext.cs" />
     <Compile Include="EF\DashboardDbInitializer.cs" />
+    <Compile Include="EF\DashBoardDbTextGain.cs" />
     <Compile Include="FeedRepo.cs" />
     <Compile Include="GraphRepo.cs" />
     <Compile Include="IAlertRepo.cs" />

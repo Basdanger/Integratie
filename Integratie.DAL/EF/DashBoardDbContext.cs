@@ -32,8 +32,8 @@ namespace Integratie.DAL.EF
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Integratie.BL.Managers.Interfaces
     public interface IFeedManager
     {
         IEnumerable<Feed> GetFeeds();
+        Feed GetFeed(double ID);
     }
 }

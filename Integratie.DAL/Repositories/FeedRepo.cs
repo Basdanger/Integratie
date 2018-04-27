@@ -29,5 +29,10 @@ namespace Integratie.DAL
             context.Feeds.Add(feed);
             context.SaveChanges();
         }
+
+        public Feed ReadFeed(double ID)
+        {
+            return context.Feeds.Single(h => h.ID == ID);
+        }
     }
 }

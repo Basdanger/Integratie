@@ -27,8 +27,10 @@ namespace Integratie.Domain.Entities
         }
 
     }
+    /*
     public class RootObject
     {
         public List<Record> records { get; set; }
     }
+    */
 }
