@@ -13,7 +13,7 @@ namespace Integratie.MVC.Test.Controllers.Api
         
         [HttpGet]
         public IHttpActionResult GetPolById(int id) {
-            string politieker = politiekers;
+            string politieker = politiekers[id];
             if (politieker == null) {
                 return NotFound();
             }

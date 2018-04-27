@@ -10,8 +10,8 @@ namespace Integratie.DAL
 {
     public interface ISubjectRepo
     {
-        List<Subject> GetSubjects();
-        Subject AddSubject(Subject subject);
+        IEnumerable<Subject> GetSubjects();
+        void AddSubject(Subject subject);
         void RemoveSubject(Subject subject);
         Subject GetSubjectById(int id);
     }
