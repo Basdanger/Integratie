@@ -24,8 +24,7 @@ namespace Integratie.DAL.EF
         }
         
         public String postJson()
-        {   
-<<<<<<< Updated upstream
+        {
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
@@ -39,31 +38,11 @@ namespace Integratie.DAL.EF
                 {
                     filter[i]=filter[i].Replace("\"",string.Empty);
                 }
-               
-<<<<<<< HEAD
-                return string.Join("",filter);
-<<<<<<< HEAD
-         
-=======
-            string pattern = @"^((?!(source | id | mentions | geo | words | profile | persons | education | hashtags | language | sentiment | urls | date | age | gender | themes | personality | retweet)).)*$";
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                foreach (Match m in Regex.Matches(streamReader.ReadToEnd(), "\\[(\".*\"), *\\]"))
-                {
-                    Regex.Replace(m, "\"", String.Empty);
-                }
-                
-                return streamReader.ReadToEnd().Replace("\"geo\": false", "\"geo\": [null, null]").Replace("[","\"[").Replace("]", "]\"").Trim('"');
->>>>>>> Stashed changes
-=======
-                */
->>>>>>> TA_Geo
-=======
-                stream="[" + string.Join("", filter)+"]";
+                stream = "[" + string.Join("", filter) + "]";
+
                 return stream;
->>>>>>> TA_Geo
+
             }
         }
 
