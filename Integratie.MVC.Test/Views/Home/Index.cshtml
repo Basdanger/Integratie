@@ -177,4 +177,8 @@
         window.player.setValue('grid1', 'rows', e.value);
     }
 </script>
-@Html.Partial("~/Views/Shared/_LineGraphCompare.cshtml")
+@*@Html.Partial("~/Views/Shared/_LineGraphCompare.cshtml")*@
+@{
+    Html.RenderAction("_LineGraphCompare", "Graph", new { id ="chart1" });
+    Html.RenderAction("_LineGraphCompare", "Graph", new { id ="chart2" });
+}
