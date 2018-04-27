@@ -1,6 +1,7 @@
 ﻿using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using System;
@@ -181,11 +182,14 @@ namespace Integratie.DAL.EF
             
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { S1, S2 }, BarChartType.Count, A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { S3, S4 }, BarChartType.Count, A1);
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { S1, S2 }, A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { S3, S4 }, A1);
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
 
+            //DashboardItems
+            DashboardItem DBI1 = new DashboardItem(0, 1, 2, 3, 3, BCG1);
+            //DashboardItem DBI1 = new DashboardItem(1,)
             context.SaveChanges();
         }
     }

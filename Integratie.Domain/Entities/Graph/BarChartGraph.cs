@@ -11,7 +11,11 @@ namespace Integratie.Domain.Entities.Graph
     public class BarChartGraph : Graph
     {
         public List<Subject> Subjects { get; set; }
-        public BarChartType Type { get; set; }
+
+        public BarChartXType XType { get; set; }
+        public BarChartYType YType { get; set; }
+
+        public int MyProperty { get; set; }
         [NotMapped]
         public Dictionary<string,double> Values { get; set; }
 
@@ -19,21 +23,12 @@ namespace Integratie.Domain.Entities.Graph
         {
             Values = new Dictionary<string, double>();
         }
-        public BarChartGraph(List<Subject> subjects, BarChartType type, Account account) : this()
+        public BarChartGraph(List<Subject> subjects, Account account) : this()
         {
 
             Subjects = subjects;
             Type = type;
         }
     }
-    public enum BarChartType
-    {
-        
-        Count,
-        Male,
-        Female,
-        Sentiment, //gemiddelde
-        Age //gemiddelde
-
-    }
+   
 }
