@@ -19,6 +19,7 @@ namespace Integratie.DAL.Repositories
 
         public List<Graph> GetAllGraphs()
         {
+            
             return context.Graphs.ToList();
         }
 
