@@ -37,7 +37,7 @@ namespace Integratie.DAL.EF
             }
 
             List<Person> people = new List<Person>();
-            String st = File.ReadAllText(@"F:\School\Repositories\Integratieproject 1\net\Integratie.DAL\politici.json");
+            String st = File.ReadAllText(@"C:\Users\ImmortalShepard\Source\Repos\IntegratieProject\Integratie.DAL\politici.json");
             IEnumerable <Person> resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
             foreach (var item in resultsPerson)

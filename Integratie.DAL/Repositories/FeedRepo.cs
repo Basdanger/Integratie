@@ -35,5 +35,20 @@ namespace Integratie.DAL.Repositories
         {
             return context.Feeds.Single(h => h.ID == id);
         }
+
+        public IEnumerable<Feed> ReadPersonFeeds(string person)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<Feed> ReadWordFeeds(string word)
+        {
+            return context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<Feed> ReadFeedsSince(DateTime date)
+        {
+            return context.Feeds.Where(f => f.Date.CompareTo(date) >= 0).ToList<Feed>();
+        }
     }
 }
