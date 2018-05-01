@@ -202,6 +202,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\GraphApiController.cs" />
+    <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -353,6 +355,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\" />
+    <Folder Include="Views\GraphApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -367,6 +370,10 @@
     <ProjectReference Include="..\Integratie.DAL\Integratie.DAL.csproj">
       <Project>{9c8d0a22-c1f8-46b6-806f-a86c648c12e9}</Project>
       <Name>Integratie.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">
+      <Project>{DF80B85D-60DE-4B74-9666-352754077BE6}</Project>
+      <Name>Integratie.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
