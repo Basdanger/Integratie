@@ -18,6 +18,7 @@ namespace Integratie.UI.Con
         private static FeedManager mgr = new FeedManager();
         static void Main(string[] args)
         {
+            Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
             Console.ReadLine();
         }
     }

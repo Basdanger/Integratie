@@ -60,7 +60,6 @@
     <Compile Include="Entities\Alerts\TrendAlert.cs" />
     <Compile Include="Entities\Dashboard\DashboardItem.cs" />
     <Compile Include="Entities\Feed.cs" />
-    <Compile Include="Entities\Gender.cs" />
     <Compile Include="Entities\Graph\BarChartGraph.cs" />
     <Compile Include="Entities\Graph\Graph.cs" />
     <Compile Include="Entities\Graph\LineGraph.cs" />
