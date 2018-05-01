@@ -24,5 +24,10 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadFeeds();
         }
+
+        public Feed GetFeed(double id)
+        {
+            return repo.ReadFeed(id);
+        }
     }
 }

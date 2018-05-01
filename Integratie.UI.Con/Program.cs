@@ -15,7 +15,6 @@ namespace Integratie.UI.Con
     class Program
     {
         private static FeedManager mgr = new FeedManager();
-        private static RecordManager rcdmgr = new RecordManager();
 
         static void Main(string[] args)
         {

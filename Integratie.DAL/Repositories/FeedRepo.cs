@@ -30,5 +30,10 @@ namespace Integratie.DAL.Repositories
             context.Feeds.Add(feed);
             context.SaveChanges();
         }
+
+        public Feed ReadFeed(double id)
+        {
+            return context.Feeds.Single(h => h.ID == id);
+        }
     }
 }

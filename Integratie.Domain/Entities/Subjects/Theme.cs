@@ -10,7 +10,7 @@ namespace Integratie.Domain.Entities.Subjects
     {
         public List<String> Terms { get; set; }
 
-        public Theme(int iD, string name) : base(iD, name)
+        public Theme(String iD, string name) : base(iD, name)
         {
         }
     }
