@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Integratie.Domain.Entities.Alerts;
-using Integratie.Domain;
+using Integratie.DAL.EF;
 using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities.Alerts;
 
 namespace Integratie.DAL.Repositories
 {
-    public class DummyAlertRepo : IAlertRepo
+    public class AlertRepo : IAlertRepo
     {
-        List<Alert> alerts = new List<Alert>();
-        public DummyAlertRepo()
+        private DashBoardDbContext context;
+
+        public AlertRepo()
         {
-            
+            context = new DashBoardDbContext();
         }
+
         public void AddAlert(Alert alert)
         {
-            alerts.Add(alert);
+            context.Alerts.Add(alert);
+            context.SaveChanges();
         }
 
         public Alert GetAlertById(int id)
         {
-            throw new NotImplementedException();
+            return context.Alerts.Find(id);
         }
 
-        public List<Alert> GetAlerts()
+        public IEnumerable<Alert> GetAlerts()
         {
-            return alerts;
+            return context.Alerts.ToList<Alert>();
         }
 
         public IEnumerable<Alert> GetUserAlerts(int userId)
@@ -38,12 +41,7 @@ namespace Integratie.DAL.Repositories
 
         public void RemoveAlert(Alert alert)
         {
-            alerts.Remove(alert);
-        }
-
-        IEnumerable<Alert> IAlertRepo.GetAlerts()
-        {
-            throw new NotImplementedException();
+            context.Alerts.Remove(alert);
         }
     }
 }
