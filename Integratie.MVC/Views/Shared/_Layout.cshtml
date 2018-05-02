@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title Politieke barometer</title>
     @*<link rel="stylesheet" href="~/Content/menu.css" type="text/css" />*@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -121,19 +121,7 @@
                         <span class="nav-link-text">Contact</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                    <a class="nav-link" href="~/Account/Login">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">Login</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                    <a class="nav-link" href="~/Account/Register">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">Register</span>
-                    </a>
-                </li>
- 
+                @Html.Partial("_LoginPartial")
         </div>
     </nav>
     @*Oude navbar hieronder*@
