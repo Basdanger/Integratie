@@ -30,6 +30,7 @@ namespace Integratie.DAL.EF
         public DbSet<Graph> Graphs { get; set; }
         public DbSet<DashboardItem> Dashboarditems { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<UserAlert> UserAlerts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -69,7 +69,10 @@ namespace Integratie.DAL.EF
 
             //ACCOUNTS
             Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
-            
+
+            //USERALERTS
+            UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
+            context.UserAlerts.Add(UA1);
 
             //GRAPHS
             BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);

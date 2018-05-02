@@ -24,6 +24,12 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public void AddUserAlert(UserAlert userAlert)
+        {
+            context.UserAlerts.Add(userAlert);
+            context.SaveChanges();
+        }
+
         public Alert GetAlertById(int id)
         {
             return context.Alerts.Find(id);
@@ -34,9 +40,24 @@ namespace Integratie.DAL.Repositories
             return context.Alerts.ToList<Alert>();
         }
 
-        public IEnumerable<Alert> GetUserAlerts(int userId)
+        public UserAlert GetUserAlert(int user, int alert)
         {
-            throw new NotImplementedException();
+            return (UserAlert)context.UserAlerts.Where(u => u.Account.ID.Equals(user) && u.Alert.ID.Equals(alert));
+        }
+
+        public IEnumerable<UserAlert> GetUserAlerts()
+        {
+            return context.UserAlerts.ToList<UserAlert>();
+        }
+
+        public IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId)
+        {
+            return context.UserAlerts.Where(u => u.Alert.ID.Equals(alertId)).ToList<UserAlert>();
+        }
+
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(int userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
         }
 
         public void RemoveAlert(Alert alert)

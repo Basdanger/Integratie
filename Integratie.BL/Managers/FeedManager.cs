@@ -14,7 +14,7 @@ namespace Integratie.BL.Managers
 {
     public class FeedManager : IFeedManager
     {
-        private IFeedRepo repo;
+        private FeedRepo repo;
 
         public FeedManager()
         {
@@ -28,6 +28,29 @@ namespace Integratie.BL.Managers
         public Feed GetFeed(double id)
         {
             return repo.ReadFeed(id);
+        }
+
+        public IEnumerable<Feed> GetPersonFeeds(string person)
+        {
+            return repo.ReadPersonFeeds(person);
+        }
+
+        public IEnumerable<Feed> GetWordFeed(string word)
+        {
+            return repo.ReadWordFeeds(word);
+        }
+
+        public IEnumerable<Feed> GetFeedSince(DateTime date)
+        {
+            return repo.ReadFeedsSince(date);
+        }
+
+        public IEnumerable<Feed> GetOrganisationFeeds(string orginasation)
+        {
+            IEnumerable<Feed> feeds = new List<Feed>();
+            SubjectManager subjectManager = new SubjectManager();
+            subjectManager.GetPeopleByOrganisation(orginasation).ToList().ForEach(s => feeds.Union(repo.ReadPersonFeeds(s.Name)));
+            return feeds;
         }
     }
 }

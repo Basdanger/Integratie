@@ -13,6 +13,10 @@ namespace Integratie.DAL.Repositories.Interfaces
         Alert GetAlertById(int id);
         void RemoveAlert(Alert alert);
         void AddAlert(Alert alert);
-        IEnumerable<Alert> GetUserAlerts(int userId);
+        UserAlert GetUserAlert(int user, int alert);
+        void AddUserAlert(UserAlert userAlert);
+        IEnumerable<UserAlert> GetUserAlerts();
+        IEnumerable<UserAlert> GetUserAlertsOfUser(int userId);
+        IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId);
     }
 }

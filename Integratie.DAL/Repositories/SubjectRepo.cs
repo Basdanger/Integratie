@@ -24,12 +24,12 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
-        public Subject GetSubjectById(string id)
+        public Subject ReadSubjectById(string id)
         {
             return context.Subjects.Find(id);
         }
 
-        public List<Subject> GetSubjects()
+        public IEnumerable<Subject> ReadSubjects()
         {
             return context.Subjects.ToList<Subject>();
         }
@@ -37,6 +37,16 @@ namespace Integratie.DAL.Repositories
         public void RemoveSubject(Subject subject)
         {
             context.Subjects.Remove(subject);
+        }
+
+        public IEnumerable<Subject> ReadSubjectByName(string name)
+        {
+            return context.Subjects.Where(s => s.Name.ToUpper().Equals(name.ToUpper())).ToList<Subject>();
+        }
+
+        public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)
+        {
+            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
         }
     }
 }

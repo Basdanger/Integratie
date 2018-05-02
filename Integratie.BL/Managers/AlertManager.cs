@@ -16,18 +16,20 @@ namespace Integratie.BL.Managers
     public class AlertManager
     {
         // test
-        IAlertRepo ar = new DummyAlertRepo();
+        private IAlertRepo repo = new AlertRepo();
         public void CheckAlerts()
         {
-            foreach (Alert a in ar.GetAlerts())
+            foreach (Alert a in repo.GetAlerts())
             {
-                if  (a.GetType() == typeof(CheckAlert))
+                if (a.GetType() == typeof(CheckAlert))
                 {
                     CheckCheckAlert((CheckAlert)a);
-                } else if (a.GetType() == typeof(CompareAlert))
+                }
+                else if (a.GetType() == typeof(CompareAlert))
                 {
                     CheckCompareAlert((CompareAlert)a);
-                } else if (a.GetType() == typeof(TrendAlert))
+                }
+                else if (a.GetType() == typeof(TrendAlert))
                 {
                     CheckTrendAlert((TrendAlert)a);
                 }
@@ -37,9 +39,9 @@ namespace Integratie.BL.Managers
         {
             Subject subject = alert.Subject;
             int fc = 0;
-            foreach(Feed f in subject.Feeds)
+            foreach (Feed f in subject.Feeds)
             {
-                if(f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
                 {
                     fc++;
                 }
@@ -51,7 +53,7 @@ namespace Integratie.BL.Managers
             int fc2 = 0;
             foreach (Feed f in subject.Feeds)
             {
-                if (f.Date.Ticks > DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
                 {
                     fc2++;
                 }
@@ -79,7 +81,7 @@ namespace Integratie.BL.Managers
                     }
                     break;
             }
-            
+
             return false;
         }
         public bool CheckCompareAlert(CompareAlert alert)
@@ -90,7 +92,7 @@ namespace Integratie.BL.Managers
             int fcA = 0;
             int fcB = 0;
 
-            foreach(Feed f in subjectA.Feeds)
+            foreach (Feed f in subjectA.Feeds)
             {
                 if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.Ticks)
                 {
@@ -141,9 +143,9 @@ namespace Integratie.BL.Managers
             double std = 0;
             double zScore = 0;
 
-            foreach(Feed f in subject.Feeds)
+            foreach (Feed f in subject.Feeds)
             {
-                if (f.Date.Ticks > DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
                 {
                     fcToday++;
                 }
@@ -153,7 +155,7 @@ namespace Integratie.BL.Managers
             {
                 foreach (Feed f in subject.Feeds)
                 {
-                    if (f.Date.Ticks > DateTime.Now.AddDays(-2 -i).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1 -i).Ticks)
+                    if (f.Date.Ticks >= DateTime.Now.AddDays(-2 - i).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1 - i).Ticks)
                     {
                         fcHistory++;
                     }
@@ -177,8 +179,9 @@ namespace Integratie.BL.Managers
             if (zScore > 2)
             {
                 return true;
-            } else
-            return false;
+            }
+            else
+                return false;
         }
     }
 }

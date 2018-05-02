@@ -7,6 +7,7 @@ using Integratie.DAL.EF;
 using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.DAL.Repositories
 {
