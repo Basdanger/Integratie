@@ -15,6 +15,7 @@
 <button id="js" class="btn btn-primary">RandomResize</button>
 <button id="js2" class="btn btn-primary">add</button>
 <button id="js3" class="btn btn-primary">Open Popup</button>
+<button id="serialize" class="btn btn-primary">Serialize</button>
 
 <div class="tesla-popup">
     <div class="tesla-popup-window">
@@ -71,6 +72,26 @@
             var widget = ['<li data-row="1" data-col="1" data-sizex="2" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>', 1, 2];
             gridster.add_widget.apply(gridster, widget)});
         //$(".gridster ul").gridster(options).width("auto");
+
+    });
+</script>
+<!-- Serializer-->
+<script type="text/javascript">
+    var gridster;
+
+    $(function () {
+
+        gridster = $(".gridster ul").gridster({
+            widget_base_dimensions: [100, 55],
+            widget_margins: [5, 5]
+        }).data('gridster');
+
+
+        $('#serialize').on('click', function () {
+            var s = gridster.serialize();
+
+            console.log(JSON.stringify(s));
+        })
 
     });
 </script>
