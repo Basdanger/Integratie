@@ -12,6 +12,10 @@ namespace Integratie.Domain.Entities.Subjects
         public DateTime Geboortedatum { get; set; }
         public String URL { get; set; }
 
+        public Person()
+        {
+        }
+
         public Person(int iD, string name) : base(iD, name)
         {
             
