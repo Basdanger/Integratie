@@ -35,7 +35,7 @@ namespace Integratie.BL.Managers
             return repo.ReadPersonFeeds(person);
         }
 
-        public IEnumerable<Feed> GetWordFeed(string word)
+        public IEnumerable<Feed> GetWordFeeds(string word)
         {
             return repo.ReadWordFeeds(word);
         }
@@ -50,6 +50,24 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feeds = new List<Feed>();
             SubjectManager subjectManager = new SubjectManager();
             subjectManager.GetPeopleByOrganisation(orginasation).ToList().ForEach(s => feeds.Union(repo.ReadPersonFeeds(s.Name)));
+            return feeds;
+        }
+
+        public IEnumerable<Feed> GetPersonFeedsSince(string person, DateTime date)
+        {
+            return repo.ReadPersonFeedsSince(person,date);
+        }
+
+        public IEnumerable<Feed> GetWordFeedsSince(string word, DateTime date)
+        {
+            return repo.ReadWordFeedsSince(word,date);
+        }
+
+        public IEnumerable<Feed> GetOrganisationFeedsSince(string orginasation, DateTime date)
+        {
+            IEnumerable<Feed> feeds = new List<Feed>();
+            SubjectManager subjectManager = new SubjectManager();
+            subjectManager.GetPeopleByOrganisation(orginasation).ToList().ForEach(s => feeds.Union(repo.ReadPersonFeedsSince(s.Name,date)));
             return feeds;
         }
     }

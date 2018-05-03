@@ -51,5 +51,15 @@ namespace Integratie.DAL.Repositories
         {
             return context.Feeds.Where(f => f.Date.CompareTo(date) >= 0).ToList<Feed>();
         }
+
+        public IEnumerable<Feed> ReadPersonFeedsSince(string person, DateTime date)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper()) && f.Date.CompareTo(date) >= 0).ToList<Feed>();
+        }
+
+        public IEnumerable<Feed> ReadWordFeedsSince(string word, DateTime date)
+        {
+            return context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper()) && f.Date.CompareTo(date) >= 0).ToList<Feed>();
+        }
     }
 }

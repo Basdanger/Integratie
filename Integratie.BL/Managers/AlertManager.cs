@@ -16,50 +16,77 @@ namespace Integratie.BL.Managers
     public class AlertManager
     {
         // test
-        private IAlertRepo repo = new AlertRepo();
+        private AlertRepo repo = new AlertRepo();
         public void CheckAlerts()
         {
             foreach (Alert a in repo.GetAlerts())
             {
                 if (a.GetType() == typeof(CheckAlert))
                 {
-                    CheckCheckAlert((CheckAlert)a);
+                    if (CheckCheckAlert((CheckAlert)a))
+                    {
+                        a.Ring = true;
+                        repo.UpdateAlert(a);
+                    } 
                 }
                 else if (a.GetType() == typeof(CompareAlert))
                 {
-                    CheckCompareAlert((CompareAlert)a);
+                    if (CheckCompareAlert((CompareAlert)a))
+                    {
+                        a.Ring = true;
+                        repo.UpdateAlert(a);
+                    }
                 }
                 else if (a.GetType() == typeof(TrendAlert))
                 {
-                    CheckTrendAlert((TrendAlert)a);
+                    if (CheckTrendAlert((TrendAlert)a))
+                    {
+                        a.Ring = true;
+                        repo.UpdateAlert(a);
+                    }
                 }
             }
         }
         public bool CheckCheckAlert(CheckAlert alert)
         {
             Subject subject = alert.Subject;
-            int fc = 0;
-            foreach (Feed f in subject.Feeds)
+            FeedManager feedManager = new FeedManager();
+            IEnumerable<Feed> feeds;
+
+            if (subject.GetType() == typeof(Person))
             {
-                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
+                feeds = feedManager.GetPersonFeedsSince(subject.Name,DateTime.Now.AddDays(-7));
+            }
+            else if (subject.GetType() == typeof(Organisation))
+            {
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+            else
+            {
+                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+
+            int fCPast = 0;
+            foreach (Feed f in feeds)
+            {
+                if (f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
                 {
-                    fc++;
+                    fCPast++;
                 }
             }
 
+            fCPast = fCPast / 6;
 
-            fc = fc / 6;
-
-            int fc2 = 0;
+            int fCNow = 0;
             foreach (Feed f in subject.Feeds)
             {
                 if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
                 {
-                    fc2++;
+                    fCNow++;
                 }
             }
 
-            int result = fc2 / fc;
+            int result = fCNow / fCPast;
             switch (alert.Operator)
             {
                 case Operator.EQ:
@@ -92,21 +119,28 @@ namespace Integratie.BL.Managers
             int fcA = 0;
             int fcB = 0;
 
-            foreach (Feed f in subjectA.Feeds)
+            FeedManager feedManager = new FeedManager();
+            IEnumerable<Feed> feedsA;
+            IEnumerable<Feed> feedsB;
+
+            if (subjectA.GetType() == typeof(Person))
             {
-                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.Ticks)
-                {
-                    fcA++;
-                }
+                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
+                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+            }
+            else if (subjectA.GetType() == typeof(Organisation))
+            {
+                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
+                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+            }
+            else
+            {
+                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
+                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
             }
 
-            foreach (Feed f in subjectB.Feeds)
-            {
-                if (f.Date.Ticks > DateTime.Now.AddDays(-7).Ticks && f.Date.Ticks < DateTime.Now.Ticks)
-                {
-                    fcB++;
-                }
-            }
+            fcA = feedsA.Count();
+            fcB = feedsB.Count();
 
             switch (alert.Operator)
             {
@@ -143,7 +177,23 @@ namespace Integratie.BL.Managers
             double std = 0;
             double zScore = 0;
 
-            foreach (Feed f in subject.Feeds)
+            FeedManager feedManager = new FeedManager();
+            IEnumerable<Feed> feeds;
+
+            if (subject.GetType() == typeof(Person))
+            {
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+            else if (subject.GetType() == typeof(Organisation))
+            {
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+            else
+            {
+                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+
+            foreach (Feed f in feeds)
             {
                 if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
                 {
@@ -153,7 +203,7 @@ namespace Integratie.BL.Managers
 
             for (int i = 0; i < days; i++)
             {
-                foreach (Feed f in subject.Feeds)
+                foreach (Feed f in feeds)
                 {
                     if (f.Date.Ticks >= DateTime.Now.AddDays(-2 - i).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1 - i).Ticks)
                     {

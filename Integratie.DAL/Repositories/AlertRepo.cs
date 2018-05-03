@@ -64,5 +64,11 @@ namespace Integratie.DAL.Repositories
         {
             context.Alerts.Remove(alert);
         }
+
+        public void UpdateAlert(Alert alert)
+        {
+            context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
     }
 }
