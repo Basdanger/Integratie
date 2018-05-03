@@ -199,9 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804281533009_InitialCreate.cs" />
-    <Compile Include="Migrations\201804281533009_InitialCreate.Designer.cs">
-      <DependentUpon>201804281533009_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201805021310383_InitialCreate.cs" />
+    <Compile Include="Migrations\201805021310383_InitialCreate.Designer.cs">
+      <DependentUpon>201805021310383_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -289,7 +289,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -373,8 +375,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804281533009_InitialCreate.resx">
-      <DependentUpon>201804281533009_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805021310383_InitialCreate.resx">
+      <DependentUpon>201805021310383_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

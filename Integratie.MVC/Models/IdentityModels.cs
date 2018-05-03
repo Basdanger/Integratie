@@ -23,7 +23,7 @@ namespace Integratie.MVC.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("Users", throwIfV1Schema: false)
+            : base("IntegratieDB", throwIfV1Schema: false)
         {
         }
 

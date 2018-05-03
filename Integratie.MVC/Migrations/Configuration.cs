@@ -12,7 +12,7 @@ namespace Integratie.MVC.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "Integratie.MVC.Models.ApplicationDbContext";
         }
 
@@ -53,10 +53,11 @@ namespace Integratie.MVC.Migrations
                 {
                     Email = "admin@tesla.be",
                     UserName = "TeslaAdmin",
+                    FirstName = "",
+                    LastName = "",
                 };
                 userManager.Create(user, "Test1234(");
                 userManager.AddToRole(user.Id, "SuperAdmin");
-
             }
         }
     }
