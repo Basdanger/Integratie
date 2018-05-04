@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Entities.Graph
 {
-    public abstract class Graph
+    public class Graph
     {
         public int GraphId { get; set; }
         public Account Account { get; set; }

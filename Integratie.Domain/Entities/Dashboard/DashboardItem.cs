@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Integratie.Domain.Entities.Graph;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Integratie.Domain.Entities.Dashboard
 {
@@ -15,6 +16,8 @@ namespace Integratie.Domain.Entities.Dashboard
         public int X_Size { get; set; }
         public int Y_Size { get; set; }
         public Graph.Graph Graph { get; set; }
+        [NotMapped]
+        public int GridId { get; set; }
 
         public DashboardItem()
         {

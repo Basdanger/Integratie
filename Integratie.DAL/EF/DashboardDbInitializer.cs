@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         protected override void Seed(DashBoardDbContext context)
         {
@@ -188,8 +188,13 @@ namespace Integratie.DAL.EF
             context.Graphs.Add(BCG2);
 
             //DashboardItems
-            DashboardItem DBI1 = new DashboardItem(0, 1, 2, 3, 3, BCG1);
+            DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
+            DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
+            DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
             //DashboardItem DBI1 = new DashboardItem(1,)
+            context.Dashboarditems.Add(DBI1);
+            context.Dashboarditems.Add(DBI2);
+            context.Dashboarditems.Add(DBI3);
             context.SaveChanges();
         }
     }

@@ -13,8 +13,18 @@ namespace Integratie.DAL.Repositories
         DashBoardDbContext context = new DashBoardDbContext();
         public List<DashboardItem> GetAllDashboardItems()
         {
+            return context.Dashboarditems.Include("Graph").ToList();
+        }
+        public List<DashboardItem> Update (List<DashboardItem> dbis)
+        {
+            foreach(DashboardItem dbi in dbis)
+            {
+                DashboardItem item = context.Dashboarditems.Where(i => i.Id == dbi.Id).First();
+                context.Dashboarditems.Remove(item);
+                context.Dashboarditems.Add(dbi);
+                context.SaveChanges();
+            }
             return context.Dashboarditems.ToList();
         }
-
     }
 }

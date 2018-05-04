@@ -1,4 +1,5 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Newtonsoft.Json;
 using System;
@@ -13,6 +14,7 @@ namespace Integratie.MVC.Controllers
     public class HomeController : Controller
     {
         GraphManager manager = new GraphManager();
+        DashboardManager dbmanager = new DashboardManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -23,8 +25,17 @@ namespace Integratie.MVC.Controllers
             graph.Values.Keys.ToList().ForEach(i => listKeys.Add(i));
             ViewBag.DataValues = JsonConvert.SerializeObject(listValues);
             ViewBag.DataKeys = JsonConvert.SerializeObject(listKeys);
-            return View();
+            List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
+            return View(dbitems);
         }
+
+        [HttpPost]
+        public ActionResult Index(List<DashboardItem> dbis)
+        {
+            dbmanager.Update(dbis);
+            return View(dbis);
+        }
+        
 
         public ActionResult About()
         {

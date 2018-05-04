@@ -13,6 +13,7 @@ namespace Integratie.DAL.Repositories.Interfaces
         List<Graph> GetAllGraphs();
         Graph GetGraphById(int Id);
         List<Graph> GetGraphsByUserId(int Id);
+        Graph Update(Graph graph);
         void AddGraph(Graph graph);
         int GetTotalCount();
     }
