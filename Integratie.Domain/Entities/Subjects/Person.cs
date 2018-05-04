@@ -24,6 +24,10 @@ namespace Integratie.Domain.Entities.Subjects
         public String ID { get; set; }
         public String Town { get; set; }
 
+        public Person()
+        {
+
+        }
         public Person(String first_Name, String last_Name, String district,
                       String level, String gender, String twitter, String site,
                       DateTime dateOfBirth, String facebook, String postal_Code,

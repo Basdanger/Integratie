@@ -1,4 +1,5 @@
-﻿using Integratie.DAL.Repositories;
+﻿using Integratie.BL.Managers.Interfaces;
+using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Subjects;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.BL.Managers
 {
-    public class SubjectManager
+    public class SubjectManager : ISubjectManager
     {
         private ISubjectRepo repo = new DummySubjectRepo();
         public IEnumerable<Subject> GetSubjects()
