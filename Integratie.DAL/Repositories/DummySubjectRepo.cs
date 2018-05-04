@@ -17,12 +17,12 @@ namespace Integratie.DAL.Repositories
             subjects.Add(subject);
         }
 
-        public Subject GetSubjectById(string id)
+        public Subject ReadSubjectById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Subject> GetSubjects()
+        public IEnumerable<Subject> ReadSubjects()
         {
             return subjects;
         }
