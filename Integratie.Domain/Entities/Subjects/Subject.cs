@@ -26,9 +26,6 @@ namespace Integratie.Domain.Entities.Subjects
             FeedCount = Feeds.Count();
     }
 
-        public Subject()
-        {
-        }
 
         public void AddFeed(Feed feed)
         {

@@ -24,12 +24,12 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
-        public Subject GetSubjectById(string id)
+        public Subject GetSubjectById(int id)
         {
             return context.Subjects.Find(id);
         }
 
-        public List<Subject> GetSubjects()
+        public IEnumerable<Subject> GetSubjects()
         {
             return context.Subjects.ToList<Subject>();
         }
