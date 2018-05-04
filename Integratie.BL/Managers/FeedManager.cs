@@ -29,5 +29,15 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadFeed(id);
         }
+
+        public void MakeFeed(Feed feed)
+        {
+            repo.CreateFeed(feed);
+        }
+
+        public bool CheckFeed(Feed feed)
+        {
+            return repo.CheckFeedExist(feed);
+        }
     }
 }

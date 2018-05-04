@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -33,18 +33,17 @@ namespace Integratie.DAL.EF
             foreach (var feed in feeds)
             {
                 context.Feeds.Add(feed);
-                
             }
 
             List<Person> people = new List<Person>();
-            String st = File.ReadAllText(@"C:\Users\ImmortalShepard\Source\Repos\IntegratieProject\Integratie.DAL\politici.json");
+            String st = File.ReadAllText(@"C:\Users\GLaDOS\Desktop\politici.json");
             IEnumerable <Person> resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
-            Console.WriteLine("Making" + resultsFeed.Count() + "people");
+            Console.WriteLine("Making " + resultsPerson.Count() + " people");
             foreach (var item in resultsPerson)
             {
                 people.Add(new Person(item.First_Name, item.Last_Name, item.District, item.District, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.ID, item.Town));
             }
-            Console.WriteLine("Adding" + resultsPerson.Count() + "people to database");
+            Console.WriteLine("Adding " + resultsPerson.Count() + " people to database");
             foreach (var person in people)
             {
                 context.People.Add(person);
@@ -81,6 +80,7 @@ namespace Integratie.DAL.EF
             DashboardItem DBI1 = new DashboardItem(0, 1, 2, 3, 3, BCG1);
             //DashboardItem DBI1 = new DashboardItem(1,)
             context.SaveChanges();
+            Console.WriteLine("Alle changes zijn opgeslagen");
         }
     }
 }

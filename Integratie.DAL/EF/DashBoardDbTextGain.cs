@@ -40,9 +40,9 @@ namespace Integratie.DAL.EF
                 }
 
                 stream = "[" + string.Join("", filter) + "]";
-                
+
                 return stream;
             }
         }
     }
-}
+}   

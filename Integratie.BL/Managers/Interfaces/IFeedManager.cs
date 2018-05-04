@@ -12,5 +12,7 @@ namespace Integratie.BL.Managers.Interfaces
     {
         IEnumerable<Feed> GetFeeds();
         Feed GetFeed(double id);
+        void MakeFeed(Feed feed);
+        bool CheckFeed(Feed feed);
     }
 }

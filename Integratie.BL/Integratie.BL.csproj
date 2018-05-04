@@ -43,12 +43,14 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\AlertManager.cs" />
@@ -56,6 +58,8 @@
     <Compile Include="Managers\FeedManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
+    <Compile Include="Managers\Interfaces\ITextgainManager.cs" />
+    <Compile Include="Managers\TextgainManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

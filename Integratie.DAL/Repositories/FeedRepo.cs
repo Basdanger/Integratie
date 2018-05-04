@@ -50,5 +50,10 @@ namespace Integratie.DAL.Repositories
         {
             return context.Feeds.Where(f => f.Date.CompareTo(date) >= 0).ToList<Feed>();
         }
+
+        public bool CheckFeedExist(Feed feed)
+        {
+            return context.Feeds.Any(f => f.ID == feed.ID);
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace Integratie.DAL.Repositories.Interfaces
         IEnumerable<Feed> ReadFeeds();
         Feed ReadFeed(double id);
         void CreateFeed(Feed feed);
+        bool CheckFeedExist(Feed feed);
     }
 }
