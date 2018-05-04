@@ -43,5 +43,13 @@ namespace Integratie.BL.Managers
             }
             return graphs;
         }
+        public List<Graph> Update(List<Graph> graphs)
+        {
+            foreach(Graph GG in graphs)
+            {
+                GraphRepo.Update(GG);
+            }
+            return GraphRepo.GetAllGraphs();
+        }
     }
 }

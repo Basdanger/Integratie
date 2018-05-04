@@ -1,5 +1,8 @@
-﻿
-
+﻿@using Integratie.Domain.Entities.Dashboard;
+@using Integratie.Domain.Entities.Graph;
+@using Newtonsoft.Json;
+@model List<DashboardItem>
+@{int counter = 0; }
 <link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.gridster.min.js")"></script>
@@ -9,7 +12,6 @@
 <div class="gridster" style="width:100%;">
     <ul id="gridul" style="width:100%; margin:0; padding:0;">
 
-        <li data-row="1" data-col="1" data-sizex="2" data-sizey="2"><canvas id="myChart" style="max-height:100%;"></canvas></li>
     </ul>
 </div>
 <button id="js" class="btn btn-primary">RandomResize</button>
@@ -61,7 +63,15 @@
             }
         }).data('gridster');
 
-
+        @foreach (DashboardItem x in Model)
+        {
+            <text>
+        var widget = ['<li><canvas id="myChart' + @counter +'" style="max-height:100%;"></canvas></li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
+            gridster.add_widget.apply(gridster, widget);
+            </text>
+            x.GridId = counter;
+            counter++;
+        }
         $('#js').on('click', function () {
             gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
                 getRandomInt(1, 4), getRandomInt(1, 4));
@@ -77,63 +87,84 @@
 </script>
 <!-- Serializer-->
 <script type="text/javascript">
-    var gridster;
+    $("#serialize").on("click", function () {
 
-    $(function () {
+        var jsonObj =@Html.Raw(Json.Encode(Model));
+        jsonObj = JSON.stringify(jsonObj);
+         $.ajax({
+                type: "POST",
+                url: '@Url.Action("Index","Home")',
+                data: jsonObj,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Succes")
+                },
+                error: function (ex) {
+                    alert(ex.statusText);
+                }
+            });
 
-        gridster = $(".gridster ul").gridster({
-            widget_base_dimensions: [100, 55],
-            widget_margins: [5, 5]
-        }).data('gridster');
-
-
-        $('#serialize').on('click', function () {
-            var s = gridster.serialize();
-
-            console.log(JSON.stringify(s));
-        })
-
-    });
+    })
 </script>
 <!--Marnick-->
 <script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: @Html.Raw(ViewBag.DataKeys),
-        datasets: [{
-            label: '# of Votes',
-            data: @Html.Raw(ViewBag.DataValues),
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
+    @for (int y = 0; y < counter; y++) {
+
+        foreach(DashboardItem dbi in Model)
+        {
+            if( dbi.GridId == y)
+            {
+
+                if(dbi.Graph.GetType() == typeof(BarChartGraph))
+                {
+                    BarChartGraph BCG = (BarChartGraph)dbi.Graph;
+                     <text>
+                    $(function () {
+                            var ctx = document.getElementById("myChart" + @y).getContext('2d');
+                            var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                                labels: @Html.Raw(JsonConvert.SerializeObject(BCG.Values.Keys.ToList())),
+                datasets: [{
+                                    label: '# of Votes',
+                    data: @Html.Raw(JsonConvert.SerializeObject(BCG.Values.Values.ToList())),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
                 }
-            }]
+                            }
+                        });
+    });
+    </text>
+                }
+            }
         }
+
     }
-});
 </script>
 
 

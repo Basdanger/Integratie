@@ -43,5 +43,14 @@ namespace Integratie.DAL.Repositories
                 return 0;
             }
         }
+
+        public Graph Update(Graph graph)
+        {
+            Graph gr = context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
+            context.Graphs.Remove(gr);
+            context.Graphs.Add(graph);
+            context.SaveChanges();
+            return context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
+        }
     }
 }
