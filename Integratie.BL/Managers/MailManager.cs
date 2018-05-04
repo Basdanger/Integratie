@@ -33,13 +33,13 @@ namespace Integratie.BL.Managers
                                                MediaTypeNames.Text.Html);
                 // Create a plain text message for client that don't support HTML
                 AlternateView plainView = AlternateView.CreateAlternateViewFromString(Regex.Replace(htmlMessage,"<[^>]+?>",string.Empty),Encoding.UTF8,MediaTypeNames.Text.Plain);
-                LinkedResource graph = new LinkedResource(@"C:\Users\Marnick\Source\Repos\IntegratieProject\Integratie.BL\Managers\4.png","image/png");
-                graph.ContentId = "Graph";
-                graph.ContentType.MediaType = "image/png";
-                graph.TransferEncoding = TransferEncoding.Base64;
-                graph.ContentType.Name = graph.ContentId;
-                graph.ContentLink = new Uri("cid:" + graph.ContentId);
-                htmlView.LinkedResources.Add(graph);
+                //LinkedResource graph = new LinkedResource(@"C:\Users\Marnick\Source\Repos\IntegratieProject\Integratie.BL\Managers\4.png","image/png");
+                //graph.ContentId = "Graph";
+                //graph.ContentType.MediaType = "image/png";
+                //graph.TransferEncoding = TransferEncoding.Base64;
+                //graph.ContentType.Name = graph.ContentId;
+                //graph.ContentLink = new Uri("cid:" + graph.ContentId);
+                //htmlView.LinkedResources.Add(graph);
                 mail.AlternateViews.Add(plainView);
                 mail.AlternateViews.Add(htmlView);
                 mail.IsBodyHtml = true;
