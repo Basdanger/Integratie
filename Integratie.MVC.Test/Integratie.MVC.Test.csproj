@@ -152,6 +152,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlertAPITestController.cs" />
     <Compile Include="Controllers\Api\AlertAPITestController.cs" />
+    <Compile Include="Controllers\Api\AndroidController.cs" />
     <Compile Include="Controllers\Api\GraphApiController.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

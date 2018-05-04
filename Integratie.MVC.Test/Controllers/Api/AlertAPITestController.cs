@@ -38,6 +38,15 @@ namespace Integratie.MVC.Test.Controllers.Api
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }
 
+        [HttpPost]
+        public IHttpActionResult PostPolitiekerExtra([FromUri] int index, [FromUri] string tekst)
+        {
+            politiekers[index] = politiekers[index] + tekst;
+
+            return StatusCode(System.Net.HttpStatusCode.NoContent);
+        }
+
+
 
     }
 }
