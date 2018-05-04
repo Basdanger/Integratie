@@ -12,18 +12,17 @@ namespace Integratie.DAL.Repositories
     public class DummySubjectRepo : ISubjectRepo
     {
         List<Subject> subjects = new List<Subject>();
-        public Subject AddSubject(Subject subject)
+        public void AddSubject(Subject subject)
         {
             subjects.Add(subject);
-            return subjects.Last();
         }
 
-        public Subject GetSubjectById(int id)
+        public Subject ReadSubjectById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Subject> GetSubjects()
+        public IEnumerable<Subject> ReadSubjects()
         {
             return subjects;
         }

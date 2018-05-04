@@ -19,7 +19,6 @@ namespace Integratie.BL.Managers
         }
         public int GetGraphCount()
         {
-
             return GraphRepo.GetTotalCount();
         }
         public List<Graph> GetAllGraphs()

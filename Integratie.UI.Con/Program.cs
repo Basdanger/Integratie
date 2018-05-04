@@ -15,13 +15,10 @@ namespace Integratie.UI.Con
     class Program
     {
         private static FeedManager mgr = new FeedManager();
-        private static RecordManager rcdmgr = new RecordManager();
 
         static void Main(string[] args)
         {
-            PrintAllFeeds();
-            //rcdmgr.ReadFile();
-
+            Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
             Console.ReadLine();
         }
 
