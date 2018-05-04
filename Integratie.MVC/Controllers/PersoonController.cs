@@ -1,4 +1,5 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,7 +22,7 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Personen()
         {
-            var subjects = manager.GetSubjects();
+            IEnumerable<Person> subjects = manager.GetPersons();
             return View(subjects);
         }
     }

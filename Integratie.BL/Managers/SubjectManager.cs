@@ -17,5 +17,9 @@ namespace Integratie.BL.Managers
         {
             return repo.GetSubjects();
         }
+        public IEnumerable<Person> GetPersons()
+        {
+            return repo.GetPersons();
+        }
     }
 }

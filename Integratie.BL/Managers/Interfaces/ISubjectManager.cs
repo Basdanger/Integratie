@@ -10,5 +10,6 @@ namespace Integratie.BL.Managers.Interfaces
     interface ISubjectManager
     {
         IEnumerable<Subject> GetSubjects();
+        IEnumerable<Person> GetPersons();
     }
 }

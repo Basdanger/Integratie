@@ -19,6 +19,11 @@ namespace Integratie.DAL
             return subjects.Last();
         }
 
+        public IEnumerable<Person> GetPersons()
+        {
+            return context.People.ToList();
+        }
+
         public Subject GetSubjectById(int id)
         {
             throw new NotImplementedException();

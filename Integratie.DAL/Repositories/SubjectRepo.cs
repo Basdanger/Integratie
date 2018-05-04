@@ -24,6 +24,11 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public IEnumerable<Person> GetPersons()
+        {
+            return context.People.ToList();
+        }
+
         public Subject GetSubjectById(int id)
         {
             return context.Subjects.Find(id);

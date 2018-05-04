@@ -14,5 +14,6 @@ namespace Integratie.DAL
         void AddSubject(Subject subject);
         void RemoveSubject(Subject subject);
         Subject GetSubjectById(int id);
+        IEnumerable<Person> GetPersons();
     }
 }
