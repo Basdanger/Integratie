@@ -8,7 +8,10 @@ namespace Integratie.Domain.Entities.Subjects
 {
     public class Organisation : Subject
     {
-        
+        public Organisation()
+        {
+
+        }
         public Organisation(String iD, string name) : base(iD, name)
         {
 

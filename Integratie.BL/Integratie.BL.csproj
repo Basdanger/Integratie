@@ -58,6 +58,8 @@
     <Compile Include="Managers\FeedManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
+    <Compile Include="Managers\Interfaces\ISubjectManager.cs" />
+    <Compile Include="Managers\SubjectManager.cs" />
     <Compile Include="Managers\Interfaces\ITextgainManager.cs" />
     <Compile Include="Managers\TextgainManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
