@@ -52,5 +52,12 @@ namespace Integratie.BL.Managers
         {
             return repo.Update(dbis);
         }
+
+        public void UpdateDashboard(List<DashboardItem> dashboardItems)
+        {
+            GraphManager graphManager = new GraphManager();
+            dashboardItems.ForEach(d => d.Graph = graphManager.GetGraphbyId(d.GraphId));
+            dashboardItems.ForEach(d => repo.UpdateDashboardItem(d));
+        }
     }
 }

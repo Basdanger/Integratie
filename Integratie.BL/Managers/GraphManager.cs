@@ -51,5 +51,10 @@ namespace Integratie.BL.Managers
             }
             return GraphRepo.GetAllGraphs();
         }
+
+        public Graph GetGraphbyId(int id)
+        {
+            return GraphRepo.GetGraphById(id);
+        }
     }
 }
