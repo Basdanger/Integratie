@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Configuration page";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Create Admin", "Register", "Role")</li>
+    </ul>
+</div>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Personalize Data", "ConfigPage", "Role")</li>
+    </ul>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
