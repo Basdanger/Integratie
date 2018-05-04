@@ -19,13 +19,15 @@ namespace Integratie.BL.Managers
             try
             {
                 MailMessage mail = new MailMessage("integratie.tesla@gmail.com","marnick_huysmans@live.be");
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Port = 587;
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtpClient.Host = "smtp.gmail.com";
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new System.Net.NetworkCredential("integratie.tesla@gmail.com", "PepeH4nds!");
-                smtpClient.EnableSsl = true;
+                SmtpClient smtpClient = new SmtpClient
+                {
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Host = "smtp.gmail.com",
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("integratie.tesla@gmail.com", "PepeH4nds!"),
+                    EnableSsl = true
+                };
                 string htmlMessage = @"<html><body>" + Body + @"<br><img src='cid:Graph' /></body></html>";
                 AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
                                                htmlMessage,
