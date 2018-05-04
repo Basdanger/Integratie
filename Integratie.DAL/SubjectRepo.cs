@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
-using Integratie.Domain;
 using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.DAL
 {
-    public class DummySubjectRepo : ISubjectRepo
+    public class SubjectRepo : ISubjectRepo
     {
         DashBoardDbContext context = new DashBoardDbContext();
-        List<Subject> subjects = new List<Subject>();
-        public Subject AddSubject(Subject subject)
+
+        public void AddSubject(Subject subject)
         {
-            subjects.Add(subject);
-            return subjects.Last();
+            context.Subjects.Add(subject);
+            context.SaveChanges();
         }
 
         public Subject GetSubjectById(int id)
@@ -24,19 +23,14 @@ namespace Integratie.DAL
             throw new NotImplementedException();
         }
 
-        public void RemoveSubject(Subject subject)
-        {
-            subjects.Remove(subject);
-        }
-
-        void ISubjectRepo.AddSubject(Subject subject)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Subject> ISubjectRepo.GetSubjects()
+        public IEnumerable<Subject> GetSubjects()
         {
             return context.Subjects.ToList();
+        }
+
+        public void RemoveSubject(Subject subject)
+        {
+            throw new NotImplementedException();
         }
     }
 }

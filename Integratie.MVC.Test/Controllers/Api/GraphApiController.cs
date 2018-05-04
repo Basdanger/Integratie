@@ -1,29 +1,27 @@
-﻿using Integratie.BL.Managers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
-namespace Integratie.MVC.Controllers.Api
+using Integratie.BL.Managers;
+namespace Integratie.MVC.Test.Controllers.Api
 {
-    public class SubjectApiController : ApiController
+    public class GraphApiController : ApiController
     {
-        private SubjectManager manager = new SubjectManager();
+        private GraphManager GraphManager = new GraphManager();
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+            var grafieken = GraphManager.GetAllGraphs();
+            return Ok(grafieken);
+        }
+        [HttpGet]
+        public IHttpActionResult GetAllFilled()
+        {
+            return Ok(GraphManager.GetAllFilledGraphs());
+        }
 
-        [HttpGet]
-        public IHttpActionResult GetSubjects()
-        {
-            var subjects = manager.GetSubjects();
-            return Ok(subjects);
-        }
-        [HttpGet]
-        public IHttpActionResult GetPersons()
-        {
-            var subjects = manager.GetSubjects();
-            return Ok(subjects);
-        }
         // GET api/<controller>
         public IEnumerable<string> Get()
         {

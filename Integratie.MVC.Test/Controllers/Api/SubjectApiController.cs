@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Integratie.MVC.Controllers.Api
+namespace Integratie.MVC.Test.Controllers.Api
 {
     public class SubjectApiController : ApiController
     {

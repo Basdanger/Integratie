@@ -1,5 +1,5 @@
 ﻿using Integratie.BL.Managers;
-using Integratie.Domain.Entities.Graph;
+//using Integratie.Domain.Entities.Graph;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -64,6 +64,46 @@ namespace Integratie.MVC.Controllers
                 ViewBag.Message = "Please select file";
             }
             return View();
+        }
+
+        public ActionResult Gemeente()
+        {
+            ViewBag.Message = "Your Towns Page";
+            string[] gemeentes = { "Aartselaar", "Antwerpen", "Arendonk", "Baarle-Hertog", "Balen", "Beerse", "Berleer", "Boechout", "Bonheiden" };
+
+            return View(gemeentes);
+        }
+
+        public ActionResult Politici()
+        {
+            // Person person = mgr.getPerson();
+            // Geef person mee aan view...
+            return View(new String[] { "Bart De Wever", "Bart De Wever", "Bart De Wever", "Bart De Wever", "Bart De Wever", "Bart De Wever", "Bart De Wever", "Bart De Wever" });
+        }
+
+        public ActionResult Politieker()
+        {
+            return View();
+        }
+
+        public ActionResult WeeklyReview()
+        {
+            return View();
+        }
+        public ActionResult Settings()
+        {
+            return View();
+        }
+
+        public ActionResult Organisatie()
+        {
+            return View();
+        }
+
+        public ActionResult GemeentePage(string Gemeente) {
+
+
+            return View((object)Gemeente);
         }
     }
 }

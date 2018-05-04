@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.DAL.Repositories.Interfaces
+namespace Integratie.DAL
 {
     public interface ISubjectRepo
     {
-        List<Subject> GetSubjects();
+        IEnumerable<Subject> GetSubjects();
         void AddSubject(Subject subject);
         void RemoveSubject(Subject subject);
-        Subject GetSubjectById(string id);
+        Subject GetSubjectById(int id);
     }
 }

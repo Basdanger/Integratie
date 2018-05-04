@@ -25,6 +25,11 @@ namespace Integratie.Domain.Entities.Subjects
             Feeds = new List<Feed>();
             FeedCount = Feeds.Count();
     }
+
+        public Subject()
+        {
+        }
+
         public void AddFeed(Feed feed)
         {
             Feeds.Add(feed);
