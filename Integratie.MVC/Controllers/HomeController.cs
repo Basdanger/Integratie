@@ -18,9 +18,9 @@ namespace Integratie.MVC.Controllers
             ViewBag.Message = "Your contact page.";
             List<double> listValues = new List<double>();
             List<string> listKeys = new List<string>();
-            BarChartGraph graph = (BarChartGraph)manager.GetAllFilledGraphs().First();
-            graph.Values.Values.ToList().ForEach(i => listValues.Add(i));
-            graph.Values.Keys.ToList().ForEach(i => listKeys.Add(i));
+            //BarChartGraph graph = (BarChartGraph)manager.GetAllFilledGraphs().First();
+            //graph.Values.Values.ToList().ForEach(i => listValues.Add(i));
+            //graph.Values.Keys.ToList().ForEach(i => listKeys.Add(i));
             ViewBag.DataValues = JsonConvert.SerializeObject(listValues);
             ViewBag.DataKeys = JsonConvert.SerializeObject(listKeys);
             return View();

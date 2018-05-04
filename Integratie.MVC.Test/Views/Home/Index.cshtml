@@ -21,8 +21,9 @@
         text-align: center;
         background-color: #18bc9c;
     }
-    canvas{
-        border:1px solid red;
+
+    canvas {
+        border: 1px solid red;
     }
 </style>
 
@@ -40,7 +41,7 @@
                 Sort
             </th>
         </tr>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -50,7 +51,7 @@
                     null
                 </td>
                 <td>
-                    @if(item.GetType() == typeof(BarChartGraph))
+                    @if (item.GetType() == typeof(BarChartGraph))
                     {
                         BarChartGraph graph = (BarChartGraph)item;
                         <span>Bar</span>
@@ -60,17 +61,17 @@
             </tr>
         }
     </table>
-@foreach (var item in Model)
-{
-    if (item.GetType() == typeof(BarChartGraph))
+    @foreach (var item in Model)
     {
-        BarChartGraph graph = (BarChartGraph)item;
-        <div>
-            <canvas id="c" style="width:200px; height: 200px;"></canvas>
-            
-        </div>
+        if (item.GetType() == typeof(BarChartGraph))
+        {
+            BarChartGraph graph = (BarChartGraph)item;
+            <div>
+                <canvas id="c" style="width:200px; height: 200px;"></canvas>
+
+            </div>
+        }
     }
-}
 
 
 
@@ -119,7 +120,7 @@
                 }.bind(this);
 
                 $('#add-new-widget').click(this.addNewWidget);
-                
+
             };
             var options2 = {
                 userId: 'JanVH',
@@ -176,3 +177,8 @@
         window.player.setValue('grid1', 'rows', e.value);
     }
 </script>
+@*@Html.Partial("~/Views/Shared/_LineGraphCompare.cshtml")*@
+@{
+    Html.RenderAction("_LineGraphCompare", "Graph", new { id ="chart1" });
+    Html.RenderAction("_LineGraphCompare", "Graph", new { id ="chart2" });
+}

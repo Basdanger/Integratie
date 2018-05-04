@@ -1,4 +1,6 @@
 ﻿using Integratie.DAL;
+using Integratie.DAL.Repositories;
+using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Graph;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,6 @@ namespace Integratie.BL.Managers
         }
         public int GetGraphCount()
         {
-
             return GraphRepo.GetTotalCount();
         }
         public List<Graph> GetAllGraphs()

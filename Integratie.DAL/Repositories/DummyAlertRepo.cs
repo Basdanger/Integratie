@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain;
+using Integratie.DAL.Repositories.Interfaces;
 
-namespace Integratie.DAL
+namespace Integratie.DAL.Repositories
 {
     public class DummyAlertRepo : IAlertRepo
     {
