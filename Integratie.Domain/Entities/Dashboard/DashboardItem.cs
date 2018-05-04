@@ -18,6 +18,8 @@ namespace Integratie.Domain.Entities.Dashboard
         public Graph.Graph Graph { get; set; }
         [NotMapped]
         public int GridId { get; set; }
+        [NotMapped]
+        public int GraphId { get; set; }
 
         public DashboardItem()
         {

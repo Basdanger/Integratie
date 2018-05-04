@@ -32,8 +32,16 @@ namespace Integratie.MVC.Controllers
         [HttpPost]
         public ActionResult Index(List<DashboardItem> dbis)
         {
+
+            List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
+            foreach (DashboardItem dbi in dbis)
+            {
+                dbi.Graph = dbitems.ToList().Where(e => e.Id == dbi.Id).First().Graph;
+            }
             dbmanager.Update(dbis);
-            return View(dbis);
+            dbitems = dbmanager.GetAllDashboardItems();
+
+            return View(dbitems);
         }
         
 

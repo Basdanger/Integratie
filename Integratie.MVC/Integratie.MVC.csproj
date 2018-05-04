@@ -268,6 +268,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.gridster.js" />
     <Content Include="Scripts\jquery.gridster.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
