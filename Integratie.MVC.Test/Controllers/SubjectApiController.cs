@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Integratie.BL.Managers;
 
 namespace Integratie.MVC.Test.Controllers
 {
     public class SubjectApiController : ApiController
     {
         private SubjectManager manager = new SubjectManager();
+
         [HttpGet]
         public IHttpActionResult GetSubjects()
         {
