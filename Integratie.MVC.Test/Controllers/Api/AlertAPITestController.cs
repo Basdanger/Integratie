@@ -33,7 +33,7 @@ namespace Integratie.MVC.Test.Controllers.Api
 
         [HttpPut]
         public IHttpActionResult PutDeviceId(string deviceId, string userId) {
-
+       
 
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }
