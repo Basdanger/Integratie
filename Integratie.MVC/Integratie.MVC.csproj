@@ -206,9 +206,10 @@
     <Compile Include="Controllers\Api\GraphApiController.cs" />
     <Compile Include="Controllers\Api\PolitiekersApi.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
-    <Compile Include="Controllers\Api\SubjectManager.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\PersoonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -346,10 +347,12 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Graph Inits\_BarChart.cshtml" />
+    <Content Include="Views\Persoon\Personen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\" />
+    <Folder Include="Views\Person\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
