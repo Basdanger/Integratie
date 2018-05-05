@@ -7,7 +7,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Full_Name)
+            Naam
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Organisation)
@@ -32,11 +32,9 @@
             @Html.DisplayFor(modelItem => item.Site)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Twitter)
+            @Html.DisplayFor(modelItem => item.Twitter) |
+            @Html.ActionLink("Detail", "Persoon", new { naam=item.Full_Name })
         </td>
-        @*<td>
-            @Html.ActionLink("Details", "Details", new { id = item.Id })
-        </td>*@
     </tr>
     }
 </table>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.Repositories;
+using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.BL.Managers
@@ -34,6 +35,18 @@ namespace Integratie.BL.Managers
         public IEnumerable<Person> GetPersonen()
         {
             return repo.GetPersonen();
+        }
+        public Person GetPersoon(String Full_Name)
+        {
+            return repo.GetPersoon(Full_Name);
+        }
+        public IEnumerable<Organisation> GetOrganisaties()
+        {
+            return repo.GetOrganisaties();
+        }
+        public IEnumerable<Feed> GetFeedsByPeople(String Full_Name)
+        {
+            return repo.FeedsByPerson(Full_Name);
         }
     }
 }

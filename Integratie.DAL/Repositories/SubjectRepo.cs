@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.DAL.Repositories
@@ -51,6 +52,19 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Person> GetPersonen()
         {
             return context.People.ToList();
+        }
+        public Person GetPersoon(String Full_Name)
+        {
+            //bevat soms geen elementen soms wel gewoon nog eens proberen
+            return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
+        }
+        public IEnumerable<Organisation> GetOrganisaties()
+        {
+            return context.Organisations.ToList();
+        }
+        public IEnumerable<Feed> FeedsByPerson(String Full_Name)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(Full_Name.ToUpper())).ToList();
         }
     }
 }

@@ -21,5 +21,10 @@ namespace Integratie.MVC.Controllers
             IEnumerable<Person> personen = mgr.GetPersonen();
             return View(personen);
         }
+        public ActionResult Persoon(String naam)
+        {
+            Person person = mgr.GetPersoon(naam);
+            return View(person);
+        }
     }
 }
