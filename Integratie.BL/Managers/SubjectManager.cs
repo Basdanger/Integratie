@@ -31,5 +31,9 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadPeopleByOrganisation(orginasation);
         }
+        public IEnumerable<Person> GetPersonen()
+        {
+            return repo.GetPersonen();
+        }
     }
 }

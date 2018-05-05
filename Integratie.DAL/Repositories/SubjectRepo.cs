@@ -48,5 +48,9 @@ namespace Integratie.DAL.Repositories
         {
             return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
         }
+        public IEnumerable<Person> GetPersonen()
+        {
+            return context.People.ToList();
+        }
     }
 }

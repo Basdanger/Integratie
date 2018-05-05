@@ -15,6 +15,10 @@ namespace Integratie.Domain.Entities.Subjects
         public List<Feed> Feeds { get; set; }
         public int FeedCount { get; set; }
 
+        public Subject()
+        {
+
+        }
         public Subject(String id, string name)
         {
             ID = id;
