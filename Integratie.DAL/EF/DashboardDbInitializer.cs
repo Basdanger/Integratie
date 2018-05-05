@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -38,8 +38,9 @@ namespace Integratie.DAL.EF
 
             List<Person> people = new List<Person>();
             //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(@"C:\Users\yanni\net\Integratie.DAL\politici.json");
-            IEnumerable<Person> resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
+            String st = File.ReadAllText(@"C:\Users\klanten\Desktop\politici.json");
+            IEnumerable<Person> resultsPerson = new List<Person>();
+            resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
             foreach (var item in resultsPerson)
             {
