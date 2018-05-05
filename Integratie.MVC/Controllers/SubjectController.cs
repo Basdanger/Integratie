@@ -32,10 +32,5 @@ namespace Integratie.MVC.Controllers
             IEnumerable<Organisation> organisaties = mgr.GetOrganisaties();
             return View(organisaties);
         }
-        public ActionResult Feeds(String Full_Name)
-        {
-            IEnumerable<Feed> feeds = mgr.GetFeedsByPeople(Full_Name);
-            return View(feeds);
-        }
     }
 }

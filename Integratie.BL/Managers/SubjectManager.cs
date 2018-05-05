@@ -44,9 +44,5 @@ namespace Integratie.BL.Managers
         {
             return repo.GetOrganisaties();
         }
-        public IEnumerable<Feed> GetFeedsByPeople(String Full_Name)
-        {
-            return repo.FeedsByPerson(Full_Name);
-        }
     }
 }
