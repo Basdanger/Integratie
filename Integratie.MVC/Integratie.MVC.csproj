@@ -367,6 +367,7 @@
     <Content Include="Views\Subject\Organisaties.cshtml" />
     <Content Include="Views\Subject\FeedsPartial.cshtml" />
     <Content Include="Views\Home\Gemeente.cshtml" />
+    <Content Include="Views\Home\GemeentePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
