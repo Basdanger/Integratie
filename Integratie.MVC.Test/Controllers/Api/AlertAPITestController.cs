@@ -26,17 +26,26 @@ namespace Integratie.MVC.Test.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult PostSomething([FromBody] string politieker) {
+        public IHttpActionResult PostSomething([FromUri] string politieker) {
             politiekers.Add(politieker);
-            return CreatedAtRoute("DefaultApi",new { controller = "AlertAPITest", id = politiekers.IndexOf(politieker) },politieker);
+            return CreatedAtRoute("DefaultApiPost",new { controller = "AlertAPITest", id = politiekers.IndexOf(politieker) },politieker);
         }
 
         [HttpPut]
         public IHttpActionResult PutDeviceId(string deviceId, string userId) {
-
+       
 
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }
+
+        [HttpPost]
+        public IHttpActionResult PostPolitiekerExtra([FromUri] int index, [FromUri] string tekst)
+        {
+            politiekers[index] = politiekers[index] + tekst;
+
+            return StatusCode(System.Net.HttpStatusCode.NoContent);
+        }
+
 
 
     }
