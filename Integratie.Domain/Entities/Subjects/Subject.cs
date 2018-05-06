@@ -9,9 +9,19 @@ namespace Integratie.Domain.Entities.Subjects
 {
     public class Subject
     {
-        public Subject(int iD, string name)
+        [Key]
+        public String ID { get; set; }
+        public String Name { get; set; }
+        public List<Feed> Feeds { get; set; }
+        public int FeedCount { get; set; }
+
+        public Subject()
         {
-            ID = iD;
+
+        }
+        public Subject(String id, string name)
+        {
+            ID = id;
             Name = name;
             Feeds = new List<Feed>();
             FeedCount = Feeds.Count();
@@ -21,11 +31,5 @@ namespace Integratie.Domain.Entities.Subjects
             Feeds.Add(feed);
             FeedCount = Feeds.Count();
         }
-
-        [Key]
-        public int ID { get; set; }
-        public String Name { get; set; }
-        public List<Feed> Feeds { get; set; }
-        public int FeedCount { get; set; }
     }
 }

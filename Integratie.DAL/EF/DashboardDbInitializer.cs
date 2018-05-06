@@ -4,9 +4,11 @@ using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,159 +17,49 @@ namespace Integratie.DAL.EF
 {
     public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
+        public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
         {
-            //DUMMY FEEDS
-            List<Feed> list = new List<Feed>()
+            List<Feed> feeds = new List<Feed>();
+            IEnumerable<Feed> resultsFeed = JsonConvert.DeserializeObject<IEnumerable<Feed>>(dashBoardDbTextGain.postJson());
+
+            Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
+            foreach (var item in resultsFeed)
             {
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now, 3),
-                new Feed(DateTime.Now, 3),
-                new Feed(DateTime.Now, 3),
-
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(1), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(1), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-7), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-0), 3),
-                new Feed(DateTime.Now.AddDays(-0), 3),
-                new Feed(DateTime.Now.AddDays(-0), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-7), 3),
-                new Feed(DateTime.Now.AddDays(1), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(1), 3),
-
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(-1), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-5), 3),
-
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(-3), 3),
-                new Feed(DateTime.Now.AddDays(-2), 3),
-                new Feed(DateTime.Now.AddDays(1), 3),
-                new Feed(DateTime.Now.AddDays(-4), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(0), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-                new Feed(DateTime.Now.AddDays(-6), 3),
-            };
-
-            foreach (var item in list)
-            {
-                context.Feeds.Add(item);
+                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
-            //DUMMY SUBJECTS
-            Subject S1 = new Subject(1, "Bart De Wever");
-            for (int i = 0; i < 11; i++)
+            Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
+            foreach (var feed in feeds)
             {
-                S1.AddFeed(list[i]);
+                context.Feeds.Add(feed);
+                
             }
 
-            Subject S2 = new Subject(2, "Maggie De Block");
-            for (int i = 11; i < 21; i++)
+            List<Person> people = new List<Person>();
+            //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
+            String st = File.ReadAllText(@"C:\Users\jvanh\Desktop\politici.json");
+            IEnumerable<Person> resultsPerson = new List<Person>();
+            resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
+            Console.WriteLine("Making" + resultsFeed.Count() + "people");
+            foreach (var item in resultsPerson)
             {
-                S2.AddFeed(list[i]);
+                people.Add(new Person(item.First_Name, item.Last_Name, item.District, item.District, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.ID, item.Town));
+            }
+            Console.WriteLine("Adding" + resultsPerson.Count() + "people to database");
+            foreach (var person in people)
+            {
+                context.People.Add(person);
             }
 
-            Subject S3 = new Subject(3, "Kris Peeters");
-            for (int i = 21; i < 31; i++)
-            {
-                S3.AddFeed(list[i]);
-            }
-
-            Subject S4 = new Subject(4, "Charles Michel");
-            for (int i = 31; i < 40; i++)
-            {
-                S4.AddFeed(list[i]);
-            }
             //DUMMY ALERTS
-            CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, S1);
-            CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, S2);
-            CheckAlert CH3 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, S3);
-            CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, S4);
-            CompareAlert CO1 = new CompareAlert(S1, S2, Operator.GT);
-            CompareAlert CO2 = new CompareAlert(S1, S2, Operator.LT);
-            TrendAlert TR1 = new TrendAlert(S1);
+            CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
+            CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);
+            CheckAlert CH3 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[3]);
+            CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, people[4]);
+            CompareAlert CO1 = new CompareAlert(people[1], people[2], Operator.GT);
+            CompareAlert CO2 = new CompareAlert(people[1], people[2], Operator.LT);
+            TrendAlert TR1 = new TrendAlert(people[1]);
 
             context.Alerts.Add(CH1);
             context.Alerts.Add(CH2);
@@ -179,11 +71,14 @@ namespace Integratie.DAL.EF
 
             //ACCOUNTS
             Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
-            
+
+            //USERALERTS
+            UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
+            context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { S1, S2 }, A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { S3, S4 }, A1);
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
 

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
+@{
+    ViewBag.Title = "Personen";
+}
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<h2>Personen</h2>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Naam
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organisation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Site)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Twitter)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr id="elementen">
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td id="naam">
+            @Html.DisplayFor(modelItem => item.Full_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organisation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Site)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Twitter) |
+            @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
+        </td>
+    </tr>
+    }
+</table>

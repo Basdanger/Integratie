@@ -11,6 +11,7 @@ namespace Integratie.DAL.Repositories.Interfaces
     public interface IFeedRepo
     {
         IEnumerable<Feed> ReadFeeds();
+        Feed ReadFeed(double id);
         void CreateFeed(Feed feed);
     }
 }

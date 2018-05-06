@@ -9,10 +9,14 @@ namespace Integratie.DAL.Repositories.Interfaces
 {
     public interface IAlertRepo
     {
-        List<Alert> GetAlerts();
-        Alert GetAlertById(int ID);
+        IEnumerable<Alert> GetAlerts();
+        Alert GetAlertById(int id);
         void RemoveAlert(Alert alert);
-        Alert AddAlert(Alert alert);
-
+        void AddAlert(Alert alert);
+        UserAlert GetUserAlert(int user, int alert);
+        void AddUserAlert(UserAlert userAlert);
+        IEnumerable<UserAlert> GetUserAlerts();
+        IEnumerable<UserAlert> GetUserAlertsOfUser(int userId);
+        IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId);
     }
 }

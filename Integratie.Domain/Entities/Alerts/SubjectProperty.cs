@@ -14,6 +14,5 @@ namespace Integratie.Domain.Entities.Alerts
         date,
         count,
         relativeCount
-
     }
 }

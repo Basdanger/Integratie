@@ -25,7 +25,7 @@ namespace Integratie.DAL.Repositories
 
         public Graph GetGraphById(int Id)
         {
-            throw new NotImplementedException();
+            return context.Graphs.Find(Id);
         }
 
         public List<Graph> GetGraphsByUserId(int Id)

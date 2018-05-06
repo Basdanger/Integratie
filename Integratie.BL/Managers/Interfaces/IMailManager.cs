@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Integratie.BL.Managers.Interfaces
 {
-    public interface IRecordManager
+    public interface IMailManager
     {
-        void ReadFile();
+        void SendMail(string Body);
     }
 }

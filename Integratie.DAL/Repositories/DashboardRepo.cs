@@ -26,5 +26,11 @@ namespace Integratie.DAL.Repositories
             }
             return context.Dashboarditems.ToList();
         }
+
+        public void UpdateDashboardItem(DashboardItem dBI)
+        {
+            context.Entry(dBI).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
     }
 }
