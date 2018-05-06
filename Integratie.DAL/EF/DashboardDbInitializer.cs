@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -81,6 +81,7 @@ namespace Integratie.DAL.EF
             BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
+            
 
             //DashboardItems
             DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
