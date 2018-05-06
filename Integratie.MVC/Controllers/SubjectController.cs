@@ -1,6 +1,7 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
+using Integratie.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -25,11 +26,11 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Persoon(String Full_Name)
         {
-            dynamic myModel = new ExpandoObject();
-            myModel.Personen = mgr.GetPersoon(Full_Name);
-            myModel.Feeds = mgr.GetFeeds(Full_Name);
-            Person person = mgr.GetPersoon(Full_Name);
-            return View(myModel);
+            PersonanFeeds pf = new PersonanFeeds();
+            pf.persons = mgr.GetPersoon(Full_Name);
+            pf.feeds = mgr.GetFeeds(Full_Name);
+            //Person person = mgr.GetPersoon(Full_Name);
+            return View(pf);
         }
         public ActionResult Organisaties()
         {
