@@ -48,5 +48,10 @@ namespace Integratie.BL.Managers
         {
             return repo.FeedsByPerson(Full_Name);
         }
+
+        public IEnumerable<Subject> GetPeopleByTown(string town)
+        {
+            return repo.ReadPeopleByTown(town);
+        }
     }
 }

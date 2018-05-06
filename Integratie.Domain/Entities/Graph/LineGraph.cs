@@ -13,11 +13,7 @@ namespace Integratie.Domain.Entities.Graph
         public Period period { get; set; }
     }
 
-    public LineGraph(Subject subject) 
-    {
-        Subject Subject = subject;
-        period = Period.DAY;
-    }
+    
     public enum Period
     {
         DAY,
