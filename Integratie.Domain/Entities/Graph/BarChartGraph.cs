@@ -19,6 +19,7 @@ namespace Integratie.Domain.Entities.Graph
         public BarChartGraph() : base(0, null)
         {
             Values = new Dictionary<string, double>();
+            
         }
         public BarChartGraph(List<Subject> subjects, Account account) : this()
         {
