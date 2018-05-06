@@ -6,13 +6,13 @@
 <link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.gridster.js")"></script>
-
+@{
+    Html.RenderAction("_BarChart", "GraphPartial", new { id = 1 });
+}
 <!-- MARNICK CHART-->
 <!-- Jan -->
 <div class="gridster" style="width:100%;">
-    <ul id="gridul" style="width:100%; margin:0; padding:0;">
-
-    </ul>
+    <ul id="gridul" style="width:100%; margin:0; padding:0;"></ul>
 </div>
 <button id="js" class="btn btn-primary">RandomResize</button>
 <button id="js2" class="btn btn-primary">add</button>
@@ -27,9 +27,9 @@
         </div>
         <div class="tesla-popup-container">
             @Html.Partial("~/Views/Graph Inits/_BarChart.cshtml");
-            </div>
         </div>
     </div>
+</div>
 <script>
     $(document).ready(function () {
         $('#js3').on('click', function () {
@@ -97,7 +97,7 @@
                 X_Size: $(this).attr('data-sizex'),
                 Y_Size: $(this).attr('data-sizey'),
                 GraphId: $(this).attr('data-graphid')
-                
+
             };
             s.push(o);
             console.log(index + ": " + $(this).attr('data-id'));

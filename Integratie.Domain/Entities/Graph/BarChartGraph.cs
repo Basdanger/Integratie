@@ -22,7 +22,6 @@ namespace Integratie.Domain.Entities.Graph
         }
         public BarChartGraph(List<Subject> subjects, Account account) : this()
         {
-
             Subjects = subjects;
         }
     }
