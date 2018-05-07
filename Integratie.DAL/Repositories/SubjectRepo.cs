@@ -24,7 +24,7 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
-        public Subject GetSubjectById(string id)
+        public Subject GetSubjectById(double id)
         {
             return context.Subjects.Find(id);
         }

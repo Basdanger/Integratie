@@ -48,9 +48,6 @@ namespace Integratie.Domain.Entities
             Geo = geo;
             Retweet = retweet;
         }
-
-        
-
     }
     public enum Gender
     {
@@ -64,8 +61,7 @@ namespace Integratie.Domain.Entities
         public String Education { get; set; }
         public String Language { get; set; }
         public String Personality { get; set; }
-
-
+        
         public Profile()
         {
 
