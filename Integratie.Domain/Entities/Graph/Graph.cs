@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,11 @@ namespace Integratie.Domain.Entities.Graph
         public AgeFilter AgeFilter { get; set; }
         public PersonalityFilter PersonalityFilter { get; set; }
         public List<string> PersonFilter { get; set; }
+        public GenderFilter GenderFilter { get; set; }
 
+        //VALUES
+        [NotMapped]
+        public double SingleValue { get; set; }
 
         public Graph(int graphId, Account account)
         {
@@ -61,7 +66,9 @@ namespace Integratie.Domain.Entities.Graph
     }
     public enum GraphType
     {
-        Single
+        Single,
+        Barchart,
+        Linechart
     }
     public enum CalcType
     {
@@ -79,5 +86,11 @@ namespace Integratie.Domain.Entities.Graph
         Both,
         E,
         I
+    }
+    public enum GenderFilter
+    {
+        Both,
+        Male,
+        Female
     }
 }

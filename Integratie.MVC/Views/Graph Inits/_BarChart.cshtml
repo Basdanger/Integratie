@@ -56,6 +56,7 @@
             <label for="exampleSelect1">Persons</label>
 
             <div id="personDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
@@ -63,12 +64,14 @@
             <label for="exampleSelect1">Gender</label>
 
             <div id="GenderSelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
             <label for="exampleSelect1">Age</label>
 
             <div id="AgeSelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
@@ -76,6 +79,7 @@
             <label for="exampleSelect1">Personality</label>
 
             <div id="PersonalitySelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
@@ -99,6 +103,14 @@
 </form>
 <!--ControlInit Script-->
 <script type="text/javascript">
+    var GraphSort;
+    var CalcSort;
+    var StartDate;
+    var EndDate;
+    var PersonFilter;
+    var GenderFilter;
+    var AgeFilter;
+    var PersonalityFilter
     $(document).off('.datepicker.data-api');
     $('.datetimepicker1').datepicker({
         format: 'dd/mm/yyyy',
@@ -109,7 +121,7 @@
         values: [
             {
                 name: 'Single Value',
-                value: 'Single Value',
+                value: 'Single',
                 selected: true
             },
             {
@@ -120,7 +132,10 @@
                 name: 'Linechart',
                 value: 'Linechart'
             }
-        ]
+        ],
+        onChange: function (val) {
+            GraphSort = val;
+        }
     });
     $('#CalcSelect').dropdown({
         values: [
@@ -133,7 +148,10 @@
                 name: 'AVG',
                 value: 'AVG'
             }
-        ]
+        ],
+        onChange: function (val) {
+            CalcSort = val;
+        }
     });
     $('#GenderSelect').dropdown({
         values: [
@@ -150,7 +168,10 @@
                 name: 'Female',
                 value: 'Female'
             }
-        ]
+        ],
+        onChange: function (val) {
+            GenderFilter = val;
+        }
     });
     $('#AgeSelect').dropdown({
         values: [
@@ -161,13 +182,16 @@
             },
             {
                 name: '25+',
-                value: '25+',
+                value: 'plus25',
             },
             {
                 name: '25-',
-                value: '25-'
+                value: 'min25'
             }
-        ]
+        ],
+        onChange: function (val) {
+            AgeFilter = val;
+        }
     });
     $('#PersonalitySelect').dropdown({
         values: [
@@ -184,7 +208,10 @@
                 name: 'E',
                 value: 'E'
             }
-        ]
+        ],
+        onChange: function (val) {
+            PersonalityFilter = val;
+        }
     });
     $('#personDropdown').dropdown({
             values: [
@@ -220,7 +247,10 @@
                     name: 'Marnick',
                     value: 'Marnick'
                 }
-            ]
+        ],
+            onChange: function (val) {
+                PersonFilter = val;
+        }
     });
 
 
@@ -232,7 +262,7 @@
         onChange: function (val) {
             switch (val) {
                 case "Barchart": SetBarChart(); break;
-                case "Single Value": SetSingle(); break;
+                case "Single": SetSingle(); break;
                 case "Linechart": SetLine(); break;
 
             }
@@ -320,5 +350,40 @@
         if (ed == "") { $('#GraphEndDate').addClass("error"); errors.push("No start end entered"); }
 
         logErrors();
+        if (errors.length == 0) SendGraphSubmit();
     })
+</script>
+<!--Submit Script-->
+<script>
+    function SendGraphSubmit() {
+        alert("SENDING");
+        var s = {
+            GraphType: GraphSort,
+            CalcType: CalcSort,
+            StartDate: $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy'),
+            EndDate: $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy'),
+            AgeFilter: AgeFilter,
+            PersonalityFilter: PersonalityFilter,
+            GenderFilter: GenderFilter,
+            PersonFilter: PersonFilter
+
+        };
+
+        s = (JSON.stringify(s));
+        console.log(s);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddGraph", "Home")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
 </script>

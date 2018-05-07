@@ -264,6 +264,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\fontawesome-webfont.woff" />
     <Content Include="Scripts\dragdrop.js" />
+    <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\dropdown.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -296,6 +297,7 @@
     <Content Include="Content\outline-icons.woff" />
     <Content Include="Content\outline-icons.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\iframe-content.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -322,6 +324,7 @@
     <Content Include="Scripts\sb-admin-datatables.min.js" />
     <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Scripts\semantic.min.js" />
+    <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />

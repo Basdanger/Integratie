@@ -63,6 +63,14 @@ namespace Integratie.MVC.Controllers
             return View();
         }
         [HttpPost]
+        public ActionResult AddGraph(Graph graph)
+        {
+            DashboardItem dbi = new DashboardItem(0, 1, 1000, 3, 1, graph);
+            dbmanager.AddDashboardItem(dbi);
+            List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
+            return View(dbitems);
+        }
+        [HttpPost]
         public ActionResult Upload_file(HttpPostedFileBase file)
         {
             if(file != null && file.ContentLength > 0)
