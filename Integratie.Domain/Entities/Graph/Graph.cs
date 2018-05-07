@@ -10,6 +10,8 @@ namespace Integratie.Domain.Entities.Graph
     {
         public int GraphId { get; set; }
         public Account Account { get; set; }
+        public GraphType GraphType { get; set; }
+        public CalcType CalcType { get; set; }
 
         //AXISTYPE
         public XType XAxisType { get; set; }
@@ -23,6 +25,11 @@ namespace Integratie.Domain.Entities.Graph
         public double StartInterval { get; set; }
         public double EndInterval { get; set; }
         public double IntervalSize { get; set; }
+
+        //FILTERS
+        public AgeFilter AgeFilter { get; set; }
+        public PersonalityFilter PersonalityFilter { get; set; }
+        public List<string> PersonFilter { get; set; }
 
 
         public Graph(int graphId, Account account)
@@ -51,5 +58,26 @@ namespace Integratie.Domain.Entities.Graph
         sentimentProcent,
 
 
+    }
+    public enum GraphType
+    {
+        Single
+    }
+    public enum CalcType
+    {
+        Sum,
+        AVG
+    }
+    public enum AgeFilter
+    {
+        Both,
+        plus25,
+        min25
+    }
+    public enum PersonalityFilter
+    {
+        Both,
+        E,
+        I
     }
 }

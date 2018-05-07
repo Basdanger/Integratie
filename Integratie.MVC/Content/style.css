@@ -1,9 +1,14 @@
 ﻿body {
+    background-color:white;
+}
+.content-wrapper{
+    background-color:white;
+
 }
 .tesla-nav {
     background-color: #007bff !important;
     color: white !important;
-    box-shadow: 0px 1px 4px gray;
+    box-shadow: 0px 1px 8px black;
     position:absolute;
 }
 .tesla-brand{
@@ -17,15 +22,15 @@
     color:white;
 }
 .tesla-container {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
         color: #007bff;
-        background-color: #007bff1f !important;
-        overflow:hidden;
-        font-weight:normal!important;
-        
+        background-color: #e5efff !important;
+        overflow: hidden;
+        font-weight: normal !important;
+        margin-top: 50px !important;
     }
     li{
         font-weight:normal!important;
@@ -132,4 +137,76 @@ a {
     overflow:scroll;
     height:95%;
     overflow-x:hidden;
+}
+.TeslaGraphDelete {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    margin-top: -7px;
+    margin-right: -7px;
+    border-radius: 20px;
+    color: #007bff;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow: 0px 0px 8px gray;
+    border: 2px solid #007bff;
+    position:absolute;
+    right:0;
+   
+}
+    .TeslaGraphDelete:hover {
+        background-color: #82bbf8;
+    }
+.TeslaGraphDelete.hide {
+    display: none;
+}
+.gridster{
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding-top:10px;
+}
+.gridsterMenu {
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    font-size: 20px;
+    margin-top:10px;
+    height: auto;
+    width: auto;
+    display: inline-block;
+    background-color: none;
+    color: #007bff;
+    border-bottom: 1px solid #007bff;
+}
+.teslaDashboardEdit {
+    margin-left: 100px;
+    cursor: pointer;
+    transition: .5s;
+    padding:2px;
+}
+.teslaDashboardEdit:hover {
+    transform: scaleX(1.2) scaleY(1.2);
+}
+.teslaDashboardEdit.selected {
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: white;
+    background-color: #007bff;
+}
+.teslaDashboardAdd {
+    cursor: pointer;
+    transition: .5s;
+}
+.teslaDashboardAdd:hover {
+    transform: scaleX(1.2) scaleY(1.2);
+}
+.error{
+    border:2px solid red;
+    border-radius:5px;
+    outline:0;
+}
+#GraphErrors{
+    margin-top:10px;
+    color:red;
+    margin-left:-8px;
 }

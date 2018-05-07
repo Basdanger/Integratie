@@ -29,7 +29,14 @@ namespace Integratie.DAL.Repositories
 
         public void UpdateDashboardItem(DashboardItem dBI)
         {
-            context.Entry(dBI).State = System.Data.Entity.EntityState.Modified;
+            context.Dashboarditems.RemoveRange(context.Dashboarditems.ToList());
+            context.Dashboarditems.Add(dBI);
+            context.SaveChanges();
+        }
+
+        public void ClearItems()
+        {
+            context.Dashboarditems.RemoveRange(context.Dashboarditems.ToList());
             context.SaveChanges();
         }
     }

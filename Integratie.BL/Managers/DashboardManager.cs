@@ -56,8 +56,15 @@ namespace Integratie.BL.Managers
         public void UpdateDashboard(List<DashboardItem> dashboardItems)
         {
             GraphManager graphManager = new GraphManager();
-            dashboardItems.ForEach(d => d.Graph = graphManager.GetGraphbyId(d.GraphId));
-            dashboardItems.ForEach(d => repo.UpdateDashboardItem(d));
+            if (dashboardItems != null && dashboardItems.Count > 0)
+            {
+                dashboardItems.ForEach(d => d.Graph = graphManager.GetGraphbyId(d.GraphId));
+                dashboardItems.ForEach(d => repo.UpdateDashboardItem(d));
+            }
+            else
+            {
+                repo.ClearItems();
+            }
         }
     }
 }
