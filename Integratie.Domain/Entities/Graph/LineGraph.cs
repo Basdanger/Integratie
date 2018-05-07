@@ -9,12 +9,7 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class LineGraph : Graph
     {
-        public Subject Subject { get; set; }
+        public List<Subject> Subjects { get; set; }
         public Period Period { get; set; }
-    }
-    public enum Period
-    {
-        DAY,
-        WEEK
     }
 }

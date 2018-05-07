@@ -12,7 +12,6 @@ namespace Integratie.Domain.Entities.Graph
     {
         public Subject Subject { get; set; }
         public PieType PieType { get; set; }
-
         [NotMapped]
         public Dictionary<string, double> Values { get; set; }
 
@@ -22,13 +21,18 @@ namespace Integratie.Domain.Entities.Graph
         }
         public PieGraph(Subject subject, Account account) : this()
         {
-
             Subject = subject;
+        }
+        public PieGraph(Subject subject, PieType pieType, Account account) : base(account)
+        {
+            Subject = subject;
+            PieType = pieType;
         }
     }
     public enum PieType
     {
         GENDER,
-        POSNEG
+        POSNEG,
+        AGE
     }
 }

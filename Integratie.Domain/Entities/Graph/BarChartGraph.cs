@@ -11,8 +11,7 @@ namespace Integratie.Domain.Entities.Graph
     public class BarChartGraph : Graph
     {
         public List<Subject> Subjects { get; set; }
-
-        public int MyProperty { get; set; }
+        public Period Period { get; set; }
         [NotMapped]
         public Dictionary<string,double> Values { get; set; }
 
@@ -20,10 +19,17 @@ namespace Integratie.Domain.Entities.Graph
         {
             Values = new Dictionary<string, double>();
         }
-        public BarChartGraph(List<Subject> subjects, Account account) : this()
+        public BarChartGraph(List<Subject> subjects, Period period, Account account) : base(account)
         {
             Subjects = subjects;
+            Period = period;
         }
     }
-   
+    public enum Period
+    {
+        DAY,
+        WEEK,
+        MONTH,
+        TOTAL
+    }
 }
