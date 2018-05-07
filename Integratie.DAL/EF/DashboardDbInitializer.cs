@@ -44,14 +44,13 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
             foreach (var item in resultsPerson)
             {
-                people.Add(new Person(item.First_Name, item.Last_Name, item.District, item.District, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.ID, item.Town));
+                people.Add(new Person(item.First_Name, item.Last_Name, item.District, item.Level, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.ID, item.Town));
             }
             Console.WriteLine("Adding" + resultsPerson.Count() + "people to database");
             foreach (var person in people)
             {
                 context.People.Add(person);
             }
-
             //DUMMY ALERTS
             CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
             CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);

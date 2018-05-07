@@ -8,6 +8,7 @@ namespace Integratie.Domain.Entities.Subjects
 {
     public class Organisation : Subject
     {
+
         public Organisation()
         {
 

@@ -28,11 +28,8 @@ namespace Integratie.Domain.Entities.Subjects
         {
 
         }
-        public Person(String first_Name, String last_Name, String district,
-                      String level, String gender, String twitter, String site,
-                      DateTime dateOfBirth, String facebook, String postal_Code,
-                      String full_Name, String position, String organisation,
-                      String id, String town) : base(id, full_Name)
+
+        public Person(string first_Name, string last_Name, string district, string level, string gender, string twitter, string site, DateTime dateOfBirth, string facebook, string postal_Code, string full_Name, string position, string organisation, string iD, string town)
         {
             First_Name = first_Name;
             Last_Name = last_Name;
@@ -47,7 +44,7 @@ namespace Integratie.Domain.Entities.Subjects
             Full_Name = full_Name;
             Position = position;
             Organisation = organisation;
-            ID = id;
+            ID = iD;
             Town = town;
         }
     }

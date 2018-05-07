@@ -40,7 +40,6 @@ namespace Integratie.BL.Managers
                     }
                     catch(Exception ex)
                     {
-
                     }
                 }
             }
