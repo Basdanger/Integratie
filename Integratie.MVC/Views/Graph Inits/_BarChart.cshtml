@@ -1,23 +1,426 @@
 ﻿
 <form>
-    <div class="form-group">
-        <label for="exampleSelect1">Select Graph</label>
-        <select class="form-control" id="exampleSelect1">
-            <option>Barchart (count)</option>
-            <option>Linechart</option>
-            <option>Piechart</option>
-            <option>other</option>
-            <option>other other</option>
-        </select>
+    <div id="test" class="form-group">
+        <label for="exampleSelect1"><b>Select Graph</b></label>
+        <br />
+        <label>Graph</label>
+        <div class="ui fluid dropdown selection" id="GraphSelect">
+            <input type="hidden" name="gender">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+        <label>Calculation</label>
+        <div class="ui fluid dropdown selection" id="CalcSelect">
+        <input type="hidden" name="gender">
+        <div class="text"></div>
+        <i class="dropdown icon"></i>
+    </div>
+    </div>
+        <!--DATA-->
+        <div id="" class="form-group">
+            <b><label for="exampleSelect2">Data</label></b>
+            <div class="form-group">
+                <label>Period Sort</label>
+                <div class="ui fluid dropdown selection" id="GraphPeriodSort">
+                    <input type="hidden" name="gender">
+                    <div class="text"></div>
+                    <i class="dropdown icon"></i>
+                </div>
+                <label id="GraphStartDateLabel" for="exampleSelect2">Start Date</label>
+                <div class='input-group date datetimepicker1' id='GraphStartDate'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span style="color:black" class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <label id="GraphEndDateLabel"for="exampleSelect2">End Date</label>
+                <div class='input-group date datetimepicker1' id='GraphEndDate'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span style="color:black" class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
+                <select style="display:none" class="form-control" id="IntervalSelect">
+                    <option>1 Day</option>
+                    <option>2 Days</option>
+                    <option>3 Days</option>
+                    <option>4 Days</option>
+                    <option>5 Days</option>
+                    <option>6 Days</option>
+                    <option>7 Days</option>
+                    <option>8 Days</option>
+                    <option>9 Days</option>
+                    <option>10 Days</option>
+                </select>
+            </div>
+        </div>
+        <!--FILTERS-->
         <div class="form-group">
-            <label for="exampleSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <b><label for="exampleSelect2">Filters</label></b>
+            <br />
+            <label for="exampleSelect1">Persons</label>
+
+            <div id="personDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+
+            <label for="exampleSelect1">Gender</label>
+
+            <div id="GenderSelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+            <label for="exampleSelect1">Age</label>
+
+            <div id="AgeSelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+
+            <label for="exampleSelect1">Personality</label>
+
+            <div id="PersonalitySelect" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+        </div>
+        <!--COMPARE-->
+        <div class="form-group" style="display:none" id="CompareForm">
+            <b><label for="exampleSelect2">Compare</label></b>
+
+            <select class="form-control" id="GraphSelect">
+                <option vlue="Single">Politicians</option>
+                <option value="Barchart">Ages</option>
+                <option value="Linechart">Gender</option>
             </select>
         </div>
-    </div>
+        <button id="GraphSubmit" type="button" class="btn btn-success">Create Graph</button>
+        <!--ERRORS-->
+        <div id="GraphErrors">
+
+        </div>
+
 </form>
+
+
+
+
+<!--ControlInit Script-->
+<script type="text/javascript">
+    var GraphSort;
+    var CalcSort;
+    var StartDate;
+    var EndDate;
+    var PersonFilter;
+    var GenderFilter;
+    var AgeFilter;
+    var PersonalityFilter
+    $(document).off('.datepicker.data-api');
+    $('.datetimepicker1').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '-3d'
+    });
+    $('#GraphPeriodSort').dropdown({
+        values: [
+            {
+                name: 'Fixed Period',
+                value: 'Fixed',
+                selected: true
+            },
+            {
+                name: 'Flex Period',
+                value: 'Flex'
+            }
+        ],
+        onChange: function (val) {
+            if (val == "Fixed") {
+                $('#GraphStartDate').css("display", 'flex');
+                $('#GraphEndDate').css("display", 'flex');
+                $('#GraphStartDateLabel').css("display", 'flex');
+                $('#GraphEndDateLabel').css("display", 'flex');
+            }
+            else {
+                $('#GraphStartDate').css("display", 'none');
+                $('#GraphEndDate').css("display", 'none');
+                $('#GraphStartDateLabel').css("display", 'none');
+                $('#GraphEndDateLabel').css("display", 'none');
+            }
+        }
+    });
+
+    $('#GraphSelect').dropdown({
+        values: [
+            {
+                name: 'Single Value',
+                value: 'Single',
+                selected: true
+            },
+            {
+                name: 'Barchart',
+                value: 'Barchart'
+            },
+            {
+                name: 'Linechart',
+                value: 'Linechart'
+            }
+        ],
+        onChange: function (val) {
+            GraphSort = val;
+        }
+    });
+    $('#CalcSelect').dropdown({
+        values: [
+            {
+                name: 'Sum',
+                value: 'Sum',
+                selected: true
+            },
+            {
+                name: 'AVG',
+                value: 'AVG'
+            }
+        ],
+        onChange: function (val) {
+            CalcSort = val;
+        }
+    });
+    $('#GenderSelect').dropdown({
+        values: [
+            {
+                name: 'Both',
+                value: 'Both',
+                selected: true
+            },
+            {
+                name: 'Male',
+                value: 'Male',
+            },
+            {
+                name: 'Female',
+                value: 'Female'
+            }
+        ],
+        onChange: function (val) {
+            GenderFilter = val;
+        }
+    });
+    $('#AgeSelect').dropdown({
+        values: [
+            {
+                name: 'Both',
+                value: 'Both',
+                selected: true
+            },
+            {
+                name: '25+',
+                value: 'plus25',
+            },
+            {
+                name: '25-',
+                value: 'min25'
+            }
+        ],
+        onChange: function (val) {
+            AgeFilter = val;
+        }
+    });
+    $('#PersonalitySelect').dropdown({
+        values: [
+            {
+                name: 'Both',
+                value: 'Both',
+                selected: true
+            },
+            {
+                name: 'I',
+                value: 'I',
+            },
+            {
+                name: 'E',
+                value: 'E'
+            }
+        ],
+        onChange: function (val) {
+            PersonalityFilter = val;
+        }
+    });
+    $('#personDropdown').dropdown({
+            values: [
+                {
+                    name: 'Bart De Wever',
+                    value: 'Bart De Wever'
+                },
+                {
+                    name: 'Jan',
+                    value: 'Jan'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                },
+                {
+                    name: 'Marnick',
+                    value: 'Marnick'
+                }
+        ],
+            onChange: function (val) {
+                PersonFilter = val;
+        }
+    });
+
+
+</script>
+
+<!--FormState Script-->
+<script>
+    $("#GraphSelect").dropdown({
+        onChange: function (val) {
+            switch (val) {
+                case "Barchart": SetBarChart(); break;
+                case "Single": SetSingle(); break;
+                case "Linechart": SetLine(); break;
+
+            }
+        }
+    });
+
+    function SetBarChart() {
+        SetAllVisible();
+        $('#IntervalSelect').css('display', 'none');
+        $('#IntervalLabel').css('display', 'none');
+    }
+    function SetSingle() {
+        SetAllVisible();
+        $('#IntervalSelect').css('display', 'none');
+        $('#IntervalLabel').css('display', 'none');
+        $('#CompareForm').css('display', 'none');
+
+    }
+    function SetLine() {
+        SetAllVisible();
+    }
+    function SetAllVisible() {
+        $('#IntervalSelect').css('display', 'block');
+        $('#IntervalLabel').css('display', 'block');
+        $('#CompareForm').css('display', 'block');
+
+    }
+</script>
+
+<!--Inline Validation Script-->
+<script>
+    var errors = [];
+    $(".datetimepicker1").change(function () { validate() });
+
+
+    function validate() {
+        console.log("Validate function");
+        clearValidate();
+        validateDates();
+        logErrors();
+        
+        }
+    
+    function clearValidate() {
+        console.log("Clear Validate function");
+        errors = [];
+        $('#GraphStartDate').removeClass("error");
+        $('#GraphEndDate').removeClass("error");
+
+    }
+    function validateDates() {
+
+        console.log("Validate Dates function");
+        var bd = $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        var ed = $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        if (bd != "" && ed != "") {
+            console.log(bd);
+            console.log(ed);
+
+            if (bd > ed) {
+                $('#GraphStartDate').addClass("error");
+                $('#GraphEndDate').addClass("error");
+                errors.push("End date cannot be greater than start date.")
+            }
+        }
+    }
+
+    function logErrors() {
+        $("#GraphErrors").empty();
+        errors.forEach(function (element){
+            $("#GraphErrors").append("<p>" + element + "</p>");
+        });
+    }
+</script>
+
+<!--Submit Validate Script-->
+<script>
+    $("#GraphSubmit").on('click', function () {
+        validate();
+
+        //Data
+        var bd = $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        var ed = $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        if (bd == "") { $('#GraphStartDate').addClass("error"); errors.push("No start date entered"); }
+        if (ed == "") { $('#GraphEndDate').addClass("error"); errors.push("No start end entered"); }
+
+        logErrors();
+        if (errors.length == 0) SendGraphSubmit();
+    })
+</script>
+<!--Submit Script-->
+<script>
+    function SendGraphSubmit() {
+        alert("SENDING");
+        var s = {
+            GraphType: GraphSort,
+            CalcType: CalcSort,
+            StartDate: $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy'),
+            EndDate: $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy'),
+            AgeFilter: AgeFilter,
+            PersonalityFilter: PersonalityFilter,
+            GenderFilter: GenderFilter,
+            PersonFilter: PersonFilter
+
+        };
+
+        s = (JSON.stringify(s));
+        console.log(s);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddGraph", "Home")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+</script>

@@ -42,21 +42,35 @@ namespace Integratie.BL.Managers
                     {
                     }
                 }
+                if(dbi.Graph.GraphType == GraphType.Single)
+                {
+                    if (dbi.Graph.PersonFilter != null)
+                        dbi.Graph.SingleValue = dbi.Graph.PersonFilter.Count;
+                    else dbi.Graph.SingleValue = 7;
+                }
             }
-
-
             return dbis;
         }
         public List<DashboardItem> Update(List<DashboardItem> dbis)
         {
             return repo.Update(dbis);
         }
-
+        public DashboardItem AddDashboardItem(DashboardItem dbi)
+        {
+            return repo.AddDashboardItem(dbi);
+        }
         public void UpdateDashboard(List<DashboardItem> dashboardItems)
         {
             GraphManager graphManager = new GraphManager();
-            dashboardItems.ForEach(d => d.Graph = graphManager.GetGraphbyId(d.GraphId));
-            dashboardItems.ForEach(d => repo.UpdateDashboardItem(d));
+            if (dashboardItems != null && dashboardItems.Count > 0)
+            {
+                dashboardItems.ForEach(d => d.Graph = graphManager.GetGraphbyId(d.GraphId));
+                Update(dashboardItems);
+            }
+            else
+            {
+                repo.ClearItems();
+            }
         }
     }
 }

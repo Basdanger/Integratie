@@ -12,9 +12,12 @@ namespace Integratie.DAL.Repositories
     public class GraphRepo : IGraphRepo
     {
         DashBoardDbContext context = new DashBoardDbContext();
-        public void AddGraph(Graph graph)
+        public Graph AddGraph(Graph graph)
         {
-            throw new NotImplementedException();
+
+            Graph g = context.Graphs.Add(graph);
+            context.SaveChanges();
+            return g;
         }
 
         public List<Graph> GetAllGraphs()
@@ -51,6 +54,12 @@ namespace Integratie.DAL.Repositories
             context.Graphs.Add(graph);
             context.SaveChanges();
             return context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
+        }
+
+        public LineGraph GetTweetLineGraphById(int id,bool wekelijks) {
+            LineGraph graph =(LineGraph) context.Graphs.Find(id);
+
+            return graph;
         }
     }
 }

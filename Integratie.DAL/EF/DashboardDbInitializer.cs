@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
+    public class DashboardDbInitializer : CreateDatabaseIfNotExists<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -26,19 +26,19 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
             foreach (var item in resultsFeed)
             {
-                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+                //feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
             Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
             foreach (var feed in feeds)
             {
-                context.Feeds.Add(feed);
+                //context.Feeds.Add(feed);
                 
             }
 
             List<Person> people = new List<Person>();
             //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(@"C:\Users\yanni\net\Integratie.DAL\politici.json");
+            String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
@@ -70,25 +70,31 @@ namespace Integratie.DAL.EF
 
             //ACCOUNTS
             Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
+            Account A2 = new Account(1, "Jorno", "DenJorno@hotmail.com");
+            context.Accounts.Add(A1);
+            context.Accounts.Add(A2);
 
             //USERALERTS
             UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
             context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
-            context.Graphs.Add(BCG1);
-            context.Graphs.Add(BCG2);
+            //BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
+            //BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
+            //BCG1.GraphType = GraphType.Barchart;
+            //BCG2.GraphType = GraphType.Barchart;
+            //context.Graphs.Add(BCG1);
+            //context.Graphs.Add(BCG2);
+            
 
             //DashboardItems
-            DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
-            DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
-            DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
+            //DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
+            //DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
+            //DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
             //DashboardItem DBI1 = new DashboardItem(1,)
-            context.Dashboarditems.Add(DBI1);
-            context.Dashboarditems.Add(DBI2);
-            context.Dashboarditems.Add(DBI3);
+            //context.Dashboarditems.Add(DBI1);
+            //context.Dashboarditems.Add(DBI2);
+            //context.Dashboarditems.Add(DBI3);
             context.SaveChanges();
         }
     }

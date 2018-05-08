@@ -15,12 +15,17 @@ namespace Integratie.DAL.Repositories
         {
             return context.Dashboarditems.Include("Graph").ToList();
         }
+        public DashboardItem AddDashboardItem(DashboardItem item)
+        {
+            DashboardItem dbi = context.Dashboarditems.Add(item);
+            context.SaveChanges();
+            return dbi;
+        }
         public List<DashboardItem> Update (List<DashboardItem> dbis)
         {
-            foreach(DashboardItem dbi in dbis)
-            {
-                DashboardItem item = context.Dashboarditems.Where(i => i.Id == dbi.Id).First();
-                context.Dashboarditems.Remove(item);
+            context.Dashboarditems.RemoveRange(context.Dashboarditems.ToList());
+            foreach (DashboardItem dbi in dbis)
+            {                
                 context.Dashboarditems.Add(dbi);
                 context.SaveChanges();
             }
@@ -29,7 +34,15 @@ namespace Integratie.DAL.Repositories
 
         public void UpdateDashboardItem(DashboardItem dBI)
         {
-            context.Entry(dBI).State = System.Data.Entity.EntityState.Modified;
+            DashboardItem item = context.Dashboarditems.Where(i => i.Id == dBI.Id).First();
+            context.Dashboarditems.Remove(item);
+            context.Dashboarditems.Add(dBI);
+            context.SaveChanges();
+        }
+
+        public void ClearItems()
+        {
+            context.Dashboarditems.RemoveRange(context.Dashboarditems.ToList());
             context.SaveChanges();
         }
     }
