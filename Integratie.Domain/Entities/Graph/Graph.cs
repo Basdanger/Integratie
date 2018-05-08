@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Integratie.Domain.Entities.Graph
 {
     public class Graph
     {
+        [Key]
         public int GraphId { get; set; }
         public Account Account { get; set; }
         public GraphType GraphType { get; set; }
@@ -46,10 +48,6 @@ namespace Integratie.Domain.Entities.Graph
         public Graph()
         {
 
-        }
-        public Graph(Account account)
-        {
-            Account = account;
         }
 
     }
