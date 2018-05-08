@@ -48,6 +48,11 @@ namespace Integratie.Domain.Entities.Graph
 
         }
 
+        public Graph(int graphId, Account account)
+        {
+            GraphId = graphId;
+            Account = account;
+        }
     }
     public enum XType
     {

@@ -16,6 +16,10 @@ namespace Integratie.Domain.Entities.Graph
         public TrendNumberGraph(Subject subject, NumberType type, Account account) :base(subject,type,account)
         {
         }
+        public TrendNumberGraph()
+        {
+
+        }
     }
     
 }

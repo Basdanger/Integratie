@@ -11,5 +11,9 @@ namespace Integratie.Domain.Entities.Graph
     {
         public List<Subject> Subjects { get; set; }
         public Period Period { get; set; }
+        public LineGraph()
+        {
+
+        }
     }
 }

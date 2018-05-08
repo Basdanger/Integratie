@@ -38,7 +38,7 @@ namespace Integratie.DAL.EF
 
             List<Person> people = new List<Person>();
             //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
+            String st = File.ReadAllText(@"C:\Users\yanni\net\Integratie.DAL\politici.json");
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
@@ -79,22 +79,22 @@ namespace Integratie.DAL.EF
             context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            //BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
-            //BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
-            //BCG1.GraphType = GraphType.Barchart;
-            //BCG2.GraphType = GraphType.Barchart;
-            //context.Graphs.Add(BCG1);
-            //context.Graphs.Add(BCG2);
-            
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
+            BCG1.GraphType = GraphType.Barchart;
+            BCG2.GraphType = GraphType.Barchart;
+            context.Graphs.Add(BCG1);
+            context.Graphs.Add(BCG2);
+
 
             //DashboardItems
-            //DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
-            //DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
-            //DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
+            DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
+            DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
+            DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
             //DashboardItem DBI1 = new DashboardItem(1,)
-            //context.Dashboarditems.Add(DBI1);
-            //context.Dashboarditems.Add(DBI2);
-            //context.Dashboarditems.Add(DBI3);
+            context.Dashboarditems.Add(DBI1);
+            context.Dashboarditems.Add(DBI2);
+            context.Dashboarditems.Add(DBI3);
             context.SaveChanges();
         }
     }

@@ -10,6 +10,10 @@ namespace Integratie.Domain.Entities.Graph
     public class SubjectThemeGraph : Graph
     {
         public Subject Subject { get; set; }
+        public SubjectThemeGraph()
+        {
+
+        }
     }
     public enum SubjectThemeType
     {

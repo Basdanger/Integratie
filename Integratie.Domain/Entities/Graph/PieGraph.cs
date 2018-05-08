@@ -28,6 +28,7 @@ namespace Integratie.Domain.Entities.Graph
             Subject = subject;
             PieType = pieType;
         }
+
     }
     public enum PieType
     {

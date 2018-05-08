@@ -15,11 +15,15 @@ namespace Integratie.Domain.Entities.Graph
         [NotMapped]
         public Dictionary<string,double> Values { get; set; }
 
-        public BarChartGraph() : base(null)
+        public BarChartGraph(List<Subject> list, Account a1) : base(null)
         {
             Values = new Dictionary<string, double>();
-            
         }
+
+        public BarChartGraph()
+        {
+        }
+
         public BarChartGraph(List<Subject> subjects, Period period, Account account) : base(account)
         {
             Subjects = subjects;

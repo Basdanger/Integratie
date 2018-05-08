@@ -20,6 +20,10 @@ namespace Integratie.Domain.Entities.Graph
             Subject = subject;
             Type = type;
         }
+        public NumberGraph()
+        {
+
+        }
     }
     public enum NumberType
     {
