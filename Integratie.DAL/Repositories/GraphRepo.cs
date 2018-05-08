@@ -52,5 +52,11 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
             return context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
         }
+
+        public LineGraph GetTweetLineGraphById(int id,bool wekelijks) {
+            LineGraph graph =(LineGraph) context.Graphs.Find(id);
+
+            return graph;
+        }
     }
 }

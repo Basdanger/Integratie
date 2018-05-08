@@ -249,6 +249,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Fakes Include="Fakes\Integratie.DAL.fakes" />
+    <Compile Include="Models\PersonanFeeds.cs" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -368,6 +369,8 @@
     <Content Include="Views\Subject\Persoon.cshtml" />
     <Content Include="Views\Subject\Organisaties.cshtml" />
     <Content Include="Views\Subject\FeedsPartial.cshtml" />
+    <Content Include="Views\Home\Gemeente.cshtml" />
+    <Content Include="Views\Home\GemeentePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -418,7 +421,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51548</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

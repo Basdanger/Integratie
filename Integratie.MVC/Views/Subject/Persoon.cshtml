@@ -1,31 +1,53 @@
-﻿@model Integratie.Domain.Entities.Subjects.Person
+﻿@model Integratie.MVC.Models.PersonanFeeds
 @{
     ViewBag.Title = "Persoon";
 }
-<h2>@Html.DisplayFor(model => model.Full_Name)</h2>
+<h2>@Html.DisplayFor(model => model.persons.Full_Name)</h2>
 <h4>Contact:</h4>
 <dt>
     Website:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.Site)
+    @Html.DisplayFor(model => model.persons.Site)
 </dd>
 <dt>
     Facebook:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.Facebook)
+    @Html.DisplayFor(model => model.persons.Facebook)
 </dd>
 <dt>
     Twitter:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.Twitter)
+    @Html.DisplayFor(model => model.persons.Twitter)
 </dd>
 <dt>
     Organisatie:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.Organisation)
+    @Html.DisplayFor(model => model.persons.Organisation)
 </dd>
-@Html.DisplayFor(model => model.Feeds);
+<h3>Tweets:</h3>
+@foreach (var feeds in Model.feeds)
+{
+<table border="0">
+    <tr>
+        <td><h5> Datum:</h5></td>
+        <td><h5>@feeds.Date</h5></td>
+    </tr>
+    <tr>
+        <td><b>Woorden:</b></td>
+        <td>@feeds.Words</td>
+    </tr>
+    <tr>
+        <td><b>Meer info:</b></td>
+        <td>@feeds.Urls</td>
+    </tr>
+    <tr>
+        <td><b>Hashtags:</b></td>
+        <td>@feeds.Hashtags</td>
+    </tr>
+</table>
+    <br/>
+        }

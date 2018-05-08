@@ -44,9 +44,14 @@ namespace Integratie.BL.Managers
         {
             return repo.GetOrganisaties();
         }
-        public IEnumerable<Feed> GetFeedsByPeople(String Full_Name)
+        public IEnumerable<Feed> GetFeeds(String person)
         {
-            return repo.FeedsByPerson(Full_Name);
+            return repo.GetFeeds(person);
+        }
+
+        public IEnumerable<Subject> GetPeopleByTown(string town)
+        {
+            return repo.ReadPeopleByTown(town);
         }
     }
 }

@@ -71,6 +71,9 @@ namespace Integratie.DAL.EF
 
             //ACCOUNTS
             Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
+            Account A2 = new Account(1, "Jorno", "DenJorno@hotmail.com");
+            context.Accounts.Add(A1);
+            context.Accounts.Add(A2);
 
             //USERALERTS
             UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
@@ -81,6 +84,7 @@ namespace Integratie.DAL.EF
             BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
+            
 
             //DashboardItems
             DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
