@@ -18,7 +18,7 @@ namespace Integratie.DAL.EF
     [DbConfigurationType(typeof(DashboardDbConfiguration))]
     public class DashBoardDbContext : DbContext
     {
-        public DashBoardDbContext() : base("IntegratieDB")
+        public DashBoardDbContext() : base("name=IntegratieDB")
         {
 
         }

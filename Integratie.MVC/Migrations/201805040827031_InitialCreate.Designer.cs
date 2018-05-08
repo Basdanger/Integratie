@@ -13,7 +13,7 @@ namespace Integratie.MVC.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805021310383_InitialCreate"; }
+            get { return "201805040827031_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
