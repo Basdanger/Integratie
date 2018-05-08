@@ -20,14 +20,20 @@
         <div id="" class="form-group">
             <b><label for="exampleSelect2">Data</label></b>
             <div class="form-group">
-                <label for="exampleSelect2">Start Date</label>
+                <label>Period Sort</label>
+                <div class="ui fluid dropdown selection" id="GraphPeriodSort">
+                    <input type="hidden" name="gender">
+                    <div class="text"></div>
+                    <i class="dropdown icon"></i>
+                </div>
+                <label id="GraphStartDateLabel" for="exampleSelect2">Start Date</label>
                 <div class='input-group date datetimepicker1' id='GraphStartDate'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
                         <span style="color:black" class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
-                <label for="exampleSelect2">End Date</label>
+                <label id="GraphEndDateLabel"for="exampleSelect2">End Date</label>
                 <div class='input-group date datetimepicker1' id='GraphEndDate'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
@@ -101,6 +107,10 @@
         </div>
 
 </form>
+
+
+
+
 <!--ControlInit Script-->
 <script type="text/javascript">
     var GraphSort;
@@ -115,6 +125,33 @@
     $('.datetimepicker1').datepicker({
         format: 'dd/mm/yyyy',
         startDate: '-3d'
+    });
+    $('#GraphPeriodSort').dropdown({
+        values: [
+            {
+                name: 'Fixed Period',
+                value: 'Fixed',
+                selected: true
+            },
+            {
+                name: 'Flex Period',
+                value: 'Flex'
+            }
+        ],
+        onChange: function (val) {
+            if (val == "Fixed") {
+                $('#GraphStartDate').css("display", 'flex');
+                $('#GraphEndDate').css("display", 'flex');
+                $('#GraphStartDateLabel').css("display", 'flex');
+                $('#GraphEndDateLabel').css("display", 'flex');
+            }
+            else {
+                $('#GraphStartDate').css("display", 'none');
+                $('#GraphEndDate').css("display", 'none');
+                $('#GraphStartDateLabel').css("display", 'none');
+                $('#GraphEndDateLabel').css("display", 'none');
+            }
+        }
     });
 
     $('#GraphSelect').dropdown({

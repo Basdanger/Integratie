@@ -30,8 +30,9 @@
         background-color: #e5efff !important;
         overflow: hidden;
         font-weight: normal !important;
-        margin-top: 50px !important;
-    }
+        margin-top: 48px !important;
+        z-index:0;
+        }
     li{
         font-weight:normal!important;
     }
@@ -214,4 +215,7 @@ a {
     color: #007bff;
     font-size: 55px;
     
+}
+.TeslaNoDisplay{
+    display:none;
 }
