@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -26,19 +26,19 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
             foreach (var item in resultsFeed)
             {
-                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+                //feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
             Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
             foreach (var feed in feeds)
             {
-                context.Feeds.Add(feed);
+                //context.Feeds.Add(feed);
                 
             }
 
             List<Person> people = new List<Person>();
             //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(@"C:\Users\klanten\Desktop\politici.json");
+            String st = File.ReadAllText(@"C:\Users\Jan Van Hoye\Desktop\politici.json");
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
@@ -82,6 +82,8 @@ namespace Integratie.DAL.EF
             //GRAPHS
             BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
             BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
+            BCG1.GraphType = GraphType.Barchart;
+            BCG2.GraphType = GraphType.Barchart;
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
             
