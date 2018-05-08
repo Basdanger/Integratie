@@ -70,5 +70,10 @@ namespace Integratie.BL.Managers
             subjectManager.GetPeopleByOrganisation(orginasation).ToList().ForEach(s => feeds.Union(repo.ReadPersonFeedsSince(s.Name,date)));
             return feeds;
         }
+
+        public IEnumerable<Feed> GetPersonFeedsGender(string person,Gender gender)
+        {
+            return repo.ReadPersonFeedsGender(person, gender);
+        }
     }
 }

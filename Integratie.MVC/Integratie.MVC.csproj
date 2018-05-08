@@ -204,6 +204,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
+    <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersoonController.cs" />
@@ -393,6 +394,8 @@
     <Content Include="Views\Subject\Persoon.cshtml" />
     <Content Include="Views\Subject\Organisaties.cshtml" />
     <Content Include="Views\Subject\FeedsPartial.cshtml" />
+    <Content Include="Views\GraphPartial\_BarChart.cshtml" />
+    <Content Include="Views\GraphPartial\_PieChart.cshtml" />
     <Content Include="Views\Home\Gemeente.cshtml" />
     <Content Include="Views\Home\GemeentePage.cshtml" />
   </ItemGroup>

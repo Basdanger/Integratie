@@ -26,11 +26,11 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Persoon(String Full_Name)
         {
-            /*PersonandFeeds pf = new PersonandFeeds();
-            pf.persons = mgr.GetPersoon(Full_Name);
-            pf.feeds = mgr.GetFeeds(Full_Name);
+            //PersonanFeeds pf = new PersonanFeeds();
+            //pf.persons = mgr.GetPersoon(Full_Name);
+            //pf.feeds = mgr.GetFeeds(Full_Name);
             //Person person = mgr.GetPersoon(Full_Name);
-            return View(pf);*/
+            //return View(pf);
             return null;
         }
         public ActionResult Organisaties()
