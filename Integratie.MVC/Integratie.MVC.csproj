@@ -225,6 +225,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -233,14 +234,19 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap2.min.css" />
+    <Content Include="Content\brand-icons.svg" />
     <Content Include="Content\dataTables.bootstrap4.css" />
     <Content Include="Content\demo.css" />
+    <Content Include="Content\dropdown.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\icons.svg" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
+    <Content Include="Content\outline-icons.svg" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\menu.css" />
+    <Content Include="Content\semantic.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -249,7 +255,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Fakes Include="Fakes\Integratie.DAL.fakes" />
-    <Compile Include="Models\PersonanFeeds.cs" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -259,6 +265,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\fontawesome-webfont.woff" />
     <Content Include="Scripts\dragdrop.js" />
+    <Content Include="Scripts\dropdown.js" />
+    <Content Include="Scripts\dropdown.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -278,7 +286,21 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\fontawesome-webfont.woff" />
     <None Include="Properties\PublishProfiles\Celis.pubxml" />
+    <Content Include="Content\icons.woff" />
+    <Content Include="Content\brand-icons.eot" />
+    <Content Include="Content\brand-icons.ttf" />
+    <Content Include="Content\brand-icons.woff" />
+    <Content Include="Content\brand-icons.woff2" />
+    <Content Include="Content\icons.eot" />
+    <Content Include="Content\icons.otf" />
+    <Content Include="Content\icons.ttf" />
+    <Content Include="Content\icons.woff2" />
+    <Content Include="Content\outline-icons.eot" />
+    <Content Include="Content\outline-icons.ttf" />
+    <Content Include="Content\outline-icons.woff" />
+    <Content Include="Content\outline-icons.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\iframe-content.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -304,6 +326,8 @@
     <Content Include="Scripts\sb-admin-charts.min.js" />
     <Content Include="Scripts\sb-admin-datatables.min.js" />
     <Content Include="Scripts\sb-admin.min.js" />
+    <Content Include="Scripts\semantic.min.js" />
+    <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />

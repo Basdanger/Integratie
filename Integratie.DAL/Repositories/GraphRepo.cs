@@ -12,9 +12,12 @@ namespace Integratie.DAL.Repositories
     public class GraphRepo : IGraphRepo
     {
         DashBoardDbContext context = new DashBoardDbContext();
-        public void AddGraph(Graph graph)
+        public Graph AddGraph(Graph graph)
         {
-            throw new NotImplementedException();
+
+            Graph g = context.Graphs.Add(graph);
+            context.SaveChanges();
+            return g;
         }
 
         public List<Graph> GetAllGraphs()

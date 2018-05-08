@@ -17,6 +17,10 @@ namespace Integratie.BL.Managers
         {
             
         }
+        public Graph AddGraph(Graph graph)
+        {
+            return GraphRepo.AddGraph(graph);
+        }
         public int GetGraphCount()
         {
             return GraphRepo.GetTotalCount();
@@ -50,7 +54,6 @@ namespace Integratie.BL.Managers
             }
             return GraphRepo.GetAllGraphs();
         }
-
         public Graph GetGraphbyId(int id)
         {
             return GraphRepo.GetGraphById(id);
