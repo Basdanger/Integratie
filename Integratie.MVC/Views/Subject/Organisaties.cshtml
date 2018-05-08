@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Organisation>
+﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
 @{
     ViewBag.Title = "Organisaties";
 }
@@ -9,7 +9,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Organisation)
             </td>
         </tr>
     }

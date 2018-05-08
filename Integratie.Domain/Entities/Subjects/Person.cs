@@ -21,7 +21,6 @@ namespace Integratie.Domain.Entities.Subjects
         public String Full_Name { get; set; }
         public String Position { get; set; }
         public String Organisation { get; set; }
-        public String ID { get; set; }
         public String Town { get; set; }
 
         public Person()
