@@ -58,5 +58,25 @@ namespace Integratie.BL.Managers
         {
             return GraphRepo.GetGraphById(id);
         }
+
+        public BarChartGraph GetBarChartGraph(int id)
+        {
+            BarChartGraph graph = (BarChartGraph)GraphRepo.GetGraphById(id);
+            FeedManager feedManager = new FeedManager();
+            //graph.Subjects.ForEach(s => graph.Values.Add(s.Name, feedManager.GetPersonFeeds(s.Name).Count()));
+            graph.Values.Add("Bart", 50);
+            graph.Values.Add("Kris", 100);
+            graph.Values.Add("Maggie", 66);
+            return graph;
+        }
+
+        public PieGraph GetPieGraph(int id)
+        {
+            PieGraph graph = (PieGraph)GraphRepo.GetGraphById(id);
+            FeedManager feedManager = new FeedManager();
+            graph.Values.Add("Male", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.m).Count());
+            graph.Values.Add("Female", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.f).Count());
+            return graph;
+        }
     }
 }

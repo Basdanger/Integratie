@@ -47,7 +47,7 @@ namespace Integratie.Domain.Entities.Graph
         {
 
         }
-       
+
     }
     public enum XType
     {
@@ -61,9 +61,7 @@ namespace Integratie.Domain.Entities.Graph
         females,
         malesProcent,
         femalesProcent,
-        sentimentProcent,
-
-
+        sentimentProcent
     }
     public enum GraphType
     {
