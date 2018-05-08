@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Organisation>
+﻿@model IEnumerable<String>
 @{
     ViewBag.Title = "Organisaties";
 }
@@ -9,8 +9,32 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
+            @item
+                </td>
         </tr>
     }
 </table>
+<ul id="myUL" class="container float">
+    
+</ul>
+@*<table class="table">
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organisation)
+            </th>>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="elementen">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organisation)
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
+                </td>
+            </tr>
+        }
+    </table>*@

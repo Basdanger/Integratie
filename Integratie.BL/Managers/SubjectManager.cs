@@ -40,7 +40,7 @@ namespace Integratie.BL.Managers
         {
             return repo.GetPersoon(Full_Name);
         }
-        public IEnumerable<Organisation> GetOrganisaties()
+        public IEnumerable<String> GetOrganisaties()
         {
             return repo.GetOrganisaties();
         }

@@ -34,8 +34,8 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Organisaties()
         {
-            IEnumerable<Organisation> organisaties = mgr.GetOrganisaties();
-            return View(organisaties);
+            IEnumerable<String> organisaties = mgr.GetOrganisaties();
+            return View(organisaties.ToArray());
         }
     }
 }
