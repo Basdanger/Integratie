@@ -177,7 +177,6 @@ a {
     display: inline-block;
     background-color: none;
     color: #007bff;
-    border-bottom: 1px solid #007bff;
 }
 .teslaDashboardEdit {
     margin-left: 100px;
@@ -218,4 +217,16 @@ a {
 }
 .TeslaNoDisplay{
     display:none;
+}
+.TeslaLNavLogin{
+    float:right;
+    color:white;
+}
+a#registerLink{
+    color:white;
+    float:right;
+}
+a#loginLink{
+    color:white;
+    float:right;
 }
