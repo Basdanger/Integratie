@@ -34,7 +34,7 @@ namespace Integratie.DAL.Repositories
 
         public Feed ReadFeed(double id)
         {
-            return context.Feeds.Single(h => h.ID == id);
+            return context.Feeds.Find(id);
         }
 
         public IEnumerable<Feed> ReadPersonFeeds(string person)
