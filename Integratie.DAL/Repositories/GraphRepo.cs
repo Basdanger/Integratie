@@ -56,10 +56,10 @@ namespace Integratie.DAL.Repositories
             return context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
         }
 
-        public LineGraph GetTweetLineGraphById(int id,bool wekelijks) {
-            LineGraph graph =(LineGraph) context.Graphs.Find(id);
+        //public LineGraph GetTweetLineGraphById(int id,bool wekelijks) {
+        //    LineGraph graph =(LineGraph) context.Graphs.Find(id);
 
-            return graph;
-        }
+        //    return graph;
+        //}
     }
 }

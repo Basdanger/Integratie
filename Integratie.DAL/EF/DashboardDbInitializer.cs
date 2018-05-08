@@ -81,8 +81,8 @@ namespace Integratie.DAL.EF
             context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] },new Period(), A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, new Period(), A1);
             BCG1.GraphType = GraphType.Barchart;
             BCG2.GraphType = GraphType.Barchart;
             context.Graphs.Add(BCG1);

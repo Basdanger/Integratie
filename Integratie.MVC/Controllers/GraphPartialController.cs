@@ -24,15 +24,15 @@ namespace Integratie.MVC.Controllers
             return PartialView();
         }
 
-        public ActionResult _PieChart(int id)
-        {
-            ViewBag.id = id;
-            PieGraph graph = graphManager.GetPieGraph(id);
-            List<double> listValues = graph.Values.Values.ToList();
-            List<string> listKeys = graph.Values.Keys.ToList();
-            ViewBag.Values = JsonConvert.SerializeObject(listValues);
-            ViewBag.Keys = JsonConvert.SerializeObject(listKeys);
-            return PartialView();
-        }
+        //public ActionResult _PieChart(int id)
+        //{
+        //    ViewBag.id = id;
+        //    PieGraph graph = graphManager.GetPieGraph(id);
+        //    List<double> listValues = graph.Values.Values.ToList();
+        //    List<string> listKeys = graph.Values.Keys.ToList();
+        //    ViewBag.Values = JsonConvert.SerializeObject(listValues);
+        //    ViewBag.Keys = JsonConvert.SerializeObject(listKeys);
+        //    return PartialView();
+        //}
     }
 }

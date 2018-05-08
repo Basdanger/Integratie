@@ -47,10 +47,6 @@ namespace Integratie.Domain.Entities.Graph
         {
 
         }
-        public Graph(Account account)
-        {
-            Account = account;
-        }
 
     }
     public enum XType
