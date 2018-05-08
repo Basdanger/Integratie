@@ -16,7 +16,7 @@ namespace Integratie.Domain.Entities.Graph
         [NotMapped]
         public Dictionary<string,double> Values { get; set; }
 
-        public BarChartGraph() : base(0, null)
+        public BarChartGraph() : base(null)
         {
             Values = new Dictionary<string, double>();
             

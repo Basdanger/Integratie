@@ -19,8 +19,10 @@ namespace Integratie.Domain.Entities.Graph
         public YType YAxisType { get; set; }
 
         //TIME
+        public PeriodSort PeriodSort { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int PeriodLength { get; set; }
 
         //INTERVAL
         public double StartInterval { get; set; }
@@ -37,9 +39,8 @@ namespace Integratie.Domain.Entities.Graph
         [NotMapped]
         public double SingleValue { get; set; }
 
-        public Graph(int graphId, Account account)
+        public Graph(Account account)
         {
-            GraphId = graphId;
             Account = account;
         }
         public Graph()
@@ -92,5 +93,10 @@ namespace Integratie.Domain.Entities.Graph
         Both,
         Male,
         Female
+    }
+    public enum PeriodSort
+    {
+        Fixed,
+        Flex
     }
 }
