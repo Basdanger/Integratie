@@ -16,7 +16,7 @@ namespace Integratie.DAL.Repositories.Interfaces
         UserAlert GetUserAlert(int user, int alert);
         void AddUserAlert(UserAlert userAlert);
         IEnumerable<UserAlert> GetUserAlerts();
-        IEnumerable<UserAlert> GetUserAlertsOfUser(int userId);
+        IEnumerable<UserAlert> GetUserAlertsOfUser(string userId);
         IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId);
     }
 }

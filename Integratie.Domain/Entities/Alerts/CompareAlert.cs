@@ -8,7 +8,7 @@ namespace Integratie.Domain.Entities.Alerts
 {
     public class CompareAlert : Alert
     {
-        public CompareAlert(Subject subjectA, Subject subjectB, Operator @operator)
+        public CompareAlert(Subject subjectA, Subject subjectB, Operator @operator) : base()
         {
             SubjectA = subjectA;
             SubjectB = subjectB;

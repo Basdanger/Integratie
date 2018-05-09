@@ -55,7 +55,7 @@ namespace Integratie.DAL.Repositories
             return context.UserAlerts.Where(u => u.Alert.ID.Equals(alertId)).ToList<UserAlert>();
         }
 
-        public IEnumerable<UserAlert> GetUserAlertsOfUser(int userId)
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
         }
@@ -69,6 +69,11 @@ namespace Integratie.DAL.Repositories
         {
             context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public Alert CheckAlert(Alert alert)
+        {
+            return context.Alerts.FirstOrDefault(a => a.Equals(alert));
         }
     }
 }

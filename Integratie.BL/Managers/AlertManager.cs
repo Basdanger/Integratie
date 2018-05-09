@@ -45,8 +45,86 @@ namespace Integratie.BL.Managers
                         repo.UpdateAlert(a);
                     }
                 }
+                else if (a.GetType() == typeof(SentimentAlert))
+                {
+                    if (CheckSentimentAlert((SentimentAlert)a))
+                    {
+                        a.Ring = true;
+                        repo.UpdateAlert(a);
+                    }
+                }
             }
         }
+
+        private bool CheckSentimentAlert(SentimentAlert alert)
+        {
+            Subject subject = alert.Subject;
+            FeedManager feedManager = new FeedManager();
+            IEnumerable<Feed> feeds;
+
+            if (subject.GetType() == typeof(Person))
+            {
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+            else if (subject.GetType() == typeof(Organisation))
+            {
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+            else
+            {
+                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+            }
+
+            int feedCount = feeds.Count();
+            int posNegFeeds = 0;
+            double result;
+
+            if (alert.SubjectProperty.Equals(SubjectProperty.pos))
+            {
+                foreach (Feed f in feeds)
+                {
+                    string[] sentiment = f.Sentiment.Split(',');
+                    float posneg = float.Parse(sentiment[0],System.Globalization.CultureInfo.InvariantCulture);
+                    if (posneg > 0)
+                    {
+                        posNegFeeds++;
+                    }
+                }
+                result = posNegFeeds / feedCount;
+            }
+            else
+            {
+                foreach (Feed f in feeds)
+                {
+                    string[] sentiment = f.Sentiment.Split(',');
+                    float posneg = float.Parse(sentiment[0], System.Globalization.CultureInfo.InvariantCulture);
+                    if (posneg < 0)
+                    {
+                        posNegFeeds++;
+                    }
+                }
+                result = posNegFeeds / feedCount;
+            }
+
+            switch (alert.Operator)
+            {
+                case Operator.GT:
+                    if (result >= alert.Value)
+                    {
+                        return true;
+                    }
+                    break;
+                case Operator.LT:
+                    if (result <= alert.Value)
+                    {
+                        return true;
+                    }
+                    break;
+            }
+
+            return false;
+        }
+
         public bool CheckCheckAlert(CheckAlert alert)
         {
             Subject subject = alert.Subject;
@@ -77,6 +155,8 @@ namespace Integratie.BL.Managers
 
             fCPast = fCPast / 6;
 
+            fCPast = (fCPast == 0) ? 1 : fCPast;
+
             int fCNow = 0;
             foreach (Feed f in subject.Feeds)
             {
@@ -86,23 +166,27 @@ namespace Integratie.BL.Managers
                 }
             }
 
-            int result = fCNow / fCPast;
+            int result;
+
+            if (alert.SubjectProperty.Equals(SubjectProperty.relativeCount))
+            {
+                result = fCNow / fCPast - 1;
+            }
+            else
+            {
+                result = fCNow - fCPast;
+            }
+            
             switch (alert.Operator)
             {
-                case Operator.EQ:
-                    if (result == alert.Value)
-                    {
-                        return true;
-                    }
-                    break;
                 case Operator.GT:
-                    if (result > alert.Value)
+                    if (result >= alert.Value)
                     {
                         return true;
                     }
                     break;
                 case Operator.LT:
-                    if (result < alert.Value)
+                    if (result <= alert.Value)
                     {
                         return true;
                     }
@@ -111,6 +195,7 @@ namespace Integratie.BL.Managers
 
             return false;
         }
+
         public bool CheckCompareAlert(CompareAlert alert)
         {
             Subject subjectA = alert.SubjectA;
@@ -156,15 +241,10 @@ namespace Integratie.BL.Managers
                         return true;
                     }
                     break;
-                case Operator.EQ:
-                    if (fcA == fcB)
-                    {
-                        return true;
-                    }
-                    break;
             }
             return false;
         }
+
         public bool CheckTrendAlert(TrendAlert alert)
         {
             Subject subject = alert.Subject;
@@ -232,6 +312,102 @@ namespace Integratie.BL.Managers
             }
             else
                 return false;
+        }
+
+        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
+        {
+            AccountManager accountManager = new AccountManager();
+            Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
+            Account account = accountManager.GetAccountById(id);
+            UserAlert userAlert = new UserAlert(account, alert, web, mail, app);
+        }
+
+        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
+        {
+            Alert alert;
+            SubjectManager subjectManager = new SubjectManager();
+            Subject subject = subjectManager.GetSubjectByName(subjectName);
+
+            if (alertType.Equals("Trend"))
+            {
+                alert = new TrendAlert(subject);
+            }
+            else if (alertType.Equals("Compare"))
+            {
+                Subject subjectB = subjectManager.GetSubjectByName(subjectBName);
+                Operator @operator;
+                if (compare.Equals("GT"))
+                {
+                    @operator = Operator.GT;
+                }
+                else
+                {
+                    @operator = Operator.LT;
+                }
+
+                alert = new CompareAlert(subject, subjectB, @operator);
+            }
+            else if (alertType.Equals("Check"))
+            {
+                SubjectProperty property;
+                if (subjectProperty.Equals("count"))
+                {
+                    property = SubjectProperty.count;
+                }
+                else
+                {
+                    property = SubjectProperty.relativeCount;
+                }
+                Operator @operator;
+                if (compare.Equals("GT"))
+                {
+                    @operator = Operator.GT;
+                }
+                else
+                {
+                    @operator = Operator.LT;
+                }
+
+                alert = new CheckAlert(property, @operator, value, subject);
+            }
+            else
+            {
+                SubjectProperty property;
+                if (subjectProperty.Equals("pos"))
+                {
+                    property = SubjectProperty.pos;
+                }
+                else
+                {
+                    property = SubjectProperty.neg;
+                }
+                Operator @operator;
+                if (compare.Equals("GT"))
+                {
+                    @operator = Operator.GT;
+                }
+                else
+                {
+                    @operator = Operator.LT;
+                }
+
+                alert = new SentimentAlert(property, @operator, value, subject);
+            }
+
+            Alert existingAlert = repo.CheckAlert(alert);
+            if (existingAlert.ID != 0)
+            {
+                alert = existingAlert;
+            } else
+            {
+                repo.AddAlert(alert);
+            }
+            return alert;
+        }
+
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
+        {
+            return repo.GetUserAlertsOfUser(userId);
         }
     }
 }

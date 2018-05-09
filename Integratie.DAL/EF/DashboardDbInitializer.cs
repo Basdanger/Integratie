@@ -1,4 +1,5 @@
-﻿using Integratie.Domain;
+﻿using Integratie.DAL.ResourcesInit;
+using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Dashboard;
@@ -26,19 +27,18 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
             foreach (var item in resultsFeed)
             {
-                //feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
             Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
             foreach (var feed in feeds)
             {
-                //context.Feeds.Add(feed);
+                context.Feeds.Add(feed);
 
             }
 
             List<Person> people = new List<Person>();
-            //String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
+            String st = SubjectStrings.Politicians();
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
@@ -53,21 +53,21 @@ namespace Integratie.DAL.EF
             }
 
             //DUMMY ALERTS
-            CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
-            CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);
-            CheckAlert CH3 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[3]);
-            CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, people[4]);
-            CompareAlert CO1 = new CompareAlert(people[1], people[2], Operator.GT);
-            CompareAlert CO2 = new CompareAlert(people[1], people[2], Operator.LT);
-            TrendAlert TR1 = new TrendAlert(people[1]);
+            //CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
+            //CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);
+            //CheckAlert CH3 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[3]);
+            //CheckAlert CH4 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1, people[4]);
+            //CompareAlert CO1 = new CompareAlert(people[1], people[2], Operator.GT);
+            //CompareAlert CO2 = new CompareAlert(people[1], people[2], Operator.LT);
+            //TrendAlert TR1 = new TrendAlert(people[1]);
 
-            context.Alerts.Add(CH1);
-            context.Alerts.Add(CH2);
-            context.Alerts.Add(CH3);
-            context.Alerts.Add(CH4);
-            context.Alerts.Add(CO1);
-            context.Alerts.Add(CO2);
-            context.Alerts.Add(TR1);
+            //context.Alerts.Add(CH1);
+            //context.Alerts.Add(CH2);
+            //context.Alerts.Add(CH3);
+            //context.Alerts.Add(CH4);
+            //context.Alerts.Add(CO1);
+            //context.Alerts.Add(CO2);
+            //context.Alerts.Add(TR1);
 
             //ACCOUNTS
             Account A1 = new Account("0", "JanVH", "jvanhoye@hotmail.com");
@@ -76,8 +76,8 @@ namespace Integratie.DAL.EF
             context.Accounts.Add(A2);
 
             //USERALERTS
-            UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
-            context.UserAlerts.Add(UA1);
+            //UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
+            //context.UserAlerts.Add(UA1);
 
             //GRAPHS
             BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] },new Period(), A1);

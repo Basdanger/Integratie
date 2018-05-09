@@ -56,7 +56,7 @@ namespace Integratie.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UserAlert> GetUserAlertsOfUser(int userId)
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             throw new NotImplementedException();
         }

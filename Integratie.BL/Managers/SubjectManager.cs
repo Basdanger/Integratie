@@ -28,6 +28,11 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjectById(id);
         }
 
+        public Subject GetSubjectByName(string name)
+        {
+            return repo.ReadSubjectByName(name);
+        }
+
         public IEnumerable<Subject> GetPeopleByOrganisation(string orginasation)
         {
             return repo.ReadPeopleByOrganisation(orginasation);

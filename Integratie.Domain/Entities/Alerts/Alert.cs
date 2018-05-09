@@ -10,5 +10,10 @@ namespace Integratie.Domain.Entities.Alerts
     {
         public int ID { get; set; }
         public bool Ring { get; set; }
+
+        protected Alert()
+        {
+            Ring = false;
+        }
     }
 }
