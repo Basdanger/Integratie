@@ -22,7 +22,7 @@ namespace Integratie.UI.Con
         {
             //Console.WriteLine(textGainManager.dashBoardDbTextGain.postJson());
             textGainManager.SetTimer();
-            Console.WriteLine(omgr.GetOrganisation(1002));
+            Console.WriteLine(omgr.GetOrganisation(1002).Full_Name);
             Console.ReadLine();
         }
     }
