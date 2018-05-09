@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 
 namespace Integratie.Domain.Entities.Subjects
 {
-    public class Subject
+    public abstract class Subject
     {
         [Key]
-        public String ID { get; set; }
-        public String Name { get; set; }
+        public double ID { get; set; }
+        public String Full_Name { get; set; }
         public List<Feed> Feeds { get; set; }
         public int FeedCount { get; set; }
+
         public Subject()
         {
 
         }
-        public Subject(String id, string name)
+        public Subject(double id, string full_name)
         {
             ID = id;
-            Name = name;
+            Full_Name = full_name;
             Feeds = new List<Feed>();
             FeedCount = Feeds.Count();
     }

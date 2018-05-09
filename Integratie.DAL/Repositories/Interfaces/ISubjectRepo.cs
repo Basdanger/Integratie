@@ -13,6 +13,6 @@ namespace Integratie.DAL.Repositories.Interfaces
         List<Subject> GetSubjects();
         void AddSubject(Subject subject);
         void RemoveSubject(Subject subject);
-        Subject GetSubjectById(string id);
+        Subject GetSubjectById(double id);
     }
 }

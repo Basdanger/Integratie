@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Integratie.BL.Managers.Interfaces
 {
-    public interface ISubjectManager
+    public interface IPersonManager
     {
-        Subject GetSubject(double id);
-        IEnumerable<Subject> GetSubjects();
+        IEnumerable<Person> GetPeople();
+        Person GetPerson(double id);
+        void MakePerson(Person person);
+        bool CheckPerson(Person person);
     }
 }

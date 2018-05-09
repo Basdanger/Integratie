@@ -12,10 +12,23 @@ namespace Integratie.BL.Managers
 {
     public class SubjectManager : ISubjectManager
     {
-        private ISubjectRepo repo = new DummySubjectRepo();
+        private ISubjectRepo repo;
+
+        public SubjectManager()
+        {
+            repo = new SubjectRepo();
+        }
+
+        public Subject GetSubject(double id)
+        {
+            return repo.GetSubjectById(id);
+        }
+
         public IEnumerable<Subject> GetSubjects()
         {
             return repo.GetSubjects();
         }
+
+
     }
 }

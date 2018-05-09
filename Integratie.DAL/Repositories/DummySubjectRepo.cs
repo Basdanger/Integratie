@@ -10,30 +10,30 @@ using Integratie.DAL.EF;
 
 namespace Integratie.DAL.Repositories
 {
-    public class DummySubjectRepo : ISubjectRepo
+    public class DummySubjectRepo/* : ISubjectRepo*/
     {
-        DashBoardDbContext context = new DashBoardDbContext();
-        List<Subject> subjects = new List<Subject>();
-        public void AddSubject(Subject subject)
-        {
-            subjects.Add(subject);
-            //return subjects.Last();
-        }
+        //DashBoardDbContext context = new DashBoardDbContext();
+        //List<Subject> subjects = new List<Subject>();
+        //public void AddSubject(Subject subject)
+        //{
+        //    subjects.Add(subject);
+        //    //return subjects.Last();
+        //}
 
-        public Subject GetSubjectById(string id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Subject GetSubjectById(string id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public List<Subject> GetSubjects()
-        {
-            return context.Subjects.ToList();
-            //return subjects;
-        }
+        //public List<Subject> GetSubjects()
+        //{
+        //    return context.Subjects.ToList();
+        //    //return subjects;
+        //}
 
-        public void RemoveSubject(Subject subject)
-        {
-            subjects.Remove(subject);
-        }
+        //public void RemoveSubject(Subject subject)
+        //{
+        //    subjects.Remove(subject);
+        //}
     }
 }

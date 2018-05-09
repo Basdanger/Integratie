@@ -13,21 +13,17 @@ using System.Timers;
 
 namespace Integratie.UI.Con
 {
-    class Program
+    public class Program
     {
+        private static OrganisationManager omgr = new OrganisationManager();
         private static FeedManager mgr = new FeedManager();
         private static TextgainManager textGainManager = new TextgainManager();
         static void Main(string[] args)
         {
-            Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
+            //Console.WriteLine(textGainManager.dashBoardDbTextGain.postJson());
             textGainManager.SetTimer();
+            Console.WriteLine(omgr.GetOrganisation(1002).Full_Name);
             Console.ReadLine();
-        }
-
-        private static void PrintAllFeeds()
-        {
-            foreach (var t in mgr.GetFeeds())
-                Console.WriteLine(t.ID);
         }
     }
 }

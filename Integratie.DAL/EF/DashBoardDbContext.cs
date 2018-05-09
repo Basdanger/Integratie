@@ -22,19 +22,19 @@ namespace Integratie.DAL.EF
         {
 
         }
-
-        public DbSet<Subject> Subjects { get; set; }
+        
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Alert> Alerts { get; set; }
         public DbSet<Graph> Graphs { get; set; }
         public DbSet<DashboardItem> Dashboarditems { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Organisation> Organisations { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
