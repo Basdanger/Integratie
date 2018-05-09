@@ -210,6 +210,7 @@
     <Compile Include="Controllers\PersoonController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\SuperAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -398,6 +399,7 @@
     <Content Include="Views\GraphPartial\_PieChart.cshtml" />
     <Content Include="Views\Home\Gemeente.cshtml" />
     <Content Include="Views\Home\GemeentePage.cshtml" />
+    <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

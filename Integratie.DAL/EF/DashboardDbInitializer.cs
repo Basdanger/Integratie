@@ -70,8 +70,8 @@ namespace Integratie.DAL.EF
             context.Alerts.Add(TR1);
 
             //ACCOUNTS
-            Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
-            Account A2 = new Account(1, "Jorno", "DenJorno@hotmail.com");
+            Account A1 = new Account("0", "JanVH", "jvanhoye@hotmail.com");
+            Account A2 = new Account("1", "Jorno", "DenJorno@hotmail.com");
             context.Accounts.Add(A1);
             context.Accounts.Add(A2);
 

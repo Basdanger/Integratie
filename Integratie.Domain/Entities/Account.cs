@@ -10,11 +10,11 @@ namespace Integratie.Domain.Entities
     public class Account
     {
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public string Mail { get; set; }
 
-        public Account(int iD, string name, string mail)
+        public Account(string iD, string name, string mail)
         {
             ID = iD;
             Name = name;

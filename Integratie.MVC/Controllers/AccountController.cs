@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Integratie.MVC.Models;
 using System.Security.Principal;
+using Integratie.BL.Managers;
 
 namespace Integratie.MVC.Controllers
 {
@@ -161,6 +162,9 @@ namespace Integratie.MVC.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    AccountManager accMgr = new AccountManager();
+                    accMgr.AddAccount(user.Id, user.UserName, user.Email);
 
                     var userRole = model.UserRoles = "User";
                     await this.UserManager.AddToRoleAsync(user.Id, userRole);

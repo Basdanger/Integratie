@@ -51,10 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\AlertManager.cs" />
     <Compile Include="Managers\DashboardManager.cs" />
     <Compile Include="Managers\FeedManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
+    <Compile Include="Managers\Interfaces\IAccountManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
     <Compile Include="Managers\Interfaces\IMailManager.cs" />
     <Compile Include="Managers\MailManager.cs" />
