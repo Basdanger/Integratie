@@ -9,9 +9,13 @@ namespace Integratie.Domain.Entities.Alerts
 {
     public class TrendAlert : Alert
     {
-        public TrendAlert(Subject subject) : base()
+        public TrendAlert(Subject subject)
         {
             Subject = subject;
+        }
+
+        public TrendAlert()
+        {
         }
 
         public Subject Subject { get; set; }

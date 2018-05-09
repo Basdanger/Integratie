@@ -18,6 +18,11 @@ namespace Integratie.DAL.Repositories
             context = new DashBoardDbContext();
         }
 
+        public AccountRepo(DashBoardDbContext context)
+        {
+            this.context = context;
+        }
+
         public Account CreateAccount(string id, string name, string mail)
         {
             Account account = new Account(id, name, mail);
@@ -36,8 +41,7 @@ namespace Integratie.DAL.Repositories
 
         public Account ReadAccountById(string id)
         {
-            Account account = context.Accounts.Find(id);
-            return account;
+            return context.Accounts.Find(id);
         }
 
         public IEnumerable<Account> ReadAccounts()

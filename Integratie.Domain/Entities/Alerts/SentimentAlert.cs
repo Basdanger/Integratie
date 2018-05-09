@@ -14,12 +14,16 @@ namespace Integratie.Domain.Entities.Alerts
         public double Value { get; set; }
         public Subject Subject { get; set; }
 
-        public SentimentAlert(SubjectProperty subjectProperty, Operator @operator, double value, Subject subject) : base()
+        public SentimentAlert(SubjectProperty subjectProperty, Operator @operator, double value, Subject subject)
         {
             SubjectProperty = subjectProperty;
             Operator = @operator;
             this.Value = value;
             Subject = subject;
+        }
+
+        public SentimentAlert()
+        {
         }
     }
 }

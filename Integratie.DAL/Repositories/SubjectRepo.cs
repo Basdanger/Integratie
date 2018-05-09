@@ -19,13 +19,18 @@ namespace Integratie.DAL.Repositories
             context = new DashBoardDbContext();
         }
 
+        public SubjectRepo(DashBoardDbContext context)
+        {
+            this.context = context;
+        }
+
         public void AddSubject(Subject subject)
         {
             context.Subjects.Add(subject);
             context.SaveChanges();
         }
 
-        public Subject ReadSubjectById(string id)
+        public Subject ReadSubjectById(int id)
         {
             return context.Subjects.Find(id);
         }
@@ -42,7 +47,7 @@ namespace Integratie.DAL.Repositories
 
         public Subject ReadSubjectByName(string name)
         {
-            return context.Subjects.First(s => s.Name.Equals(name.ToUpper()));
+            return ReadSubjectById(context.Subjects.First(s => s.Name.Equals(name.ToUpper())).ID);
         }
 
         public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)

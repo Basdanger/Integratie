@@ -10,12 +10,16 @@ namespace Integratie.Domain.Entities.Alerts
     //Basic Alert
     public class CheckAlert : Alert
     {
-        public CheckAlert(SubjectProperty subjectProperty, Operator @operator, double value, Subject subject) : base()
+        public CheckAlert(SubjectProperty subjectProperty, Operator @operator, double value, Subject subject)
         {
             SubjectProperty = subjectProperty;
             Operator = @operator;
             this.Value = value;
             Subject = subject;
+        }
+
+        public CheckAlert()
+        {
         }
 
         public SubjectProperty SubjectProperty { get; set; }

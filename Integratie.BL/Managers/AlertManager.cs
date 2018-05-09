@@ -10,6 +10,7 @@ using Integratie.Domain.Entities.Subjects;
 using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Integratie.BL.Managers
 {
@@ -316,21 +317,24 @@ namespace Integratie.BL.Managers
 
         public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
         {
-            AccountManager accountManager = new AccountManager();
+            AccountManager accountManager = new AccountManager(repo.GetContext());
             Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
             Account account = accountManager.GetAccountById(id);
             UserAlert userAlert = new UserAlert(account, alert, web, mail, app);
+            repo.AddUserAlert(userAlert);
         }
 
         public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
         {
             Alert alert;
-            SubjectManager subjectManager = new SubjectManager();
+            SubjectManager subjectManager = new SubjectManager(repo.GetContext());
             Subject subject = subjectManager.GetSubjectByName(subjectName);
+            Alert existingAlert;
 
             if (alertType.Equals("Trend"))
             {
                 alert = new TrendAlert(subject);
+                existingAlert = repo.FindTrendAlert((TrendAlert)alert);
             }
             else if (alertType.Equals("Compare"))
             {
@@ -346,6 +350,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new CompareAlert(subject, subjectB, @operator);
+                existingAlert = repo.FindCompareAlert((CompareAlert)alert);
             }
             else if (alertType.Equals("Check"))
             {
@@ -369,6 +374,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new CheckAlert(property, @operator, value, subject);
+                existingAlert = repo.FindCheckAlert((CheckAlert)alert);
             }
             else
             {
@@ -392,14 +398,15 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new SentimentAlert(property, @operator, value, subject);
+                existingAlert = repo.FindSentimentAlert((SentimentAlert)alert);
             }
 
-            Alert existingAlert = repo.CheckAlert(alert);
-            if (existingAlert.ID != 0)
+            if (existingAlert != null)
             {
                 alert = existingAlert;
             } else
             {
+                this.Validate(alert);
                 repo.AddAlert(alert);
             }
             return alert;
@@ -408,6 +415,17 @@ namespace Integratie.BL.Managers
         public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             return repo.GetUserAlertsOfUser(userId);
+        }
+
+        private void Validate(Alert alert)
+        {
+            //Validator.ValidateObject(ticket, new ValidationContext(ticket), validateAllProperties: true);
+
+            List<ValidationResult> errors = new List<ValidationResult>();
+            bool valid = Validator.TryValidateObject(alert, new ValidationContext(alert), errors, validateAllProperties: true);
+
+            if (!valid)
+                throw new ValidationException("Ticket not valid!");
         }
     }
 }

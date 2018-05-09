@@ -203,6 +203,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -400,10 +401,12 @@
     <Content Include="Views\Home\Gemeente.cshtml" />
     <Content Include="Views\Home\GemeentePage.cshtml" />
     <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
+    <Content Include="Views\Home\Alerts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\" />
+    <Folder Include="Views\Alert\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integratie.BL\Integratie.BL.csproj">
