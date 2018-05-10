@@ -39,6 +39,10 @@ namespace Integratie.DAL.EF
 
             List<Person> people = new List<Person>();
             String st = SubjectStrings.Politicians();
+            ////String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
+            ////String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
+            //String st = File.ReadAllText(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory + "politici.json"));
+
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
             Console.WriteLine("Making" + resultsFeed.Count() + "people");
@@ -80,13 +84,13 @@ namespace Integratie.DAL.EF
             //context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] },new Period(), A1);
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, new Period(), A1);
             BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, new Period(), A1);
             BCG1.GraphType = GraphType.Barchart;
             BCG2.GraphType = GraphType.Barchart;
             context.Graphs.Add(BCG1);
             context.Graphs.Add(BCG2);
-            
+
 
             //DashboardItems
             DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);

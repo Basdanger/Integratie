@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
+<h1>Personen</h1>
+<table class="table" style="color: black">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Full_Name
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
+            </td>
+        </tr>
+    }
+</table>

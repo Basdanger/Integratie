@@ -13,16 +13,26 @@ namespace Integratie.Domain.Entities
         public string ID { get; set; }
         public string Name { get; set; }
         public string Mail { get; set; }
+        public string Password { get; set; }
+
+        public Account()
+        {
+
+        }
+
+        public Account(string iD, string name, string mail, string password)
+        {
+            ID = iD;
+            Name = name;
+            Mail = mail;
+            Password = password;
+        }
 
         public Account(string iD, string name, string mail)
         {
             ID = iD;
             Name = name;
             Mail = mail;
-        }
-
-        public Account()
-        {
         }
     }
 }
