@@ -50,9 +50,9 @@ namespace Integratie.DAL.Repositories
             return ReadSubjectById(context.Subjects.First(s => s.Name.Equals(name.ToUpper())).ID);
         }
 
-        public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)
+        public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
-            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
+            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();
         }
 
         public IEnumerable<Subject> ReadPeopleByTown(string town)
@@ -71,9 +71,9 @@ namespace Integratie.DAL.Repositories
 
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
-        public IEnumerable<Organisation> GetOrganisaties()
+        public IEnumerable<Person> GetOrganisaties()
         {
-            return context.Organisations.ToList();
+            return context.People.ToList().Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {

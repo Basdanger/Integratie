@@ -1,16 +1,18 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Organisation>
+﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
 @{
     ViewBag.Title = "Organisaties";
 }
-
-<h2>Organisaties</h2>
-<table class="table">
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-        </tr>
-    }
-</table>
+    <h2>Organisaties</h2>
+    <table class="table" style="color: black">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organisation)
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "PersonenPerOrganisatie", new { Organisatie = item.Organisation })
+                </td>
+            </tr>
+        }
+    </table>

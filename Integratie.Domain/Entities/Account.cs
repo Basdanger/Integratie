@@ -34,9 +34,5 @@ namespace Integratie.Domain.Entities
             Name = name;
             Mail = mail;
         }
-
-        public Account()
-        {
-        }
     }
 }

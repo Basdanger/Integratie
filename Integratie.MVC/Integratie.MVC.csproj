@@ -225,6 +225,7 @@
     <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PersonAndFeeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -391,8 +392,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Persoon\Personen.cshtml" />
-    <Content Include="Views\Persoon\Persoon.cshtml" />
     <Content Include="Views\Subject\Personen.cshtml" />
     <Content Include="Views\Subject\Persoon.cshtml" />
     <Content Include="Views\Subject\Organisaties.cshtml" />
@@ -403,6 +402,9 @@
     <Content Include="Views\Home\GemeentePage.cshtml" />
     <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
     <Content Include="Views\Home\Alerts.cshtml" />
+    <Content Include="Views\Subject\PersonenPerOrganisatie.cshtml" />
+    <Content Include="Views\Subject\Gemeente.cshtml" />
+    <Content Include="Views\Subject\GemeentePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
