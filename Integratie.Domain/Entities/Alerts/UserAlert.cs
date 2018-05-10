@@ -25,5 +25,9 @@ namespace Integratie.Domain.Entities.Alerts
             Mail = mail;
             App = app;
         }
+        public UserAlert()
+        {
+
+        }
     }
 }

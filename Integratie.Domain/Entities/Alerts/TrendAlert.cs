@@ -13,6 +13,10 @@ namespace Integratie.Domain.Entities.Alerts
         {
             Subject = subject;
         }
+        public TrendAlert()
+        {
+
+        }
 
         public Subject Subject { get; set; }
     }

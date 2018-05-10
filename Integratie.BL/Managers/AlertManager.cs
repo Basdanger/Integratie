@@ -17,6 +17,10 @@ namespace Integratie.BL.Managers
     {
         // test
         private AlertRepo repo = new AlertRepo();
+        public List<Alert> GetAllAlerts()
+        {
+            return repo.GetAlerts().ToList();
+        }
         public void CheckAlerts()
         {
             foreach (Alert a in repo.GetAlerts())

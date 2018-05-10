@@ -1,0 +1,29 @@
+﻿@using Integratie.Domain.Entities.Alerts
+@model List<Alert>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+    
+    <div class="form-horizontal TeslaAlertContainer">
+
+
+
+        <table>
+            <tr><td><b>ID</b></td><td><b>Ring</b></td></tr>
+            @foreach (Alert A in Model)
+            {
+            <tr><td>@A.ID</td><td>@A.Ring</td></tr>
+            }
+        </table>
+    </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

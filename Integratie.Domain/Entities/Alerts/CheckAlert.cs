@@ -18,6 +18,10 @@ namespace Integratie.Domain.Entities.Alerts
             this.Value = value;
             Subject = subject;
         }
+        public CheckAlert()
+        {
+
+        }
 
         public object SubjectPropertyValue { get; set; }
         public SubjectProperty SubjectProperty { get; set; }

@@ -233,3 +233,6 @@ a#TeslaHello{
 a#TeslaLogOff{
     color:white;
 }
+.TeslaAlertContainer{
+    color:black!important;
+}

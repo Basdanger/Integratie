@@ -14,7 +14,10 @@ namespace Integratie.Domain.Entities.Alerts
             SubjectB = subjectB;
             Operator = @operator;
         }
+        public CompareAlert()
+        {
 
+        }
         public Subject SubjectA { get; set; }
         public Subject SubjectB { get; set; }
         public Operator Operator { get; set; }
