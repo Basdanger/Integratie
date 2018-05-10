@@ -33,15 +33,19 @@ namespace Integratie.MVC.Migrations
 
             if (!rolemanager.RoleExists("Admin"))
             {
-                var role = new IdentityRole();
-                role.Name = "Admin";
+                var role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
                 rolemanager.Create(role);
             }
 
             if (!rolemanager.RoleExists("User"))
             {
-                var role = new IdentityRole();
-                role.Name = "User";
+                var role = new IdentityRole
+                {
+                    Name = "User"
+                };
                 rolemanager.Create(role);
             }
 

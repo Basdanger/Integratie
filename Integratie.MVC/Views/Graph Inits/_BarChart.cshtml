@@ -40,6 +40,8 @@
                         <span style="color:black" class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
+                <label id="DaysDateLabel" for="exampleSelect2"># Days</label>
+                <input type="number" class="form-control" id="DaysDate">
                 <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
                 <select style="display:none" class="form-control" id="IntervalSelect">
                     <option>1 Day</option>
@@ -144,12 +146,18 @@
                 $('#GraphEndDate').css("display", 'flex');
                 $('#GraphStartDateLabel').css("display", 'flex');
                 $('#GraphEndDateLabel').css("display", 'flex');
+
+                $('#DaysDateLabel').css("display", 'none');
+                $('#DaysDate').css("display", 'none');
             }
             else {
                 $('#GraphStartDate').css("display", 'none');
                 $('#GraphEndDate').css("display", 'none');
                 $('#GraphStartDateLabel').css("display", 'none');
                 $('#GraphEndDateLabel').css("display", 'none');
+
+                $('#DaysDateLabel').css("display", 'flex');
+                $('#DaysDate').css("display", 'flex');
             }
         }
     });
@@ -327,6 +335,7 @@
         $('#CompareForm').css('display', 'block');
 
     }
+   
 </script>
 
 <!--Inline Validation Script-->

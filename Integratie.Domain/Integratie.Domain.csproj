@@ -63,11 +63,6 @@
     <Compile Include="Entities\Feed.cs" />
     <Compile Include="Entities\Graph\BarChartGraph.cs" />
     <Compile Include="Entities\Graph\Graph.cs" />
-    <Compile Include="Entities\Graph\LineGraph.cs" />
-    <Compile Include="Entities\Graph\NumberGraph.cs" />
-    <Compile Include="Entities\Graph\PieGraph.cs" />
-    <Compile Include="Entities\Graph\SubjectThemeGraph.cs" />
-    <Compile Include="Entities\Graph\TrendNumberGraph.cs" />
     <Compile Include="Entities\Subjects\Organisation.cs" />
     <Compile Include="Entities\Subjects\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

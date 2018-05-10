@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
     <Compile Include="Repositories\DashboardRepo.cs" />
     <Compile Include="Repositories\DummyAlertRepo.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="EF\DashBoardDbTextGain.cs" />
     <Compile Include="Repositories\FeedRepo.cs" />
     <Compile Include="Repositories\GraphRepo.cs" />
+    <Compile Include="Repositories\Interfaces\IAccountRepo.cs" />
     <Compile Include="Repositories\Interfaces\IAlertRepo.cs" />
     <Compile Include="Repositories\Interfaces\IFeedRepo.cs" />
     <Compile Include="Repositories\Interfaces\IGraphRepo.cs" />

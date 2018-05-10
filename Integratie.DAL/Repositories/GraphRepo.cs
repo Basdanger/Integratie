@@ -22,8 +22,7 @@ namespace Integratie.DAL.Repositories
 
         public List<Graph> GetAllGraphs()
         {
-            
-            return context.Graphs.ToList();
+                return context.Graphs.ToList();
         }
 
         public Graph GetGraphById(int Id)
@@ -56,10 +55,5 @@ namespace Integratie.DAL.Repositories
             return context.Graphs.Where(g => g.GraphId == graph.GraphId).First();
         }
 
-        public LineGraph GetTweetLineGraphById(int id,bool wekelijks) {
-            LineGraph graph =(LineGraph) context.Graphs.Find(id);
-
-            return graph;
-        }
     }
 }

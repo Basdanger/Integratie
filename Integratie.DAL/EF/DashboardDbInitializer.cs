@@ -33,7 +33,7 @@ namespace Integratie.DAL.EF
             foreach (var feed in feeds)
             {
                 //context.Feeds.Add(feed);
-                
+
             }
 
             List<Person> people = new List<Person>();
@@ -70,8 +70,8 @@ namespace Integratie.DAL.EF
             context.Alerts.Add(TR1);
 
             //ACCOUNTS
-            Account A1 = new Account(0, "JanVH", "jvanhoye@hotmail.com");
-            Account A2 = new Account(1, "Jorno", "DenJorno@hotmail.com");
+            Account A1 = new Account("0", "JanVH", "jvanhoye@hotmail.com");
+            Account A2 = new Account("1", "Jorno", "DenJorno@hotmail.com");
             context.Accounts.Add(A1);
             context.Accounts.Add(A2);
 
@@ -80,8 +80,8 @@ namespace Integratie.DAL.EF
             context.UserAlerts.Add(UA1);
 
             //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, A1);
+            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] },new Period(), A1);
+            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, new Period(), A1);
             BCG1.GraphType = GraphType.Barchart;
             BCG2.GraphType = GraphType.Barchart;
             context.Graphs.Add(BCG1);
