@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : CreateDatabaseIfNotExists<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -26,13 +26,13 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
             foreach (var item in resultsFeed)
             {
-                //feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+              feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
             Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
             foreach (var feed in feeds)
             {
-                //context.Feeds.Add(feed);
+                context.Feeds.Add(feed);
                 
             }
 

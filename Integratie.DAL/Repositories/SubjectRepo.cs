@@ -45,9 +45,9 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.Where(s => s.Name.ToUpper().Equals(name.ToUpper())).ToList<Subject>();
         }
 
-        public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)
+        public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
-            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
+            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();
         }
 
         public IEnumerable<Subject> ReadPeopleByTown(string town)
@@ -62,13 +62,13 @@ namespace Integratie.DAL.Repositories
         public Person GetPersoon(String Full_Name)
         {
             //bevat soms geen elementen soms wel gewoon nog eens proberen
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
+            //return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
 
-            //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
+            return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
-        public IEnumerable<Organisation> GetOrganisaties()
+        public IEnumerable<Person> GetOrganisaties()
         {
-            return context.Organisations.ToList();
+            return context.People.ToList().Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {

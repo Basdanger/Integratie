@@ -1,32 +1,32 @@
-﻿@model Integratie.MVC.Models.PersonanFeeds
+﻿@model Integratie.MVC.Models.PersonAndFeeds
 @{
     ViewBag.Title = "Persoon";
 }
-<h2>@Html.DisplayFor(model => model.persons.Full_Name)</h2>
+<h2>@Html.DisplayFor(model => model.person.Full_Name)</h2>
 <h4>Contact:</h4>
 <dt>
     Website:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.persons.Site)
+    @Html.DisplayFor(model => model.person.Site)
 </dd>
 <dt>
     Facebook:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.persons.Facebook)
+    @Html.DisplayFor(model => model.person.Facebook)
 </dd>
 <dt>
     Twitter:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.persons.Twitter)
+    @Html.DisplayFor(model => model.person.Twitter)
 </dd>
 <dt>
     Organisatie:
 </dt>
 <dd>
-    @Html.DisplayFor(model => model.persons.Organisation)
+    @Html.DisplayFor(model => model.person.Organisation)
 </dd>
 <h3>Tweets:</h3>
 @foreach (var feeds in Model.feeds)

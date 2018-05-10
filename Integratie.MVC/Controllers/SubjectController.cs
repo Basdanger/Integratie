@@ -26,17 +26,21 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Persoon(String Full_Name)
         {
-            //PersonanFeeds pf = new PersonanFeeds();
-            //pf.persons = mgr.GetPersoon(Full_Name);
-            //pf.feeds = mgr.GetFeeds(Full_Name);
+            PersonAndFeeds pf = new PersonAndFeeds();
+            pf.person = mgr.GetPersoon(Full_Name);
+            pf.feeds = mgr.GetFeeds(Full_Name);
             //Person person = mgr.GetPersoon(Full_Name);
-            //return View(pf);
-            return null;
+            return View(pf);
         }
         public ActionResult Organisaties()
         {
-            IEnumerable<Person> organisaties = mgr.GetPersonen();
+            IEnumerable<Person> organisaties = mgr.GetOrganisaties();
             return View(organisaties);
+        }
+        public ActionResult PersonenPerOrganisatie(String Organisatie)
+        {
+            IEnumerable<Person> personen = mgr.GetPeopleByOrganisation(Organisatie);
+            return View(personen);
         }
     }
 }

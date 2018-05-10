@@ -11,6 +11,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Organisation)
             </td>
+            <td>
+            @Html.ActionLink("Detail", "PersonenPerOrganisatie", new { Organisatie = item.Organisation })
+        </td>
         </tr>
     }
 </table>

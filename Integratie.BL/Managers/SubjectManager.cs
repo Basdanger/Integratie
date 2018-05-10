@@ -28,9 +28,9 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjectById(id);
         }
 
-        public IEnumerable<Subject> GetPeopleByOrganisation(string orginasation)
+        public IEnumerable<Person> GetPeopleByOrganisation(string organisation)
         {
-            return repo.ReadPeopleByOrganisation(orginasation);
+            return repo.ReadPeopleByOrganisation(organisation);
         }
         public IEnumerable<Person> GetPersonen()
         {
@@ -40,7 +40,7 @@ namespace Integratie.BL.Managers
         {
             return repo.GetPersoon(Full_Name);
         }
-        public IEnumerable<Organisation> GetOrganisaties()
+        public IEnumerable<Person> GetOrganisaties()
         {
             return repo.GetOrganisaties();
         }
