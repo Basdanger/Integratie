@@ -13,7 +13,7 @@ namespace Integratie.Domain.Entities.Subjects
         {
 
         }
-        public Theme(String iD, string name) : base(iD, name)
+        public Theme(string name) : base(name)
         {
         }
     }
