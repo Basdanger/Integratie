@@ -17,7 +17,7 @@ namespace Integratie.DAL.EF
 
         public DashBoardDbTextGain()
         {
-            httpWebRequest = (HttpWebRequest)WebRequest.Create("http://kdg.textgain.com/query");
+            httpWebRequest = (HttpWebRequest)WebRequest.Create("https://kdg.textgain.com/query");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             httpWebRequest.Headers.Add("X-API-Key", "aEN3K6VJPEoh3sMp9ZVA73kkr");
