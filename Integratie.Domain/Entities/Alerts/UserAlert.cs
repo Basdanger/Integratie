@@ -13,6 +13,7 @@ namespace Integratie.Domain.Entities.Alerts
         public int ID { get; set; }
         public Account Account { get; set; }
         public Alert Alert { get; set; }
+        public bool Show { get; set; }
         public bool Web { get; set; }
         public bool Mail { get; set; }
         public bool App { get; set; }
@@ -24,6 +25,7 @@ namespace Integratie.Domain.Entities.Alerts
             Web = web;
             Mail = mail;
             App = app;
+            Show = false;
         }
     }
 }

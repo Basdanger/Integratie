@@ -17,7 +17,7 @@ namespace Integratie.DAL.Repositories
             subjects.Add(subject);
         }
 
-        public Subject ReadSubjectById(string id)
+        public Subject ReadSubjectById(int id)
         {
             throw new NotImplementedException();
         }

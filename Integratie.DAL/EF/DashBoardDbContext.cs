@@ -6,6 +6,7 @@ using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -37,7 +38,6 @@ namespace Integratie.DAL.EF
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Entity<Graph>()
@@ -46,6 +46,8 @@ namespace Integratie.DAL.EF
             modelBuilder.Entity<Graph>()
             .Property(f => f.StartDate)
             .HasColumnType("datetime2");
+
+            modelBuilder.Entity<Alert>().HasKey(a => a.AlertID);
         }
     }
 }

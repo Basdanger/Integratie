@@ -18,6 +18,11 @@ namespace Integratie.DAL.Repositories
             context = new DashBoardDbContext();
         }
 
+        public DashBoardDbContext GetContext()
+        {
+            return context;
+        }
+
         public void AddAlert(Alert alert)
         {
             context.Alerts.Add(alert);
@@ -40,9 +45,9 @@ namespace Integratie.DAL.Repositories
             return context.Alerts.ToList<Alert>();
         }
 
-        public UserAlert GetUserAlert(int user, int alert)
+        public UserAlert GetUserAlert(string user, int alert)
         {
-            return (UserAlert)context.UserAlerts.Where(u => u.Account.ID.Equals(user) && u.Alert.ID.Equals(alert));
+            return (UserAlert)context.UserAlerts.Where(u => u.Account.ID.Equals(user) && u.Alert.AlertID.Equals(alert));
         }
 
         public IEnumerable<UserAlert> GetUserAlerts()
@@ -52,10 +57,10 @@ namespace Integratie.DAL.Repositories
 
         public IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId)
         {
-            return context.UserAlerts.Where(u => u.Alert.ID.Equals(alertId)).ToList<UserAlert>();
+            return context.UserAlerts.Where(u => u.Alert.AlertID.Equals(alertId)).ToList<UserAlert>();
         }
 
-        public IEnumerable<UserAlert> GetUserAlertsOfUser(int userId)
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
         }
@@ -69,6 +74,62 @@ namespace Integratie.DAL.Repositories
         {
             context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public CheckAlert FindCheckAlert(CheckAlert alert)
+        {
+            CheckAlert checkAlert = null;
+            try
+            {
+                checkAlert = context.Alerts.OfType<CheckAlert>().Where(a => a.Subject.ID.Equals(alert.Subject.ID) && a.Operator.Equals(alert.Operator) && a.SubjectProperty.Equals(alert.SubjectProperty) && a.Value.Equals(alert.Value)).First();
+            }
+            catch (Exception)
+            {
+                return checkAlert;
+            }
+            return checkAlert;
+        }
+
+        public SentimentAlert FindSentimentAlert(SentimentAlert alert)
+        {
+            SentimentAlert sentimentAlert = null;
+            try
+            {
+                sentimentAlert = context.Alerts.OfType<SentimentAlert>().Where(a => a.Subject.ID.Equals(alert.Subject.ID) && a.Operator.Equals(alert.Operator) && a.SubjectProperty.Equals(alert.SubjectProperty) && a.Value.Equals(alert.Value)).First();
+            }
+            catch (Exception)
+            {
+                return sentimentAlert;
+            }
+            return sentimentAlert;
+        }
+
+        public TrendAlert FindTrendAlert(TrendAlert alert)
+        {
+            TrendAlert trendAlert = null;
+            try
+            {
+                trendAlert = context.Alerts.OfType<TrendAlert>().Where(a => a.Subject.ID.Equals(alert.Subject.ID)).First();
+            }
+            catch (Exception)
+            {
+                return trendAlert;
+            }
+            return trendAlert;
+        }
+
+        public CompareAlert FindCompareAlert(CompareAlert alert)
+        {
+            CompareAlert compareAlert = null;
+            try
+            {
+                compareAlert = context.Alerts.OfType<CompareAlert>().Where(a => a.SubjectA.ID.Equals(alert.SubjectA.ID) && a.SubjectB.ID.Equals(alert.SubjectB.ID) && a.Operator.Equals(alert.Operator)).First();
+            }
+            catch (Exception)
+            {
+                return compareAlert;
+            }
+            return compareAlert;
         }
     }
 }

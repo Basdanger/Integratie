@@ -20,6 +20,11 @@ namespace Integratie.BL.Managers
             repo = new AccountRepo();
         }
 
+        public AccountManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        {
+            repo = new AccountRepo(dashboardDbContext);
+        }
+
         public Account AddAccount(string id, string name, string mail)
         {
             Account account = new Account(id, name, mail);

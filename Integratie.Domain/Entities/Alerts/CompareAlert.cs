@@ -15,11 +15,12 @@ namespace Integratie.Domain.Entities.Alerts
             Operator = @operator;
         }
 
+        public CompareAlert()
+        {
+        }
+
         public Subject SubjectA { get; set; }
         public Subject SubjectB { get; set; }
         public Operator Operator { get; set; }
-
-
-        public int MyProperty { get; set; }
     }
 }

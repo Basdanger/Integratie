@@ -9,7 +9,6 @@ namespace Integratie.Domain.Entities.Alerts
     public enum  Operator
     {
         GT,
-        LT,
-        EQ
+        LT
     }
 }
