@@ -13,6 +13,7 @@ namespace Integratie.BL.Managers
     public class DashboardManager
     {
         DashboardRepo repo = new DashboardRepo();
+        GraphManager graphManager = new GraphManager();
         public List<DashboardItem> GetAllDashboardItems()
         {
             List<DashboardItem> dbis = repo.GetAllDashboardItems();
@@ -20,34 +21,33 @@ namespace Integratie.BL.Managers
             {
                 if(dbi.Graph.GetType() == typeof(BarChartGraph))
                 {
-                    BarChartGraph BCG = (BarChartGraph)dbi.Graph;
-                    try
-                    {
-                        if (dbi.Id == 1)
-                        {
-                            BCG.Values.Add("Bart", 20);
-                            BCG.Values.Add("Stef", 40);
-                            BCG.Values.Add("Ben", 10);
-                            BCG.Values.Add("Fred", 5);
-                        }
-                        else
-                        {
-                            BCG.Values.Add("Bart", 10);
-                            BCG.Values.Add("Stef", 20);
-                            BCG.Values.Add("Ben", 5);
-                            BCG.Values.Add("Fred", 15);
-                        }
-                    }
-                    catch(Exception ex)
-                    {
+                    //BarChartGraph BCG = (BarChartGraph)dbi.Graph;
+                    //try
+                    //{
+                    //    if (dbi.Id == 1)
+                    //    {
+                    //        BCG.Values.Add("Bart", 20);
+                    //        BCG.Values.Add("Stef", 40);
+                    //        BCG.Values.Add("Ben", 10);
+                    //        BCG.Values.Add("Fred", 5);
+                    //    }
+                    //    else
+                    //    {
+                    //        BCG.Values.Add("Bart", 10);
+                    //        BCG.Values.Add("Stef", 20);
+                    //        BCG.Values.Add("Ben", 5);
+                    //        BCG.Values.Add("Fred", 15);
+                    //    }
+                    //}
+                    //catch(Exception ex)
+                    //{
 
-                    }
+                    //}
                 }
                 if(dbi.Graph.GraphType == GraphType.Single)
                 {
-                    if (dbi.Graph.PersonFilter != null)
-                        dbi.Graph.SingleValue = dbi.Graph.PersonFilter.Count;
-                    else dbi.Graph.SingleValue = 7;
+                    
+                    dbi.Graph = graphManager.GetFilledSingleGraph(dbi.Graph);
                 }
             }
             return dbis;

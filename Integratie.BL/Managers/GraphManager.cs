@@ -13,6 +13,7 @@ namespace Integratie.BL.Managers
     public class GraphManager
     {
         IGraphRepo GraphRepo = new GraphRepo();
+        FeedManager feedManager = new FeedManager();
         public void AddGraph(int userId, Graph graph)
         {
             
@@ -67,6 +68,11 @@ namespace Integratie.BL.Managers
             graph.Values.Add("Bart", 50);
             graph.Values.Add("Kris", 100);
             graph.Values.Add("Maggie", 66);
+            return graph;
+        }
+        public Graph GetFilledSingleGraph(Graph graph)
+        {
+            graph.SingleValue = feedManager.GetFilteredFeeds(graph).Count();
             return graph;
         }
 

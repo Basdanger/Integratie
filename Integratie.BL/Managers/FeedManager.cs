@@ -9,6 +9,7 @@ using Integratie.BL.Managers.Interfaces;
 using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities.Graph;
 
 namespace Integratie.BL.Managers
 {
@@ -74,6 +75,61 @@ namespace Integratie.BL.Managers
         public IEnumerable<Feed> GetPersonFeedsGender(string person,Gender gender)
         {
             return repo.ReadPersonFeedsGender(person, gender);
+        }
+
+        public IEnumerable<Feed> GetFilteredFeeds(Graph graph)
+        {
+            List<String> Agefilter = new List<string>();
+            List<String> Personalityfilter = new List<string>();
+            List<String> Genderfilter = new List<string>();
+            if(graph.AgeFilter == AgeFilter.Both)
+            {
+                Agefilter.Add("");
+                Agefilter.Add("25+");
+                Agefilter.Add("25-");
+            }
+            if(graph.AgeFilter == AgeFilter.min25)
+            {
+                Agefilter.Add("25-");
+            }
+            if (graph.AgeFilter == AgeFilter.plus25)
+            {
+                Agefilter.Add("25+");
+            }
+
+            if(graph.PersonalityFilter == PersonalityFilter.Both)
+            {
+                Personalityfilter.Add("");
+                Personalityfilter.Add("I");
+                Personalityfilter.Add("E");
+            }
+            if (graph.PersonalityFilter == PersonalityFilter.I)
+            {
+                Personalityfilter.Add("I");
+            }
+            if (graph.PersonalityFilter == PersonalityFilter.E)
+            {
+                Personalityfilter.Add("E");
+            }
+
+            if (graph.GenderFilter == GenderFilter.Both)
+            {
+                Genderfilter.Add("f");
+                Genderfilter.Add("m");
+                Genderfilter.Add("");
+            }
+            if (graph.GenderFilter == GenderFilter.Male)
+            {
+                Genderfilter.Add("m");
+            }
+            if (graph.GenderFilter == GenderFilter.Female)
+            {
+                Genderfilter.Add("f");
+            }
+            if (graph.PersonFilter == null) graph.PersonFilter = "";
+
+            IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList());
+            return filteredList;
         }
     }
 }

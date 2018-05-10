@@ -125,8 +125,7 @@
     var PersonalityFilter
     $(document).off('.datepicker.data-api');
     $('.datetimepicker1').datepicker({
-        format: 'dd/mm/yyyy',
-        startDate: '-3d'
+        format: 'dd/mm/yyyy'
     });
     $('#GraphPeriodSort').dropdown({
         values: [
@@ -269,8 +268,8 @@
                     value: 'Jan'
                 },
                 {
-                    name: 'Marnick',
-                    value: 'Marnick'
+                    name: 'Koen Geens',
+                    value: 'Koen Geens'
                 },
                 {
                     name: 'Marnick',
@@ -402,7 +401,6 @@
 <!--Submit Script-->
 <script>
     function SendGraphSubmit() {
-        alert("SENDING");
         var s = {
             GraphType: GraphSort,
             CalcType: CalcSort,
@@ -425,10 +423,14 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                //alert("Succes")
+                $('.tesla-popup').removeClass('open');
+                $('.tesla-popup-window').removeClass('open');
+                location.reload();
             },
             error: function (ex) {
-                //alert(ex.statusText);
+                $('.tesla-popup').removeClass('open');
+                $('.tesla-popup-window').removeClass('open');
+                location.reload();
             }
         });
     }

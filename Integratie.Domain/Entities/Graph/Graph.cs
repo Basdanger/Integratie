@@ -34,7 +34,7 @@ namespace Integratie.Domain.Entities.Graph
         //FILTERS
         public AgeFilter AgeFilter { get; set; }
         public PersonalityFilter PersonalityFilter { get; set; }
-        public List<string> PersonFilter { get; set; }
+        public String PersonFilter { get; set; }
         public GenderFilter GenderFilter { get; set; }
 
         //VALUES

@@ -72,9 +72,19 @@
             var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas></li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
             gridster.add_widget.apply(gridster, widget);
             </text>}
-                else {
+            if (x.Graph.GraphType == GraphType.Single)
+            {
             <text>
-                    var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '"><div class="TeslaGraphDelete hide">X</div><p class="TeslaSingleGraph">' + @x.Id + '</p></li>', @x.X_Size, @x.Y_Size, @x.Column, @x.Row]
+            var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '">'
+                + '<div class="TeslaGraphDelete hide">X</div>'
+                + '<div class="TeslaSingleContainer">'
+                + '<p class="TeslaSingleGraph">' + @x.Graph.SingleValue + '</p>'
+                + '<div class="TeslaSingleValueInformation">'
+                + '<b>Person:</b> @x.Graph.PersonFilter<br/>'
+                + '<b>Gender:</b> @x.Graph.GenderFilter<br/>'
+                + '<b>Age:</b> @x.Graph.AgeFilter<br/><br/>'
+                + '<b>Date:</b> @x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()'
+                + '</div ></div></li > ', @x.X_Size, @x.Y_Size, @x.Column, @x.Row]
             gridster.add_widget.apply(gridster, widget);
             </text>
 

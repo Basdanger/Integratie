@@ -51,6 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201805101437021_InitialCreate.cs" />
+    <Compile Include="Migrations\201805101437021_InitialCreate.Designer.cs">
+      <DependentUpon>201805101437021_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805101504551_FirstMigration.cs" />
+    <Compile Include="Migrations\201805101504551_FirstMigration.Designer.cs">
+      <DependentUpon>201805101504551_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
     <Compile Include="Repositories\DashboardRepo.cs" />
@@ -81,6 +90,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805101437021_InitialCreate.resx">
+      <DependentUpon>201805101437021_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101504551_FirstMigration.resx">
+      <DependentUpon>201805101504551_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

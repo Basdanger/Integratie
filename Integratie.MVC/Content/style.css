@@ -233,3 +233,32 @@ a#TeslaHello{
 a#TeslaLogOff{
     color:white;
 }
+.TeslaSingleContainer {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #ececec;
+    color:black;
+    
+}
+p.TeslaSingleGraph {
+    background-color:white;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    z-index: 6;
+    display: block;
+}
+.TeslaSingleGraph{
+}
+.TeslaSingleValueInformation {
+    width: 100%;
+    height:calc(100%-88px);
+    border-radius: 5px;
+    z-index: 1;
+    display: block;
+    margin-top:5px;
+    text-align:left;
+    padding:10px;
+}
