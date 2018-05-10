@@ -65,6 +65,26 @@ namespace Integratie.DAL.Repositories
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
         }
 
+        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is TrendAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CheckAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CompareAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is SentimentAlert);
+        }
+
         public void RemoveAlert(Alert alert)
         {
             context.Alerts.Remove(alert);
@@ -73,6 +93,12 @@ namespace Integratie.DAL.Repositories
         public void UpdateAlert(Alert alert)
         {
             context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void UpdateUserAlert(UserAlert userAlert)
+        {
+            context.Entry(userAlert).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
 

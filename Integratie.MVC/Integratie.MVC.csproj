@@ -204,6 +204,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\AlertPartialController.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -402,6 +403,15 @@
     <Content Include="Views\Home\GemeentePage.cshtml" />
     <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
     <Content Include="Views\Home\Alerts.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_AlertPopUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

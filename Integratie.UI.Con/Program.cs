@@ -19,10 +19,15 @@ namespace Integratie.UI.Con
         static void Main(string[] args)
         {
             //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
-            mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
-            Console.WriteLine("Alert added");
-            mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
-            Console.WriteLine("Alert added");
+            //mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
+            //Console.WriteLine("Alert added");
+            //mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
+            //Console.WriteLine("Alert added");
+            IEnumerable<UserAlert> alerts = mgr.GetUserAlertsOfUser("0");
+            UserAlert userAlert = alerts.First();
+            userAlert.Mail = false;
+            mgr.UpdateUserAlert(userAlert);
+            Console.WriteLine("Updated");
             Console.ReadLine();
         }
 

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Alerts.UserAlert>
+
+<h2>Sentiment-Alerts</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Web)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.App)
+        </th>
+        <th>
+            Alert
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Web)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.App)
+            </td>
+            <td>
+                @{
+                    Html.RenderAction("_SentimentAlert", "AlertPartial", new { id = item.Alert.AlertID });
+                }
+            </td>
+        </tr>
+    }
+</table>

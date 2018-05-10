@@ -47,7 +47,7 @@ namespace Integratie.DAL.Repositories
 
         public Subject ReadSubjectByName(string name)
         {
-            return ReadSubjectById(context.Subjects.First(s => s.Name.Equals(name.ToUpper())).ID);
+            return context.Subjects.First(s => s.Name.Equals(name.ToUpper()));
         }
 
         public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)

@@ -427,5 +427,35 @@ namespace Integratie.BL.Managers
             if (!valid)
                 throw new ValidationException("Ticket not valid!");
         }
+
+        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
+        {
+            return repo.GetUserTrendAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
+        {
+            return repo.GetUserCheckAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
+        {
+            return repo.GetUserCompareAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
+        {
+            return repo.GetUserSentimentAlertsOfUser(userId);
+        }
+
+        public Alert GetAlertById(int id)
+        {
+            return repo.GetAlertById(id);
+        }
+
+        public void UpdateUserAlert(UserAlert userAlert)
+        {
+            repo.UpdateUserAlert(userAlert);
+        }
     }
 }

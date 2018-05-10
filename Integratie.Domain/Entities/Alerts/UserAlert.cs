@@ -27,5 +27,9 @@ namespace Integratie.Domain.Entities.Alerts
             App = app;
             Show = false;
         }
+
+        public UserAlert()
+        {
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         public ActionResult Index()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "test";
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
@@ -227,5 +227,9 @@ namespace Integratie.MVC.Controllers
             return View(people);
         }
 
+        public ActionResult Alerts()
+        {
+            return View();
+        }
     }
 }
