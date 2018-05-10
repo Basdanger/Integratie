@@ -41,7 +41,7 @@ namespace Integratie.DAL.EF
             String st = SubjectStrings.Politicians();
             ////String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
             ////String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
-            String st = File.ReadAllText(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory + "politici.json"));
+            //String st = File.ReadAllText(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory + "politici.json"));
 
             IEnumerable<Person> resultsPerson = new List<Person>();
             resultsPerson = JsonConvert.DeserializeObject<IEnumerable<Person>>(st);
