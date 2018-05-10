@@ -203,6 +203,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\GraphApiController.cs" />
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\banner.jpg" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -241,6 +243,7 @@
     <Content Include="Content\demo.css" />
     <Content Include="Content\dropdown.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\Homepage.css" />
     <Content Include="Content\icons.svg" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />

@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @model List<DashboardItem>
 @{int counter = 0; }
+<link href="~/Content/Homepage.css" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/semantic.min.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
@@ -15,6 +16,31 @@
 <script src="@Url.Content("~/Scripts/dropdown.js")"></script>
 <script src="@Url.Content("~/Scripts/transition.js")"></script>
 
+
+<head>
+    <title>Urban by TEMPLATED</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Politieke barometer <span>by Team Tesla</span></a></div>
+    </header>
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <header>
+                <h1>Politieke Barometer</h1>
+                <p>Welkom op onze website! Kom hier alles te weten over uw favoriete politiekers!</p>
+            </header>
+            <a href="#main" class="button big scrolly">Ontdek meer!</a>
+        </div>
+    </section>
+</body>
 <!-- MARNICK CHART-->
 <!-- Jan -->
 <div class="gridsterMenu">
@@ -27,7 +53,7 @@
     <ul id="gridul" style="margin:0; padding:0; position:relative;"></ul>
 </div>
 
-<div class="tesla-popup">
+<div class="tesla-popup" id="main">
     <div class="tesla-popup-window">
         <div class="tesla-popup-header">
             <span style="float:left;margin-left:10px;margin-top:3px;">New Graph</span>
@@ -237,5 +263,17 @@
     }
 </script>
 
+<!-- Footer -->
+<footer id="footer">
+    <div class="copyright">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+        </ul>
+        <p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+    </div>
+</footer>
 
 
