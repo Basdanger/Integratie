@@ -18,14 +18,24 @@ namespace Integratie.BL.Managers
             repo = new SubjectRepo();
         }
 
+        public SubjectManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        {
+            repo = new SubjectRepo(dashboardDbContext);
+        }
+        
         public IEnumerable<Subject> GetSubjects()
         {
             return repo.ReadSubjects();
         }
 
-        public Subject GetSubjectById(string id)
+        public Subject GetSubjectById(int id)
         {
             return repo.ReadSubjectById(id);
+        }
+
+        public Subject GetSubjectByName(string name)
+        {
+            return repo.ReadSubjectByName(name);
         }
 
         public IEnumerable<Subject> GetPeopleByOrganisation(string orginasation)

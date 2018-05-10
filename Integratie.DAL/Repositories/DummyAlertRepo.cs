@@ -36,7 +36,7 @@ namespace Integratie.DAL.Repositories
             return alerts;
         }
 
-        public UserAlert GetUserAlert(int user, int alert)
+        public UserAlert GetUserAlert(string user, int alert)
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace Integratie.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UserAlert> GetUserAlertsOfUser(int userId)
+        public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             throw new NotImplementedException();
         }

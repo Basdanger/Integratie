@@ -56,6 +56,7 @@
     <Compile Include="Entities\Alerts\CheckAlert.cs" />
     <Compile Include="Entities\Alerts\CompareAlert.cs" />
     <Compile Include="Entities\Alerts\Operator.cs" />
+    <Compile Include="Entities\Alerts\SentimentAlert.cs" />
     <Compile Include="Entities\Alerts\SubjectProperty.cs" />
     <Compile Include="Entities\Alerts\TrendAlert.cs" />
     <Compile Include="Entities\Alerts\UserAlert.cs" />

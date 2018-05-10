@@ -13,6 +13,6 @@ namespace Integratie.DAL.Repositories.Interfaces
         IEnumerable<Subject> ReadSubjects();
         void AddSubject(Subject subject);
         void RemoveSubject(Subject subject);
-        Subject ReadSubjectById(string id);
+        Subject ReadSubjectById(int id);
     }
 }

@@ -12,7 +12,7 @@ namespace Integratie.Domain.Entities.Subjects
         {
 
         }
-        public Organisation(String iD, string name) : base(iD, name)
+        public Organisation(string name) : base(name)
         {
 
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,8 @@ namespace Integratie.Domain.Entities.Subjects
     public class Subject
     {
         [Key]
-        public String ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         public String Name { get; set; }
         public List<Feed> Feeds { get; set; }
         public int FeedCount { get; set; }
@@ -19,9 +21,8 @@ namespace Integratie.Domain.Entities.Subjects
         {
 
         }
-        public Subject(String id, string name)
+        public Subject(string name)
         {
-            ID = id;
             Name = name;
             Feeds = new List<Feed>();
             FeedCount = Feeds.Count();
