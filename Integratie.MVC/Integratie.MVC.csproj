@@ -405,6 +405,9 @@
     <Content Include="Views\Subject\PersonenPerOrganisatie.cshtml" />
     <Content Include="Views\Subject\Gemeente.cshtml" />
     <Content Include="Views\Subject\GemeentePage.cshtml" />
+    <Content Include="Views\Subject\EditPersoon.cshtml" />
+    <Content Include="Views\Subject\DeletePerson.cshtml" />
+    <Content Include="Views\Subject\CreatePersoon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -63,5 +63,34 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadPeopleByTown(town);
         }
+        public void ChangePerson(Person person)
+        {
+            repo.UpdatePersoon(person);
+        }
+        public void DeletePerson(String Full_Name)
+        {
+            repo.DeletePersoon(Full_Name);
+        }
+        public void AddContact(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
+        {
+            Person person = new Person()
+            {
+                First_Name = First_Name,
+                Last_Name = Last_Name,
+                District = District,
+                Level = Level,
+                Gender = Gender,
+                Twitter = Twitter,
+                Site = Site,
+                DateOfBirth = DateOfBirth,
+                Facebook = Facebook,
+                Postal_Code = Postal_Code,
+                Full_Name = Full_Name,
+                Position = Position,
+                Organisation = Organisation,
+                Town = Town
+            };
+            repo.CreatePersoon(person);
+        }
     }
 }

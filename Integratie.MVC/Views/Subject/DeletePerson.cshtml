@@ -1,0 +1,46 @@
+﻿@model Integratie.Domain.Entities.Subjects.Person
+
+<h2>Wil je @Html.DisplayFor(model => model.Full_Name) Verwijderen</h2>
+<h4>Contact:</h4>
+<dt>
+    Website:
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Site)
+</dd>
+<dt>
+    Facebook:
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Facebook)
+</dd>
+<dt>
+    Twitter:
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Twitter)
+</dd>
+<dt>
+    Organisatie:
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Organisation)
+</dd>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken(){
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+}
+<style>
+    dd {
+        color: black;
+    }
+
+    dt {
+        color: black;
+    }
+</style>

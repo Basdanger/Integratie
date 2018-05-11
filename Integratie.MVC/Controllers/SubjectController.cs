@@ -31,6 +31,75 @@ namespace Integratie.MVC.Controllers
             pf.feeds = mgr.GetFeeds(Full_Name);
             return View(pf);
         }
+        public ActionResult EditPersoon(String Full_Name)
+        {
+            Person person = mgr.GetPersoon(Full_Name);
+            return View(person);
+        }
+        [HttpPost]
+        public ActionResult EditPersoon(String Full_Name, Person person)
+        {
+            try
+            {
+                    mgr.ChangePerson(person);
+                return RedirectToAction("Personen");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult DeletePerson(String Full_Name)
+        {
+            Person p = mgr.GetPersoon(Full_Name);
+            return View(p);
+        }
+        [HttpPost]
+        public ActionResult DeletePerson(String Full_Name, FormCollection collection)
+        {
+            try
+            {
+                mgr.DeletePerson(Full_Name);
+
+                return RedirectToAction("Personen");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult CreatePersoon()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreatePersoon(Person person)
+        {
+            try
+            {
+                mgr.AddContact(
+                person.First_Name,
+                person.Last_Name,
+                person.District,
+                person.Level,
+                person.Gender,
+                person.Twitter,
+                person.Site,
+                person.DateOfBirth,
+                person.Facebook,
+                person.Postal_Code,
+                person.Full_Name,
+                person.Position,
+                person.Organisation,
+                person.Town
+                );
+                return RedirectToAction("Personen");
+            }
+            catch
+            {
+                return View();
+            }
+        }
         public ActionResult Organisaties()
         {
             IEnumerable<Person> organisaties = mgr.GetOrganisaties();
