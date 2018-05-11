@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,6 +92,13 @@ namespace Integratie.BL.Managers
                 Town = Town
             };
             repo.CreatePersoon(person);
+        }
+        public void PersonToCsv()
+        {
+            var filepath = @"C:\Users\yanni\net\cvsexport";
+            var personen = repo.GetPersonen();
+            var csv = new StringBuilder();
+            File.WriteAllText(filepath, csv.ToString());
         }
     }
 }

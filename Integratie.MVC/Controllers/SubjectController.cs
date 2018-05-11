@@ -31,12 +31,15 @@ namespace Integratie.MVC.Controllers
             pf.feeds = mgr.GetFeeds(Full_Name);
             return View(pf);
         }
+        //[Authorize(Roles = "Admin")]
         public ActionResult EditPersoon(String Full_Name)
         {
             Person person = mgr.GetPersoon(Full_Name);
             return View(person);
         }
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditPersoon(String Full_Name, Person person)
         {
             try
@@ -49,11 +52,13 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
+        //[Authorize(Roles = "Admin")]
         public ActionResult DeletePerson(String Full_Name)
         {
             Person p = mgr.GetPersoon(Full_Name);
             return View(p);
         }
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult DeletePerson(String Full_Name, FormCollection collection)
         {
@@ -68,10 +73,12 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
+       // [Authorize(Roles = "Admin")]
         public ActionResult CreatePersoon()
         {
             return View();
         }
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CreatePersoon(Person person)
         {
