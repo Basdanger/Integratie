@@ -39,16 +39,15 @@ namespace Integratie.MVC.Controllers
         public ActionResult EditPersoon(String Full_Name)
         {
             Person person = mgr.GetPersoon(Full_Name);
-            return View(person);
+            return View();
         }
        // [Authorize(Roles = "Admin")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult EditPersoon(String Full_Name, Person person)
         {
             try
             {
-                    mgr.ChangePerson(person);
+                mgr.ChangePerson(person);
                 return RedirectToAction("Personen");
             }
             catch
@@ -84,11 +83,11 @@ namespace Integratie.MVC.Controllers
         }
         //[Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult CreatePersoon(Person person)
+        public ActionResult CreatePersoon(Person person, FormCollection collection)
         {
             try
             {
-                mgr.AddPerson(
+                person = mgr.AddPerson(
                 person.First_Name,
                 person.Last_Name,
                 person.District,

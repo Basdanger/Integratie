@@ -17,7 +17,7 @@ namespace Integratie.DAL.Repositories
         public SubjectRepo()
         {
             context = new DashBoardDbContext();
-            //context.Database.Initialize(true);
+            context.Database.Initialize(false);
         }
 
         public SubjectRepo(DashBoardDbContext context)
@@ -74,7 +74,7 @@ namespace Integratie.DAL.Repositories
         }
         public IEnumerable<Person> GetOrganisaties()
         {
-            return context.People.ToList().Distinct();
+            return context.People.Distinct().ToList();
         }
         public Person FeedsByPerson(String Full_Name)
         {
@@ -87,7 +87,7 @@ namespace Integratie.DAL.Repositories
         }
         public void UpdatePersoon(Person person)
         {
-            context.Entry<Person>(person).State = EntityState.Modified;
+            context.Entry(person).State = EntityState.Modified;
             context.SaveChanges();
         }
         public void DeletePersoon(String Full_Name)
@@ -96,10 +96,11 @@ namespace Integratie.DAL.Repositories
             context.People.Remove(p);
             context.SaveChanges();
         }
-        public void CreatePersoon(Person person)
+        public Person CreatePersoon(Person person)
         {
             context.People.Add(person);
             context.SaveChanges();
+            return person;
         }
         public void CreatePersonen(List<Person> persons)
         {
