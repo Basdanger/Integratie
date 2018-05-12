@@ -4,6 +4,21 @@
 }
 <div style="color: black">
     <h2>Personen</h2>
+    <p>
+        @Html.ActionLink("Voeg toe", "CreatePersoon")
+    </p>
+    <div class="col-md-12">
+        @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="attachment">Select a Csv File</label>
+                <label class="btn btn-default btn-file">
+                    <input type="file" name="attachmentcsv" id="attachmentcsv">
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        }
+    </div>
     <table class="table">
         <tr>
             <th>
@@ -32,8 +47,16 @@
                     @Html.DisplayFor(modelItem => item.Site)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Twitter) |
-                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
+                    @Html.DisplayFor(modelItem => item.Twitter) <br />
+                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })<br />
+                    @*@if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {*@
+                    @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
+                    @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
+                    @*}
+                        }*@
                 </td>
             </tr>
         }

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : CreateDatabaseIfNotExists<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -39,7 +39,7 @@ namespace Integratie.DAL.EF
 
             List<Person> people = new List<Person>();
             String st = SubjectStrings.Politicians();
-            ////String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
+            //String st = File.ReadAllText(@"C:\Users\yanni\net\Integratie.DALpolitici.json");
             ////String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
             //String st = File.ReadAllText(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory + "politici.json"));
 
@@ -55,7 +55,17 @@ namespace Integratie.DAL.EF
             {
                 context.People.Add(person);
             }
-
+            //List<Organisation> org = new List<Organisation>();
+            //IEnumerable<Organisation> organisations = new List<Organisation>();
+            //organisations = JsonConvert.DeserializeObject<IEnumerable<Organisation>>(st);
+            //foreach (var item in organisations)
+            //{
+            //    org.Add(new Organisation(item.ID, item.Naam));
+            //}
+            //foreach (var o in org)
+            //{
+            //    context.Organisations.Add(o);
+            //}
             //DUMMY ALERTS
             //CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
             //CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);
