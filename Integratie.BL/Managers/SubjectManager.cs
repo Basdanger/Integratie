@@ -72,7 +72,7 @@ namespace Integratie.BL.Managers
         {
             repo.DeletePersoon(Full_Name);
         }
-        public void AddContact(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
+        public void AddPerson(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
         {
             Person person = new Person()
             {
@@ -93,12 +93,9 @@ namespace Integratie.BL.Managers
             };
             repo.CreatePersoon(person);
         }
-        public void PersonToCsv()
+        public void CreatePersons(List<Person> persons)
         {
-            var filepath = @"C:\Users\yanni\net\cvsexport";
-            var personen = repo.GetPersonen();
-            var csv = new StringBuilder();
-            File.WriteAllText(filepath, csv.ToString());
+            repo.CreatePersonen(persons);
         }
     }
 }

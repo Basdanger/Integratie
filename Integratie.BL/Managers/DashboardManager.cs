@@ -12,7 +12,11 @@ namespace Integratie.BL.Managers
 {
     public class DashboardManager
     {
-        DashboardRepo repo = new DashboardRepo();
+        DashboardRepo repo;
+        public DashboardManager()
+        {
+            repo = new DashboardRepo();
+        }
         public List<DashboardItem> GetAllDashboardItems()
         {
             List<DashboardItem> dbis = repo.GetAllDashboardItems();

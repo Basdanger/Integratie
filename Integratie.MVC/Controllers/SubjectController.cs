@@ -1,11 +1,15 @@
-﻿using Integratie.BL.Managers;
+﻿using CsvHelper;
+using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -84,7 +88,7 @@ namespace Integratie.MVC.Controllers
         {
             try
             {
-                mgr.AddContact(
+                mgr.AddPerson(
                 person.First_Name,
                 person.Last_Name,
                 person.District,
@@ -255,6 +259,59 @@ namespace Integratie.MVC.Controllers
             SubjectManager subjectmngr = new SubjectManager();
             IEnumerable<Subject> people = subjectmngr.GetPeopleByTown(gemeente);
             return View(people);
+        }
+        //[HttpPost]
+        //public void UploadPerson(HttpPostedFileBase file)
+        //{
+        //    using (var reader = new StreamReader(file.InputStream))
+        //    {
+        //        List<Person> personen = new List<Person>();
+        //        List<String> First_Name = new List<string>();
+        //        List<String> Last_Name = new List<string>();
+        //        while (!reader.EndOfStream)
+        //        {
+        //            var line = reader.ReadLine();
+        //            var values = line.Split(',');
+
+        //            First_Name.Add(values[0]);
+        //            Last_Name.Add(values[1]);
+        //        }
+        //        for (int i = 0; i < First_Name.Count; i++)
+        //        {
+        //            personen.Add(new Person(First_Name[i], Last_Name[i]));
+        //        }
+        //        mgr.CreatePersons(personen);
+        //    }
+        //}
+        [HttpPost]
+        public ActionResult UploadPerson(HttpPostedFileBase file)
+        {
+            string path = null;
+            List<Person> personen = new List<Person>();
+            try
+            {
+                if(file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    path = AppDomain.CurrentDomain.BaseDirectory + "upload\\" + fileName;
+                    file.SaveAs(path);
+
+                    var csv = new CsvReader(new StreamReader(path));
+                    var PersonList = csv.GetRecords<Person>();
+
+                    foreach (var item in PersonList)
+                    {
+                        Person person = new Person();
+
+                        person.First_Name = item.First_Name;
+                        person.Last_Name = item.Last_Name;
+
+                        personen.Add(person);
+                    }
+                }
+            }
+            catch { }
+            return View(personen);
         }
     }
 }

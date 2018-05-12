@@ -101,5 +101,13 @@ namespace Integratie.DAL.Repositories
             context.People.Add(person);
             context.SaveChanges();
         }
+        public void CreatePersonen(List<Person> persons)
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                context.People.Add(persons[i]);
+            }
+            context.SaveChanges();
+        }
     }
 }

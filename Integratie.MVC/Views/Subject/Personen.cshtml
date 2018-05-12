@@ -6,7 +6,14 @@
     <h2>Personen</h2>
     <p>
         @Html.ActionLink("Voeg toe", "CreatePersoon")
+        @Html.ActionLink("CSV", "UploadPerson")
     </p>
+    @*@using (Html.BeginForm("UploadPerson", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="FileUpload" />
+        @Html.ActionLink("Importeer vanuit csv", "UploadPerson")
+        <input type="submit" name="Submit" id="Submit" value="Upload" />
+    }*@
     <table class="table">
         <tr>
             <th>
@@ -38,13 +45,13 @@
                     @Html.DisplayFor(modelItem => item.Twitter) <br />
                     @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })<br />
                     @*@if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("Admin"))
-                        {*@
-                @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
-                @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
-                        @*}
-                    }*@
+                        {
+                            if (User.IsInRole("Admin"))
+                            {*@
+                    @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
+                    @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
+                    @*}
+                        }*@
                 </td>
             </tr>
         }

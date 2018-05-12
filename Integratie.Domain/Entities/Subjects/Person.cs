@@ -47,5 +47,11 @@ namespace Integratie.Domain.Entities.Subjects
             Organisation = organisation;
             Town = town;
         }
+
+        public Person(string first_Name, string last_Name)
+        {
+            First_Name = first_Name;
+            Last_Name = last_Name;
+        }
     }
 }
