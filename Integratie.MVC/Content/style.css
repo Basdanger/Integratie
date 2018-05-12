@@ -262,3 +262,10 @@ p.TeslaSingleGraph {
     text-align:left;
     padding:10px;
 }
+.TeslaSingleInfoCalculation {
+    position: absolute;
+    padding: 3px;
+    background-color: #007bff;
+    top: 66px;
+    border-top-right-radius:5px;
+}

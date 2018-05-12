@@ -128,6 +128,11 @@ namespace Integratie.BL.Managers
             }
             if (graph.PersonFilter == null) graph.PersonFilter = "";
 
+            if (graph.PeriodSort == PeriodSort.Flex)
+            {
+                graph.EndDate = DateTime.Now;
+                graph.StartDate = graph.EndDate.AddDays(graph.PeriodLength * -1);
+            }
             IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList());
             return filteredList;
         }

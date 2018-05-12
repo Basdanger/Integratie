@@ -42,6 +42,7 @@
                 </div>
                 <label id="DaysDateLabel" for="exampleSelect2"># Days</label>
                 <input type="number" class="form-control" id="DaysDate">
+
                 <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
                 <select style="display:none" class="form-control" id="IntervalSelect">
                     <option>1 Day</option>
@@ -123,10 +124,14 @@
     var GenderFilter;
     var AgeFilter;
     var PersonalityFilter
+    var PeriodSort;
     $(document).off('.datepicker.data-api');
+    var d = new Date();
+
     $('.datetimepicker1').datepicker({
         format: 'dd/mm/yyyy'
     });
+    $(".datetimepicker1").datepicker("update", new Date());
     $('#GraphPeriodSort').dropdown({
         values: [
             {
@@ -158,6 +163,7 @@
                 $('#DaysDateLabel').css("display", 'flex');
                 $('#DaysDate').css("display", 'flex');
             }
+            PeriodSort = val;
         }
     });
 
@@ -409,7 +415,9 @@
             AgeFilter: AgeFilter,
             PersonalityFilter: PersonalityFilter,
             GenderFilter: GenderFilter,
-            PersonFilter: PersonFilter
+            PersonFilter: PersonFilter,
+            PeriodSort: PeriodSort,
+            PeriodLength: $('#DaysDate').val()
 
         };
 

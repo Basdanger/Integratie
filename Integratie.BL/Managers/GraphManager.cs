@@ -73,6 +73,12 @@ namespace Integratie.BL.Managers
         public Graph GetFilledSingleGraph(Graph graph)
         {
             graph.SingleValue = feedManager.GetFilteredFeeds(graph).Count();
+            int countDays = 1;
+            if (graph.CalcType == CalcType.AVG)
+            {
+                countDays = (int)(graph.EndDate - graph.StartDate).TotalDays;
+            }
+            graph.SingleValue = (int)graph.SingleValue / countDays;
             return graph;
         }
 

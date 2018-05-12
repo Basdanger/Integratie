@@ -70,7 +70,7 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Feed> ReadFilteredFeed( DateTime StartDate, DateTime Enddate, List<String> AgeFilter, List<String> PersonalityFilter, List<String> GenderFilter, List<String> PersonFilter)
         {
             IEnumerable<Feed> feeds;
-            if (PersonFilter.Count > 0)
+            if (PersonFilter.First() != "")
                 feeds = context.Feeds
                 .Where(f => f.Date <= Enddate && f.Date >= StartDate)
                 .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
