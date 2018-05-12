@@ -6,14 +6,19 @@
     <h2>Personen</h2>
     <p>
         @Html.ActionLink("Voeg toe", "CreatePersoon")
-        @Html.ActionLink("CSV", "UploadPerson")
     </p>
-    @*@using (Html.BeginForm("UploadPerson", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <input type="file" name="FileUpload" />
-        @Html.ActionLink("Importeer vanuit csv", "UploadPerson")
-        <input type="submit" name="Submit" id="Submit" value="Upload" />
-    }*@
+    <div class="col-md-12">
+        @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="attachment">Select a Csv File</label>
+                <label class="btn btn-default btn-file">
+                    <input type="file" name="attachmentcsv" id="attachmentcsv">
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        }
+    </div>
     <table class="table">
         <tr>
             <th>
