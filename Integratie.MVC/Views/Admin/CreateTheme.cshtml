@@ -1,0 +1,98 @@
+﻿@model Integratie.Domain.Entities.Subjects.Theme
+@{
+    /**/
+
+    ViewBag.Title = "CreateTheme";
+}
+
+<h2>Create Theme</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p>Thema nr:</p>
+    @Html.EditorFor(m => m.ID)
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.Terms, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Terms, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Terms, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div id="termen"></div>
+
+    @*<input id="termText" name="termText" type="text" class="form-control"
+        style="width: 300px; float: left; margin-right: 5px" />*@
+
+
+    <div>
+        <table>
+            <tr>
+                <th>termen</th>
+            </tr>
+            @for (int i = 0; i < Model.Terms.Count; i++)
+            {
+                <tr>
+                    <td>@Html.EditorFor(m => m.Terms[i])</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <button type="button" class="btn btn-default" onclick="extraTerm()">Voeg term toe</button>
+    @*if (Model.Terms == null || Model.Terms.Count == 0)
+        {
+            <p>None.</p>
+        }
+        else
+        {
+            <p>Termen</p>
+            <ul id="termEditor" style="list-style-type: none">
+                @for (int i = 0; i < Model.Terms.Count; i++)
+                {
+                    <li style="padding-bottom:15px">
+                        <img src="@Url.Content("~/Content/images/draggable-icon.png")" style="cursor: move" alt="" />
+
+                        @Html.LabelFor(model => model.Terms[i])
+                        @Html.EditorFor(model => model.Terms[i])
+
+                        <a href="#" onclick="$(this).parent().remove();">Delete</a>
+                    </li>
+                }
+            </ul>
+            <a href="#">Add another</a>
+        }*@
+    <input type="submit" class="btn btn-default btn-xs" value="Creëer Thema" />
+
+    @section scripts {
+            <script type="text/javascript">
+                var termcounter = 0;
+
+                function extraTerm() {
+                    if (termcounter == 0) {
+                        @{Model.Terms = new List<String>();
+                      Model.Terms.Add("test");
+                        }
+                    }
+
+                        
+                    @*var term = $('#termText').val();
+                    $('div#termen').append('<p>' + term + '</p><button>delete</button>');
+                    termcounter++;*@
+                }
+
+                function verwijderTerm(cijfer) {
+
+                }
+            </script>
+        }
+}

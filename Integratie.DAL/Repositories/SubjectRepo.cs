@@ -8,6 +8,9 @@ using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+
 namespace Integratie.DAL.Repositories
 {
     public class SubjectRepo : ISubjectRepo
@@ -21,8 +24,13 @@ namespace Integratie.DAL.Repositories
 
         public void AddSubject(Subject subject)
         {
-            context.Subjects.Add(subject);
-            context.SaveChanges();
+                context.Subjects.Add(subject);
+                context.SaveChanges();
+        }
+
+        public IEnumerable<Theme> ReadThemas()
+        {
+            return context.Subjects.OfType<Theme>();
         }
 
         public Subject ReadSubjectById(string id)
@@ -34,6 +42,7 @@ namespace Integratie.DAL.Repositories
         {
             return context.Subjects.ToList<Subject>();
         }
+
 
         public void RemoveSubject(Subject subject)
         {

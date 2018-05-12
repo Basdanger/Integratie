@@ -18,7 +18,8 @@ namespace Integratie.UI.Con
 
         static void Main(string[] args)
         {
-            Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
+            
+            //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
             Console.ReadLine();
         }
 

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Theme>
+@{
+    ViewBag.Title = "ThemaConfig";
+}
+
+<h2>ThemaConfig</h2>
+
+<button>
+    @Html.ActionLink("Create Theme", "CreateTheme", "Admin")
+</button>
+
+<h2>Huidige Themas</h2>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Terms)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Terms)
+            </td>
+        </tr>
+    }
+</table>

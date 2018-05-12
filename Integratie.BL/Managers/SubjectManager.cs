@@ -23,6 +23,11 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjects();
         }
 
+        public IEnumerable<Theme> GetThemas()
+        {
+            return repo.ReadThemas();
+        }
+
         public Subject GetSubjectById(string id)
         {
             return repo.ReadSubjectById(id);
@@ -32,6 +37,12 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadPeopleByOrganisation(orginasation);
         }
+
+        public void AddTheme(Theme thema)
+        {
+            repo.AddSubject(thema);
+        }
+
         public IEnumerable<Person> GetPersonen()
         {
             return repo.GetPersonen();
