@@ -223,6 +223,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlertCreation.cs" />
+    <Compile Include="Models\AlertUpdate.cs" />
     <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -415,10 +416,6 @@
     <Content Include="Views\AlertPartial\_CheckUserAlerts.cshtml" />
     <Content Include="Views\AlertPartial\_SentimentUserAlerts.cshtml" />
     <Content Include="Views\AlertPartial\_AlertPopUp.cshtml" />
-    <Content Include="Views\AlertPartial\_TrendForm.cshtml" />
-    <Content Include="Views\AlertPartial\_CompareForm.cshtml" />
-    <Content Include="Views\AlertPartial\_CheckForm.cshtml" />
-    <Content Include="Views\AlertPartial\_SentimentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

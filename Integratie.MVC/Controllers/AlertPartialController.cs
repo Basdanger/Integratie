@@ -13,6 +13,7 @@ namespace Integratie.MVC.Controllers
     public class AlertPartialController : Controller
     {
         AlertManager alertManager = new AlertManager();
+        SubjectManager subjectManager = new SubjectManager();
         // GET: AlertPartial
         public ActionResult Index()
         {
@@ -69,27 +70,7 @@ namespace Integratie.MVC.Controllers
 
         public ActionResult _AlertPopUp()
         {
-            return PartialView();
-        }
-
-        public ActionResult _TrendForm()
-        {
-            return PartialView();
-        }
-
-        public ActionResult _CompareForm()
-        {
-            return PartialView();
-        }
-
-        public ActionResult _CheckForm()
-        {
-            return PartialView();
-        }
-
-        public ActionResult _SentimentForm()
-        {
-            return PartialView();
+            return PartialView(subjectManager.GetSubjectNames());
         }
     }
 }

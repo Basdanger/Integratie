@@ -28,6 +28,11 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjects();
         }
 
+        public List<string> GetSubjectNames()
+        {
+            return repo.GetNames();
+        }
+
         public Subject GetSubjectById(int id)
         {
             return repo.ReadSubjectById(id);
@@ -53,10 +58,6 @@ namespace Integratie.BL.Managers
         public IEnumerable<Organisation> GetOrganisaties()
         {
             return repo.GetOrganisaties();
-        }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return repo.GetFeeds(person);
         }
 
         public IEnumerable<Subject> GetPeopleByTown(string town)

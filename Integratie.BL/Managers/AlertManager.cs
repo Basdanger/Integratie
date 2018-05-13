@@ -430,7 +430,8 @@ namespace Integratie.BL.Managers
 
         public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
         {
-            return repo.GetUserTrendAlertsOfUser(userId);
+            List<UserAlert> userAlerts = repo.GetUserTrendAlertsOfUser(userId).ToList();
+            return userAlerts;
         }
 
         public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
@@ -453,8 +454,12 @@ namespace Integratie.BL.Managers
             return repo.GetAlertById(id);
         }
 
-        public void UpdateUserAlert(UserAlert userAlert)
+        public void UpdateUserAlert(int id, bool web, bool mail, bool app)
         {
+            UserAlert userAlert = repo.GetUserAlert(id);
+            userAlert.Web = web;
+            userAlert.Mail = mail;
+            userAlert.App = app;
             repo.UpdateUserAlert(userAlert);
         }
     }

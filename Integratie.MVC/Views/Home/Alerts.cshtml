@@ -26,7 +26,6 @@
         $('#close').on('click', function () {
             $('.tesla-popup').removeClass('open');
             $('.tesla-popup-window').removeClass('open');
-            console.log('clicked');
         });
         $('.teslaDashboardAdd').on('click', function () {
             $('.tesla-popup').addClass('open');
@@ -41,3 +40,35 @@
     Html.RenderAction("_CheckUserAlerts", "AlertPartial");
     Html.RenderAction("_SentimentUserAlerts", "AlertPartial");
 }
+
+<script>
+    function SendAlertUpdateSubmit(int) {
+        alert("SENDING");
+        var web = "[id='Web " + int + "']";
+        var mail = "[id='Mail " + int + "']";
+        var app = "[id='App " + int + "']";
+        var s = {
+            Id: int,
+            Web: $(web).checkbox('is checked'),
+            Mail: $(mail).checkbox('is checked'),
+            App: $(app).checkbox('is checked')
+        };
+
+        s = (JSON.stringify(s));
+        console.log(s);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateUserAlert", "Home")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+</script>

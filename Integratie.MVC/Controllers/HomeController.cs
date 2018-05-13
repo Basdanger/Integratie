@@ -4,6 +4,7 @@ using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Integratie.MVC.Controllers
     {
         GraphManager manager = new GraphManager();
         DashboardManager dbmanager = new DashboardManager();
+        AlertManager alertManager = new AlertManager();
         public ActionResult Index()
         {
             ViewBag.Message = "test";
@@ -238,7 +240,15 @@ namespace Integratie.MVC.Controllers
         [HttpPost]
         public ActionResult AddUserAlert(AlertCreation alert)
         {
-            return View();
+            alertManager.AddUserAlert(User.Identity.GetUserId(), alert.AlertType, alert.Subject, alert.Web, alert.Mail, alert.App, alert.SubjectB, alert.Compare, alert.SubjectProperty, alert.Value);
+            return RedirectToAction("Alerts");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateAlert(AlertUpdate alert)
+        {
+            alertManager.UpdateUserAlert(alert.Id, alert.Web, alert.Mail, alert.App);
+            return RedirectToAction("Alerts");
         }
     }
 }

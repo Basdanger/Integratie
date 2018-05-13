@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<Integratie.Domain.Entities.Alerts.UserAlert>
 
-<h2>Trend-Alerts</h2>
-<table class="table">
+<table class="ui celled table">
+    <thead class="full-width">
+        <tr>
+            <th>Trend-Alerts</th>
+        </tr>
+    </thead>
     <tr>
         <th>
             Settings
@@ -14,45 +18,48 @@
     {
         <tr>
             <td>
-                @using (Html.BeginForm())
-                {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(modelItem => item.ID)
-
-                    <div class="form-group">
-                        @Html.LabelFor(modelItem => item.Web, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(modelItem => item.Web, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(modelItem => item.Web, "", new { @class = "text-danger" })
+                <div class="ui form">
+                    <div class="four fields">
+                        <div id="Web @item.ID" class="ui field toggle checkbox">
+                            <label>Web</label>
+                            @if (item.Web)
+                            {
+                                <input checked="checked" type="checkbox">
+                            }
+                            else
+                            {
+                                <input type="checkbox">
+                            }
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(modelItem => item.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(modelItem => item.Mail, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(modelItem => item.Mail, "", new { @class = "text-danger" })
+                        <br>
+                        <div id="Mail @item.ID" class="ui field toggle checkbox">
+                            <label>Mail</label>
+                            @if (item.Mail)
+                            {
+                                <input checked="checked" type="checkbox">
+                            }
+                            else
+                            {
+                                <input type="checkbox">
+                            }
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(modelItem => item.App, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(modelItem => item.App, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(modelItem => item.App, "", new { @class = "text-danger" })
+                        <br>
+                        <div id="App @item.ID" class="ui field toggle checkbox">
+                            <label>App</label>
+                            @if (item.App)
+                            {
+                                <input checked="checked" type="checkbox">
+                            }
+                            else
+                            {
+                                <input type="checkbox">
+                            }
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
+                        <div class="field">
+                            <div id="submit @item.ID" class="ui submit button">Save</div>
                         </div>
                     </div>
                 </div>
-                }
             </td>
             <td>
                 @{
@@ -62,3 +69,24 @@
         </tr>
     }
 </table>
+
+@foreach (var item in Model)
+{
+    <script>
+        $("[id='Web @item.ID']").checkbox({
+            
+        });
+                
+        $("[id='Mail @item.ID']").checkbox({
+
+        });
+        
+        $("[id='App @item.ID']").checkbox({
+
+        });
+
+        $("#submit @item.ID").on('click', function () {
+            SendAlertUpdateSubmit(@item.ID);
+        });
+    </script>
+}

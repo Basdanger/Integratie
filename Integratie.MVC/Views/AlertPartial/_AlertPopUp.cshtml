@@ -1,4 +1,6 @@
-﻿<form>
+﻿@model List<string>
+
+<form class="ui form" id="form">
     <div id="test" class="form-group">
         <label><b>Select Alert</b></label>
         <br />
@@ -19,6 +21,12 @@
             <input type="hidden">
             <div class="text"></div>
             <i class="dropdown icon"></i>
+            <div class="menu">
+                @foreach(var item in Model)
+                {
+                    <div class="item" data-value="@item">@item</div>
+                }
+            </div>
         </div>
 
         <label id="SubjectBLabel">Subject 2</label>
@@ -27,6 +35,12 @@
             <input type="hidden">
             <div class="text"></div>
             <i class="dropdown icon"></i>
+            <div class="menu">
+                @foreach (var item in Model)
+                {
+                    <div class="item" data-value="@item">@item</div>
+                }
+            </div>
         </div>
 
         <label id="SentimentLabel">Sentiment</label>
@@ -62,8 +76,15 @@
             <div id="Percent" class="ui fluid range"></div>
         </div>
 
-        <div id="Value" class="ui labeled input">
-            <input placeholder="0" type="number">
+        <div id="PercentSentimentSlider" class="ui segment">
+            <p>
+                <span id="PercentSentimentText"></span>%
+            </p>
+            <div id="PercentSentiment" class="ui fluid range"></div>
+        </div>
+
+        <div id="Value" class="ui input">
+            <input placeholder=0 type="number" id="ValueInput" name="value">
         </div>
 
         <label><b>Alert Settings</b></label>
@@ -83,6 +104,7 @@
             <input name="gender" type="checkbox">
         </div>
     </div>
+    <button id="AlertSubmit" type="button" class="btn btn-success">Create Alert</button>
     <!--ERRORS-->
     <div id="AlertErrors">
 
@@ -92,12 +114,11 @@
 
 <script type="text/javascript">
     var AlertType;
-    var Subject;
+    var Subject = "";
     var Web;
     var Mail;
     var App;
-    var Subject;
-    var SubjectB;
+    var SubjectB = "";
     var Compare;
     var SubjectProperty;
     var Value;
@@ -148,9 +169,11 @@
             if (val == "count") {
                 $('#PercentSlider').css("display", 'none');
                 $('#Value').css("display", 'flex');
+                Value = $('#form').form('get value', 'value');
             } else {
                 $('#PercentSlider').css("display", 'flex');
                 $('#Value').css("display", 'none');
+                Value = $('#PercentText').html();
             }
         }
     });
@@ -182,27 +205,46 @@
         }
     });
 
-    $('#Value').checkbox({
+    $('#PercentSentiment').range({
+        min: 0,
+        max: 100,
+        start: 0,
         onChange: function (val) {
+            $('#PercentSentimentText').html(val);
             Value = val;
         }
     });
 
+    $('#form').form('set value', 'value', 0);
+
+    $('#ValueInput').change(function () {
+        Value = $(this).val();
+    });
+
     $('#Web').checkbox({
-        onChange: function (val) {
-            Mail = val;
+        onChecked: function () {
+            Web = true;
+        },
+        onUnchecked: function () {
+            Web = false;
         }
     });
 
     $('#Mail').checkbox({
-        onChange: function (val) {
-            Mail = val;
+        onChecked: function () {
+            Mail = true;
+        },
+        onUnchecked: function () {
+            Mail = false;
         }
     });
 
     $('#App').checkbox({
-        onChange: function (val) {
-            Mail = val;
+        onChecked: function () {
+            App = true;
+        },
+        onUnchecked: function () {
+            App = false;
         }
     });
 
@@ -238,6 +280,7 @@
                 $('#Compare').css("display", 'none');
                 $('#CompareLabel').css("display", 'none');
                 $('#PercentSlider').css("display", 'none');
+                $('#PercentSentimentSlider').css("display", 'none');
                 $('#Value').css("display", 'none');
                 $('#ValueLabel').css("display", 'none');
             }
@@ -251,6 +294,7 @@
                 $('#Compare').css("display", 'flex');
                 $('#CompareLabel').css("display", 'flex');
                 $('#PercentSlider').css("display", 'none');
+                $('#PercentSentimentSlider').css("display", 'none');
                 $('#Value').css("display", 'none');
                 $('#ValueLabel').css("display", 'none');
             }
@@ -265,10 +309,14 @@
                 $('#CompareLabel').css("display", 'flex');
                 if ($('#CheckSubjectProperty div[class*="selected"]').attr("data-value") == "count") {
                     $('#PercentSlider').css("display", 'none');
+                    $('#PercentSentimentSlider').css("display", 'none');
                     $('#Value').css("display", 'flex');
+                    Value = $('#form').form('get value', 'value');
                 } else {
                     $('#PercentSlider').css("display", 'flex');
+                    $('#PercentSentimentSlider').css("display", 'none');
                     $('#Value').css("display", 'none');
+                    Value = $('#PercentText').html();
                 }
                 $('#ValueLabel').css("display", 'flex');
             }
@@ -281,10 +329,107 @@
                 $('#CheckLabel').css("display", 'none');
                 $('#Compare').css("display", 'flex');
                 $('#CompareLabel').css("display", 'flex');
-                $('#PercentSlider').css("display", 'flex');
+                $('#PercentSlider').css("display", 'none');
+                $('#PercentSentimentSlider').css("display", 'flex');
                 $('#Value').css("display", 'none');
                 $('#ValueLabel').css("display", 'flex');
+                Value = $('#PercentSentimentText').html();
             }
         }
     });
+</script>
+<!--Inline Validation Script-->
+<script>
+    var errors = [];
+
+    $('#ValueInput').change(function () {
+        validate();
+    });
+
+    function validate() {
+        console.log("Validate function");
+        clearValidate();
+        validateValues();
+        logErrors();
+    }
+
+    function clearValidate() {
+        console.log("Clear Validate function");
+        errors = [];
+        $('#ValueInput').removeClass("error");
+        $('#Subject').removeClass("error");
+        $('#SubjectB').removeClass("error");
+
+    }
+    function validateValues() {
+        console.log("Validate Value function");
+        if (Subject == "") {
+            $('#Subject').addClass("error");
+            errors.push("No Subject given.");
+        }
+        if (AlertType != "Trend") {
+            if (isNaN(Value)) {
+                $('#ValueInput').addClass("error");
+                errors.push("Value is not a number.");
+            }
+            if (Value == '') {
+                $('#ValueInput').addClass("error");
+                errors.push("No value entered.");
+            }
+        }
+        if (AlertType == "Compare") {
+            $('#SubjectB').addClass("error");
+            errors.push("No second Subject given.");
+        }
+    }
+
+    function logErrors() {
+        $("#AlertErrors").empty();
+        errors.forEach(function (element) {
+            $("#AlertErrors").append("<p>" + element + "</p>");
+        });
+    }
+</script>
+<!--Submit Validate Script-->
+<script>
+    $("#AlertSubmit").on('click', function () {
+        validate();
+        
+        logErrors();
+        if (errors.length == 0) SendAlertSubmit();
+    })
+</script>
+<!--Submit Script-->
+<script>
+    function SendAlertSubmit() {
+        alert("SENDING");
+        var s = {
+            AlertType: AlertType,
+            Subject: Subject,
+            Web: Web,
+            Mail: Mail,
+            App: App,
+            SubjectB: SubjectB,
+            Compare: Compare,
+            SubjectProperty: SubjectProperty,
+            Value: Value
+        };
+
+        s = (JSON.stringify(s));
+        console.log(s);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddUserAlert", "Home")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
 </script>

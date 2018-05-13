@@ -12,7 +12,7 @@ namespace Integratie.Domain.Entities.Alerts
         public SubjectProperty SubjectProperty { get; set; }
         public Operator Operator { get; set; }
         public int Value { get; set; }
-        public Subject Subject { get; set; }
+        public virtual Subject Subject { get; set; }
 
         public SentimentAlert(SubjectProperty subjectProperty, Operator @operator, int value, Subject subject)
         {
