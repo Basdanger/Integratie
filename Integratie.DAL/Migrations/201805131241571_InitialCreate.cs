@@ -14,6 +14,7 @@ namespace Integratie.DAL.Migrations
                         ID = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         Mail = c.String(),
+                        Password = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -116,7 +117,7 @@ namespace Integratie.DAL.Migrations
                         Graph_GraphId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Graph", t => t.Graph_GraphId)
+                .ForeignKey("dbo.Graph", t => t.Graph_GraphId, cascadeDelete: true)
                 .Index(t => t.Graph_GraphId);
             
             CreateTable(
@@ -126,8 +127,8 @@ namespace Integratie.DAL.Migrations
                         GraphId = c.Int(nullable: false, identity: true),
                         GraphType = c.Int(nullable: false),
                         CalcType = c.Int(nullable: false),
-                        XAxisType = c.Int(nullable: false),
-                        YAxisType = c.Int(nullable: false),
+                        CompareSort = c.Int(nullable: false),
+                        ComparePersons = c.String(),
                         PeriodSort = c.Int(nullable: false),
                         StartDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         EndDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
@@ -137,6 +138,7 @@ namespace Integratie.DAL.Migrations
                         IntervalSize = c.Double(nullable: false),
                         AgeFilter = c.Int(nullable: false),
                         PersonalityFilter = c.Int(nullable: false),
+                        PersonFilter = c.String(),
                         GenderFilter = c.Int(nullable: false),
                         Period = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),

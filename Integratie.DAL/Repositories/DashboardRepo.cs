@@ -23,13 +23,19 @@ namespace Integratie.DAL.Repositories
         }
         public List<DashboardItem> Update (List<DashboardItem> dbis)
         {
-            context.Dashboarditems.RemoveRange(context.Dashboarditems.ToList());
             foreach (DashboardItem dbi in dbis)
-            {                
-                context.Dashboarditems.Add(dbi);
+            {
+                context.Entry(dbi).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
             return context.Dashboarditems.ToList();
+        }
+        public void Remove (DashboardItem item)
+        {
+            DashboardItem i = context.Dashboarditems.Include("Graph").Where(dbi => dbi.Id == item.Id).First();
+            context.Graphs.Remove(i.Graph);
+            context.Dashboarditems.Remove(i);
+            context.SaveChanges();
         }
 
         public void UpdateDashboardItem(DashboardItem dBI)

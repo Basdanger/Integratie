@@ -48,6 +48,11 @@ namespace Integratie.DAL.EF
             .HasColumnType("datetime2");
 
             modelBuilder.Entity<Alert>().HasKey(a => a.AlertID);
+
+            modelBuilder.Entity<DashboardItem>()
+                .HasOptional<Graph>(s => s.Graph)
+                .WithOptionalDependent()
+                .WillCascadeOnDelete(true);
         }
     }
 }

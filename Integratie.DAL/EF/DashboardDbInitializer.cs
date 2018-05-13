@@ -93,23 +93,6 @@ namespace Integratie.DAL.EF
             //UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
             //context.UserAlerts.Add(UA1);
 
-            //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, new Period(), A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, new Period(), A1);
-            BCG1.GraphType = GraphType.Barchart;
-            BCG2.GraphType = GraphType.Barchart;
-            context.Graphs.Add(BCG1);
-            context.Graphs.Add(BCG2);
-
-
-            //DashboardItems
-            DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
-            DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
-            DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
-            //DashboardItem DBI1 = new DashboardItem(1,)
-            context.Dashboarditems.Add(DBI1);
-            context.Dashboarditems.Add(DBI2);
-            context.Dashboarditems.Add(DBI3);
             context.SaveChanges();
         }
     }

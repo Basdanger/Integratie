@@ -19,30 +19,9 @@ namespace Integratie.BL.Managers
             List<DashboardItem> dbis = repo.GetAllDashboardItems();
             foreach(DashboardItem dbi in dbis)
             {
-                if(dbi.Graph.GetType() == typeof(BarChartGraph))
+                if(dbi.Graph.GraphType == GraphType.Barchart)
                 {
-                    //BarChartGraph BCG = (BarChartGraph)dbi.Graph;
-                    //try
-                    //{
-                    //    if (dbi.Id == 1)
-                    //    {
-                    //        BCG.Values.Add("Bart", 20);
-                    //        BCG.Values.Add("Stef", 40);
-                    //        BCG.Values.Add("Ben", 10);
-                    //        BCG.Values.Add("Fred", 5);
-                    //    }
-                    //    else
-                    //    {
-                    //        BCG.Values.Add("Bart", 10);
-                    //        BCG.Values.Add("Stef", 20);
-                    //        BCG.Values.Add("Ben", 5);
-                    //        BCG.Values.Add("Fred", 15);
-                    //    }
-                    //}
-                    //catch(Exception ex)
-                    //{
-
-                    //}
+                    dbi.Graph = graphManager.GetFilledBarGraph(dbi.Graph);
                 }
                 if(dbi.Graph.GraphType == GraphType.Single)
                 {
@@ -60,6 +39,7 @@ namespace Integratie.BL.Managers
         {
             return repo.AddDashboardItem(dbi);
         }
+
         public void UpdateDashboard(List<DashboardItem> dashboardItems)
         {
             GraphManager graphManager = new GraphManager();
@@ -72,6 +52,10 @@ namespace Integratie.BL.Managers
             {
                 repo.ClearItems();
             }
+        }
+        public void RemoveDashboardItem(DashboardItem item)
+        {
+            repo.Remove(item);
         }
     }
 }

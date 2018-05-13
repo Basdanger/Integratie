@@ -62,7 +62,6 @@
     <Compile Include="Entities\Alerts\UserAlert.cs" />
     <Compile Include="Entities\Dashboard\DashboardItem.cs" />
     <Compile Include="Entities\Feed.cs" />
-    <Compile Include="Entities\Graph\BarChartGraph.cs" />
     <Compile Include="Entities\Graph\Graph.cs" />
     <Compile Include="Entities\Subjects\Organisation.cs" />
     <Compile Include="Entities\Subjects\Person.cs" />

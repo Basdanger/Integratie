@@ -236,9 +236,8 @@ a#TeslaLogOff{
 .TeslaSingleContainer {
     height: 100%;
     border-radius: 5px;
-    background-color: #ececec;
-    color:black;
-    
+    background-color: #c9e2ff;
+    color: black;
 }
 p.TeslaSingleGraph {
     background-color:white;
@@ -259,13 +258,33 @@ p.TeslaSingleGraph {
     z-index: 1;
     display: block;
     margin-top:5px;
-    text-align:left;
-    padding:10px;
+    text-align:center;
+    overflow:hidden;
 }
 .TeslaSingleInfoCalculation {
     position: absolute;
     padding: 3px;
-    background-color: #007bff;
+    background-color: #91c6ff;
     top: 66px;
-    border-top-right-radius:5px;
+    border-top-right-radius: 5px;
+    font-size:12px;
+}
+.teslaTag {
+    margin: 2px;
+    background-color: #91c6ff;
+    font-size:12px;
+    padding: 4px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+}
+.TeslaBarInformation {
+    width: 100%;
+    border-radius: 5px;
+    z-index: 1;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    overflow: hidden;
+
 }

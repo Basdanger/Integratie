@@ -97,11 +97,17 @@
         <div class="form-group" style="display:none" id="CompareForm">
             <b><label for="exampleSelect2">Compare</label></b>
 
-            <select class="form-control" id="GraphSelect">
-                <option vlue="Single">Politicians</option>
-                <option value="Barchart">Ages</option>
-                <option value="Linechart">Gender</option>
-            </select>
+            <div id="CompareDropdown" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+            <br/>
+            <div id="personCompareDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
         </div>
         <button id="GraphSubmit" type="button" class="btn btn-success">Create Graph</button>
         <!--ERRORS-->
@@ -125,6 +131,8 @@
     var AgeFilter;
     var PersonalityFilter
     var PeriodSort;
+    var Compare;
+    var PersonCompare;
     $(document).off('.datepicker.data-api');
     var d = new Date();
 
@@ -185,6 +193,7 @@
         ],
         onChange: function (val) {
             GraphSort = val;
+            console.log("Changed Graph: " + val)
         }
     });
     $('#CalcSelect').dropdown({
@@ -264,43 +273,51 @@
         }
     });
     $('#personDropdown').dropdown({
-            values: [
-                {
-                    name: 'Bart De Wever',
-                    value: 'Bart De Wever'
+        values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
                 },
-                {
-                    name: 'Jan',
-                    value: 'Jan'
-                },
-                {
-                    name: 'Koen Geens',
-                    value: 'Koen Geens'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                }
+            </text>
+            }
         ],
             onChange: function (val) {
                 PersonFilter = val;
         }
+    });
+    $('#CompareDropdown').dropdown({
+        values: [
+            {
+                name: 'Politicians',
+                value: 'Politicians',
+                selected: true
+            },
+            {
+                name: 'Age',
+                value: 'Age'
+            },
+            {
+                name: 'Gender',
+                value: 'Gender'
+            }
+        ],
+        onChange: function (val) {
+                Compare = val;
+            }
+    });
+    $('#personCompareDropdown').dropdown({values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
+                },
+            </text>
+            }
+    ],
+
     });
 
 
@@ -316,9 +333,32 @@
                 case "Linechart": SetLine(); break;
 
             }
+            GraphSort = val;
+            CheckCompares();
         }
     });
-
+    $('#personCompareDropdown').dropdown({
+        onChange: function (val) {
+            PersonCompare = val;
+            CheckCompares();
+        }
+    });
+    $('#CompareDropdown').dropdown({
+        onChange: function (val) {
+            Compare = val;
+            CheckCompares();
+        }
+    });
+    function CheckCompares() {
+        if (Compare == "Politicians" && GraphSort == "Barchart") {
+            console.log("GraphSort: " + GraphSort);
+            $('#personDropdown').addClass("disabled");
+            $('#personDropdown').dropdown('clear');
+        }
+        else {
+            $('#personDropdown').removeClass("disabled");
+        }
+    }
     function SetBarChart() {
         SetAllVisible();
         $('#IntervalSelect').css('display', 'none');
@@ -367,8 +407,8 @@
     function validateDates() {
 
         console.log("Validate Dates function");
-        var bd = $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
-        var ed = $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        var bd = Date.parse($('#GraphStartDate').data('datepicker').getFormattedDate('yyyy-mm-dd'));
+        var ed = Date.parse($('#GraphEndDate').data('datepicker').getFormattedDate('yyyy-mm-dd'));
         if (bd != "" && ed != "") {
             console.log(bd);
             console.log(ed);
@@ -417,9 +457,12 @@
             GenderFilter: GenderFilter,
             PersonFilter: PersonFilter,
             PeriodSort: PeriodSort,
-            PeriodLength: $('#DaysDate').val()
+            PeriodLength: $('#DaysDate').val(),
+            ComparePersons: PersonCompare,
+            CompareSort: Compare
 
         };
+        if (Compare == "Politicians" && GraphSort == "Barchart") s.PersonFilter = "";
 
         s = (JSON.stringify(s));
         console.log(s);

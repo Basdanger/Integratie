@@ -51,17 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805101437021_InitialCreate.cs" />
-    <Compile Include="Migrations\201805101437021_InitialCreate.Designer.cs">
-      <DependentUpon>201805101437021_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201805131241571_InitialCreate.cs" />
+    <Compile Include="Migrations\201805131241571_InitialCreate.Designer.cs">
+      <DependentUpon>201805131241571_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805101504551_FirstMigration.cs" />
-    <Compile Include="Migrations\201805101504551_FirstMigration.Designer.cs">
-      <DependentUpon>201805101504551_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805110946072_Migration2.cs" />
-    <Compile Include="Migrations\201805110946072_Migration2.Designer.cs">
-      <DependentUpon>201805110946072_Migration2.cs</DependentUpon>
+    <Compile Include="Migrations\201805131255444_MigrationA.cs" />
+    <Compile Include="Migrations\201805131255444_MigrationA.Designer.cs">
+      <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
@@ -95,18 +91,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805101437021_InitialCreate.resx">
-      <DependentUpon>201805101437021_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805101504551_FirstMigration.resx">
-      <DependentUpon>201805101504551_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805110946072_Migration2.resx">
-      <DependentUpon>201805110946072_Migration2.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <EmbeddedResource Include="Migrations\201805131241571_InitialCreate.resx">
+      <DependentUpon>201805131241571_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805131255444_MigrationA.resx">
+      <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

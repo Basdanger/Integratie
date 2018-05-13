@@ -75,14 +75,16 @@ namespace Integratie.DAL.Repositories
                 .Where(f => f.Date <= Enddate && f.Date >= StartDate)
                 .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
                 .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality))
-                .Where(f => PersonFilter.Any(t => f.Persons.Contains(t)));
+                .Where(f => PersonFilter.Any(t => f.Persons.Contains(t)))
+                .Where(f => GenderFilter.Any(t => t == f.Profile.Gender.ToString()));
             else
             {
                 feeds =
                 context.Feeds
                 .Where(f => f.Date <= Enddate && f.Date >= StartDate).ToList()
                 .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
-                .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality));
+                .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality))
+                .Where(f => GenderFilter.Any(t => t == f.Profile.Gender.ToString()));
 
             }
             return feeds;
