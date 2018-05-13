@@ -78,7 +78,7 @@ namespace Integratie.BL.Managers
 
             int feedCount = feeds.Count();
             int posNegFeeds = 0;
-            double result;
+            int result;
 
             if (alert.SubjectProperty.Equals(SubjectProperty.pos))
             {
@@ -104,7 +104,7 @@ namespace Integratie.BL.Managers
                         posNegFeeds++;
                     }
                 }
-                result = posNegFeeds / feedCount;
+                result = (posNegFeeds / feedCount) * 100;
             }
 
             switch (alert.Operator)
@@ -171,7 +171,7 @@ namespace Integratie.BL.Managers
 
             if (alert.SubjectProperty.Equals(SubjectProperty.relativeCount))
             {
-                result = fCNow / fCPast - 1;
+                result = (fCNow / fCPast - 1) * 100;
             }
             else
             {
@@ -315,7 +315,7 @@ namespace Integratie.BL.Managers
                 return false;
         }
 
-        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
+        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, int value)
         {
             AccountManager accountManager = new AccountManager(repo.GetContext());
             Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
@@ -324,7 +324,7 @@ namespace Integratie.BL.Managers
             repo.AddUserAlert(userAlert);
         }
 
-        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
+        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
         {
             Alert alert;
             SubjectManager subjectManager = new SubjectManager(repo.GetContext());

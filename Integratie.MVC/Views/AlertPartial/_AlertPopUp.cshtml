@@ -1,54 +1,290 @@
-﻿@model Integratie.Domain.Entities.Alerts.UserAlert
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Alert</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-        <!--<div class="form-group">
-            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
-            </div>
-        </div>-->
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Web, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Web, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Web, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.App, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.App, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.App, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+﻿<form>
+    <div id="test" class="form-group">
+        <label><b>Select Alert</b></label>
+        <br />
+        <div class="ui fluid dropdown selection" id="AlertType">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
         </div>
     </div>
-}
+    <!--AlertParameters-->
+    <div class="form-group">
+        <b><label>Parameters</label></b>
+        <br />
+
+        <label>Subject</label>
+
+        <div id="Subject" class="ui fluid dropdown search selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="SubjectBLabel">Subject 2</label>
+
+        <div id="SubjectB" class="ui fluid dropdown search selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="SentimentLabel">Sentiment</label>
+
+        <div id="SentimentSubjectProperty" class="ui fluid dropdown selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="CheckLabel">Absolute or Relative</label>
+
+        <div id="CheckSubjectProperty" class="ui fluid dropdown selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="CompareLabel">Compare</label>
+
+        <div id="Compare" class="ui fluid dropdown selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="ValueLabel">Value</label>
+
+        <div id="PercentSlider" class="ui segment">
+            <p>
+                <span id="PercentText"></span>%
+            </p>
+            <div id="Percent" class="ui fluid range"></div>
+        </div>
+
+        <div id="Value" class="ui labeled input">
+            <input placeholder="0" type="number">
+        </div>
+
+        <label><b>Alert Settings</b></label>
+        <br>
+        <div id="Web" class="ui fluid toggle checkbox">
+            <label>Web</label>
+            <input name="gender" type="checkbox">
+        </div>
+        <br>
+        <div id="Mail" class="ui fluid toggle checkbox">
+            <label>Mail</label>
+            <input name="gender" type="checkbox">
+        </div>
+        <br>
+        <div id="App" class="ui fluid toggle checkbox">
+            <label>App</label>
+            <input name="gender" type="checkbox">
+        </div>
+    </div>
+    <!--ERRORS-->
+    <div id="AlertErrors">
+
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    var AlertType;
+    var Subject;
+    var Web;
+    var Mail;
+    var App;
+    var Subject;
+    var SubjectB;
+    var Compare;
+    var SubjectProperty;
+    var Value;
+
+    $('#Subject').dropdown({
+        onChange: function (val) {
+            Subject = val;
+        }
+    });
+
+    $('#SubjectB').dropdown({
+        onChange: function (val) {
+            SubjectB = val;
+        }
+    });
+
+    $('#SentimentSubjectProperty').dropdown({
+        values: [
+            {
+                name: "Positive",
+                value: "pos",
+                selected: true
+            },
+            {
+                name: "Negative",
+                value: "neg"
+            }
+        ],
+        onChange: function (val) {
+            SubjectProperty = val;
+        }
+    });
+
+    $('#CheckSubjectProperty').dropdown({
+        values: [
+            {
+                name: "Absolute",
+                value: "count",
+                selected: true
+            },
+            {
+                name: "Relative",
+                value: "relativeCount"
+            }
+        ],
+        onChange: function (val) {
+            SubjectProperty = val;
+            if (val == "count") {
+                $('#PercentSlider').css("display", 'none');
+                $('#Value').css("display", 'flex');
+            } else {
+                $('#PercentSlider').css("display", 'flex');
+                $('#Value').css("display", 'none');
+            }
+        }
+    });
+
+    $('#Compare').dropdown({
+        values: [
+            {
+                name: "Greater Than",
+                value: "GT",
+                selected: true
+            },
+            {
+                name: "Less Than",
+                value: "LT"
+            }
+        ],
+        onChange: function (val) {
+            Compare = val;
+        }
+    });
+
+    $('#Percent').range({
+        min: -100,
+        max: 100,
+        start: 0,
+        onChange: function (val) {
+            $('#PercentText').html(val);
+            Value = val;
+        }
+    });
+
+    $('#Value').checkbox({
+        onChange: function (val) {
+            Value = val;
+        }
+    });
+
+    $('#Web').checkbox({
+        onChange: function (val) {
+            Mail = val;
+        }
+    });
+
+    $('#Mail').checkbox({
+        onChange: function (val) {
+            Mail = val;
+        }
+    });
+
+    $('#App').checkbox({
+        onChange: function (val) {
+            Mail = val;
+        }
+    });
+
+    $('#AlertType').dropdown({
+        values: [
+            {
+                name: 'Trend Alert',
+                value: "Trend",
+                selected: true
+            },
+            {
+                name: 'Compare Alert',
+                value: "Compare"
+            },
+            {
+                name: 'Check Alert',
+                value: "Check"
+            },
+            {
+                name: 'Sentiment Alert',
+                value: "Sentiment"
+            }
+        ],
+        onChange: function (val) {
+            AlertType = val;
+            if (AlertType == "Trend") {
+                $('#SubjectB').css("display", 'none');
+                $('#SubjectBLabel').css("display", 'none');
+                $('#SentimentSubjectProperty').css("display", 'none');
+                $('#SentimentLabel').css("display", 'none');
+                $('#CheckSubjectProperty').css("display", 'none');
+                $('#CheckLabel').css("display", 'none');
+                $('#Compare').css("display", 'none');
+                $('#CompareLabel').css("display", 'none');
+                $('#PercentSlider').css("display", 'none');
+                $('#Value').css("display", 'none');
+                $('#ValueLabel').css("display", 'none');
+            }
+            else if (AlertType == "Compare") {
+                $('#SubjectB').css("display", 'flex');
+                $('#SubjectBLabel').css("display", 'flex');
+                $('#SentimentSubjectProperty').css("display", 'none');
+                $('#SentimentLabel').css("display", 'none');
+                $('#CheckSubjectProperty').css("display", 'none');
+                $('#CheckLabel').css("display", 'none');
+                $('#Compare').css("display", 'flex');
+                $('#CompareLabel').css("display", 'flex');
+                $('#PercentSlider').css("display", 'none');
+                $('#Value').css("display", 'none');
+                $('#ValueLabel').css("display", 'none');
+            }
+            else if (AlertType == "Check") {
+                $('#SubjectB').css("display", 'none');
+                $('#SubjectBLabel').css("display", 'none');
+                $('#SentimentSubjectProperty').css("display", 'none');
+                $('#SentimentLabel').css("display", 'none');
+                $('#CheckSubjectProperty').css("display", 'flex');
+                $('#CheckLabel').css("display", 'flex');
+                $('#Compare').css("display", 'flex');
+                $('#CompareLabel').css("display", 'flex');
+                if ($('#CheckSubjectProperty div[class*="selected"]').attr("data-value") == "count") {
+                    $('#PercentSlider').css("display", 'none');
+                    $('#Value').css("display", 'flex');
+                } else {
+                    $('#PercentSlider').css("display", 'flex');
+                    $('#Value').css("display", 'none');
+                }
+                $('#ValueLabel').css("display", 'flex');
+            }
+            else {
+                $('#SubjectB').css("display", 'none');
+                $('#SubjectBLabel').css("display", 'none');
+                $('#SentimentSubjectProperty').css("display", 'flex');
+                $('#SentimentLabel').css("display", 'flex');
+                $('#CheckSubjectProperty').css("display", 'none');
+                $('#CheckLabel').css("display", 'none');
+                $('#Compare').css("display", 'flex');
+                $('#CompareLabel').css("display", 'flex');
+                $('#PercentSlider').css("display", 'flex');
+                $('#Value').css("display", 'none');
+                $('#ValueLabel').css("display", 'flex');
+            }
+        }
+    });
+</script>

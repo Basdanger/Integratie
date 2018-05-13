@@ -1,5 +1,6 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities.Alerts;
+using Integratie.MVC.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,26 @@ namespace Integratie.MVC.Controllers
         }
 
         public ActionResult _AlertPopUp()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _TrendForm()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _CompareForm()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _CheckForm()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _SentimentForm()
         {
             return PartialView();
         }

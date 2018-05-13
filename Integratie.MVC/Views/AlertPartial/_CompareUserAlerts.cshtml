@@ -4,13 +4,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Web)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.App)
+            Settings
         </th>
         <th>
             Alert
@@ -20,13 +14,45 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Web)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.App)
+                @using (Html.BeginForm())
+                {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(modelItem => item.ID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(modelItem => item.Web, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(modelItem => item.Web, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(modelItem => item.Web, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(modelItem => item.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(modelItem => item.Mail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(modelItem => item.Mail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(modelItem => item.App, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(modelItem => item.App, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(modelItem => item.App, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                }
             </td>
             <td>
                 @{

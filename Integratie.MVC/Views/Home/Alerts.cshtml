@@ -11,7 +11,7 @@
 <div class="tesla-popup">
     <div class="tesla-popup-window">
         <div class="tesla-popup-header">
-            <span style="float:left;margin-left:10px;margin-top:3px;">New Graph</span>
+            <span style="float:left;margin-left:10px;margin-top:3px;">New Alert</span>
             <button id="close" style="float:right; margin-top:-3px; color:darkred" type="button" class="btn btn-link"><i class="fa fa-fw fa-close tesla-bar-icon"></i></button>
         </div>
         <div class="tesla-popup-container">
@@ -23,11 +23,6 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('#js3').on('click', function () {
-            $('.tesla-popup').addClass('open');
-            $('.tesla-popup-window').addClass('open');
-            console.log('clicked');
-        });
         $('#close').on('click', function () {
             $('.tesla-popup').removeClass('open');
             $('.tesla-popup-window').removeClass('open');

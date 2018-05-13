@@ -1,7 +1,9 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
+using Integratie.MVC.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -228,6 +230,13 @@ namespace Integratie.MVC.Controllers
         }
 
         public ActionResult Alerts()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddUserAlert(AlertCreation alert)
         {
             return View();
         }
