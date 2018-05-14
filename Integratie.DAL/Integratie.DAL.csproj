@@ -82,6 +82,7 @@
     <Compile Include="Repositories\Interfaces\ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SubjectRepo.cs" />
+    <Compile Include="Repositories\ThemeRepo.cs" />
     <Compile Include="ResourcesInit\SubjectStrings.cs" />
   </ItemGroup>
   <ItemGroup>
