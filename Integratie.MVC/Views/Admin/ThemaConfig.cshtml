@@ -27,7 +27,15 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Terms)
+                @if (item.Terms != null)
+                {
+                foreach (var term in item.Terms)
+                {
+                    <p>term</p>
+                }}
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTheme", new { id=item.ID })
             </td>
         </tr>
     }

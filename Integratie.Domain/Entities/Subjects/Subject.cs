@@ -10,7 +10,7 @@ namespace Integratie.Domain.Entities.Subjects
     public class Subject
     {
         [Key]
-        public String ID { get; set; }
+        public int ID { get; set; }
         public String Name { get; set; }
         public List<Feed> Feeds { get; set; }
         public int FeedCount { get; set; }
@@ -19,7 +19,7 @@ namespace Integratie.Domain.Entities.Subjects
         {
 
         }
-        public Subject(String id, string name)
+        public Subject(int id, string name)
         {
             ID = id;
             Name = name;

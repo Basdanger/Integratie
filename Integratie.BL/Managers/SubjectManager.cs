@@ -60,6 +60,11 @@ namespace Integratie.BL.Managers
             return repo.GetFeeds(person);
         }
 
+        public Theme GetThemeById(int id)
+        {
+            return repo.GetThema(id);
+        }
+
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {
             return repo.ReadPeopleByTown(town);

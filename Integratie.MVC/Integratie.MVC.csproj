@@ -401,6 +401,7 @@
     <Content Include="Views\Home\GemeentePage.cshtml" />
     <Content Include="Views\Admin\ThemaConfig.cshtml" />
     <Content Include="Views\Admin\CreateTheme.cshtml" />
+    <Content Include="Views\Admin\EditTheme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

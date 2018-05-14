@@ -59,6 +59,11 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
         }
 
+        public Theme GetThema(int id)
+        {
+            return context.Subjects.OfType<Theme>().First(t=> t.ID.Equals(id));
+        }
+
         public IEnumerable<Subject> ReadPeopleByTown(string town)
         {
             return context.Subjects.OfType<Person>().Where(p => p.Town.Equals(town.ToUpper()));

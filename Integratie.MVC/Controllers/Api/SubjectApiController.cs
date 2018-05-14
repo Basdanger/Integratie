@@ -1,4 +1,5 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,12 @@ namespace Integratie.MVC.Controllers.Api
         {
             var subjects = manager.GetSubjects();
             return Ok(subjects);
+        }
+        [HttpPost]
+        public IHttpActionResult PostTerm(int id, String term) {
+            Theme thema=manager.GetThemeById(id);
+         
+            return Ok(thema);
         }
         // GET api/<controller>
         public IEnumerable<string> Get()

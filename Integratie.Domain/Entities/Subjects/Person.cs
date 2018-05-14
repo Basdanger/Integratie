@@ -21,7 +21,7 @@ namespace Integratie.Domain.Entities.Subjects
         public String Full_Name { get; set; }
         public String Position { get; set; }
         public String Organisation { get; set; }
-        public String ID { get; set; }
+        public int ID { get; set; }
         public String Town { get; set; }
 
         public Person()
@@ -32,7 +32,7 @@ namespace Integratie.Domain.Entities.Subjects
                       String level, String gender, String twitter, String site,
                       DateTime dateOfBirth, String facebook, String postal_Code,
                       String full_Name, String position, String organisation,
-                      String id, String town) : base(id, full_Name)
+                      int id, String town) : base(id, full_Name)
         {
             First_Name = first_Name;
             Last_Name = last_Name;

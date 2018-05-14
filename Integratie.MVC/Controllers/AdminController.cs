@@ -27,22 +27,27 @@ namespace Integratie.MVC.Controllers
 
         public ActionResult CreateTheme() {
             var theme = new Theme();
-            theme.Terms = new List<String>();
+           
             return View(theme);
         }
 
         [HttpPost]
         public ActionResult CreateTheme(Theme thema)
         {
-            if (ModelState.IsValid) {
-
-            }
-            List<String> termen = new List<String>();
-            termen.Add("Test");
-            termen.Add("Hallo");
-            thema.Terms = termen;
+            
             subjectManager.AddTheme(thema);
-            return RedirectToAction("ThemaConfig");
-        } 
+            return RedirectToAction("EditTheme", new { id=thema.ID });
+            
+            
+            //subjectManager.AddTheme(thema);
+            //return RedirectToAction("ThemaConfig");
+
+       }
+
+        public ActionResult EditTheme(int id) {
+            Theme thema = subjectManager.GetThemeById(id);
+            return View(thema);
+        }
+
     }
 }

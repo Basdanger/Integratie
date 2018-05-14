@@ -8,12 +8,12 @@ namespace Integratie.Domain.Entities.Subjects
 {
     public class Theme : Subject
     {
-        public List<String> Terms { get; set; }
+        public String Terms { get; set; }
         public Theme()
         {
 
         }
-        public Theme(String iD, string name) : base(iD, name)
+        public Theme(int iD, string name) : base(iD, name)
         {
         }
     }
