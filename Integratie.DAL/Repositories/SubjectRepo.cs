@@ -72,9 +72,10 @@ namespace Integratie.DAL.Repositories
 
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
-        public IEnumerable<Person> GetOrganisaties()
+        public IEnumerable<String> GetOrganisaties()
         {
-            return context.People.ToList();
+            //return context.People.ToList();
+            return context.People.Select(o => o.Organisation).Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {

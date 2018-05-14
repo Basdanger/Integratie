@@ -115,12 +115,15 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Organisaties()
         {
-            IEnumerable<Person> organisaties = mgr.GetOrganisaties();
-            return View(organisaties);
+            //IEnumerable<Person> organisaties = mgr.GetOrganisaties();
+            //return View(organisaties);
+            IEnumerable<String> organisaties = mgr.GetOrganisaties();
+            return View(organisaties.ToArray());
         }
         public ActionResult PersonenPerOrganisatie(String Organisatie)
         {
             IEnumerable<Person> personen = mgr.GetPeopleByOrganisation(Organisatie);
+            ViewBag.Description = Organisatie;
             return View(personen);
         }
         public ActionResult Gemeente()

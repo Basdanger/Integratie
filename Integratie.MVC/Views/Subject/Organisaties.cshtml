@@ -1,18 +1,38 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
+﻿@model IEnumerable<String>
 @{
     ViewBag.Title = "Organisaties";
 }
-    <h2>Organisaties</h2>
-    <table class="table" style="color: black">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Organisation)
-                </td>
-                <td>
-                    @Html.ActionLink("Detail", "PersonenPerOrganisatie", new { Organisatie = item.Organisation })
-                </td>
-            </tr>
-        }
-    </table>
+
+<h2>Organisaties</h2>
+<table class="table" style="color: black">
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item
+        </td>
+        <td>
+            @Html.ActionLink("Detail", "PersonenPerOrganisatie", new { Organisatie = item })
+        </td>
+    </tr>
+    }
+</table>
+
+@*@model IEnumerable<Integratie.Domain.Entities.Subjects.Person>
+@{
+    ViewBag.Title = "Organisaties";
+}
+<h2>Organisaties</h2>
+<table class="table" style="color: black">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organisation)
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "PersonenPerOrganisatie", new { Organisatie = item.Organisation })
+            </td>
+        </tr>
+    }
+</table>*@
