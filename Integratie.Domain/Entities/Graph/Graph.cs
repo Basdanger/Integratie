@@ -16,9 +16,9 @@ namespace Integratie.Domain.Entities.Graph
         public GraphType GraphType { get; set; }
         public CalcType CalcType { get; set; }
 
-        //AXISTYPE
-        public XType XAxisType { get; set; }
-        public YType YAxisType { get; set; }
+        //COMPARE
+        public CompareSort CompareSort { get; set; }
+        public String ComparePersons { get; set; }
 
         //TIME
         public PeriodSort PeriodSort { get; set; }
@@ -34,12 +34,14 @@ namespace Integratie.Domain.Entities.Graph
         //FILTERS
         public AgeFilter AgeFilter { get; set; }
         public PersonalityFilter PersonalityFilter { get; set; }
-        public List<string> PersonFilter { get; set; }
+        public String PersonFilter { get; set; }
         public GenderFilter GenderFilter { get; set; }
 
         //VALUES
         [NotMapped]
         public double SingleValue { get; set; }
+        [NotMapped]
+        public Dictionary<string, double> BarValues { get; set; }
 
         public Graph(Account account)
         {
@@ -98,5 +100,9 @@ namespace Integratie.Domain.Entities.Graph
     {
         Fixed,
         Flex
+    }
+    public enum CompareSort
+    {
+        Politicians,Age,Gender
     }
 }
