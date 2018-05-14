@@ -424,6 +424,8 @@
     <Content Include="Views\Subject\DeletePerson.cshtml" />
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
     <Content Include="Views\Theme\Index.cshtml" />
+    <Content Include="Views\Theme\ThemeConfig.cshtml" />
+    <Content Include="Views\Theme\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

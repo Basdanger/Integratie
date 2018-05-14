@@ -18,6 +18,12 @@ namespace Integratie.MVC.Controllers
             return View(themas);
         }
 
+        //[Authorize(Roles = "Admin")]
+        public ActionResult ThemeConfig() {
+            IEnumerable<Theme> themas = themeManager.GetThemas();
+            return View(themas);
+        }
+
        
     }
 }
