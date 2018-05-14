@@ -8,6 +8,6 @@ namespace Integratie.BL.Managers.Interfaces
 {
     public interface IMailManager
     {
-        void SendMail(string Body);
+        void SendMail(string Body,string adress,string name);
     }
 }

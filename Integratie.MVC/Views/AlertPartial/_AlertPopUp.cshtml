@@ -29,6 +29,22 @@
             </div>
         </div>
 
+        <label id="SentimentLabel">Sentiment</label>
+
+        <div id="SentimentSubjectProperty" class="ui fluid dropdown selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
+        <label id="CompareLabel">Compare</label>
+
+        <div id="Compare" class="ui fluid dropdown selection">
+            <input type="hidden">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+        </div>
+
         <label id="SubjectBLabel">Subject 2</label>
 
         <div id="SubjectB" class="ui fluid dropdown search selection">
@@ -43,25 +59,9 @@
             </div>
         </div>
 
-        <label id="SentimentLabel">Sentiment</label>
-
-        <div id="SentimentSubjectProperty" class="ui fluid dropdown selection">
-            <input type="hidden">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
-        </div>
-
         <label id="CheckLabel">Absolute or Relative</label>
 
         <div id="CheckSubjectProperty" class="ui fluid dropdown selection">
-            <input type="hidden">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
-        </div>
-
-        <label id="CompareLabel">Compare</label>
-
-        <div id="Compare" class="ui fluid dropdown selection">
             <input type="hidden">
             <div class="text"></div>
             <i class="dropdown icon"></i>
@@ -307,6 +307,7 @@
                 $('#CheckLabel').css("display", 'flex');
                 $('#Compare').css("display", 'flex');
                 $('#CompareLabel').css("display", 'flex');
+                SubjectProperty = $('#CheckSubjectProperty div[class*="selected"]').attr("data-value");
                 if ($('#CheckSubjectProperty div[class*="selected"]').attr("data-value") == "count") {
                     $('#PercentSlider').css("display", 'none');
                     $('#PercentSentimentSlider').css("display", 'none');
@@ -334,6 +335,7 @@
                 $('#Value').css("display", 'none');
                 $('#ValueLabel').css("display", 'flex');
                 Value = $('#PercentSentimentText').html();
+                SubjectProperty = $('#SentimentSubjectProperty div[class*="selected"]').attr("data-value");
             }
         }
     });
@@ -347,14 +349,12 @@
     });
 
     function validate() {
-        console.log("Validate function");
         clearValidate();
         validateValues();
         logErrors();
     }
 
     function clearValidate() {
-        console.log("Clear Validate function");
         errors = [];
         $('#ValueInput').removeClass("error");
         $('#Subject').removeClass("error");
@@ -362,12 +362,11 @@
 
     }
     function validateValues() {
-        console.log("Validate Value function");
         if (Subject == "") {
             $('#Subject').addClass("error");
             errors.push("No Subject given.");
         }
-        if (AlertType != "Trend") {
+        if (AlertType == "Check" || AlertType == "Sentiment") {
             if (isNaN(Value)) {
                 $('#ValueInput').addClass("error");
                 errors.push("Value is not a number.");
@@ -378,8 +377,10 @@
             }
         }
         if (AlertType == "Compare") {
-            $('#SubjectB').addClass("error");
-            errors.push("No second Subject given.");
+            if (SubjectB == "") {
+                $('#SubjectB').addClass("error");
+                errors.push("No second Subject given.");
+            }
         }
     }
 
@@ -402,7 +403,6 @@
 <!--Submit Script-->
 <script>
     function SendAlertSubmit() {
-        alert("SENDING");
         var s = {
             AlertType: AlertType,
             Subject: Subject,
@@ -416,7 +416,6 @@
         };
 
         s = (JSON.stringify(s));
-        console.log(s);
 
         $.ajax({
             type: "POST",
@@ -424,8 +423,10 @@
             data: s,
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success: function () {
-                
+            success: function (data) {
+                if (data.status == 'OK') {
+                    window.location.href = data.Url;
+                }
             },
             error: function (ex) {
                 //alert(ex.statusText);

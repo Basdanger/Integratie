@@ -157,5 +157,11 @@ namespace Integratie.DAL.Repositories
             }
             return compareAlert;
         }
+
+        public void RemoveUserAlert(UserAlert userAlert)
+        {
+            context.UserAlerts.Remove(userAlert);
+            context.SaveChanges();
+        }
     }
 }

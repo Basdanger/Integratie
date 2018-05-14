@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Alerts.UserAlert>
+﻿@model List<Integratie.Domain.Entities.Alerts.UserAlert>
 
 <table class="ui celled table">
     <thead class="full-width">
@@ -7,18 +7,18 @@
         </tr>
     </thead>
     <tr>
-        <th>
+        <th class="ten wide">
             Settings
         </th>
-        <th>
+        <th class="five wide">
             Alert
         </th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="@item.ID">
             <td>
-                <div class="ui large form">
+                <div class="ui form">
                     <div class="four fields">
                         <div id="Web @item.ID" class="ui field toggle checkbox">
                             <label>Web</label>
@@ -56,7 +56,9 @@
                             }
                         </div>
                         <div class="field">
-                            <div id="submit @item.ID" class="ui submit button">Save</div>
+                            <button id="submit @item.ID" class="ui primary button">
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -74,19 +76,35 @@
 {
     <script>
         $("[id='Web @item.ID']").checkbox({
-
+            onChecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            },
+            onUnchecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            }
         });
 
         $("[id='Mail @item.ID']").checkbox({
-
+            onChecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            },
+            onUnchecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            }
         });
 
         $("[id='App @item.ID']").checkbox({
-
+            onChecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            },
+            onUnchecked: function () {
+                SendAlertUpdateSubmit(@item.ID);
+            }
         });
 
-        $("#submit @item.ID").on('click', function () {
-            SendAlertUpdateSubmit(@item.ID);
+        $("[id='submit @item.ID']").on('click', function () {
+            SendAlertDeleteSubmit(@item.ID);
+            $('#@item.ID').remove();
         });
     </script>
 }

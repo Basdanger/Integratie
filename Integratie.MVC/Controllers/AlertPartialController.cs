@@ -50,22 +50,22 @@ namespace Integratie.MVC.Controllers
 
         public ActionResult _CheckUserAlerts()
         {
-            return PartialView(alertManager.GetUserCheckAlertsOfUser(User.Identity.GetUserId()));
+            return PartialView(alertManager.GetUserCheckAlertsOfUser(User.Identity.GetUserId()).ToList());
         }
 
         public ActionResult _TrendUserAlerts()
         {
-            return PartialView(alertManager.GetUserTrendAlertsOfUser(User.Identity.GetUserId()));
+            return PartialView(alertManager.GetUserTrendAlertsOfUser(User.Identity.GetUserId()).ToList());
         }
 
         public ActionResult _CompareUserAlerts()
         {
-            return PartialView(alertManager.GetUserCompareAlertsOfUser(User.Identity.GetUserId()));
+            return PartialView(alertManager.GetUserCompareAlertsOfUser(User.Identity.GetUserId()).ToList());
         }
 
         public ActionResult _SentimentUserAlerts()
         {
-            return PartialView(alertManager.GetUserSentimentAlertsOfUser(User.Identity.GetUserId()));
+            return PartialView(alertManager.GetUserSentimentAlertsOfUser(User.Identity.GetUserId()).ToList());
         }
 
         public ActionResult _AlertPopUp()

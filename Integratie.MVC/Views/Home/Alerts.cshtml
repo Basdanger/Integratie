@@ -43,7 +43,6 @@
 
 <script>
     function SendAlertUpdateSubmit(int) {
-        alert("SENDING");
         var web = "[id='Web " + int + "']";
         var mail = "[id='Mail " + int + "']";
         var app = "[id='App " + int + "']";
@@ -55,12 +54,27 @@
         };
 
         s = (JSON.stringify(s));
-        console.log(s);
 
         $.ajax({
             type: "POST",
             url: '@Url.Action("UpdateUserAlert", "Home")',
             data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+
+    function SendAlertDeleteSubmit(int) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("RemoveUserAlert", "Home")',
+            data: JSON.stringify({ id: int }),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {

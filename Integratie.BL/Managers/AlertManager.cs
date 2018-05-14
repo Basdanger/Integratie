@@ -16,42 +16,61 @@ namespace Integratie.BL.Managers
 {
     public class AlertManager
     {
-        // test
         private AlertRepo repo = new AlertRepo();
         public void CheckAlerts()
         {
+            MailManager mailManager = new MailManager();
             foreach (Alert a in repo.GetAlerts())
             {
+                a.Ring = false;
                 if (a.GetType() == typeof(CheckAlert))
                 {
                     if (CheckCheckAlert((CheckAlert)a))
                     {
                         a.Ring = true;
-                        repo.UpdateAlert(a);
-                    } 
+                        //a.Graph = UpdateAlertGraph(a);
+                    }
+                    repo.UpdateAlert(a);
                 }
                 else if (a.GetType() == typeof(CompareAlert))
                 {
                     if (CheckCompareAlert((CompareAlert)a))
                     {
                         a.Ring = true;
-                        repo.UpdateAlert(a);
                     }
+                    repo.UpdateAlert(a);
                 }
                 else if (a.GetType() == typeof(TrendAlert))
                 {
                     if (CheckTrendAlert((TrendAlert)a))
                     {
                         a.Ring = true;
-                        repo.UpdateAlert(a);
                     }
+                    repo.UpdateAlert(a);
                 }
                 else if (a.GetType() == typeof(SentimentAlert))
                 {
                     if (CheckSentimentAlert((SentimentAlert)a))
                     {
                         a.Ring = true;
-                        repo.UpdateAlert(a);
+                    }
+                    repo.UpdateAlert(a);
+                }
+                if (a.Ring)
+                {
+                    List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
+                    foreach (UserAlert userAlert in userAlerts)
+                    {
+                        userAlert.Show = true;
+                        repo.UpdateUserAlert(userAlert);
+                        if (userAlert.Mail)
+                        {
+                            mailManager.SendMail("", userAlert.Account.Mail, userAlert.Account.Name);
+                        }
+                        if (userAlert.App)
+                        {
+
+                        }
                     }
                 }
             }
@@ -126,7 +145,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        public bool CheckCheckAlert(CheckAlert alert)
+        private bool CheckCheckAlert(CheckAlert alert)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
@@ -197,7 +216,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        public bool CheckCompareAlert(CompareAlert alert)
+        private bool CheckCompareAlert(CompareAlert alert)
         {
             Subject subjectA = alert.SubjectA;
             Subject subjectB = alert.SubjectB;
@@ -246,7 +265,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        public bool CheckTrendAlert(TrendAlert alert)
+        private bool CheckTrendAlert(TrendAlert alert)
         {
             Subject subject = alert.Subject;
 
@@ -461,6 +480,12 @@ namespace Integratie.BL.Managers
             userAlert.Mail = mail;
             userAlert.App = app;
             repo.UpdateUserAlert(userAlert);
+        }
+
+        public void RemoveUserAlert(int id)
+        {
+            UserAlert userAlert = repo.GetUserAlert(id);
+            repo.RemoveUserAlert(userAlert);
         }
     }
 }
