@@ -63,7 +63,7 @@ namespace Integratie.DAL.Repositories
 
         public IEnumerable<Person> GetPersonen()
         {
-            return context.People.ToList();
+            return context.People.ToList().OrderByDescending(p => p.FeedCount);
         }
         public Person GetPersoon(String Full_Name)
         {
@@ -74,7 +74,7 @@ namespace Integratie.DAL.Repositories
         }
         public IEnumerable<Person> GetOrganisaties()
         {
-            return context.People.Distinct().ToList();
+            return context.People.ToList();
         }
         public Person FeedsByPerson(String Full_Name)
         {
