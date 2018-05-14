@@ -22,7 +22,6 @@
     color:white;
 }
 .tesla-container {
-    margin-top: 40px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -220,11 +219,11 @@ a {
     color:white;
 }
 a#registerLink{
-    color:white;
+    color:black;
     float:right;
 }
 a#loginLink{
-    color:white;
+    color:black;
     float:right;
 }
 a#TeslaHello{
@@ -287,4 +286,14 @@ p.TeslaSingleGraph {
     text-align: center;
     overflow: hidden;
 
+}
+.TeslaIndexP {
+    color:#007bff ;
+}
+.TeslaIndexFoto {
+    height: 350px;
+    object-fit: cover;
+    object-position: 70% 35%;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 }
