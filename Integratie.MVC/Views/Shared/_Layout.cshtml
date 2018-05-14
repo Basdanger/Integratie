@@ -14,8 +14,6 @@
     @Scripts.Render("~/Scripts/Chart.min.js")
     <link href="~/Content/style.css" rel="stylesheet">
     <link href="~/Content/bootstrap2.min.css" rel="stylesheet">
-    <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet">
-    <link href="~/Content/sb-admin.css" rel="stylesheet">
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="@Url.Content("~/Content/semantic.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
@@ -31,183 +29,45 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg tesla-nav fixed-top" id="mainNav">
-        <a class="navbar-brand tesla-brand" href="Home/index.html">Politieke Barometer</a>
-        <div class="TeslaLNavLogin">@Html.Partial("_LoginPartial")</div>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""><i class="fa fa-fw fa-bars tesla-bar-icon"></i></span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="@Url.Action("Index", "Index")">Politieke Barometer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav navbar-sidenav tesla-side-nav" id="exampleAccordion">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="@Url.Action("Index", "Home")">
-                        <i class="fa fa-fw fa-dashboard"></i>
-                        <span class="nav-link-text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fa fa-fw fa-area-chart"></i>
-                        <span class="nav-link-text">Charts</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-wrench"></i>
-                        <span class="nav-link-text">Components</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseComponents">
-                        <li>
-                            <a href="navbar.html">Navbar</a>
-                        </li>
-                        <li>
-                            <a href="cards.html">Cards</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
-                        <span class="nav-link-text">Onderwerpen</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                        <li>
-                            <a href="../Subject/Personen">Personen</a>
-                        </li>
-                        <li>
-                            <a href="../Subject/Organisaties">Organisaties</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Theme")">Themas</a>
-                        </li>
-                        <li>
-                            <a href="../Subject/Gemeente">Gemeenten</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-sitemap"></i>
-                        <span class="nav-link-text">Menu Levels</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseMulti">
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-                            <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseTwoExamplePages" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
-                        <span class="nav-link-text">BeheerPagina</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseTwoExamplePages">
-                        <li>
-                            <a href="../Subject/Personen">Personen</a>
-                        </li>
-                        <li>
-                            <a href="../Subject/Organisaties">Organisaties</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ThemeConfig", "Theme")">Themas</a>
-                        </li>
-                        <li>
-                            <a href="../Subject/Gemeente">Gemeenten</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                    <a class="nav-link" href="~/Views/Home/About.cshtml">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">About</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                    <a class="nav-link" href="~/Views/Home/Contact.cshtml">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">Contact</span>
-                    </a>
-                </li>
 
-
-</div>
-    </nav>
-    @*Oude navbar hieronder*@
-    <!--<div class="navbar navbar-inverse navbar-fixed-top">
-            @*<div class="container">*@
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Team Tesla", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <input type="text" onkeyup="myFunction()">
-                <input type="submit">
-            </div>
-            <div class="navbar-collapse collapse">
-                @*<ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>*@
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    @*</div>*@
-    @*<div class="topnav">
-            @Html.ActionLink("Team Tesla", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <input type="text">
-            <input type="submit">
-            @Html.Partial("_LoginPartial")
-        </div>*@
-    <aside class="sidebar">
-        <div id="leftside-navigation" class="nano">
-            <ul class="nano-content">
-                <li><br /></li>
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Politici", "Contact", "Home")</li>
-                <li>@Html.ActionLink("Organisatie", "Organisatie", "Home")</li>
-                <li>@Html.ActionLink("Weekly Review", "WeeklyReview", "Home")</li>
-                <li>@Html.ActionLink("Gemeente", "Gemeente", "Home")</li>
-                <li>@Html.ActionLink("Thema", "Thema", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                <li>@Html.ActionLink("Login", "Login", "Account")</li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Theme")">Themes <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Subjects
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Index", "Theme")">Themes</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
             </ul>
+
+
+            @Html.Partial("_LoginPartial")
         </div>
-    </aside>-->
+    </nav>
+
+
+    @Url.Action("Index", "Home")
+
+
     <div class="content-wrapper">
-        <div class="container-fluid tesla-container">
+        <div class="tesla-container">
             @RenderBody()
-            <hr />
         </div>
     </div>
     @Scripts.Render("~/bundles/bootstrap")
