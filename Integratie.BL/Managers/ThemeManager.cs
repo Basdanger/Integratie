@@ -27,5 +27,10 @@ namespace Integratie.BL.Managers
         {
             return repo.GetThema(id);
         }
+
+        public void addTheme(Theme thema)
+        {
+            repo.addTheme(thema);
+        }
     }
 }

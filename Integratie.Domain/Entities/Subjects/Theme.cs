@@ -4,9 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Drawing.Image;
+
 
 namespace Integratie.Domain.Entities.Subjects
 {
@@ -70,11 +68,15 @@ namespace Integratie.Domain.Entities.Subjects
             image.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
             Image = stream.ToArray();
         }
-        public Image GetImage()
+        public string GetImageSrc()
         {
-            MemoryStream memoryStream = new MemoryStream(Image);
-            Image i = System.Drawing.Image.FromStream(memoryStream);
-            return i;
+            //MemoryStream memoryStream = new MemoryStream(Image);
+            //Image i = System.Drawing.Image.FromStream(memoryStream);
+            //return i;
+            string imreBase64Data = Convert.ToBase64String(Image);
+            string imgDataURL = string.Format("data:image/jpeg;base64,{0}", imreBase64Data);
+
+            return imgDataURL;
         }
     }
 }

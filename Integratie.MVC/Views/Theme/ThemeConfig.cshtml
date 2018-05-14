@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Terms)
         </th>
+        <th> 
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
         @*<th></th>*@
     </tr>
 
@@ -28,6 +31,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Terms)
         </td>
+        <td>
+            <img src="@item.GetImageSrc()" width="30" height="30"/>
+    </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |

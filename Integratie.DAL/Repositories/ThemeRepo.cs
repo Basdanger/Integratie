@@ -28,6 +28,12 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.OfType<Theme>();
         }
 
+        public void addTheme(Theme thema)
+        {
+            context.Subjects.Add(thema);
+            context.SaveChanges();
+        }
+
         public Theme GetThema(int id)
         {
             return context.Subjects.OfType<Theme>().First(t => t.ID.Equals(id));
