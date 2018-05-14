@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201805131255444_MigrationA.Designer.cs">
       <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805141237437_ThemeMigration.cs" />
+    <Compile Include="Migrations\201805141237437_ThemeMigration.Designer.cs">
+      <DependentUpon>201805141237437_ThemeMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805131255444_MigrationA.resx">
       <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805141237437_ThemeMigration.resx">
+      <DependentUpon>201805141237437_ThemeMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

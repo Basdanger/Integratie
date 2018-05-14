@@ -227,6 +227,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -422,6 +423,7 @@
     <Content Include="Views\Subject\EditPersoon.cshtml" />
     <Content Include="Views\Subject\DeletePerson.cshtml" />
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
+    <Content Include="Views\Theme\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
