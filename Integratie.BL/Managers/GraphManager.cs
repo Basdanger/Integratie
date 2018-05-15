@@ -44,9 +44,61 @@ namespace Integratie.BL.Managers
                 {
                     graphs.Add(GetFilledBarGraph(g));
                 }
+                if (g.GraphType == GraphType.Linechart)
+                {
+                    graphs.Add(GetFilledLineGraph(g));
+                }
             }
             return graphs;
         }
+
+        internal Graph GetFilledLineGraph(Graph graph)
+        {
+            graph.BarValues = new Dictionary<string, double>();
+            graph.LineValues = new Dictionary<string, List<double>>();
+            List<Feed> feeds = feedManager.GetFilteredFeeds(graph).ToList();
+            int countDays = 1;
+            if (graph.CalcType == CalcType.AVG)
+            {
+                countDays = (int)(graph.EndDate - graph.StartDate).TotalDays;
+            }
+            if (graph.IntervalSize == 0) graph.IntervalSize = 1;
+            if (graph.ComparePersons != null)
+                if (graph.CompareSort == CompareSort.Politicians)
+            {
+                foreach (string s in graph.ComparePersons.Split(',').Select(s => s.Trim()))
+                {
+                    if (graph.CalcType == CalcType.Sum)
+                        {
+                            DateTime dc = graph.StartDate;
+                            List<double> values = new List<double>();
+                            bool overtime = false;
+                            while(!overtime)
+                            {
+                                if (dc > graph.EndDate) { overtime = true; }
+                                values.Add(
+                                    feeds.Where(f => f.Persons.Contains(s))
+                                    .Where(f => f.Date >= dc && f.Date <= dc.AddDays(graph.IntervalSize))
+                                    .Count());
+                                
+                                dc = dc.AddDays(graph.IntervalSize);
+                            }
+                            graph.LineValues.Add(s, values);
+                        }
+                    if (graph.CalcType == CalcType.AVG)
+                        {
+                            DateTime dc = graph.StartDate;
+                            while (dc < graph.EndDate)
+                            {
+                                graph.BarValues.Add(s, feeds.Where(f => f.Persons.Contains(s)).Where(f => f.Date >= dc || f.Date <= dc.AddDays(graph.IntervalSize)).Count()/graph.IntervalSize);
+                                dc.AddDays(graph.IntervalSize);
+                            }
+                        }
+                    }
+            }
+            return graph;
+        }
+
         public List<Graph> Update(List<Graph> graphs)
         {
             foreach(Graph GG in graphs)
@@ -82,6 +134,7 @@ namespace Integratie.BL.Managers
             }
             if (graph.CompareSort == CompareSort.Politicians)
             {
+                if(graph.ComparePersons != null)
                 foreach(string s in graph.ComparePersons.Split(',').Select(s => s.Trim()))
                 {
                     if(graph.CalcType == CalcType.Sum)
