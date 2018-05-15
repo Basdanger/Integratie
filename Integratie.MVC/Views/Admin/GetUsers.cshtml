@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Account>
+﻿@model IEnumerable<Integratie.MVC.Models.ApplicationUser>
 
 @{
     ViewBag.Title = "Users";
@@ -10,32 +10,43 @@
     @Html.ActionLink("Create New", "Create")
     @Html.ActionLink("Export to CSV", "ExportToCSV")
 </p>
-<table class="table">
+<table class="table" style="color: black;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mail)
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
+            @Html.ActionLink("Details", "GetUser", new { id = item.Id }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+        </td>*
+    </tr>
     }
 
 </table>

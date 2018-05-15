@@ -1,5 +1,6 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
+using Integratie.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,7 @@ namespace Integratie.MVC.Controllers
     public class AdminController : Controller
     {
         private AccountManager mgr = new AccountManager();
+        RoleController rc = new RoleController();
         // GET: Admin
         public ActionResult Index()
         {
@@ -19,8 +21,13 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult GetUsers()
         {
-            IEnumerable<Account> accounts = mgr.GetAccounts();
+            IEnumerable<ApplicationUser> accounts = rc.GetUsers();
             return View(accounts);
+        }
+        public ActionResult GetUser(int id)
+        {
+            ApplicationUser user = rc.GetUser(id);
+            return View(user);
         }
         public void ExportToCSV()
         {
