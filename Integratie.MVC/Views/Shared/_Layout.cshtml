@@ -134,6 +134,18 @@
                         <span class="nav-link-text">Contact</span>
                     </a>
                 </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("SuperAdmin"))
+                    {
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                            <a class="nav-link" href="../Role/ConfigPage">
+                                <i class="fa fa-fw fa-link"></i>
+                                <span class="nav-link-text">ConfigPage</span>
+                            </a>
+                        </li>
+                    }
+                }
                 
  
         </div>

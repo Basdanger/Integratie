@@ -303,6 +303,8 @@
     <Content Include="Content\outline-icons.ttf" />
     <Content Include="Content\outline-icons.woff" />
     <Content Include="Content\outline-icons.woff2" />
+    <None Include="Properties\PublishProfiles\windows server testuser.pubxml" />
+    <None Include="Properties\PublishProfiles\Windows Server.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\iframe-content.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -401,8 +403,10 @@
     <Content Include="Views\GraphPartial\_PieChart.cshtml" />
     <Content Include="Views\Home\Gemeente.cshtml" />
     <Content Include="Views\Home\GemeentePage.cshtml" />
-    <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
     <Content Include="Views\Home\Alerts.cshtml" />
+    <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
+    <Content Include="Views\SuperAdmin\EditAdminPassword.cshtml" />
+    <Content Include="Views\SuperAdmin\EditEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
