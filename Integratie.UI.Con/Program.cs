@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
 using System.IO;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.UI.Con
 {
@@ -18,11 +19,18 @@ namespace Integratie.UI.Con
 
         static void Main(string[] args)
         {
+            SubjectManager subject = new SubjectManager();
             //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
-            mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
-            Console.WriteLine("Alert added");
-            mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
-            Console.WriteLine("Alert added");
+            //mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
+            //Console.WriteLine("Alert added");
+            //mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
+            //Console.WriteLine("Alert added");
+            Person person;
+            subject.GetPersonen();
+            person = subject.GetPersoon("Bart De Wever");
+            person.Full_Name = "Filip De Wever";
+            subject.ChangePerson(person);
+            
             Console.ReadLine();
         }
 

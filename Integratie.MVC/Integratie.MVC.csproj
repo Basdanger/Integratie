@@ -216,6 +216,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Api\AccountApiController.cs" />
     <Compile Include="Controllers\Api\GraphApiController.cs" />
@@ -223,7 +224,6 @@
     <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PersoonController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
@@ -412,8 +412,6 @@
     <Content Include="Views\Subject\FeedsPartial.cshtml" />
     <Content Include="Views\GraphPartial\_BarChart.cshtml" />
     <Content Include="Views\GraphPartial\_PieChart.cshtml" />
-    <Content Include="Views\Home\Gemeente.cshtml" />
-    <Content Include="Views\Home\GemeentePage.cshtml" />
     <Content Include="Views\SuperAdmin\GetAdmins.cshtml" />
     <Content Include="Views\Home\Alerts.cshtml" />
     <Content Include="Views\Subject\PersonenPerOrganisatie.cshtml" />
@@ -422,6 +420,7 @@
     <Content Include="Views\Subject\EditPersoon.cshtml" />
     <Content Include="Views\Subject\DeletePerson.cshtml" />
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
+    <Content Include="Views\Admin\GetUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

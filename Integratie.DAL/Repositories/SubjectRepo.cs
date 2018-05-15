@@ -63,19 +63,24 @@ namespace Integratie.DAL.Repositories
 
         public IEnumerable<Person> GetPersonen()
         {
-            return context.People.ToList().OrderByDescending(p => p.FeedCount);
+            return context.People.ToList().OrderBy(p => p.First_Name);
         }
-        public Person GetPersoon(String Full_Name)
+        public Person GetPersoon(int ID)
         {
+            return context.People.Find(ID);
             //bevat soms geen elementen soms wel gewoon nog eens proberen
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
-
+            //return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
         public IEnumerable<String> GetOrganisaties()
         {
             //return context.People.ToList();
             return context.People.Select(o => o.Organisation).Distinct();
+        }
+        public IEnumerable<String> GetGemeente()
+        {
+            //return context.People.ToList();
+            return context.People.Select(g => g.Town).Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {
@@ -86,14 +91,16 @@ namespace Integratie.DAL.Repositories
         {
             return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person));
         }
+
         public void UpdatePersoon(Person person)
         {
-            context.Entry(person).State = EntityState.Modified;
+
+            context.Entry(person).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
-        public void DeletePersoon(String Full_Name)
+        public void DeletePersoon(int id)
         {
-            Person p = GetPersoon(Full_Name);
+            Person p = GetPersoon(id);
             context.People.Remove(p);
             context.SaveChanges();
         }
