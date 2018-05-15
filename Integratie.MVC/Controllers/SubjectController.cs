@@ -38,13 +38,13 @@ namespace Integratie.MVC.Controllers
             pf.feeds = mgr.GetFeeds(Full_Name);
             return View(pf);
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditPersoon(int id)
         {
             Person person = mgr.GetPersoon(id);
             return View(person);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditPersoon(Person person, FormCollection collection)
         {
@@ -52,13 +52,13 @@ namespace Integratie.MVC.Controllers
                 mgr.ChangePerson(person);
                 return RedirectToAction("Personen");
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeletePerson(int id)
         {
             Person p = mgr.GetPersoon(id);
             return View(p);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult DeletePerson(int id, FormCollection collection)
         {
@@ -73,12 +73,12 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreatePersoon()
         {
             return View();
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CreatePersoon(Person person, FormCollection collection)
         {
@@ -123,134 +123,6 @@ namespace Integratie.MVC.Controllers
             ViewBag.Message = "Gemeentes";
             IEnumerable<String> gemeentes = mgr.GetGemeentes();
             return View(gemeentes.ToArray());
-//            string[] gemeentes = { "AALST",
-//"AARTSELAAR",
-//"ANDERLECHT",
-//"ANTWERPEN",
-//"BELSELE",
-//"BERCHEM",
-//"BORGERHOUT",
-//"BORSBEKE",
-//"BOUWEL",
-//"BRASSCHAAT",
-//"BRUSSEL",
-//"DE PANNE",
-//"DESSEL",
-//"DEURNE",
-//"DIEPENBEEK",
-//"DUFFEL",
-//"EDEGEM",
-//"EKEREN",
-//"GANSHOREN",
-//"GEEL",
-//"GENK",
-//"GENT",
-//"HARELBEKE",
-//"HEUSDEN",
-//"HOBOKEN",
-//"HOEILAART",
-//"JETTE",
-//"KACHTEM",
-//"KALMTHOUT",
-//"KAPELLEN",
-//"KESSEL LO",
-//"KOERSEL",
-//"KOOLKERKE",
-//"KORTRIJK",
-//"KRAAINEM",
-//"KRUISHOUTEM",
-//"LEDEBERG",
-//"LEEFDAAL",
-//"LEOPOLDSBURG",
-//"LEUVEN",
-//"LIEDEKERKE",
-//"LIER",
-//"LOKEREN",
-//"LOMMEL",
-//"LUBBEEK",
-//"MALDEGEM",
-//"MEERBEEK",
-//"MEERLE",
-//"MEISE",
-//"MELLE",
-//"MERCHTEM",
-//"MERKSPLAS",
-//"MOL",
-//"MORTSEL",
-//"NEDEROKKERZEEL",
-//"NEDER-OVER-HEEMBEEK",
-//"NIEUWERKERKEN",
-//"NOORDERWIJK",
-//"OETINGEN",
-//"OPWIJK",
-//"OUDERGEM",
-//"OUD-TURNHOUT",
-//"POEKE",
-//"RAMSDONK",
-//"RAMSEL",
-//"REKKEM",
-//"ROLLEGEM",
-//"ROTSELAAR",
-//"RUISBROEK",
-//"RUMBEKE",
-//"SCHAARBEEK",
-//"SCHELDERODE",
-//"SCHILDE",
-//"SCHULEN",
-//"SINT-AGATHA-RODE",
-//"SINT-AMANDSBERG",
-//"SINT-GILLIS-DENDERMONDE",
-//"SINT-JAN",
-//"SINT-JANS-MOLENBEEK",
-//"SINT-JOOST-TEN-NOODE",
-//"SINT-LAMBRECHTS-HERK",
-//"SINT-MARTENS-LATEM",
-//"SINT-MARTENS-LENNIK",
-//"SINT-NIKLAAS",
-//"SINT-PAUWELS",
-//"SINT-PIETERS-WOLUWE",
-//"SINT-ULRIKS-KAPELLE",
-//"SLEIDINGE",
-//"STEENHUFFEL",
-//"STOKKEM",
-//"STOKROOIE",
-//"TIELEN",
-//"TORHOUT",
-//"UITBERGEN",
-//"UKKEL",
-//"VELDWEZELT",
-//"VELM",
-//"VILVOORDE",
-//"VISSENAKEN",
-//"VLISSEGEM",
-//"VOORDE",
-//"VOSSEM",
-//"VRASENE",
-//"WALEM",
-//"WALTWILDER",
-//"WELDEN",
-//"WESPELAAR",
-//"WESTKAPELLE",
-//"WIDOOIE",
-//"WIEKEVORST",
-//"WIEZE",
-//"WIJSHAGEN",
-//"WOMMELGEM",
-//"WULPEN",
-//"ZANDVOORDE",
-//"ZARLARDINGE",
-//"ZAVENTEM",
-//"ZEGELSEM",
-//"ZELE",
-//"ZEPPEREN",
-//"ZERKEGEM",
-//"ZEVEREN",
-//"ZICHEN-ZUSSEN-BOLDER",
-//"ZOERLE-PARWIJS",
-//"ZOERSEL",
-//"ZOLDER",
-//"ZONHOVEN",
-//"ZOTTEGEM" };
         }
         public ActionResult GemeentePage(string gemeente)
         {

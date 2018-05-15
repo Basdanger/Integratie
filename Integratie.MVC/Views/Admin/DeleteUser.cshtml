@@ -1,0 +1,11 @@
+﻿@model Integratie.MVC.Models.ApplicationUser
+
+<h2>Wil je @Html.DisplayFor(model => model.UserName)</h2>
+<dt>
+    Naam:
+</dt>
+<dd>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</dd>
+<dt>E-mail:</dt>
+<dd>@Html.DisplayFor(model => model.Email)</dd>
+<dd>Rol</dd>
+<dt>@Html.DisplayFor(model => model.Roles)</dt>

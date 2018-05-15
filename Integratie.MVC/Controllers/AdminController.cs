@@ -1,6 +1,8 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
 using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,23 +14,52 @@ namespace Integratie.MVC.Controllers
 {
     public class AdminController : Controller
     {
-        private AccountManager mgr = new AccountManager();
+        private ApplicationDbContext context;
         RoleController rc = new RoleController();
+        public AdminController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult GetUsers()
+        public ActionResult GetUsers(string roleName = "User")
         {
-            IEnumerable<ApplicationUser> accounts = rc.GetUsers();
-            return View(accounts);
+            var roleManager =
+                new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IQueryable<ApplicationUser> users = null;
+            if (roleManager.RoleExists("User"))
+            {
+                var idsWithPermission = roleManager.FindByName("User").Users.Select(iur => iur.UserId);
+                users = context.Users.Where(u => idsWithPermission.Contains(u.Id));
+            }
+            return View(users);
         }
-        public ActionResult GetUser(int id)
+        public ActionResult GetUser(String username)
         {
-            ApplicationUser user = rc.GetUser(id);
+            var user= context.Users.Where(u => u.UserName.Equals(username)).First();
             return View(user);
         }
+        //public void DeleteUser(String username)
+        //{
+        //    ApplicationUser au = GetUser(username)
+        //    context.Users.Remove(applicationUser);
+        //}
+        //[HttpPost]
+        //public ActionResult DeleteUser(ApplicationUser applicationUser, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        context.Users.Remove(applicationUser);
+        //        return RedirectToAction("GetUsers");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
         public void ExportToCSV()
         {
             StringWriter sw = new StringWriter();
@@ -36,11 +67,18 @@ namespace Integratie.MVC.Controllers
             Response.AddHeader("content-disposition", "attachement; filename=ExportedUsersList.csv");
             Response.ContentType = "text/csv";
 
-            var users = mgr.GetAccounts();
-
+            //var users = GetUsers();
+            var roleManager =
+                new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IQueryable<ApplicationUser> users = null;
+            if (roleManager.RoleExists("User"))
+            {
+                var idsWithPermission = roleManager.FindByName("User").Users.Select(iur => iur.UserId);
+                users = context.Users.Where(u => idsWithPermission.Contains(u.Id));
+            }
             foreach (var item in users)
             {
-                sw.WriteLine(String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\"", item.ID, item.Name, item.Mail, item.Password));
+                sw.WriteLine(String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\"", item.UserName, item.FirstName, item.LastName, item.Id));
             }
             Response.Write(sw.ToString());
             Response.End();

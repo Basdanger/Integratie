@@ -1,27 +1,10 @@
 ﻿@model Integratie.MVC.Models.ApplicationUser
-
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
-
-    <!-- The Grid -->
-    <div class="w3-row-padding">
-
-        <!-- Left Column -->
-        <div class="w3-third">
-
-            <div class="w3-white w3-text-grey w3-card-4">
-                <div class="w3-display-container">
-                </div>
-                <div class="w3-container">
-                    <h2>@Html.DisplayFor(model => model.UserName)</h2>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.FirstName)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.LastName)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.Email)</p>
-                    <hr>
-                    <br>
-                </div>
-            </div><br>
-
-            <!-- End Left Column -->
-        </div>
-</div>
+<div style="color: black;">
+    <h2>@Html.DisplayFor(model => model.UserName)</h2>
+    <dt>Voornaam:</dt>
+    <dd>@Html.DisplayFor(model => model.FirstName)</dd>    
+    <dt>Voornaam:</dt>
+    <dd>@Html.DisplayFor(model => model.LastName)</dd>
+    <dt>Voornaam:</dt>
+    <dd>@Html.DisplayFor(model => model.Email)</dd>
 </div>

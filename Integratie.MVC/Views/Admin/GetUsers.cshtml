@@ -43,8 +43,8 @@
         </td>
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
-            @Html.ActionLink("Details", "GetUser", new { id = item.Id }) |
-            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+            @Html.ActionLink("Detail", "GetUser", new { username = item.UserName })
+            @Html.ActionLink("Delete", "DeleteUser", new { username = item.UserName })
         </td>*
     </tr>
     }

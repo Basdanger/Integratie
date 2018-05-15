@@ -23,14 +23,7 @@ namespace Integratie.MVC.Controllers
         {
             context = new ApplicationDbContext();
         }
-        public List<ApplicationUser> GetUsers()
-        {
-            return context.Users.ToList();
-        }
-        public ApplicationUser GetUser(int id)
-        {
-            return context.Users.Find(id);
-        }
+        
     public ActionResult ConfigPage()
         {
             if (User.Identity.IsAuthenticated)
