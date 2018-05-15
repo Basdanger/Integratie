@@ -28,6 +28,11 @@ namespace Integratie.BL.Managers
                     
                     dbi.Graph = graphManager.GetFilledSingleGraph(dbi.Graph);
                 }
+                if(dbi.Graph.GraphType == GraphType.Linechart)
+                {
+
+                    dbi.Graph = graphManager.GetFilledLineGraph(dbi.Graph);
+                }
             }
             return dbis;
         }
