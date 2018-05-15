@@ -36,8 +36,14 @@ namespace Integratie.MVC.Controllers
         {
             thema.Image = new byte[file.ContentLength];
             file.InputStream.Read(thema.Image, 0, file.ContentLength);
-            themeManager.addTheme(thema);
+            themeManager.AddTheme(thema);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Theme(int id) {
+            Theme thema=themeManager.GetThemeById(id);
+
+            return View(thema);
         }
     }
 }

@@ -5,10 +5,16 @@
     ViewBag.Title = "Index";
 }
 
-
-@foreach(Theme T in Model)
-{
-    <li class="d-inline-block">
-
-    </li>
-}
+<div class="TeslaThemesContainer">
+    <ul>
+        @foreach (Theme t in Model)
+    {
+        <li data-id="'+@t.ID+'" class="d-inline-block TeslaThemeBlock flex-column" onclick="@Url.Action("Theme","Theme",new {id=t.ID})">
+            <h3 class="TeslaThemeText">@t.Name</h3>
+            <div class="TeslaThemeImage">
+                <img align="right" src="@t.GetImageSrc()" />
+            </div>
+        </li>
+    }
+    </ul>
+</div>

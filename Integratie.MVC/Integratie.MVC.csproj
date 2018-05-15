@@ -438,6 +438,7 @@
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\ThemeConfig.cshtml" />
     <Content Include="Views\Theme\Create.cshtml" />
+    <Content Include="Views\Theme\Theme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

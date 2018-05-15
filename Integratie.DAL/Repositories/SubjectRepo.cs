@@ -83,7 +83,7 @@ namespace Integratie.DAL.Repositories
         }
         public IEnumerable<Feed> GetFeeds(String person)
         {
-            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person));
+            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person.ToUpper()));
         }
         public void UpdatePersoon(Person person)
         {
