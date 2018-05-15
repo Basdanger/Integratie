@@ -17,6 +17,7 @@ namespace Integratie.DAL.Repositories
         public SubjectRepo()
         {
             context = new DashBoardDbContext();
+            context.Database.Initialize(false);
         }
 
         public SubjectRepo(DashBoardDbContext context)
@@ -50,9 +51,9 @@ namespace Integratie.DAL.Repositories
             return ReadSubjectById(context.Subjects.First(s => s.Name.Equals(name.ToUpper())).ID);
         }
 
-        public IEnumerable<Subject> ReadPeopleByOrganisation(string organisation)
+        public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
-            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList<Subject>();
+            return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();
         }
 
         public IEnumerable<Subject> ReadPeopleByTown(string town)
@@ -62,7 +63,7 @@ namespace Integratie.DAL.Repositories
 
         public IEnumerable<Person> GetPersonen()
         {
-            return context.People.ToList();
+            return context.People.ToList().OrderByDescending(p => p.FeedCount);
         }
         public Person GetPersoon(String Full_Name)
         {
@@ -71,9 +72,10 @@ namespace Integratie.DAL.Repositories
 
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
-        public IEnumerable<Organisation> GetOrganisaties()
+        public IEnumerable<String> GetOrganisaties()
         {
-            return context.Organisations.ToList();
+            //return context.People.ToList();
+            return context.People.Select(o => o.Organisation).Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {
@@ -83,6 +85,31 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Feed> GetFeeds(String person)
         {
             return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person));
+        }
+        public void UpdatePersoon(Person person)
+        {
+            context.Entry(person).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+        public void DeletePersoon(String Full_Name)
+        {
+            Person p = GetPersoon(Full_Name);
+            context.People.Remove(p);
+            context.SaveChanges();
+        }
+        public Person CreatePersoon(Person person)
+        {
+            context.People.Add(person);
+            context.SaveChanges();
+            return person;
+        }
+        public void CreatePersonen(List<Person> persons)
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                context.People.Add(persons[i]);
+            }
+            context.SaveChanges();
         }
     }
 }

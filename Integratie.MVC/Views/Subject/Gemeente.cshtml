@@ -1,0 +1,45 @@
+﻿@model IEnumerable<string>
+@using Newtonsoft.Json
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/bootstrap.css")
+
+
+<div class="jumbotron">
+    <h1>Gemeenten</h1>
+    <p class="lead">Dit is een lijst met alle gemeenten</p>
+</div>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for gemeentes..">
+
+<ul id="myUL" class="container float">
+    @foreach (var item in Model)
+    {
+        <li class="item float-item">
+            <a href="@Url.Action("GemeentePage","Home", new {gemeente=item})"><p>@item</p></a>
+        </li>
+    }
+</ul>
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, ul, li, a, i;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>

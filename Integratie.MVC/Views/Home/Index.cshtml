@@ -69,21 +69,74 @@
         {
             if (x.Graph.GraphType == GraphType.Barchart) {
             <text>
-            var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas></li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
-            gridster.add_widget.apply(gridster, widget);
-            </text>}
-                else {
-            <text>
-                    var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '"><div class="TeslaGraphDelete hide">X</div><p class="TeslaSingleGraph">' + @x.Id + '</p></li>', @x.X_Size, @x.Y_Size, @x.Column, @x.Row]
-            gridster.add_widget.apply(gridster, widget);
-            </text>
+        var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
+            + '<div class="TeslaBarInformation">'
+            +'<span class="teslaTag">@x.Graph.CalcType</span>'
+                @{
+                    if(x.Graph.PersonFilter != "")
+                    {
+                        foreach(string ss in x.Graph.PersonFilter.Split(',').Select(s => s.Trim()))
+                        {
+                        <text>+ '<span class="teslaTag">@ss</span>'</text>
+                        }
+                    }
 
+                    if(x.Graph.GenderFilter != GenderFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.GenderFilter</span>'</text>
+                    }
+
+                    if(x.Graph.AgeFilter != AgeFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.AgeFilter</span>'</text>
+                    }
 
                 }
+                + '<span class="teslaTag"> @{if (x.Graph.PeriodSort == PeriodSort.Fixed) { <text>@x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()</text> } else {<text> @x.Graph.PeriodLength.ToString() Days</text> } } '
 
-                x.GridId = counter;
-                counter++;
+
+            + '</li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
+            gridster.add_widget.apply(gridster, widget);
+            </text>}
+            if (x.Graph.GraphType == GraphType.Single)
+            {
+            <text>
+            var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '">'
+                +'<div class="TeslaSingleInfoCalculation">@x.Graph.CalcType</div>'
+                + '<div class="TeslaGraphDelete hide">X</div>'
+                + '<div class="TeslaSingleContainer">'
+                + '<p class="TeslaSingleGraph">' + @x.Graph.SingleValue + '</p>'
+                + '<div class="TeslaSingleValueInformation">'
+                @{
+                    if(x.Graph.PersonFilter != "")
+                    {
+                        foreach(string ss in x.Graph.PersonFilter.Split(',').Select(s => s.Trim()))
+                        {
+                        <text>+ '<span class="teslaTag">@ss</span>'</text>
+                        }
+                    }
+
+                    if(x.Graph.GenderFilter != GenderFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.GenderFilter</span>'</text>
+                    }
+
+                    if(x.Graph.AgeFilter != AgeFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.AgeFilter</span>'</text>
+                    }
+
+                }
+                + '<span class="teslaTag"> @{if (x.Graph.PeriodSort == PeriodSort.Fixed) { <text>@x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()</text> } else {<text> @x.Graph.PeriodLength.ToString() Days</text> } } '
+                + '</span></div ></div></li > ', @x.X_Size, @x.Y_Size, @x.Column, @x.Row]
+            gridster.add_widget.apply(gridster, widget);
+
+            </text>
             }
+
+            x.GridId = counter;
+            counter++;
+        }
             $('.teslaDashboardEdit').on('click', function () {
                 if (enabled) {
                     $(this).removeClass('selected');
@@ -125,6 +178,31 @@
                 }
             });
         $('.TeslaGraphDelete').on('click', function () {
+            var o = {
+                Id: $(this).parent().attr('data-id'),
+                Column: $(this).parent().attr('data-col'),
+                Row: $(this).parent().attr('data-row'),
+                X_Size: $(this).parent().attr('data-sizex'),
+                Y_Size: $(this).parent().attr('data-sizey'),
+                GraphId: $(this).parent().attr('data-graphid')
+
+            };
+            o = (JSON.stringify(o));
+            console.log(o);
+            $.ajax({
+            type: "POST",
+            url: '@Url.Action("RemoveDashboardItem", "Home")',
+            data: o,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+            $(this).parent()
                 gridster.remove_widget($(this).parent());
             })
     });
@@ -173,22 +251,18 @@
 
         foreach(DashboardItem dbi in Model)
         {
-            if( dbi.GridId == y)
+            if( dbi.Graph.GraphType == GraphType.Barchart)
             {
-
-                if(dbi.Graph.GetType() == typeof(BarChartGraph))
-                {
-                    BarChartGraph BCG = (BarChartGraph)dbi.Graph;
                      <text>
                     $(function () {
                             var ctx = document.getElementById("myChart" + @dbi.Id).getContext('2d');
                             var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                                labels: @Html.Raw(JsonConvert.SerializeObject(BCG.Values.Keys.ToList())),
+                                labels: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Keys.ToList())),
                 datasets: [{
-                                    label: '# of Votes',
-                    data: @Html.Raw(JsonConvert.SerializeObject(BCG.Values.Values.ToList())),
+                                    label: '# of tweets',
+                    data: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Values.ToList())),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -224,7 +298,6 @@
             }
         }
 
-    }
 </script>
 
 

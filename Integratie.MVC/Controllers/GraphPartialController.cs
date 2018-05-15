@@ -15,12 +15,12 @@ namespace Integratie.MVC.Controllers
         // GET: GraphPartial
         public ActionResult _BarChart(int id)
         {
-            ViewBag.id = id;
-            BarChartGraph graph = graphManager.GetBarChartGraph(id);
-            List<double> listValues = graph.Values.Values.ToList();
-            List<string> listKeys = graph.Values.Keys.ToList();
-            ViewBag.Values = JsonConvert.SerializeObject(listValues);
-            ViewBag.Keys = JsonConvert.SerializeObject(listKeys);
+            //ViewBag.id = id;
+            //BarChartGraph graph = graphManager.GetBarChartGraph(id);
+            //List<double> listValues = graph.Values.Values.ToList();
+            //List<string> listKeys = graph.Values.Keys.ToList();
+            //ViewBag.Values = JsonConvert.SerializeObject(listValues);
+            //ViewBag.Keys = JsonConvert.SerializeObject(listKeys);
             return PartialView();
         }
 

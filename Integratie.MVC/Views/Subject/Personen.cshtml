@@ -2,58 +2,63 @@
 @{
     ViewBag.Title = "Personen";
 }
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("table");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
+<div style="color: black">
+    <h2>Personen</h2>
+    <p>
+        @Html.ActionLink("Voeg toe", "CreatePersoon")
+    </p>
+    <div class="col-md-12">
+        @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label for="attachment">Select a Csv File</label>
+                <label class="btn btn-default btn-file">
+                    <input type="file" name="attachmentcsv" id="attachmentcsv">
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
         }
-    }
-</script>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-<h2>Personen</h2>
-<table class="table">
-    <tr>
-        <th>
-            Naam
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Organisation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Site)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Twitter)
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-    <tr id="elementen">
-        <td id="naam">
-            @Html.DisplayFor(modelItem => item.Full_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Organisation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Site)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Twitter) |
-            @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
-        </td>
-    </tr>
-    }
-</table>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organisation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Site)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Twitter)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="elementen">
+                <td id="naam">
+                    @Html.DisplayFor(modelItem => item.Full_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organisation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Site)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Twitter) <br />
+                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })<br />
+                    @*@if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {*@
+                    @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
+                    @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
+                    @*}
+                        }*@
+                </td>
+            </tr>
+        }
+    </table>
+</div>

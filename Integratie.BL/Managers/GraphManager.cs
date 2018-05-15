@@ -1,6 +1,7 @@
 ﻿using Integratie.DAL;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
+using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Graph;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Integratie.BL.Managers
     public class GraphManager
     {
         IGraphRepo GraphRepo = new GraphRepo();
+        FeedManager feedManager = new FeedManager();
         public void AddGraph(int userId, Graph graph)
         {
             
@@ -31,17 +33,16 @@ namespace Integratie.BL.Managers
         }
         public List<Graph> GetAllFilledGraphs()
         {
-            List<Graph> graphs = GraphRepo.GetAllGraphs();
-            foreach(Graph g in graphs)
+            List<Graph> graphs = new List<Graph>();
+            foreach(Graph g in GraphRepo.GetAllGraphs())
             {
-                if (g.GetType() == typeof(BarChartGraph))
+                if (g.GraphType == GraphType.Single)
                 {
-                    BarChartGraph bcg = (BarChartGraph)g;
-                    bcg.Values.Add("Test1", 20);
-                    bcg.Values.Add("Test2", 10);
-                    bcg.Values.Add("Test3", 15);
-
-
+                    graphs.Add(GetFilledSingleGraph(g));
+                }
+                if (g.GraphType == GraphType.Barchart)
+                {
+                    graphs.Add(GetFilledBarGraph(g));
                 }
             }
             return graphs;
@@ -59,14 +60,36 @@ namespace Integratie.BL.Managers
             return GraphRepo.GetGraphById(id);
         }
 
-        public BarChartGraph GetBarChartGraph(int id)
+        public Graph GetFilledSingleGraph(Graph graph)
         {
-            BarChartGraph graph = (BarChartGraph)GraphRepo.GetGraphById(id);
-            FeedManager feedManager = new FeedManager();
-            //graph.Subjects.ForEach(s => graph.Values.Add(s.Name, feedManager.GetPersonFeeds(s.Name).Count()));
-            graph.Values.Add("Bart", 50);
-            graph.Values.Add("Kris", 100);
-            graph.Values.Add("Maggie", 66);
+            graph.SingleValue = feedManager.GetFilteredFeeds(graph).Count();
+            int countDays = 1;
+            if (graph.CalcType == CalcType.AVG)
+            {
+                countDays = (int)(graph.EndDate - graph.StartDate).TotalDays;
+            }
+            graph.SingleValue = (int)graph.SingleValue / countDays;
+            return graph;
+        }
+        public Graph GetFilledBarGraph(Graph graph)
+        {
+            graph.BarValues = new Dictionary<string, double>();
+            List<Feed> feeds = feedManager.GetFilteredFeeds(graph).ToList();
+            int countDays = 1;
+            if (graph.CalcType == CalcType.AVG)
+            {
+                countDays = (int)(graph.EndDate - graph.StartDate).TotalDays;
+            }
+            if (graph.CompareSort == CompareSort.Politicians)
+            {
+                foreach(string s in graph.ComparePersons.Split(',').Select(s => s.Trim()))
+                {
+                    if(graph.CalcType == CalcType.Sum)
+                    graph.BarValues.Add(s, feeds.Where(f => f.Persons.Contains(s)).Count());
+                    if (graph.CalcType == CalcType.AVG)
+                        graph.BarValues.Add(s, (int)feeds.Where(f => f.Persons.Contains(s)).Count()/countDays);
+                }
+            }
             return graph;
         }
 

@@ -42,6 +42,7 @@
                 </div>
                 <label id="DaysDateLabel" for="exampleSelect2"># Days</label>
                 <input type="number" class="form-control" id="DaysDate">
+
                 <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
                 <select style="display:none" class="form-control" id="IntervalSelect">
                     <option>1 Day</option>
@@ -96,11 +97,17 @@
         <div class="form-group" style="display:none" id="CompareForm">
             <b><label for="exampleSelect2">Compare</label></b>
 
-            <select class="form-control" id="GraphSelect">
-                <option vlue="Single">Politicians</option>
-                <option value="Barchart">Ages</option>
-                <option value="Linechart">Gender</option>
-            </select>
+            <div id="CompareDropdown" class="ui fluid dropdown selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+            <br/>
+            <div id="personCompareDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
         </div>
         <button id="GraphSubmit" type="button" class="btn btn-success">Create Graph</button>
         <!--ERRORS-->
@@ -123,11 +130,16 @@
     var GenderFilter;
     var AgeFilter;
     var PersonalityFilter
+    var PeriodSort;
+    var Compare;
+    var PersonCompare;
     $(document).off('.datepicker.data-api');
+    var d = new Date();
+
     $('.datetimepicker1').datepicker({
-        format: 'dd/mm/yyyy',
-        startDate: '-3d'
+        format: 'dd/mm/yyyy'
     });
+    $(".datetimepicker1").datepicker("update", new Date());
     $('#GraphPeriodSort').dropdown({
         values: [
             {
@@ -159,6 +171,7 @@
                 $('#DaysDateLabel').css("display", 'flex');
                 $('#DaysDate').css("display", 'flex');
             }
+            PeriodSort = val;
         }
     });
 
@@ -180,6 +193,7 @@
         ],
         onChange: function (val) {
             GraphSort = val;
+            console.log("Changed Graph: " + val)
         }
     });
     $('#CalcSelect').dropdown({
@@ -259,43 +273,51 @@
         }
     });
     $('#personDropdown').dropdown({
-            values: [
-                {
-                    name: 'Bart De Wever',
-                    value: 'Bart De Wever'
+        values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
                 },
-                {
-                    name: 'Jan',
-                    value: 'Jan'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                },
-                {
-                    name: 'Marnick',
-                    value: 'Marnick'
-                }
+            </text>
+            }
         ],
             onChange: function (val) {
                 PersonFilter = val;
         }
+    });
+    $('#CompareDropdown').dropdown({
+        values: [
+            {
+                name: 'Politicians',
+                value: 'Politicians',
+                selected: true
+            },
+            {
+                name: 'Age',
+                value: 'Age'
+            },
+            {
+                name: 'Gender',
+                value: 'Gender'
+            }
+        ],
+        onChange: function (val) {
+                Compare = val;
+            }
+    });
+    $('#personCompareDropdown').dropdown({values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
+                },
+            </text>
+            }
+    ],
+
     });
 
 
@@ -311,9 +333,32 @@
                 case "Linechart": SetLine(); break;
 
             }
+            GraphSort = val;
+            CheckCompares();
         }
     });
-
+    $('#personCompareDropdown').dropdown({
+        onChange: function (val) {
+            PersonCompare = val;
+            CheckCompares();
+        }
+    });
+    $('#CompareDropdown').dropdown({
+        onChange: function (val) {
+            Compare = val;
+            CheckCompares();
+        }
+    });
+    function CheckCompares() {
+        if (Compare == "Politicians" && GraphSort == "Barchart") {
+            console.log("GraphSort: " + GraphSort);
+            $('#personDropdown').addClass("disabled");
+            $('#personDropdown').dropdown('clear');
+        }
+        else {
+            $('#personDropdown').removeClass("disabled");
+        }
+    }
     function SetBarChart() {
         SetAllVisible();
         $('#IntervalSelect').css('display', 'none');
@@ -362,8 +407,8 @@
     function validateDates() {
 
         console.log("Validate Dates function");
-        var bd = $('#GraphStartDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
-        var ed = $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
+        var bd = Date.parse($('#GraphStartDate').data('datepicker').getFormattedDate('yyyy-mm-dd'));
+        var ed = Date.parse($('#GraphEndDate').data('datepicker').getFormattedDate('yyyy-mm-dd'));
         if (bd != "" && ed != "") {
             console.log(bd);
             console.log(ed);
@@ -402,7 +447,6 @@
 <!--Submit Script-->
 <script>
     function SendGraphSubmit() {
-        alert("SENDING");
         var s = {
             GraphType: GraphSort,
             CalcType: CalcSort,
@@ -411,9 +455,14 @@
             AgeFilter: AgeFilter,
             PersonalityFilter: PersonalityFilter,
             GenderFilter: GenderFilter,
-            PersonFilter: PersonFilter
+            PersonFilter: PersonFilter,
+            PeriodSort: PeriodSort,
+            PeriodLength: $('#DaysDate').val(),
+            ComparePersons: PersonCompare,
+            CompareSort: Compare
 
         };
+        if (Compare == "Politicians" && GraphSort == "Barchart") s.PersonFilter = "";
 
         s = (JSON.stringify(s));
         console.log(s);
@@ -425,10 +474,14 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                //alert("Succes")
+                $('.tesla-popup').removeClass('open');
+                $('.tesla-popup-window').removeClass('open');
+                location.reload();
             },
             error: function (ex) {
-                //alert(ex.statusText);
+                $('.tesla-popup').removeClass('open');
+                $('.tesla-popup-window').removeClass('open');
+                location.reload();
             }
         });
     }

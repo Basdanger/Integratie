@@ -1,53 +1,67 @@
-﻿@model Integratie.MVC.Models.PersonanFeeds
+﻿@model Integratie.MVC.Models.PersonAndFeeds
 @{
     ViewBag.Title = "Persoon";
 }
-<h2>@Html.DisplayFor(model => model.persons.Full_Name)</h2>
-<h4>Contact:</h4>
-<dt>
-    Website:
-</dt>
-<dd>
-    @Html.DisplayFor(model => model.persons.Site)
-</dd>
-<dt>
-    Facebook:
-</dt>
-<dd>
-    @Html.DisplayFor(model => model.persons.Facebook)
-</dd>
-<dt>
-    Twitter:
-</dt>
-<dd>
-    @Html.DisplayFor(model => model.persons.Twitter)
-</dd>
-<dt>
-    Organisatie:
-</dt>
-<dd>
-    @Html.DisplayFor(model => model.persons.Organisation)
-</dd>
-<h3>Tweets:</h3>
-@foreach (var feeds in Model.feeds)
-{
-<table border="0">
-    <tr>
-        <td><h5> Datum:</h5></td>
-        <td><h5>@feeds.Date</h5></td>
-    </tr>
-    <tr>
-        <td><b>Woorden:</b></td>
-        <td>@feeds.Words</td>
-    </tr>
-    <tr>
-        <td><b>Meer info:</b></td>
-        <td>@feeds.Urls</td>
-    </tr>
-    <tr>
-        <td><b>Hashtags:</b></td>
-        <td>@feeds.Hashtags</td>
-    </tr>
-</table>
-    <br/>
-        }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html, body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto", sans-serif
+    }
+</style>
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+        <!-- Left Column -->
+        <div class="w3-third">
+
+            <div class="w3-white w3-text-grey w3-card-4">
+                <div class="w3-display-container">
+                    <img src="https://twitter.com/@Url.Content(Model.person.Twitter)/profile_image?size=original" alt="profile_photo" width="100%">
+                </div>
+                <div class="w3-container">
+                    <h2>@Html.DisplayFor(model => model.person.Full_Name)</h2>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Organisation)</p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Position)</p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Site)</p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Facebook)</p>
+                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Twitter)</p>
+                    <hr>
+                    <br>
+                </div>
+            </div><br>
+
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+
+            <div class="w3-container w3-card w3-white w3-margin-bottom">
+                <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Tweets</h2>
+                @foreach (var feeds in Model.feeds)
+                {
+            <div class="w3-container">
+                <h5 class="w3-opacity"><b>@feeds.Hashtags</b></h5>
+                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@feeds.Date</h6>
+                <p>@feeds.Words</p>
+                <p>@feeds.Urls</p>
+                <hr>
+            </div>
+                }
+            </div>
+
+
+
+            <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+</div>

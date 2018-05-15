@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : CreateDatabaseIfNotExists<DashBoardDbContext>
+    public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -27,7 +27,7 @@ namespace Integratie.DAL.EF
             Console.WriteLine("Making " + resultsFeed.Count() + " feeds");
             foreach (var item in resultsFeed)
             {
-                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+               feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
             }
 
             Console.WriteLine("Adding " + resultsFeed.Count() + " feeds to database");
@@ -39,7 +39,7 @@ namespace Integratie.DAL.EF
 
             List<Person> people = new List<Person>();
             String st = SubjectStrings.Politicians();
-            ////String st = File.ReadAllText(@"..\..\..\Integratie.DAL\politici.json");
+            //String st = File.ReadAllText(@"C:\Users\yanni\net\Integratie.DALpolitici.json");
             ////String st = File.ReadAllText(@"D:\nikol\Documents\IntegratieprojectClone\net\Integratie.DAL\politici.json");
             //String st = File.ReadAllText(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory + "politici.json"));
 
@@ -55,7 +55,17 @@ namespace Integratie.DAL.EF
             {
                 context.People.Add(person);
             }
-
+            //List<Organisation> org = new List<Organisation>();
+            //IEnumerable<Organisation> organisations = new List<Organisation>();
+            //organisations = JsonConvert.DeserializeObject<IEnumerable<Organisation>>(st);
+            //foreach (var item in organisations)
+            //{
+            //    org.Add(new Organisation(item.ID, item.Naam));
+            //}
+            //foreach (var o in org)
+            //{
+            //    context.Organisations.Add(o);
+            //}
             //DUMMY ALERTS
             //CheckAlert CH1 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 1.5, people[1]);
             //CheckAlert CH2 = new CheckAlert(null, SubjectProperty.relativeCount, Operator.GT, 2, people[2]);
@@ -83,23 +93,6 @@ namespace Integratie.DAL.EF
             //UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
             //context.UserAlerts.Add(UA1);
 
-            //GRAPHS
-            BarChartGraph BCG1 = new BarChartGraph(new List<Subject> { people[1], people[2] }, new Period(), A1);
-            BarChartGraph BCG2 = new BarChartGraph(new List<Subject> { people[3], people[4] }, new Period(), A1);
-            BCG1.GraphType = GraphType.Barchart;
-            BCG2.GraphType = GraphType.Barchart;
-            context.Graphs.Add(BCG1);
-            context.Graphs.Add(BCG2);
-
-
-            //DashboardItems
-            DashboardItem DBI1 = new DashboardItem(0, 1, 1, 1, 1, BCG1);
-            DashboardItem DBI2 = new DashboardItem(1, 1, 2, 1, 1, BCG2);
-            DashboardItem DBI3 = new DashboardItem(2, 1, 3, 2, 2, BCG2);
-            //DashboardItem DBI1 = new DashboardItem(1,)
-            context.Dashboarditems.Add(DBI1);
-            context.Dashboarditems.Add(DBI2);
-            context.Dashboarditems.Add(DBI3);
             context.SaveChanges();
         }
     }

@@ -16,9 +16,11 @@ namespace Integratie.MVC.Controllers
     {
         GraphManager manager = new GraphManager();
         DashboardManager dbmanager = new DashboardManager();
+        SubjectManager subjectManager = new SubjectManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
+            ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
@@ -35,9 +37,17 @@ namespace Integratie.MVC.Controllers
             //dbmanager.Update(dbis);
             //dbitems = dbmanager.GetAllDashboardItems();
 
+            ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
             return View(dbitems);
         }
-        
+       [HttpPost]
+        public ActionResult RemoveDashboardItem(DashboardItem dbi)
+        {
+            dbmanager.RemoveDashboardItem(dbi);
+            List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
+            ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
+            return View(dbitems);
+        }
 
         public ActionResult About()
         {
@@ -59,7 +69,7 @@ namespace Integratie.MVC.Controllers
         [HttpPost]
         public ActionResult AddGraph(Graph graph)
         {
-            DashboardItem dbi = new DashboardItem(0, 1, 1000, 3, 1, graph);
+            DashboardItem dbi = new DashboardItem(0, 1, 1000, 3, 2, graph);
             dbmanager.AddDashboardItem(dbi);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);

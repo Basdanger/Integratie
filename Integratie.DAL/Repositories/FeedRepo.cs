@@ -66,5 +66,28 @@ namespace Integratie.DAL.Repositories
         {
             return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper()) && f.Profile.Gender.Equals(gender)).ToList<Feed>();
         }
+
+        public IEnumerable<Feed> ReadFilteredFeed( DateTime StartDate, DateTime Enddate, List<String> AgeFilter, List<String> PersonalityFilter, List<String> GenderFilter, List<String> PersonFilter)
+        {
+            IEnumerable<Feed> feeds;
+            if (PersonFilter.First() != "")
+                feeds = context.Feeds
+                .Where(f => f.Date <= Enddate && f.Date >= StartDate)
+                .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
+                .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality))
+                .Where(f => PersonFilter.Any(t => f.Persons.Contains(t)))
+                .Where(f => GenderFilter.Any(t => t == f.Profile.Gender.ToString()));
+            else
+            {
+                feeds =
+                context.Feeds
+                .Where(f => f.Date <= Enddate && f.Date >= StartDate).ToList()
+                .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
+                .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality))
+                .Where(f => GenderFilter.Any(t => t == f.Profile.Gender.ToString()));
+
+            }
+            return feeds;
+        }
     }
 }
