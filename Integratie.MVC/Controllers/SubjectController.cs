@@ -115,8 +115,6 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Organisaties()
         {
-            //IEnumerable<Person> organisaties = mgr.GetOrganisaties();
-            //return View(organisaties);
             IEnumerable<String> organisaties = mgr.GetOrganisaties();
             return View(organisaties.ToArray());
         }
@@ -265,25 +263,25 @@ namespace Integratie.MVC.Controllers
             IEnumerable<Subject> people = subjectmngr.GetPeopleByTown(gemeente);
             return View(people);
         }
-        //[HttpPost]
-        //public void UploadCsv(HttpPostedFileBase attachmentcsv)
-        //{
-        //    CsvFileDescription csvFileDescription = new CsvFileDescription
-        //    {
-        //        SeparatorChar = ',',
-        //        FirstLineHasColumnNames = true
-        //    };
-        //    CsvContext csvContext = new CsvContext();
-        //    StreamReader streamReader = new StreamReader(attachmentcsv.InputStream);
-        //    IEnumerable<Person> list = csvContext.Read<Person>(streamReader, csvFileDescription);
-        //    foreach (var item in list)
-        //    {
-        //        mgr.AddPerson(item.First_Name, item.Last_Name, item.District, item.Level, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.Town);
-        //    }
-        //    //return Redirect("Personen");
-        //}
         [HttpPost]
         public ActionResult CSVOpladen(HttpPostedFileBase attachmentcsv)
+        {
+            CsvFileDescription csvFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ',',
+                FirstLineHasColumnNames = true
+            };
+            CsvContext csvContext = new CsvContext();
+            StreamReader streamReader = new StreamReader(attachmentcsv.InputStream);
+            IEnumerable<Person> list = csvContext.Read<Person>(streamReader, csvFileDescription);
+            foreach (var item in list)
+            {
+                mgr.AddPerson(item.First_Name, item.Last_Name, item.District, item.Level, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.Town);
+            }
+            return Redirect("Personen");
+        }
+        [HttpPost]
+        public ActionResult CSVOpladenOrganisatie(HttpPostedFileBase attachmentcsv)
         {
             CsvFileDescription csvFileDescription = new CsvFileDescription
             {
