@@ -76,6 +76,15 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public async Task UpdateAlerts(List<Alert> alerts)
+        {
+            foreach (Alert alert in alerts)
+            {
+                context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
+        }
+
         public CheckAlert FindCheckAlert(CheckAlert alert)
         {
             CheckAlert checkAlert = null;
