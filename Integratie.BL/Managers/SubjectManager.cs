@@ -64,10 +64,6 @@ namespace Integratie.BL.Managers
         {
             return repo.GetGemeente();
         }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return repo.GetFeeds(person);
-        }
 
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {

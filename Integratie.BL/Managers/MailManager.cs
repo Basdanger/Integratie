@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Integratie.BL.Managers
 {
-    public class MailManager : IMailManager
+    public class MailManager
     {
         public LinkedResource LinkedResource { get; private set; }
 
