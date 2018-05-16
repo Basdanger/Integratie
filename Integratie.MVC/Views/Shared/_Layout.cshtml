@@ -22,12 +22,15 @@
     <link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/dropdown.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/range.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery.gridster.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
     <script src="@Url.Content("~/Scripts/semantic.min.js")"></script>
     <script src="@Url.Content("~/Scripts/iframe-content.min.js")"></script>
     <script src="@Url.Content("~/Scripts/dropdown.js")"></script>
     <script src="@Url.Content("~/Scripts/transition.js")"></script>
+    <script src="@Url.Content("~/Scripts/range.js")"></script>
+
 
 </head>
 <body>
@@ -55,6 +58,12 @@
                     <a class="nav-link" href="tables.html">
                         <i class="fa fa-fw fa-table"></i>
                         <span class="nav-link-text">Tables</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alerts">
+                    <a class="nav-link" href="@Url.Action("Alerts","Home")">
+                        <i class="fa fa-fw fa-table"></i>
+                        <span class="nav-link-text">Alerts</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -134,7 +143,7 @@
                         <span class="nav-link-text">Contact</span>
                     </a>
                 </li>
-                
+            </ul>
  
         </div>
     </nav>

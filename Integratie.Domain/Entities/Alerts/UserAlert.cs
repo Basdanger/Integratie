@@ -11,8 +11,8 @@ namespace Integratie.Domain.Entities.Alerts
     public class UserAlert
     {
         public int ID { get; set; }
-        public Account Account { get; set; }
-        public Alert Alert { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Alert Alert { get; set; }
         public bool Show { get; set; }
         public bool Web { get; set; }
         public bool Mail { get; set; }
@@ -26,6 +26,10 @@ namespace Integratie.Domain.Entities.Alerts
             Mail = mail;
             App = app;
             Show = false;
+        }
+
+        public UserAlert()
+        {
         }
     }
 }

@@ -45,9 +45,9 @@ namespace Integratie.DAL.Repositories
             return context.Alerts.ToList<Alert>();
         }
 
-        public UserAlert GetUserAlert(string user, int alert)
+        public UserAlert GetUserAlert(int id)
         {
-            return (UserAlert)context.UserAlerts.Where(u => u.Account.ID.Equals(user) && u.Alert.AlertID.Equals(alert));
+            return (UserAlert)context.UserAlerts.Find(id);
         }
 
         public IEnumerable<UserAlert> GetUserAlerts()
@@ -63,6 +63,26 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)
         {
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
+        }
+
+        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is TrendAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CheckAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CompareAlert);
+        }
+
+        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is SentimentAlert);
         }
 
         public void RemoveAlert(Alert alert)
@@ -83,6 +103,12 @@ namespace Integratie.DAL.Repositories
                 context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
             }
             await context.SaveChangesAsync();
+        }
+
+        public void UpdateUserAlert(UserAlert userAlert)
+        {
+            context.Entry(userAlert).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
 
         public CheckAlert FindCheckAlert(CheckAlert alert)
@@ -139,6 +165,12 @@ namespace Integratie.DAL.Repositories
                 return compareAlert;
             }
             return compareAlert;
+        }
+
+        public void RemoveUserAlert(UserAlert userAlert)
+        {
+            context.UserAlerts.Remove(userAlert);
+            context.SaveChanges();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace Integratie.MVC.Controllers
         GraphManager manager = new GraphManager();
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
+        AlertManager alertManager = new AlertManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -102,6 +105,41 @@ namespace Integratie.MVC.Controllers
             SubjectManager subjectmngr = new SubjectManager();
             IEnumerable<Subject> people=subjectmngr.GetPeopleByTown(gemeente);
             return View(people);
+        }
+
+        public ActionResult Alerts()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddUserAlert(AlertCreation alert)
+        {
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("Alerts", "Home", new { });
+
+            try
+            {
+                alertManager.AddUserAlert(User.Identity.GetUserId(), alert.AlertType, alert.Subject, alert.Web, alert.Mail, alert.App, alert.SubjectB, alert.Compare, alert.SubjectProperty, alert.Value);
+            }
+            catch (Exception)
+            {
+                return Json(new { Url = redirectUrl, status = "Error" });
+            }
+
+            return Json(new { Url = redirectUrl, status = "OK" });
+        }
+
+        [HttpPost]
+        public void UpdateUserAlert(AlertUpdate alert)
+        {
+            alertManager.UpdateUserAlert(alert.Id, alert.Web, alert.Mail, alert.App);
+        }
+
+        [HttpPost]
+        public void RemoveUserAlert(int id)
+        {
+            alertManager.RemoveUserAlert(id);
         }
     }
 }

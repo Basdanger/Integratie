@@ -29,6 +29,11 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjects();
         }
 
+        public List<string> GetSubjectNames()
+        {
+            return repo.GetNames();
+        }
+
         public Subject GetSubjectById(int id)
         {
             return repo.ReadSubjectById(id);
