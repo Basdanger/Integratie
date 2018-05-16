@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using Integratie.BL.Managers;
+using Quartz;
 using Quartz.Impl;
 using Quartz.Logging;
 using System;
@@ -38,27 +39,18 @@ namespace Integratie.Scheduler
                 await scheduler.Start();
 
                 // define the job and tie it to our HelloJob class
-                IJobDetail job = JobBuilder.Create<HelloJob>()
+                IJobDetail job = JobBuilder.Create<UpdateJob>()
                     .WithIdentity("job1", "group1")
                     .Build();
 
                 // Trigger the job to run now, and then repeat every 10 seconds
                 ITrigger trigger = TriggerBuilder.Create()
                     .WithIdentity("trigger1", "group1")
-                    .StartNow()
-                    .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(10)
-                        .RepeatForever())
+                    .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(2,0))
                     .Build();
 
                 // Tell quartz to schedule the job using our trigger
                 await scheduler.ScheduleJob(job, trigger);
-
-                // some sleep to show what's happening
-                await Task.Delay(TimeSpan.FromSeconds(60));
-
-                // and last shut down the scheduler when you are ready to close your program
-                await scheduler.Shutdown();
             }
             catch (SchedulerException se)
             {
@@ -93,11 +85,13 @@ namespace Integratie.Scheduler
         }
     }
 
-    public class HelloJob : IJob
+    public class UpdateJob : IJob
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            await Console.Out.WriteLineAsync("Greetings from HelloJob!");
+            FeedManager feedManager = new FeedManager();
+            await feedManager.UpdateFeeds();
+            await Console.Out.WriteLineAsync("Feeds Updated");
         }
     }
 }

@@ -9,21 +9,24 @@ using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Integratie.UI.Con
 {
     class Program
     {
-        private static AlertManager mgr = new AlertManager();
+        private static FeedManager mgr = new FeedManager();
 
         static void Main(string[] args)
         {
             //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
-            mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
-            Console.WriteLine("Alert added");
-            mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
-            Console.WriteLine("Alert added");
-            Console.ReadLine();
+            //mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
+            //Console.WriteLine("Alert added");
+            //mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
+            //Console.WriteLine("Alert added");
+            //File.WriteAllText(@"C:\Users\ImmortalShepard\test.txt", mgr.ReadFeeds());
+            //Console.WriteLine("done");
+            //Console.ReadLine();
         }
 
         //private static void PrintAllFeeds()
