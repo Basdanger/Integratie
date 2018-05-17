@@ -26,8 +26,8 @@ namespace Integratie.BL.Managers
                 Credentials = new System.Net.NetworkCredential("integratie.tesla@gmail.com", "PepeH4nds!"),
                 EnableSsl = true
             };
-            //string htmlMessage = @"<html><body>" + Body + @"<br><img src='cid:Graph' /></body></html>";
-            string htmlMessage = @"<html><body>" + name + @"<br><br>" + body + "<br><br>TeamTesla</body></html>";
+            //string htmlMessage = @"<html><body>" + body + @"<br><img src='cid:Graph' /></body></html>";
+            string htmlMessage = @"<html><body>" + name + @"<br><br>" + body + @"<br><br>TeamTesla</body></html>";
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
                                            htmlMessage,
                                            Encoding.UTF8,
@@ -44,7 +44,7 @@ namespace Integratie.BL.Managers
             mail.AlternateViews.Add(plainView);
             mail.AlternateViews.Add(htmlView);
             mail.IsBodyHtml = true;
-            mail.Subject = "SMTP Test";
+            mail.Subject = "Tesla Alert";
             using (smtpClient)
             {
                 await smtpClient.SendMailAsync(mail);
