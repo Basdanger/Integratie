@@ -14,9 +14,9 @@ namespace Integratie.BL.Managers
     {
         public LinkedResource LinkedResource { get; private set; }
 
-        public async Task SendMail(string Body,string to,string name)
+        public async Task SendMail(string body,string to,string name)
         {
-            MailMessage mail = new MailMessage("integratie.tesla@gmail.com", "marnick_huysmans@live.be");
+            MailMessage mail = new MailMessage("integratie.tesla@gmail.com", to);
             SmtpClient smtpClient = new SmtpClient
             {
                 Port = 587,
@@ -26,13 +26,14 @@ namespace Integratie.BL.Managers
                 Credentials = new System.Net.NetworkCredential("integratie.tesla@gmail.com", "PepeH4nds!"),
                 EnableSsl = true
             };
-            string htmlMessage = @"<html><body>" + Body + @"<br><img src='cid:Graph' /></body></html>";
+            //string htmlMessage = @"<html><body>" + body + @"<br><img src='cid:Graph' /></body></html>";
+            string htmlMessage = @"<html><body>" + name + @"<br><br>" + body + @"<br><br>TeamTesla</body></html>";
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
                                            htmlMessage,
                                            Encoding.UTF8,
                                            MediaTypeNames.Text.Html);
             // Create a plain text message for client that don't support HTML
-            AlternateView plainView = AlternateView.CreateAlternateViewFromString(Regex.Replace(htmlMessage, "<[^>]+?>", string.Empty), Encoding.UTF8, MediaTypeNames.Text.Plain);
+            AlternateView plainView = AlternateView.CreateAlternateViewFromString(name + " \n\n" + body + " \n\nTeamTesla", Encoding.UTF8, MediaTypeNames.Text.Plain);
             //LinkedResource graph = new LinkedResource(@"C:\Users\Marnick\Source\Repos\IntegratieProject\Integratie.BL\Managers\4.png","image/png");
             //graph.ContentId = "Graph";
             //graph.ContentType.MediaType = "image/png";
@@ -43,7 +44,7 @@ namespace Integratie.BL.Managers
             mail.AlternateViews.Add(plainView);
             mail.AlternateViews.Add(htmlView);
             mail.IsBodyHtml = true;
-            mail.Subject = "SMTP Test";
+            mail.Subject = "Tesla Alert";
             using (smtpClient)
             {
                 await smtpClient.SendMailAsync(mail);
