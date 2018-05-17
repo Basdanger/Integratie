@@ -42,24 +42,38 @@ namespace Integratie.MVC.Controllers
             var user= context.Users.Where(u => u.UserName.Equals(username)).First();
             return View(user);
         }
-        //public void DeleteUser(String username)
-        //{
-        //    ApplicationUser au = GetUser(username)
-        //    context.Users.Remove(applicationUser);
-        //}
-        //[HttpPost]
-        //public ActionResult DeleteUser(ApplicationUser applicationUser, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        context.Users.Remove(applicationUser);
-        //        return RedirectToAction("GetUsers");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        public ActionResult DeleteUser(String username)
+        {
+            var user = context.Users.Where(u => u.UserName.ToUpper().Equals(username)).First();
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult DeleteUser(ApplicationUser applicationUser, FormCollection collection)
+        {
+            try
+            {
+                context.Users.Remove(applicationUser);
+                context.SaveChanges();
+                return RedirectToAction("GetUsers");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult UpdateUser(String username)
+        {
+            var user = context.Users.Where(u => u.UserName.Equals(username)).First();
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult UpdateUser(ApplicationUser applicationUser, FormCollection collection)
+        {
+            context.Entry(applicationUser).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+            return RedirectToAction("GetUsers");
+        }
+
         public void ExportToCSV()
         {
             StringWriter sw = new StringWriter();
