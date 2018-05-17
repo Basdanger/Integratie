@@ -90,8 +90,11 @@ namespace Integratie.Scheduler
         public async Task Execute(IJobExecutionContext context)
         {
             FeedManager feedManager = new FeedManager();
+            AlertManager alertManager = new AlertManager();
             await feedManager.UpdateFeeds();
             await Console.Out.WriteLineAsync("Feeds Updated");
+            await alertManager.CheckAlerts();
+            await Console.Out.WriteLineAsync("Alerts Updated");
         }
     }
 }
