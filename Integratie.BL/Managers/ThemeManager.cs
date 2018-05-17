@@ -14,11 +14,13 @@ namespace Integratie.BL.Managers
     {
         private ThemeRepo repo;
         private SubjectRepo subjRepo;
+        private FeedRepo feedRepo;
 
         public ThemeManager()
         {
             repo = new ThemeRepo();
             subjRepo = new SubjectRepo();
+            feedRepo = new FeedRepo();
         }
 
         public IEnumerable<Theme> GetThemas()
@@ -39,15 +41,41 @@ namespace Integratie.BL.Managers
 
         private Theme UpdateTheme(Theme thema)
         {
-            thema.TopPersons = setTopPersons(thema.TermsList);
-
+            thema=setTopFive(thema.TermsList,thema);
+            thema.TermMentions = setTermMentions(thema.TermsList);
+            //thema.TopOrganisations = setTopOrganisations(thema.TermsList);
+            repo.UpdateThema(thema);
             return thema;
         }
-        
-        private string setTopPersons(List<string> termsList)
+        //Meer logica in repo?
+        private string setTopOrganisations(List<string> termsList)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<TermMention> setTermMentions(List<string> termsList)
+        {
+            List<TermMention> termMentionList = new List<TermMention>();
+            foreach(String t in termsList){
+                int counter = 0;
+                foreach (Feed f in feedRepo.ReadFeeds())
+                {
+                    if (f.GetWords().Contains(t)) {
+                        counter++;
+                    }
+                    TermMention termMention = new TermMention(t,counter);
+                    termMentionList.Add(termMention);
+                }
+            }
+            return termMentionList;
+        }
+
+        private Theme setTopFive(List<string> termsList,Theme thema)
         {
             string topPersons="";
-            Dictionary<Person, int> map = new Dictionary<Person, int>();
+            string topOrganisations = "";
+            Dictionary<Person, int> mapPerson = new Dictionary<Person, int>();
+            Dictionary<string, int> mapOrg = new Dictionary<string, int>();
             IEnumerable<Person> personen = subjRepo.GetPersonen();
             foreach(Person p in personen) {
                 int totalcounter = 0;
@@ -55,18 +83,37 @@ namespace Integratie.BL.Managers
                 foreach (Feed f in feeds) {
                     totalcounter = totalcounter + f.GetWords().Intersect(termsList).Count();
                 }
-                System.Diagnostics.Debug.WriteLine("Persoon: "+p.Full_Name+" Relevantie: " + totalcounter);
-                map.Add(p, totalcounter);
+                mapPerson.Add(p, totalcounter);
             }
-            var myList = map.ToList();
+            var myList = mapPerson.ToList();
             myList.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
-            for(int i=0;i<5;i++)
+
+            foreach (KeyValuePair<Person,int> p in myList) {
+                if (mapOrg.ContainsKey(p.Key.Organisation))
+                {
+                    int count;
+                    mapOrg.TryGetValue(p.Key.Organisation, out count);
+                    mapOrg[p.Key.Organisation] = count + p.Value;
+                }
+                else {
+                    mapOrg.Add(p.Key.Organisation, p.Value);
+
+                }
+                
+            }
+            var myList2 = mapOrg.ToList();
+            myList2.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+
+            for (int i=0;i<5;i++)
             {
                 topPersons = topPersons + myList.ElementAt(i).Key.Full_Name+',';
+                topOrganisations = topOrganisations + myList2.ElementAt(i).Key + ',';
             }
             topPersons = topPersons.Remove(topPersons.Length - 1);
-
-            return topPersons;
+            topOrganisations = topOrganisations.Remove(topPersons.Length - 1);
+            thema.TopPersons = topPersons;
+            thema.TopOrganisations = topOrganisations;
+            return thema;
         }
     }
 }

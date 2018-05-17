@@ -61,6 +61,7 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.OfType<Person>().Where(p => p.Town.Equals(town.ToUpper()));
         }
 
+        
         public IEnumerable<Person> GetPersonen()
         {
             return context.People.ToList();

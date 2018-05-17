@@ -2,6 +2,7 @@
 using Integratie.Domain.Entities.Subjects;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,5 +40,10 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.OfType<Theme>().First(t => t.ID.Equals(id));
         }
 
+        public void UpdateThema(Theme thema)
+        {
+            context.Entry(thema).State = EntityState.Modified;
+            context.SaveChanges();
+        }
     }
 }

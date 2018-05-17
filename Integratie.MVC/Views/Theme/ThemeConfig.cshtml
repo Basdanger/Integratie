@@ -20,7 +20,7 @@
         <th> 
             @Html.DisplayNameFor(model => model.Image)
         </th>
-        @*<th></th>*@
+        <th>Opties</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -34,11 +34,12 @@
         <td>
             <img src="@item.GetImageSrc()" width="30" height="30"/>
     </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+        <td>
+            @Html.ActionLink("Add Story","NewStory",new { id = item.ID })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+        </td>
     </tr>
 }
 
