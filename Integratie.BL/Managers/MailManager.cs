@@ -14,7 +14,7 @@ namespace Integratie.BL.Managers
     {
         public LinkedResource LinkedResource { get; private set; }
 
-        public async Task SendMail(string Body)
+        public async Task SendMail(string Body,string to,string name)
         {
             MailMessage mail = new MailMessage("integratie.tesla@gmail.com", "marnick_huysmans@live.be");
             SmtpClient smtpClient = new SmtpClient

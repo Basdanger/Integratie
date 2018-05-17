@@ -16,44 +16,58 @@ namespace Integratie.BL.Managers
 {
     public class AlertManager
     {
-        // test
         private AlertRepo repo = new AlertRepo();
-        public void CheckAlerts()
+        public async Task CheckAlerts()
         {
-            foreach (Alert a in repo.GetAlerts())
+            List<Alert> alerts = repo.GetAlerts().ToList();
+            List<Alert> trueAlerts = new List<Alert>();
+            foreach (Alert a in alerts)
             {
-                if (a.GetType() == typeof(CheckAlert))
+                a.Ring = false;
+                if (CheckAlert(a))
                 {
-                    if (CheckCheckAlert((CheckAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    } 
+                    a.Ring = true;
+                    trueAlerts.Add(a);
                 }
-                else if (a.GetType() == typeof(CompareAlert))
+            }
+            await repo.UpdateAlerts(alerts);
+
+            foreach (Alert a in trueAlerts)
+            {
+                MailManager mailManager = new MailManager();
+                List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
+                foreach (UserAlert uA in userAlerts)
                 {
-                    if (CheckCompareAlert((CompareAlert)a))
+                    uA.Show = true;
+                    if (uA.Mail)
                     {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
+                        await mailManager.SendMail("test",uA.Account.Mail,uA.Account.Name);
+                    }
+                    if (uA.App)
+                    {
+
                     }
                 }
-                else if (a.GetType() == typeof(TrendAlert))
-                {
-                    if (CheckTrendAlert((TrendAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    }
-                }
-                else if (a.GetType() == typeof(SentimentAlert))
-                {
-                    if (CheckSentimentAlert((SentimentAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    }
-                }
+            }
+        }
+
+        private bool CheckAlert(Alert alert)
+        {
+            if (alert.GetType() == typeof(CheckAlert))
+            {
+                return CheckCheckAlert((CheckAlert)alert);
+            }
+            else if (alert.GetType() == typeof(CompareAlert))
+            {
+                return CheckCompareAlert((CompareAlert)alert);
+            }
+            else if (alert.GetType() == typeof(TrendAlert))
+            {
+                return CheckTrendAlert((TrendAlert)alert);
+            }
+            else
+            {
+                return CheckSentimentAlert((SentimentAlert)alert);
             }
         }
 
@@ -419,8 +433,6 @@ namespace Integratie.BL.Managers
 
         private void Validate(Alert alert)
         {
-            //Validator.ValidateObject(ticket, new ValidationContext(ticket), validateAllProperties: true);
-
             List<ValidationResult> errors = new List<ValidationResult>();
             bool valid = Validator.TryValidateObject(alert, new ValidationContext(alert), errors, validateAllProperties: true);
 
