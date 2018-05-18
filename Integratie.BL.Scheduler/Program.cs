@@ -42,15 +42,23 @@ namespace Integratie.Scheduler
                 IJobDetail job = JobBuilder.Create<UpdateJob>()
                     .WithIdentity("job1", "group1")
                     .Build();
+                IJobDetail job2 = JobBuilder.Create<ReviewJob>()
+                    .WithIdentity("job2", "group2")
+                    .Build();
 
                 // Trigger the job to run now, and then repeat every 10 seconds
                 ITrigger trigger = TriggerBuilder.Create()
                     .WithIdentity("trigger1", "group1")
                     .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(2,0))
                     .Build();
+                ITrigger trigger2 = TriggerBuilder.Create()
+                    .WithIdentity("trigger2", "group2")
+                    .WithSchedule(CronScheduleBuilder.WeeklyOnDayAndHourAndMinute(DayOfWeek.Monday, 3, 0))
+                    .Build();
 
                 // Tell quartz to schedule the job using our trigger
                 await scheduler.ScheduleJob(job, trigger);
+                await scheduler.ScheduleJob(job2, trigger2);
             }
             catch (SchedulerException se)
             {
@@ -89,12 +97,24 @@ namespace Integratie.Scheduler
     {
         public async Task Execute(IJobExecutionContext context)
         {
+            DateTime date = DateTime.Now;
             FeedManager feedManager = new FeedManager();
             AlertManager alertManager = new AlertManager();
-            await feedManager.UpdateFeeds();
+            await feedManager.UpdateFeeds(date);
             await Console.Out.WriteLineAsync("Feeds Updated");
-            await alertManager.CheckAlerts();
+            await alertManager.CheckAlerts(date);
             await Console.Out.WriteLineAsync("Alerts Updated");
+        }
+    }
+
+    public class ReviewJob : IJob
+    {
+        public async Task Execute(IJobExecutionContext context)
+        {
+            DateTime date = DateTime.Now;
+            SubjectManager subjectManager = new SubjectManager();
+            await subjectManager.WeeklyReview(date);
+            await Console.Out.WriteLineAsync("Weekly Review Updated");
         }
     }
 }

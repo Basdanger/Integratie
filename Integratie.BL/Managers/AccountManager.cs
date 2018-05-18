@@ -8,12 +8,13 @@ using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.BL.Managers
 {
     public class AccountManager : IAccountManager
     {
-        private readonly IAccountRepo repo;
+        private readonly AccountRepo repo;
 
         public AccountManager()
         {
@@ -62,6 +63,22 @@ namespace Integratie.BL.Managers
 
             if (!valid)
                 throw new ValidationException("Account not valid!");
+        }
+
+        public void AddFollow(string accountId,int subjectId)
+        {
+            Account account = repo.ReadAccountById(accountId);
+            SubjectManager subjectManager = new SubjectManager(repo.GetContext());
+            account.Follows.Add(subjectManager.GetSubjectById(subjectId));
+            repo.UpdateAccount(account);
+        }
+
+        public void RemoveFollow(string accountId, int subjectId)
+        {
+            Account account = repo.ReadAccountById(accountId);
+            Subject subject = account.Follows.Find(f => f.ID.Equals(subjectId));
+            account.Follows.Remove(subject);
+            repo.UpdateAccount(account);
         }
     }
 }

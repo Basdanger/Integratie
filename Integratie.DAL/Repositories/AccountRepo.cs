@@ -23,6 +23,11 @@ namespace Integratie.DAL.Repositories
             this.context = context;
         }
 
+        public DashBoardDbContext GetContext()
+        {
+            return context;
+        }
+
         public Account CreateAccount(string id, string name, string mail)
         {
             Account account = new Account(id, name, mail);

@@ -17,14 +17,14 @@ namespace Integratie.BL.Managers
     public class AlertManager
     {
         private AlertRepo repo = new AlertRepo();
-        public async Task CheckAlerts()
+        public async Task CheckAlerts(DateTime now)
         {
             List<Alert> alerts = repo.GetAlerts().ToList();
             List<Alert> trueAlerts = new List<Alert>();
             foreach (Alert a in alerts)
             {
                 a.Ring = false;
-                if (CheckAlert(a))
+                if (CheckAlert(a,now))
                 {
                     a.Ring = true;
                     trueAlerts.Add(a);
@@ -43,7 +43,7 @@ namespace Integratie.BL.Managers
                     {
                         await mailManager.SendMail("test",uA.Account.Mail,uA.Account.Name);
                     }
-                    if (uA.App)
+                    if (uA.App && uA.Account.DeviceId != null)
                     {
 
                     }
@@ -51,43 +51,47 @@ namespace Integratie.BL.Managers
             }
         }
 
-        private bool CheckAlert(Alert alert)
+        private bool CheckAlert(Alert alert,DateTime now)
         {
             if (alert.GetType() == typeof(CheckAlert))
             {
-                return CheckCheckAlert((CheckAlert)alert);
+                return CheckCheckAlert((CheckAlert)alert,now);
             }
             else if (alert.GetType() == typeof(CompareAlert))
             {
-                return CheckCompareAlert((CompareAlert)alert);
+                return CheckCompareAlert((CompareAlert)alert,now);
             }
             else if (alert.GetType() == typeof(TrendAlert))
             {
-                return CheckTrendAlert((TrendAlert)alert);
+                return CheckTrendAlert((TrendAlert)alert,now);
             }
             else
             {
-                return CheckSentimentAlert((SentimentAlert)alert);
+                return CheckSentimentAlert((SentimentAlert)alert,now);
             }
         }
 
-        private bool CheckSentimentAlert(SentimentAlert alert)
+        private bool CheckSentimentAlert(SentimentAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, double> valuePairs = new Dictionary<string, double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             int feedCount = feeds.Count();
@@ -105,6 +109,8 @@ namespace Integratie.BL.Managers
                         posNegFeeds++;
                     }
                 }
+                valuePairs.Add("Positive", posNegFeeds);
+                valuePairs.Add("Negative", feedCount - posNegFeeds);
                 result = posNegFeeds / feedCount;
             }
             else
@@ -117,9 +123,14 @@ namespace Integratie.BL.Managers
                     {
                         posNegFeeds++;
                     }
+                    valuePairs.Add("Positive", feedCount - posNegFeeds);
+                    valuePairs.Add("Negative", posNegFeeds);
                 }
                 result = (posNegFeeds / feedCount) * 100;
             }
+
+            GraphManager graphManager = new GraphManager(repo.GetContext());
+            alert.GraphId = graphManager.AddAlertBarGraph(valuePairs, start, end);
 
             switch (alert.Operator)
             {
@@ -136,36 +147,50 @@ namespace Integratie.BL.Managers
                     }
                     break;
             }
-
+            
             return false;
         }
 
-        private bool CheckCheckAlert(CheckAlert alert)
+        private bool CheckCheckAlert(CheckAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
+            List<double> values = new List<double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name,DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name,start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             int fCPast = 0;
-            foreach (Feed f in feeds)
+            
+            int fc = 0;
+
+            for (int i = 6; i > 0; i--)
             {
-                if (f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
+                foreach (Feed f in feeds)
                 {
-                    fCPast++;
+                    if (start.AddDays(6 - i).Ticks <= f.Date.Ticks && f.Date.Ticks < end.AddDays(-i).Ticks)
+                    {
+                        fc++;
+                    }
                 }
+                fCPast += fc;
+                values.Add(fc);
+                fc = 0;
             }
 
             fCPast = fCPast / 6;
@@ -175,11 +200,13 @@ namespace Integratie.BL.Managers
             int fCNow = 0;
             foreach (Feed f in subject.Feeds)
             {
-                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
                     fCNow++;
                 }
             }
+            values.Add(fCNow);
+            valuePairs.Add(subject.Name, values);
 
             int result;
 
@@ -191,7 +218,10 @@ namespace Integratie.BL.Managers
             {
                 result = fCNow - fCPast;
             }
-            
+
+            GraphManager graphManager = new GraphManager(repo.GetContext());
+            alert.GraphId = graphManager.AddAlertLineGraph(valuePairs, start, end);
+
             switch (alert.Operator)
             {
                 case Operator.GT:
@@ -211,7 +241,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckCompareAlert(CompareAlert alert)
+        private bool CheckCompareAlert(CompareAlert alert,DateTime now)
         {
             Subject subjectA = alert.SubjectA;
             Subject subjectB = alert.SubjectB;
@@ -223,24 +253,33 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feedsA;
             IEnumerable<Feed> feedsB;
 
+            DateTime end = DateTime.Now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, double> valuePairs = new Dictionary<string, double>();
+
             if (subjectA.GetType() == typeof(Person))
             {
-                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, start);
             }
             else if (subjectA.GetType() == typeof(Organisation))
             {
-                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, start);
             }
             else
             {
-                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, start);
             }
 
             fcA = feedsA.Count();
+            valuePairs.Add(subjectA.Name, fcA);
             fcB = feedsB.Count();
+            valuePairs.Add(subjectB.Name, fcB);
+
+            GraphManager graphManager = new GraphManager(repo.GetContext());
+            alert.GraphId = graphManager.AddAlertBarGraph(valuePairs, start, end);
 
             switch (alert.Operator)
             {
@@ -260,7 +299,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckTrendAlert(TrendAlert alert)
+        private bool CheckTrendAlert(TrendAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
 
@@ -268,51 +307,57 @@ namespace Integratie.BL.Managers
             int fcToday = 0;
             int fcHistory = 0;
             float avarage = 0;
-            float[] avarages = new float[days];
             double std = 0;
             double zScore = 0;
 
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = DateTime.Now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
+            List<double> values = new List<double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             foreach (Feed f in feeds)
             {
-                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
                     fcToday++;
                 }
             }
 
-            for (int i = 0; i < days; i++)
+            for (int i = 6; i > 0; i--)
             {
                 foreach (Feed f in feeds)
                 {
-                    if (f.Date.Ticks >= DateTime.Now.AddDays(-2 - i).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1 - i).Ticks)
+                    if (start.AddDays(6 - i).Ticks <= f.Date.Ticks && f.Date.Ticks < end.AddDays(-i).Ticks)
                     {
                         fcHistory++;
                     }
                 }
-                avarages[i] = fcHistory;
                 avarage += fcHistory;
+                values.Add(fcHistory);
                 fcHistory = 0;
             }
 
+            valuePairs.Add(subject.Name, values);
+
             avarage = (float)avarage / days;
 
-            foreach (float item in avarages)
+            foreach (float item in values)
             {
                 std += Math.Pow(item - avarage, 2);
             }
@@ -320,6 +365,9 @@ namespace Integratie.BL.Managers
             std = Math.Sqrt(std / days);
 
             zScore = ((float)fcToday - avarage) / std;
+
+            GraphManager graphManager = new GraphManager(repo.GetContext());
+            alert.GraphId = graphManager.AddAlertLineGraph(valuePairs, start, end);
 
             if (zScore > 2)
             {

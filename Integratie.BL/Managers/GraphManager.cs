@@ -13,7 +13,18 @@ namespace Integratie.BL.Managers
 {
     public class GraphManager
     {
-        IGraphRepo GraphRepo = new GraphRepo();
+        IGraphRepo GraphRepo;
+
+        public GraphManager()
+        {
+            GraphRepo = new GraphRepo();
+        }
+
+        public GraphManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        {
+            GraphRepo = new GraphRepo(dashboardDbContext);
+        }
+
         FeedManager feedManager = new FeedManager();
         public void AddGraph(int userId, Graph graph)
         {
@@ -144,6 +155,29 @@ namespace Integratie.BL.Managers
                 }
             }
             return graph;
+        }
+
+        public int AddAlertLineGraph(Dictionary<string,List<double>> valuePairs,DateTime start,DateTime end)
+        {
+            Graph graph = new Graph();
+            graph.LineValues = valuePairs;
+            graph.StartDate = start;
+            graph.EndDate = end;
+            graph.CalcType = CalcType.AVG;
+            graph.IntervalSize = 1;
+            graph.GraphType = GraphType.Linechart;
+            return GraphRepo.AddGraph(graph).GraphId;
+        }
+
+        public int AddAlertBarGraph(Dictionary<string, double> valuePairs, DateTime start, DateTime end)
+        {
+            Graph graph = new Graph();
+            graph.BarValues = valuePairs;
+            graph.StartDate = start;
+            graph.EndDate = end;
+            graph.CalcType = CalcType.Sum;
+            graph.GraphType = GraphType.Barchart;
+            return GraphRepo.AddGraph(graph).GraphId;
         }
     }
 }

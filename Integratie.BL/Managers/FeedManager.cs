@@ -140,7 +140,7 @@ namespace Integratie.BL.Managers
             return filteredList;
         }
 
-        public async Task UpdateFeeds()
+        public async Task UpdateFeeds(DateTime now)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://kdg.textgain.com/query");
             httpWebRequest.Method = "POST";
@@ -150,7 +150,7 @@ namespace Integratie.BL.Managers
             
             using (var streamWriter = new StreamWriter(await httpWebRequest.GetRequestStreamAsync()))
             {
-                string date = String.Format("{0:yyyy MM dd HH:mm:ss}", DateTime.Now.AddDays(-1));
+                string date = String.Format("{0:yyyy MM dd HH:mm:ss}", now.AddDays(-1));
                 string json = "{ \"since\":\"" + date + "\" }";
 
                 streamWriter.Write(json);

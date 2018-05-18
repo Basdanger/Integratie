@@ -119,5 +119,14 @@ namespace Integratie.DAL.Repositories
             }
             context.SaveChanges();
         }
+
+        public async Task UpdateSubjects(List<Subject> subjects)
+        {
+            foreach (Subject subject in subjects)
+            {
+                context.Entry(subject).State = System.Data.Entity.EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
+        }
     }
 }

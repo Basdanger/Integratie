@@ -11,7 +11,18 @@ namespace Integratie.DAL.Repositories
 {
     public class GraphRepo : IGraphRepo
     {
-        DashBoardDbContext context = new DashBoardDbContext();
+        DashBoardDbContext context;
+
+        public GraphRepo()
+        {
+            context = new DashBoardDbContext();
+        }
+
+        public GraphRepo(DashBoardDbContext context)
+        {
+            this.context = context;
+        }
+
         public Graph AddGraph(Graph graph)
         {
 

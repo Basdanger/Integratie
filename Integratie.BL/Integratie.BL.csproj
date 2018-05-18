@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\AlertManager.cs" />
-    <Compile Include="Managers\DashboardDbContext.cs" />
     <Compile Include="Managers\DashboardManager.cs" />
     <Compile Include="Managers\FeedManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
