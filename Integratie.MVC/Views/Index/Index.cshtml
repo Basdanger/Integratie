@@ -7,21 +7,36 @@
 <script src="@Url.Content("~/Scripts/slick.min.js")"></script>
 
 
-<section class="regular slider" style="height:350px; margin:0;">
+<section class="regular slider TeslaIndexSlider" style="height:350px; margin:0;margin-top:-28px;">
     <div>
         <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Bart.jpg")">
-        <h1 style="color:White;position:absolute; top:0px;">Bart De wever</h1>
+        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Bart De wever</h1>
+        <h2 style="color:White;position:absolute; width:100vw; top:180px;"><span class="TeslaIndexNumber">103 Positive tweets</span> in the last 3 days.</h2>
     </div>
     <div>
         <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Maggie.jpg")">
-        <h1 style="color:White;position:absolute; top:0px;">Maggie De Block</h1>
+        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Maggie De Block</h1>
+        <h2 style="color:White;position:absolute; width:100vw; top:180px;"><span class="TeslaIndexNumber">Trending now</span> among 25+ females.</h2>
     </div>
     <div>
         <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/theo.jpg")">
-        <h1 style="color:white;position:absolute; top:0px;  z-index:20;"><b>Theo Francken:</b> 731 males have tweeted something about him.</h1>
+        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Theo Francken</h1>
+        <h2 style="color:White;position:absolute; width:100vw; top:180px;">An <span class="TeslaIndexNumber">AVG of 3</span> tweets per day.</h2>
     </div>
 </section>
-
+<div class="container TeslaIndexContainer">
+<div class="row">
+    <div class="col-sm TeslaIndexIcon">
+        <center><i class="fa fa-fw fa-tachometer "></i></center>
+    </div>
+    <div class="col-sm TeslaIndexIcon">
+        <center><i class="fa fa-fw fa-wrench"></i></center>
+    </div>
+    <div class="col-sm TeslaIndexIcon">
+        <center><i class="fa fa-fw fa-safari"></i></center>
+    </div>
+</div>
+</div>
 <script>
     $(".regular").slick({
         dots: true,
