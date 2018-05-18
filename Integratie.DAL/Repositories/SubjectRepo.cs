@@ -50,7 +50,10 @@ namespace Integratie.DAL.Repositories
         {
             return context.Subjects.First(s => s.Name.Equals(name.ToUpper()));
         }
-
+        public IEnumerable<Person> ReadPeopleByName(string name)
+        {
+            return context.People.Where(s => s.Full_Name.Equals(name.ToUpper()));
+        }
         public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
             return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();

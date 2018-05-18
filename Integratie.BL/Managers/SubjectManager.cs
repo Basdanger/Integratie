@@ -43,6 +43,10 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadSubjectByName(name);
         }
+        public IEnumerable<Person> GetPeopleByName(string name)
+        {
+            return repo.ReadPeopleByName(name);
+        }
 
         public IEnumerable<Person> GetPeopleByOrganisation(string orginasation)
         {

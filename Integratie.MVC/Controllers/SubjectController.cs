@@ -27,9 +27,18 @@ namespace Integratie.MVC.Controllers
         {
             return View();
         }
-        public ActionResult Personen()
+        //public ActionResult Personen()
+        //{
+        //    IEnumerable<Person> personen = mgr.GetPersonen();
+        //    return View(personen);
+        //}
+        public ActionResult Personen(string option, string search)
         {
             IEnumerable<Person> personen = mgr.GetPersonen();
+            if (option == "Name")
+            {
+                personen = mgr.GetPeopleByName(search);
+            }
             return View(personen);
         }
         public ActionResult Persoon(int id, String Full_Name)
