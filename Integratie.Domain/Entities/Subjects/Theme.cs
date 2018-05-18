@@ -12,10 +12,10 @@ namespace Integratie.Domain.Entities.Subjects
     {
         public String Terms { get; set; }
         public byte[] Image { get; set; }
-        public List<TermMention> TermMentions { get; set; }
+        public virtual List<TermMention> TermMentions { get; set; }
         public String TopPersons { get; set; }
         public String TopOrganisations { get; set; }
-        public List<Story> Stories { get; set; }
+        public virtual List<Story> Stories { get; set; }
 
 
         [NotMapped]

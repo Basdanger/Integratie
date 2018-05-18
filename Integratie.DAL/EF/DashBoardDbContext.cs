@@ -54,5 +54,7 @@ namespace Integratie.DAL.EF
                 .WithOptionalDependent()
                 .WillCascadeOnDelete(true);
         }
+
+        public System.Data.Entity.DbSet<Integratie.Domain.Entities.Subjects.Story> Stories { get; set; }
     }
 }

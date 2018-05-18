@@ -43,31 +43,41 @@ namespace Integratie.BL.Managers
         {
             thema=setTopFive(thema.TermsList,thema);
             thema.TermMentions = setTermMentions(thema.TermsList);
-            //thema.TopOrganisations = setTopOrganisations(thema.TermsList);
-            repo.UpdateThema(thema);
+   
             return thema;
         }
-        //Meer logica in repo?
-        private string setTopOrganisations(List<string> termsList)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private List<TermMention> setTermMentions(List<string> termsList)
         {
             List<TermMention> termMentionList = new List<TermMention>();
             foreach(String t in termsList){
                 int counter = 0;
+                TermMention termMention=null;
                 foreach (Feed f in feedRepo.ReadFeeds())
                 {
                     if (f.GetWords().Contains(t)) {
                         counter++;
                     }
-                    TermMention termMention = new TermMention(t,counter);
-                    termMentionList.Add(termMention);
+                    termMention = new TermMention(t,counter);
+                    
                 }
+                termMentionList.Add(termMention);
             }
             return termMentionList;
+        }
+
+        public void AddStory(Story story, int themaId)
+        {
+            repo.addStory(story);
+            story.Date = DateTime.Now;
+            Theme thema=repo.GetThema(themaId);
+            if (thema.Stories == null) {
+                thema.Stories = new List<Story>();
+            }
+            thema.Stories.Add(story);
+            
+            repo.UpdateThema(thema);
         }
 
         private Theme setTopFive(List<string> termsList,Theme thema)
@@ -110,7 +120,7 @@ namespace Integratie.BL.Managers
                 topOrganisations = topOrganisations + myList2.ElementAt(i).Key + ',';
             }
             topPersons = topPersons.Remove(topPersons.Length - 1);
-            topOrganisations = topOrganisations.Remove(topPersons.Length - 1);
+            topOrganisations = topOrganisations.Remove(topOrganisations.Length - 1);
             thema.TopPersons = topPersons;
             thema.TopOrganisations = topOrganisations;
             return thema;

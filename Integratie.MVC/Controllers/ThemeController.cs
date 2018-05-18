@@ -45,5 +45,19 @@ namespace Integratie.MVC.Controllers
 
             return View(thema);
         }
+
+        public ActionResult CreateStory(int themaId) {
+            ViewBag.themaId = themaId;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateStory(Story story, int themaId)
+        {
+            themeManager.AddStory(story, themaId);
+
+            return RedirectToAction("Theme",new { id = themaId });
+        }
     }
 }

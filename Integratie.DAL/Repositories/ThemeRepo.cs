@@ -35,6 +35,11 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public void addStory(Story story) {
+            context.Stories.Add(story);
+            context.SaveChanges();
+        }
+
         public Theme GetThema(int id)
         {
             return context.Subjects.OfType<Theme>().First(t => t.ID.Equals(id));
@@ -45,5 +50,6 @@ namespace Integratie.DAL.Repositories
             context.Entry(thema).State = EntityState.Modified;
             context.SaveChanges();
         }
+
     }
 }
