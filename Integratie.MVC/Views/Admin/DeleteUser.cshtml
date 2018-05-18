@@ -1,4 +1,4 @@
-﻿@model Integratie.MVC.Models.ApplicationUser
+﻿@model Integratie.MVC.Models.DeleteUserViewModel
 @Html.HiddenFor(model => model.Id)
 <h2>Wil je @Html.DisplayFor(model => model.UserName) echt verwijderen?</h2>
 <dt>
@@ -7,8 +7,6 @@
 <dd>@Html.DisplayFor(model => model.FirstName)</dd>
 <dt>E-mail:</dt>
 <dd>@Html.DisplayFor(model => model.Email)</dd>
-<dd>Rol</dd>
-<dt>@Html.DisplayFor(model => model.Roles)</dt>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken(){
