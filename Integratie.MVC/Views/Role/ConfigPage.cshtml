@@ -4,17 +4,12 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
-    @*<div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Create Admin", "Register", "Role")</li>
-        </ul>
-    </div>*@
+    
     <button>
         @Html.ActionLink("Create Admin", "Register", "Role")
     </button>
     <button>
-        @Html.ActionLink("Personalize Data", "ConfigPage", "Role")
+        @Html.ActionLink("List Admins", "GetAdmins", "SuperAdmin")
     </button>
 
     @*<div class="navbar-collapse collapse">
