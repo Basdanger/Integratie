@@ -44,18 +44,7 @@
                 <input type="number" class="form-control" id="DaysDate">
 
                 <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
-                <select style="display:none" class="form-control" id="IntervalSelect">
-                    <option>1 Day</option>
-                    <option>2 Days</option>
-                    <option>3 Days</option>
-                    <option>4 Days</option>
-                    <option>5 Days</option>
-                    <option>6 Days</option>
-                    <option>7 Days</option>
-                    <option>8 Days</option>
-                    <option>9 Days</option>
-                    <option>10 Days</option>
-                </select>
+                <input type="number" class="form-control" id="IntervalSelect">
             </div>
         </div>
         <!--FILTERS-->
@@ -439,6 +428,7 @@
         var ed = $('#GraphEndDate').data('datepicker').getFormattedDate('dd-mm-yyyy');
         if (bd == "") { $('#GraphStartDate').addClass("error"); errors.push("No start date entered"); }
         if (ed == "") { $('#GraphEndDate').addClass("error"); errors.push("No start end entered"); }
+        if ((GraphSort == "Barchart" || GraphSort == "LineChart") && (PersonCompare == "" || PersonCompare == null)) errors.push("No compare subjects entered.")
 
         logErrors();
         if (errors.length == 0) SendGraphSubmit();
@@ -459,10 +449,12 @@
             PeriodSort: PeriodSort,
             PeriodLength: $('#DaysDate').val(),
             ComparePersons: PersonCompare,
-            CompareSort: Compare
+            CompareSort: Compare,
+            IntervalSize: $('#IntervalSelect').val()
 
         };
         if (Compare == "Politicians" && GraphSort == "Barchart") s.PersonFilter = "";
+        if (Compare == "Politicians" && GraphSort == "LineChart") s.PersonFilter = "";
 
         s = (JSON.stringify(s));
         console.log(s);

@@ -8,7 +8,7 @@
 <!-- MARNICK CHART-->
 <!-- Jan -->
 <div class="gridsterMenu">
-    <span>Dashboard </span>
+    <span>Dashboard</span>
 
     <i class="fa fa-fw fa-wrench teslaDashboardEdit"></i>
     <i class="fa fa-fw fa-plus teslaDashboardAdd"></i>
@@ -65,13 +65,13 @@
         gridster.disable();
         gridster.disable_resize();
 
-        @foreach (DashboardItem x in Model)
-        {
+        @foreach (DashboardItem x in Model){
+
             if (x.Graph.GraphType == GraphType.Barchart) {
-            <text>
-        var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
-            + '<div class="TeslaBarInformation">'
-            +'<span class="teslaTag">@x.Graph.CalcType</span>'
+                <text>
+                var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
+                + '<div class="TeslaBarInformation">'
+                +'<span class="teslaTag">@x.Graph.CalcType</span>'
                 @{
                     if(x.Graph.PersonFilter != "")
                     {
@@ -93,15 +93,14 @@
 
                 }
                 + '<span class="teslaTag"> @{if (x.Graph.PeriodSort == PeriodSort.Fixed) { <text>@x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()</text> } else {<text> @x.Graph.PeriodLength.ToString() Days</text> } } '
-
-
-            + '</li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
-            gridster.add_widget.apply(gridster, widget);
-            </text>}
+                + '</li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
+                gridster.add_widget.apply(gridster, widget);
+                </text>
+            }
             if (x.Graph.GraphType == GraphType.Single)
             {
-            <text>
-            var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '">'
+                <text>
+                var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '">'
                 +'<div class="TeslaSingleInfoCalculation">@x.Graph.CalcType</div>'
                 + '<div class="TeslaGraphDelete hide">X</div>'
                 + '<div class="TeslaSingleContainer">'
@@ -129,14 +128,46 @@
                 }
                 + '<span class="teslaTag"> @{if (x.Graph.PeriodSort == PeriodSort.Fixed) { <text>@x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()</text> } else {<text> @x.Graph.PeriodLength.ToString() Days</text> } } '
                 + '</span></div ></div></li > ', @x.X_Size, @x.Y_Size, @x.Column, @x.Row]
-            gridster.add_widget.apply(gridster, widget);
+                gridster.add_widget.apply(gridster, widget);
 
-            </text>
+                </text>
+
+            }
+            if (x.Graph.GraphType == GraphType.Linechart)
+            {
+                <text>
+                var widget = ['<li data-id="' + @x.Id +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
+                + '<div class="TeslaBarInformation">'
+                +'<span class="teslaTag">@x.Graph.CalcType</span>'
+                @{
+                    if(x.Graph.PersonFilter != "")
+                    {
+                        foreach(string ss in x.Graph.PersonFilter.Split(',').Select(s => s.Trim()))
+                        {
+                        <text>+ '<span class="teslaTag">@ss</span>'</text>
+                        }
+                    }
+
+                    if(x.Graph.GenderFilter != GenderFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.GenderFilter</span>'</text>
+                    }
+
+                    if(x.Graph.AgeFilter != AgeFilter.Both)
+                    {
+                        <text>+ '<span class="teslaTag">@x.Graph.AgeFilter</span>'</text>
+                    }
+
+                }
+                + '<span class="teslaTag"> @{if (x.Graph.PeriodSort == PeriodSort.Fixed) { <text>@x.Graph.StartDate.ToShortDateString() - @x.Graph.EndDate.ToShortDateString()</text> } else {<text> @x.Graph.PeriodLength.ToString() Days</text> } } '
+                + '</li>', @x.X_Size, @x.Y_Size,@x.Column,@x.Row]
+                gridster.add_widget.apply(gridster, widget);
+                </text>
             }
 
-            x.GridId = counter;
-            counter++;
-        }
+                x.GridId = counter;
+                counter++;
+         }
             $('.teslaDashboardEdit').on('click', function () {
                 if (enabled) {
                     $(this).removeClass('selected');
@@ -161,7 +192,7 @@
                 gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
                     getRandomInt(1, 4), getRandomInt(1, 4));
                 console.log("clicked");
-            });
+        });
 
         $('#js2').on('click', function () {
                 enabled = !enabled;
@@ -247,56 +278,120 @@
 </script>
 <!--Marnick-->
 <script>
-    @for (int y = 0; y < counter; y++) {
+    @for (int y = 0; y < counter; y++)
+    {
 
-        foreach(DashboardItem dbi in Model)
+        foreach (DashboardItem dbi in Model)
         {
-            if( dbi.Graph.GraphType == GraphType.Barchart)
+            if (dbi.Graph.GraphType == GraphType.Barchart)
             {
-                     <text>
-                    $(function () {
-                            var ctx = document.getElementById("myChart" + @dbi.Id).getContext('2d');
-                            var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                                labels: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Keys.ToList())),
-                datasets: [{
-                                    label: '# of tweets',
-                    data: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Values.ToList())),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
+                             <text>
+                            $(function () {
+                                    var ctx = document.getElementById("myChart" + @dbi.Id).getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                                        labels: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Keys.ToList())),
+                        datasets: [{
+                                            label: '# of tweets',
+                            data: @Html.Raw(JsonConvert.SerializeObject(dbi.Graph.BarValues.Values.ToList())),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                        }
+                                    }
+                                });
+                });
+                </text>
+            }
+            if (dbi.Graph.GraphType == GraphType.Linechart)
+            {
+
+                int ii = 0;
+                            <text>
+                            var colors = [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ];
+                            $(function () {
+                                var ctx = document.getElementById("myChart" + @dbi.Id).getContext('2d');
+                                var chart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        @{
+                                        DateTime dt = dbi.Graph.StartDate;
+                                            <text>labels:[ </text>while(dt < dbi.Graph.EndDate.AddDays(dbi.Graph.IntervalSize))
+                                            {
+                                                <text>"@dt.ToShortDateString()",</text>
+                                                dt = dt.AddDays(dbi.Graph.IntervalSize);
+                                            }
+    }] 
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        },
+                                        tooltips: {
+                                            mode: 'index'
                                         }
-                                    }]
-                }
-                            }
-                        });
-    });
-    </text>
-                }
+                                    }
+                                });
+                                chart.data.datasets = [
+                    @foreach (var item in dbi.Graph.LineValues)
+                    {
+                            <text>
+                                {
+
+                                    label: '@item.Key',
+                                    data:  @Html.Raw(JsonConvert.SerializeObject(item.Value)),
+                                    backgroundColor: colors[@ii],
+                                    borderColor: colors[@ii],
+                                    borderWidth: 2,
+                                    fill: false
+                                },
+                    </text>
+                        ii++;
+                    }
+                        ];
+
+                        chart.update()
+                    });
+                </text>
             }
         }
+    }
+
 
 </script>
 
