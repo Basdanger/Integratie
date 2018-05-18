@@ -13,5 +13,6 @@ namespace Integratie.Domain.Entities.Alerts
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AlertID { get; set; }
         public bool Ring { get; set; } = false;
+        public virtual Graph.Graph Graph { get; set; }
     }
 }
