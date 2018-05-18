@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link href="@Url.Content("~/Content/slick.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/slick-theme.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/slick.min.js")"></script>
+
+
+<section class="regular slider" style="height:350px; margin:0;">
+    <div>
+        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Bart.jpg")">
+        <h1 style="color:White;position:absolute; top:0px;">Bart De wever</h1>
+    </div>
+    <div>
+        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Maggie.jpg")">
+        <h1 style="color:White;position:absolute; top:0px;">Maggie De Block</h1>
+    </div>
+    <div>
+        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/theo.jpg")">
+        <h1 style="color:white;position:absolute; top:0px;  z-index:20;"><b>Theo Francken:</b> 731 males have tweeted something about him.</h1>
+    </div>
+</section>
+
+<script>
+    $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
+</script>
+

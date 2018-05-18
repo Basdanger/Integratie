@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using Integratie.DAL.EF;
 
 namespace Integratie.MVC
 {
@@ -14,6 +15,10 @@ namespace Integratie.MVC
     {
         protected void Application_Start()
         {
+            //Dit forceerde de Seed functie
+            //System.Data.Entity.Database.SetInitializer(new DashboardDbInitializer());
+            //DashBoardDbContext db = new DashBoardDbContext();
+            //db.Database.Initialize(true);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

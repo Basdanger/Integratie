@@ -19,6 +19,7 @@ namespace Integratie.BL.Managers
         private AlertRepo repo = new AlertRepo();
         public void CheckAlerts()
         {
+            NotificationManager notificationManager = new NotificationManager();
             MailManager mailManager = new MailManager();
             foreach (Alert a in repo.GetAlerts())
             {
@@ -69,7 +70,7 @@ namespace Integratie.BL.Managers
                         }
                         if (userAlert.App)
                         {
-
+                            notificationManager.sendNotification("","");
                         }
                     }
                 }
