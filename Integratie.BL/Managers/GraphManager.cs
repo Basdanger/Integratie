@@ -145,14 +145,5 @@ namespace Integratie.BL.Managers
             }
             return graph;
         }
-
-        //public PieGraph GetPieGraph(int id)
-        //{
-        //    PieGraph graph = (PieGraph)GraphRepo.GetGraphById(id);
-        //    FeedManager feedManager = new FeedManager();
-        //    graph.Values.Add("Male", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.m).Count());
-        //    graph.Values.Add("Female", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.f).Count());
-        //    return graph;
-        //}
     }
 }
