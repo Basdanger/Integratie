@@ -88,6 +88,11 @@ namespace Integratie.DAL.Repositories
             return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
         }
 
+        public IEnumerable<Feed> GetFeeds(String person)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person.ToUpper()));
+        }
+
         public List<string> GetNames()
         {
             return context.Subjects.Select(s => s.Name).OrderBy(s => s).ToList();
