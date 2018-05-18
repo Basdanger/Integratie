@@ -67,6 +67,11 @@ namespace Integratie.BL.Managers
             return termMentionList;
         }
 
+        public List<Story> GetStories(int themaId)
+        {
+            return repo.GetThema(themaId).Stories;
+        }
+
         public void AddStory(Story story, int themaId)
         {
             repo.addStory(story);
@@ -78,6 +83,11 @@ namespace Integratie.BL.Managers
             thema.Stories.Add(story);
             
             repo.UpdateThema(thema);
+        }
+
+        public void DeleteStory(int storyId)
+        {
+            repo.deleteStory(storyId);
         }
 
         private Theme setTopFive(List<string> termsList,Theme thema)

@@ -51,5 +51,9 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public void deleteStory(int storyId)
+        {
+            context.Stories.Remove(storyId);
+        }
     }
 }

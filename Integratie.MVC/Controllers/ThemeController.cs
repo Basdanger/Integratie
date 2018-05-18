@@ -59,5 +59,16 @@ namespace Integratie.MVC.Controllers
 
             return RedirectToAction("Theme",new { id = themaId });
         }
+
+        public ActionResult EditStories(int themaId) {
+            List<Story> stories=themeManager.GetStories(themaId);
+            ViewBag.Name = themeManager.GetThemeById(themaId).Name;
+            return View(stories.AsEnumerable());
+        }
+
+        public ActionResult DeleteStory(int storyId) {
+            themeManager.DeleteStory(storyId);
+            return null;
+        }
     }
 }

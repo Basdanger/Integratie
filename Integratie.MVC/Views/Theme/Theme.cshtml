@@ -11,7 +11,7 @@
         <h1>Top 5 politici die betrokken zijn in dit thema</h1>
         @foreach (var topPerson in Model.TopPersonsList)
         {
-        <a href="@Url.Action("Subject","Persoon",new {Full_Name=topPerson})">
+        <a href="@Url.Action("Persoon","Subject",new {Full_Name=topPerson})">
             <h2>@topPerson</h2>
         </a>
         }
