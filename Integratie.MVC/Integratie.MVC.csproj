@@ -222,6 +222,7 @@
     <Compile Include="Controllers\Api\SubjectApiController.cs" />
     <Compile Include="Controllers\GraphPartialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersoonController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -259,7 +260,11 @@
     <Content Include="Content\demo.css" />
     <Content Include="Content\dropdown.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\fonts\slick.svg" />
     <Content Include="Content\icons.svg" />
+    <Content Include="Content\Images\Bart.jpg" />
+    <Content Include="Content\Images\Maggie.jpg" />
+    <Content Include="Content\Images\theo.jpg" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\outline-icons.svg" />
@@ -267,6 +272,8 @@
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\semantic.min.css" />
+    <Content Include="Content\slick-theme.css" />
+    <Content Include="Content\slick.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\summernote.css" />
     <Content Include="favicon.ico" />
@@ -309,6 +316,9 @@
     <Content Include="Content\font\summernote.eot" />
     <Content Include="Content\font\summernote.ttf" />
     <Content Include="Content\font\summernote.woff" />
+    <Content Include="Content\fonts\slick.eot" />
+    <Content Include="Content\fonts\slick.ttf" />
+    <Content Include="Content\fonts\slick.woff" />
     <None Include="Properties\PublishProfiles\Celis.pubxml" />
     <Content Include="Content\icons.woff" />
     <Content Include="Content\brand-icons.eot" />
@@ -352,6 +362,7 @@
     <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Scripts\semantic.min.js" />
     <Content Include="Scripts\summernote.min.js" />
+    <Content Include="Scripts\slick.min.js" />
     <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -429,6 +440,7 @@
     <Content Include="Views\Subject\DeletePerson.cshtml" />
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
     <Content Include="Views\SiteContent\Index.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

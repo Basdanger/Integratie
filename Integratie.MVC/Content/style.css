@@ -22,7 +22,6 @@
     color:white;
 }
 .tesla-container {
-    margin-top: 40px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -220,11 +219,11 @@ a {
     color:white;
 }
 a#registerLink{
-    color:white;
+    color:black;
     float:right;
 }
 a#loginLink{
-    color:white;
+    color:black;
     float:right;
 }
 a#TeslaHello{
@@ -290,4 +289,37 @@ p.TeslaSingleGraph {
 }
 .TeslaSiteContentContainer{
     color:black;
+}
+}
+.TeslaIndexP {
+    color:#007bff ;
+}
+.TeslaIndexFoto {
+    height: 350px;
+    object-fit: cover;
+    object-position: 70% 35%;
+    filter: grayscale(100%) brightness(70%);
+    -webkit-filter: grayscale(100%) brightness(70%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+.TeslaIndexNumber {
+    color: #7dbcff;
+    font-weight: 900;
+}
+.TeslaIndexSlider {
+    height:auto;
+}
+.TeslaIndexContainer{
+    color: black;
+    margin-top:20px;
+}
+.TeslaIndexIcon {
+    font-size: 40px;
+    color: #7dbcff;
+}
+ul.slick-dots{
+    margin-top:0;
+    margin-top:-30px!important;
+
+    position:absolute;
 }
