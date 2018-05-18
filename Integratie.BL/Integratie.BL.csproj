@@ -63,6 +63,7 @@
     <Compile Include="Managers\MailManager.cs" />
     <Compile Include="Managers\NotificationManager.cs" />
     <Compile Include="Managers\SubjectManager.cs" />
+    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
