@@ -1,0 +1,20 @@
+﻿@model Integratie.MVC.Models.ApplicationUser
+@Html.HiddenFor(model => model.Id)
+<h2>Wil je @Html.DisplayFor(model => model.UserName) echt verwijderen?</h2>
+<dt>
+    Naam:
+</dt>
+<dd>@Html.DisplayFor(model => model.FirstName)</dd>
+<dt>E-mail:</dt>
+<dd>@Html.DisplayFor(model => model.Email)</dd>
+<dd>Rol</dd>
+<dt>@Html.DisplayFor(model => model.Roles)</dt>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken(){
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "GetUsers")
+        </div>
+    }
+}

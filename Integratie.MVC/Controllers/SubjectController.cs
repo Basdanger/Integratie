@@ -21,6 +21,7 @@ namespace Integratie.MVC.Controllers
     public class SubjectController : Controller
     {
         private SubjectManager mgr = new SubjectManager();
+        private FeedManager feedManager = new FeedManager();
         // GET: Subject
         public ActionResult Index()
         {
@@ -31,46 +32,40 @@ namespace Integratie.MVC.Controllers
             IEnumerable<Person> personen = mgr.GetPersonen();
             return View(personen);
         }
-        public ActionResult Persoon(String Full_Name)
+        public ActionResult Persoon(int id, String Full_Name)
         {
             PersonAndFeeds pf = new PersonAndFeeds();
-            pf.person = mgr.GetPersoon(Full_Name);
-            pf.feeds = mgr.GetFeeds(Full_Name);
+            pf.person = mgr.GetPersoon(id);
+            pf.feeds = feedManager.GetPersonFeeds(Full_Name);
             return View(pf);
         }
-        //[Authorize(Roles = "Admin")]
-        public ActionResult EditPersoon(String Full_Name)
+        [Authorize(Roles = "Admin")]
+        public ActionResult EditPersoon(int id)
         {
-            Person person = mgr.GetPersoon(Full_Name);
-            return View();
+            Person person = mgr.GetPersoon(id);
+            return View(person);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult EditPersoon(String Full_Name, Person person)
+        public ActionResult EditPersoon(Person person, FormCollection collection)
         {
-            try
-            {
+
                 mgr.ChangePerson(person);
                 return RedirectToAction("Personen");
-            }
-            catch
-            {
-                return View();
-            }
         }
-        //[Authorize(Roles = "Admin")]
-        public ActionResult DeletePerson(String Full_Name)
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeletePerson(int id)
         {
-            Person p = mgr.GetPersoon(Full_Name);
+            Person p = mgr.GetPersoon(id);
             return View(p);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult DeletePerson(String Full_Name, FormCollection collection)
+        public ActionResult DeletePerson(int id, FormCollection collection)
         {
             try
             {
-                mgr.DeletePerson(Full_Name);
+                mgr.DeletePerson(id);
 
                 return RedirectToAction("Personen");
             }
@@ -79,12 +74,12 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreatePersoon()
         {
             return View();
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CreatePersoon(Person person, FormCollection collection)
         {
@@ -126,162 +121,17 @@ namespace Integratie.MVC.Controllers
         }
         public ActionResult Gemeente()
         {
-            ViewBag.Message = "Your Towns Page";
-            string[] gemeentes = { "AALST",
-"AARTSELAAR",
-"ANDERLECHT",
-"ANTWERPEN",
-"BELSELE",
-"BERCHEM",
-"BORGERHOUT",
-"BORSBEKE",
-"BOUWEL",
-"BRASSCHAAT",
-"BRUSSEL",
-"DE PANNE",
-"DESSEL",
-"DEURNE",
-"DIEPENBEEK",
-"DUFFEL",
-"EDEGEM",
-"EKEREN",
-"GANSHOREN",
-"GEEL",
-"GENK",
-"GENT",
-"HARELBEKE",
-"HEUSDEN",
-"HOBOKEN",
-"HOEILAART",
-"JETTE",
-"KACHTEM",
-"KALMTHOUT",
-"KAPELLEN",
-"KESSEL LO",
-"KOERSEL",
-"KOOLKERKE",
-"KORTRIJK",
-"KRAAINEM",
-"KRUISHOUTEM",
-"LEDEBERG",
-"LEEFDAAL",
-"LEOPOLDSBURG",
-"LEUVEN",
-"LIEDEKERKE",
-"LIER",
-"LOKEREN",
-"LOMMEL",
-"LUBBEEK",
-"MALDEGEM",
-"MEERBEEK",
-"MEERLE",
-"MEISE",
-"MELLE",
-"MERCHTEM",
-"MERKSPLAS",
-"MOL",
-"MORTSEL",
-"NEDEROKKERZEEL",
-"NEDER-OVER-HEEMBEEK",
-"NIEUWERKERKEN",
-"NOORDERWIJK",
-"OETINGEN",
-"OPWIJK",
-"OUDERGEM",
-"OUD-TURNHOUT",
-"POEKE",
-"RAMSDONK",
-"RAMSEL",
-"REKKEM",
-"ROLLEGEM",
-"ROTSELAAR",
-"RUISBROEK",
-"RUMBEKE",
-"SCHAARBEEK",
-"SCHELDERODE",
-"SCHILDE",
-"SCHULEN",
-"SINT-AGATHA-RODE",
-"SINT-AMANDSBERG",
-"SINT-GILLIS-DENDERMONDE",
-"SINT-JAN",
-"SINT-JANS-MOLENBEEK",
-"SINT-JOOST-TEN-NOODE",
-"SINT-LAMBRECHTS-HERK",
-"SINT-MARTENS-LATEM",
-"SINT-MARTENS-LENNIK",
-"SINT-NIKLAAS",
-"SINT-PAUWELS",
-"SINT-PIETERS-WOLUWE",
-"SINT-ULRIKS-KAPELLE",
-"SLEIDINGE",
-"STEENHUFFEL",
-"STOKKEM",
-"STOKROOIE",
-"TIELEN",
-"TORHOUT",
-"UITBERGEN",
-"UKKEL",
-"VELDWEZELT",
-"VELM",
-"VILVOORDE",
-"VISSENAKEN",
-"VLISSEGEM",
-"VOORDE",
-"VOSSEM",
-"VRASENE",
-"WALEM",
-"WALTWILDER",
-"WELDEN",
-"WESPELAAR",
-"WESTKAPELLE",
-"WIDOOIE",
-"WIEKEVORST",
-"WIEZE",
-"WIJSHAGEN",
-"WOMMELGEM",
-"WULPEN",
-"ZANDVOORDE",
-"ZARLARDINGE",
-"ZAVENTEM",
-"ZEGELSEM",
-"ZELE",
-"ZEPPEREN",
-"ZERKEGEM",
-"ZEVEREN",
-"ZICHEN-ZUSSEN-BOLDER",
-"ZOERLE-PARWIJS",
-"ZOERSEL",
-"ZOLDER",
-"ZONHOVEN",
-"ZOTTEGEM" };
-            return View(gemeentes);
+            ViewBag.Message = "Gemeentes";
+            IEnumerable<String> gemeentes = mgr.GetGemeentes();
+            return View(gemeentes.ToArray());
         }
         public ActionResult GemeentePage(string gemeente)
         {
-            SubjectManager subjectmngr = new SubjectManager();
-            IEnumerable<Subject> people = subjectmngr.GetPeopleByTown(gemeente);
+            IEnumerable<Subject> people = mgr.GetPeopleByTown(gemeente);
             return View(people);
         }
         [HttpPost]
         public ActionResult CSVOpladen(HttpPostedFileBase attachmentcsv)
-        {
-            CsvFileDescription csvFileDescription = new CsvFileDescription
-            {
-                SeparatorChar = ',',
-                FirstLineHasColumnNames = true
-            };
-            CsvContext csvContext = new CsvContext();
-            StreamReader streamReader = new StreamReader(attachmentcsv.InputStream);
-            IEnumerable<Person> list = csvContext.Read<Person>(streamReader, csvFileDescription);
-            foreach (var item in list)
-            {
-                mgr.AddPerson(item.First_Name, item.Last_Name, item.District, item.Level, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.Town);
-            }
-            return Redirect("Personen");
-        }
-        [HttpPost]
-        public ActionResult CSVOpladenOrganisatie(HttpPostedFileBase attachmentcsv)
         {
             CsvFileDescription csvFileDescription = new CsvFileDescription
             {

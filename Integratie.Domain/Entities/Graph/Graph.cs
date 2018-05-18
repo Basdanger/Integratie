@@ -42,6 +42,8 @@ namespace Integratie.Domain.Entities.Graph
         public double SingleValue { get; set; }
         [NotMapped]
         public Dictionary<string, double> BarValues { get; set; }
+        [NotMapped]
+        public Dictionary<string, List<double>> LineValues { get; set; }
 
         public Graph(Account account)
         {
