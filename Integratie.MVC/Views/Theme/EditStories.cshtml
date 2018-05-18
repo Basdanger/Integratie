@@ -26,8 +26,10 @@
                 @Html.DisplayFor(modelItem => story.StoryString)
             </td>
             <td>
-                @Html.ActionLink("Remove Story", "RemoveStory", "Theme", new { storyId = story.Id }, null)
+                @Html.ActionLink("Remove Story", "DeleteStory", "Theme", new { storyId = story.Id }, null)
             </td>
             </tr>
             }
     </table>
+
+@Html.ActionLink("Back to ThemeConfig","ThemeConfig","Theme")

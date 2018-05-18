@@ -68,7 +68,7 @@ namespace Integratie.MVC.Controllers
 
         public ActionResult DeleteStory(int storyId) {
             themeManager.DeleteStory(storyId);
-            return null;
+            return RedirectToAction("EditStories");
         }
     }
 }

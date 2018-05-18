@@ -53,7 +53,9 @@ namespace Integratie.DAL.Repositories
 
         public void deleteStory(int storyId)
         {
-            context.Stories.Remove(storyId);
+            Story story = context.Stories.Find(storyId);
+            context.Stories.Remove(story);
+            context.SaveChanges();
         }
     }
 }
