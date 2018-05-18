@@ -25,11 +25,11 @@ namespace Integratie.UI.Con
             //Console.WriteLine("Alert added");
             //mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
             //Console.WriteLine("Alert added");
-            Person person;
-            subject.GetPersonen();
-            person = subject.GetPersoon("Bart De Wever");
-            person.Full_Name = "Filip De Wever";
-            subject.ChangePerson(person);
+            //Person person;
+            //subject.GetPersonen();
+            //person = subject.GetPersoon("Bart De Wever");
+            //person.Full_Name = "Filip De Wever";
+            //subject.ChangePerson(person);
             
             Console.ReadLine();
         }
