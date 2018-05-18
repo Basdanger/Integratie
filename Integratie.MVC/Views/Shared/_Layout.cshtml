@@ -8,8 +8,10 @@
     <meta name="author" content="">
     <title>@ViewBag.Title Politieke Barometer</title>
     @*<link rel="stylesheet" href="~/Content/menu.css" type="text/css" />*@
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/Chart.min.js")
     <link href="~/Content/style.css" rel="stylesheet">
@@ -43,6 +45,12 @@
                     <a class="nav-link" href="@Url.Action("Index", "Home")">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Index", "SiteContent")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Content</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -134,7 +142,7 @@
                         <span class="nav-link-text">Contact</span>
                     </a>
                 </li>
-                
+                </ul>
  
         </div>
     </nav>

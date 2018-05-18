@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<!-- include summernote css/js -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+
+<div class="TeslaSiteContentContainer">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Site Title</label>
+            <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+        </div>
+    </form>
+    <div id="summernote">Hello Summernote</div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
+    });
+</script>
