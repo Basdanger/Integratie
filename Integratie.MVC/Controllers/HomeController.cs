@@ -21,6 +21,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         AlertManager alertManager = new AlertManager();
+        private SubjectManager subjectmgr = new SubjectManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -140,6 +141,11 @@ namespace Integratie.MVC.Controllers
         public void RemoveUserAlert(int id)
         {
             alertManager.RemoveUserAlert(id);
+        }
+        public ActionResult Search(String search)
+        {
+            //Person person = subjectmgr;
+            return View();
         }
     }
 }
