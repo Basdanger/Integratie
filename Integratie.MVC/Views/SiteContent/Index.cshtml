@@ -5,7 +5,7 @@
 
 
 <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<link href="@Url.Content("~/Content/summernote.css")" rel="stylesheet" type="text/css" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 
@@ -16,11 +16,134 @@
             <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
         </div>
     </form>
-    <div id="summernote">Hello Summernote</div>
+
+    <div id="accordion">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Alerts 
+                </a>
+                <i class="fa fa-fw fa-bell" style="color:#4183c4"></i>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Alert Alias</label>
+                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+                    <br/>
+                    <div id="summernote">Hello Summernote</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                    Themes
+                </a>
+                <i class="fa fa-fw fa-globe" style="color:#4183c4"></i>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Theme Alias</label>
+                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote2">Hello Summernote</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                    Persons
+                </a>
+                <i class="fa fa-fw fa-user" style="color:#4183c4"></i>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Person Alias</label>
+                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote4">Hello Summernote</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                   Organisations
+                </a>
+                <i class="fa fa-fw fa-sitemap" style="color:#4183c4"></i>
+            </div>
+            <div id="collapseFour" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Organisation Alias</label>
+<input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+
+                    <br /><div id="summernote5">Hello Summernote</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 <script>
     $(document).ready(function () {
-        $('#summernote').summernote();
+        $('#summernote').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+        $('#summernote2').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+        $('#summernote3').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+        $('#summernote4').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
+        $('#summernote5').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        });
     });
 </script>

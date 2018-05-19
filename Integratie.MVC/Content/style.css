@@ -22,6 +22,7 @@
     color:white;
 }
 .tesla-container {
+
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -322,4 +323,14 @@ ul.slick-dots{
     margin-top:-30px!important;
 
     position:absolute;
+}
+.popover-content.note-children-container{
+    display:none;
+}
+.note-popover.popover {
+    display: none;
+}
+.TeslaSiteContentContainer {
+    margin-left: 20px;
+    margin-right: 20px;
 }
