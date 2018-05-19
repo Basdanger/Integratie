@@ -39,6 +39,14 @@ namespace Integratie.MVC.Controllers
             {
                 personen = mgr.GetPeopleByName(search);
             }
+            if(option == "Organisation")
+            {
+                personen = mgr.GetPeopleByOrganisation(search);
+            }
+            if(option == "Gender")
+            {
+                personen = mgr.GetPeopleByGender(search);
+            }
             return View(personen);
         }
         public ActionResult Persoon(int id, String Full_Name)

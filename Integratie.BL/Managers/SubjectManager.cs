@@ -107,5 +107,9 @@ namespace Integratie.BL.Managers
         {
             repo.CreatePersonen(persons);
         }
+        public IEnumerable<Person> GetPeopleByGender(String gender)
+        {
+            return repo.GetPeopleByGender(gender);
+        }
     }
 }

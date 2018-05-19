@@ -127,5 +127,9 @@ namespace Integratie.DAL.Repositories
             }
             context.SaveChanges();
         }
+        public IEnumerable<Person> GetPeopleByGender(String gender)
+        {
+            return context.People.Where(p => p.Gender.Equals(gender)).ToList();
+        }
     }
 }
