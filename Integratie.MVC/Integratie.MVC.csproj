@@ -467,6 +467,10 @@
     <Content Include="Views\Admin\GetUser.cshtml" />
     <Content Include="Views\Admin\DeleteUser.cshtml" />
     <Content Include="Views\Admin\UpdateUser.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentAlertDropDown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

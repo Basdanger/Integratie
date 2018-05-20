@@ -57,10 +57,18 @@
                 @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
 }
                 </li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alerts","Home")">Alerts</a>
+                    </li>
+                }
             </ul>
-
-
             @Html.Partial("_LoginPartial")
+            @if (Request.IsAuthenticated)
+            {
+                Html.RenderAction("_AlertDropDown", "Shared");
+            }
         </div>
     </nav>
 
