@@ -38,13 +38,13 @@ namespace Integratie.MVC.Controllers
             pf.feeds = mgr.GetFeeds(Full_Name);
             return View(pf);
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditPersoon(int id)
         {
             Person person = mgr.GetPersoon(id);
             return View(person);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditPersoon(String Full_Name, Person person)
         {
@@ -58,19 +58,19 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeletePerson(int id)
         {
             Person p = mgr.GetPersoon(id);
             return View(p);
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult DeletePerson(String Full_Name, FormCollection collection)
+        public ActionResult DeletePerson(int id, FormCollection collection)
         {
             try
             {
-                mgr.DeletePerson(Full_Name);
+                mgr.DeletePerson(id);
 
                 return RedirectToAction("Personen");
             }
@@ -79,12 +79,12 @@ namespace Integratie.MVC.Controllers
                 return View();
             }
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreatePersoon()
         {
             return View();
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CreatePersoon(Person person, FormCollection collection)
         {

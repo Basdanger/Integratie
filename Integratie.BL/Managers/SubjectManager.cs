@@ -68,9 +68,9 @@ namespace Integratie.BL.Managers
         {
             repo.UpdatePersoon(person);
         }
-        public void DeletePerson(String Full_Name)
+        public void DeletePerson(int id)
         {
-            repo.DeletePersoon(Full_Name);
+            repo.DeletePersoon(id);
         }
         public Person AddPerson(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
         {

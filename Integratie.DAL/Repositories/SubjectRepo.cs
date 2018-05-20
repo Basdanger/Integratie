@@ -92,9 +92,9 @@ namespace Integratie.DAL.Repositories
             context.Entry(person).State = EntityState.Modified;
             context.SaveChanges();
         }
-        public void DeletePersoon(String Full_Name)
+        public void DeletePersoon(int id)
         {
-            Person p = GetPersoon(Full_Name);
+            Person p = GetPersoon(id);
             context.People.Remove(p);
             context.SaveChanges();
         }
