@@ -184,8 +184,6 @@
     var ContactContent;
     var PrivacyContent;
     $(document).ready(function () {
-        $('#summernote').summernote({
-        });
         $('#summernote').summernote('code', '@Html.Raw(ViewBag.IndexContent)');
         $('#summernote').on('summernote.change', function (customEvent, contents, $editable) {
             $('#IndexCardHeader').css("color", "orange");
@@ -195,6 +193,7 @@
         })
         IndexContent = $('#summernote').summernote('code');
 
+        $('#summernote1').summernote('code', '@Html.Raw(ViewBag.AlertContent)');
         $('#summernote1').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -210,12 +209,9 @@
             $('#AlertTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             AlertContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.AlertContent");
-                AlertContent = $(this).summernote('code');
-
-            });
+            })
+        AlertContent = $('#summernote1').summernote('code');
+        $('#summernote2').summernote('code', '@Html.Raw(ViewBag.ThemeContent)');
         $('#summernote2').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -231,12 +227,9 @@
             $('#ThemeTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             ThemeContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.ThemeContent");
-                ThemeContent = $(this).summernote('code');
-
-            });
+            })
+        ThemeContent = $('#summernote2').summernote('code');
+        $('#summernote3').summernote('code', '@Html.Raw(ViewBag.ThemeContent)');
         $('#summernote3').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -252,12 +245,9 @@
             $('#ThemeTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             ThemeContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.ThemeContent");
-                ThemeContent = $(this).summernote('code');
-
-            });
+            })
+        ThemeContent = $('#summernote3').summernote('code');
+        $('#summernote4').summernote('code', '@Html.Raw(ViewBag.PersonContent)');
         $('#summernote4').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -273,12 +263,9 @@
             $('#PersonTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             PersonContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.PersonContent");
-                PersonContent = $(this).summernote('code');
-
-            });
+            })
+        PersonContent = $('#summernote4').summernote('code');
+        $('#summernote5').summernote('code', '@Html.Raw(ViewBag.OrganisationContent)');
         $('#summernote5').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -294,12 +281,9 @@
             $('#OrganisationTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             OrganisationContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code"," @ViewBag.OrganisationContent");
-                OrganisationContent = $(this).summernote('code');
-
-            });
+            })
+        OrganisationContent = $('#summernote5').summernote('code');
+        $('#summernote6').summernote('code', '@Html.Raw(ViewBag.FaqContent)');
         $('#summernote6').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -315,12 +299,9 @@
             $('#FAQTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             FaqContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.FAQContent");
-                FaqContent = $(this).summernote('code');
-
-            });
+            })
+        FaqContent = $('#summernote6').summernote('code');
+        $('#summernote7').summernote('code', '@Html.Raw(ViewBag.ContactContent)');
         $('#summernote7').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -336,12 +317,9 @@
             $('#ContactTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             ContactContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.ContactContent");
-                ContactContent = $(this).summernote('code');
-
-            });
+            })
+        ContactContent = $('#summernote7').summernote('code');
+        $('#summernote8').summernote('code', '@Html.Raw(ViewBag.PrivacyContent)');
         $('#summernote8').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -357,12 +335,8 @@
             $('#PrivacyTitle').css("color", "orange");
             $("#ContentSave").removeClass("disabled");
             PrivacyContent = $(this).summernote('code');
-        })
-            .on('summernote.create', function () {
-                $(this).summernote("code", "@ViewBag.PrivacyContent");
-                PrivacyContent = $(this).summernote('code');
-
-            });
+            })
+        PrivacyContent = $('#summernote8').summernote('code');
 
         $('#PrimaryCP').colorpicker({
                 inline: true,
