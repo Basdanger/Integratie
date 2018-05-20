@@ -105,7 +105,7 @@ namespace Integratie.BL.Managers
 
             int feedCount = feeds.Count();
             int posNegFeeds = 0;
-            double result;
+            int result;
 
             if (alert.SubjectProperty.Equals(SubjectProperty.pos))
             {
@@ -135,7 +135,7 @@ namespace Integratie.BL.Managers
                     valuePairs.Add("Positive", feedCount - posNegFeeds);
                     valuePairs.Add("Negative", posNegFeeds);
                 }
-                result = posNegFeeds / feedCount;
+                result = (posNegFeeds / feedCount) * 100;
             }
 
             alert.Graph.EndDate = end;
@@ -222,7 +222,7 @@ namespace Integratie.BL.Managers
 
             if (alert.SubjectProperty.Equals(SubjectProperty.relativeCount))
             {
-                result = fCNow / fCPast - 1;
+                result = (fCNow / fCPast - 1) * 100;
             }
             else
             {
@@ -390,7 +390,7 @@ namespace Integratie.BL.Managers
                 return false;
         }
 
-        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
+        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, int value)
         {
             initNonExistingRepo(true);
             AccountManager accountManager = new AccountManager(unitOfWorkManager);
@@ -401,7 +401,7 @@ namespace Integratie.BL.Managers
             unitOfWorkManager.Save();
         }
 
-        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
+        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
         {
             Alert alert;
             SubjectManager subjectManager = new SubjectManager(unitOfWorkManager);
