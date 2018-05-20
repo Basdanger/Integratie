@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.MVC", "Integrati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.MVC.Test", "Integratie.MVC.Test\Integratie.MVC.Test.csproj", "{ED9B0EBA-07A1-48E1-AD70-0473A3F2C367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integratie.Scheduler", "Integratie.BL.Scheduler\Integratie.Scheduler.csproj", "{AD0DF594-B1C7-479A-8D6D-62523D1ECA96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{ED9B0EBA-07A1-48E1-AD70-0473A3F2C367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED9B0EBA-07A1-48E1-AD70-0473A3F2C367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED9B0EBA-07A1-48E1-AD70-0473A3F2C367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0DF594-B1C7-479A-8D6D-62523D1ECA96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0DF594-B1C7-479A-8D6D-62523D1ECA96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0DF594-B1C7-479A-8D6D-62523D1ECA96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0DF594-B1C7-479A-8D6D-62523D1ECA96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
