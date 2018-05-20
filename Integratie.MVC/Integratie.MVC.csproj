@@ -229,6 +229,7 @@
     <Compile Include="Controllers\SiteContentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

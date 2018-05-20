@@ -125,9 +125,9 @@ namespace Integratie.DAL.Repositories
             }
             context.SaveChanges();
         }
-        public IEnumerable<Person> ReadPeopleByName(string name)
-        {
-            return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
-        }
+        //public IEnumerable<Person> ReadPeopleByName(string name)
+        //{
+        //    return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
+        //}
     }
 }
