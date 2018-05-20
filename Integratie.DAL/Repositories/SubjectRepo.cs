@@ -74,13 +74,19 @@ namespace Integratie.DAL.Repositories
         }
         public IEnumerable<String> GetOrganisaties()
         {
-            //return context.People.ToList();
             return context.People.Select(o => o.Organisation).Distinct();
+        }
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return context.People.Where(o => o.Organisation.ToUpper().Contains(organisatie)).Select(o => o.Organisation).Distinct();
         }
         public IEnumerable<String> GetGemeente()
         {
-            //return context.People.ToList();
             return context.People.Select(g => g.Town).Distinct();
+        }
+        public IEnumerable<String> GetGemeente(String gemeente)
+        {
+            return context.People.Where(g => g.Town.ToUpper().Contains(gemeente)).Select(g => g.Town).Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {
@@ -118,6 +124,10 @@ namespace Integratie.DAL.Repositories
                 context.People.Add(persons[i]);
             }
             context.SaveChanges();
+        }
+        public IEnumerable<Person> ReadPeopleByName(string name)
+        {
+            return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
         }
     }
 }

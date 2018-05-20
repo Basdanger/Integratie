@@ -1,9 +1,5 @@
 ﻿@model Integratie.MVC.Models.Search
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -13,13 +9,63 @@
 </head>
 <body>
     <div>
-        <h4>Resultaten:</h4>
+        <h1>Resultaten:</h1>
         <hr />
-        @Html.DisplayFor(model => model.person.Full_Name);
-        @Html.DisplayFor(model => model.person.Organisation);
+        <h2>Personen:</h2>
+        <table class="table">
+            @foreach (var item in Model.persons)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Full_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Organisation)</td>
+            <td><a href="http://localhost:51548/Subject/Persoon/@Url.Content(item.ID.ToString())?Full_Name=@Url.Content(item.Full_Name)">Lees meer</a></td>
+        </tr>
+}
+        </table>
+        <h2>Organisaties:</h2>
+        <table class="table">
+            @foreach (var item in Model.organisaties)
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td><a href="http://localhost:51548/Subject/Organisaties">Lees meer</a></td>
+            </tr>
+    }
+        </table>
+        <h2>Steden:</h2>
+        <table class="table">
+            @foreach (var item in Model.steden)
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td><a href="http://localhost:51548/Subject/GemeentePage?gemeente=@Url.Content(item)">Lees meer</a></td>
+            </tr>
+    }
+        </table>
+        <h2>Feeds:</h2>
+        <table class="table">
+            @foreach (var item in Model.feeds)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Words)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hashtags)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Persons)
+                </td>
+            </tr>
+    }
+        </table>
     </div>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Terugkeren", "Index")
     </p>
 </body>
 </html>

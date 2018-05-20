@@ -21,7 +21,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         AlertManager alertManager = new AlertManager();
-        private SubjectManager subjectmgr = new SubjectManager();
+        FeedManager feedManager = new FeedManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -145,7 +145,11 @@ namespace Integratie.MVC.Controllers
         public ActionResult Search(String zoek)
         {
             Search search = new Search();
-            search.person = subjectmgr.GetPersonen().Where(pers => pers.Full_Name.ToUpper().Equals(zoek)).First();
+            search.persons = subjectManager.GetPeopleByName(zoek);
+            search.organisaties = subjectManager.GetOrganisaties(zoek);
+            search.steden = subjectManager.GetGemeentes(zoek);
+            search.feeds = feedManager.GetWordFeeds(zoek);
+            search.feedsByPerson = feedManager.GetPersonFeeds(zoek);
             return View(search);
         }
     }
