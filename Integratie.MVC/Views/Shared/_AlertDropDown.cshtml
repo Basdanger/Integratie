@@ -1,0 +1,25 @@
+﻿@model List<Integratie.Domain.Entities.Alerts.UserAlert>
+
+<div class="ui icon top right dropdown" style="margin-left: 10px;position:absolute; right:50px;top:10px;">
+    <i class="bell icon"></i>
+    <div class="menu">
+        <div class="header">Alerts</div>
+        <div class="ui divider"></div>
+        @foreach (var item in Model)
+        {
+            if (item.Web && item.Show)
+            {
+                <div class="item">@item.Alert.AlertID</div>
+            }
+        }
+        @if (!Model.Any())
+        {
+            <div class="header">No Alerts</div>
+        }
+        <div class="ui divider"></div>
+        <div class="item">Mark all as viewed</div>
+    </div>
+</div>
+<script>
+    $('.ui.dropdown').dropdown();
+</script>

@@ -216,6 +216,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Api\AccountApiController.cs" />
     <Compile Include="Controllers\Api\GraphApiController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersoonController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\SiteContentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
@@ -446,13 +448,26 @@
     <Content Include="Views\Subject\EditPersoon.cshtml" />
     <Content Include="Views\Subject\DeletePerson.cshtml" />
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
+    <Content Include="Views\Admin\GetUsers.cshtml" />
+    <Content Include="Views\Admin\GetUser.cshtml" />
+    <Content Include="Views\Admin\DeleteUser.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentAlert.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentUserAlerts.cshtml" />
+    <Content Include="Views\AlertPartial\_AlertPopUp.cshtml" />
+    <Content Include="Views\Admin\UpdateUser.cshtml" />
+    <Content Include="Views\Shared\_AlertDropDown.cshtml" />
     <Content Include="Views\SiteContent\Index.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\" />
-    <Folder Include="Views\Alert\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integratie.BL\Integratie.BL.csproj">

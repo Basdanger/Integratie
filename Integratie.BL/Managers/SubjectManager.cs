@@ -13,15 +13,17 @@ namespace Integratie.BL.Managers
     public class SubjectManager
     {
         private SubjectRepo repo;
+        private UnitOfWorkManager unitOfWorkManager;
 
         public SubjectManager()
         {
             repo = new SubjectRepo();
         }
 
-        public SubjectManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        public SubjectManager(UnitOfWorkManager unitOfWorkManager)
         {
-            repo = new SubjectRepo(dashboardDbContext);
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new SubjectRepo(unitOfWorkManager.UnitOfWork);
         }
         
         public IEnumerable<Subject> GetSubjects()
@@ -97,6 +99,30 @@ namespace Integratie.BL.Managers
         public void CreatePersons(List<Person> persons)
         {
             repo.CreatePersonen(persons);
+        }
+
+        public async Task WeeklyReview(DateTime now)
+        {
+            FeedManager feedManager = new FeedManager();
+            List<Subject> subjects = repo.ReadSubjects().ToList();
+
+            foreach(Subject subject in subjects)
+            {
+                if (subject.GetType().Equals(typeof(Person)))
+                {
+                    subject.FeedCount = feedManager.GetPersonFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                }
+                else if (subject.GetType().Equals(typeof(Organisation)))
+                {
+                    subject.FeedCount = feedManager.GetOrganisationFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                }
+                else
+                {
+                    subject.FeedCount = feedManager.GetWordFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                }
+            }
+
+            await repo.UpdateSubjects(subjects);
         }
     }
 }

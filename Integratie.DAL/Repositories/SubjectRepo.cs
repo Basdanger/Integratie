@@ -12,7 +12,7 @@ namespace Integratie.DAL.Repositories
 {
     public class SubjectRepo : ISubjectRepo
     {
-        private DashBoardDbContext context;
+        private readonly DashBoardDbContext context;
 
         public SubjectRepo()
         {
@@ -20,9 +20,9 @@ namespace Integratie.DAL.Repositories
             context.Database.Initialize(false);
         }
 
-        public SubjectRepo(DashBoardDbContext context)
+        public SubjectRepo(UnitOfWork unitOfWork)
         {
-            this.context = context;
+            context = unitOfWork.Context;
         }
 
         public void AddSubject(Subject subject)
@@ -110,6 +110,15 @@ namespace Integratie.DAL.Repositories
                 context.People.Add(persons[i]);
             }
             context.SaveChanges();
+        }
+
+        public async Task UpdateSubjects(List<Subject> subjects)
+        {
+            foreach (Subject subject in subjects)
+            {
+                context.Entry(subject).State = System.Data.Entity.EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -20,9 +20,18 @@ namespace Integratie.DAL.EF
     [DbConfigurationType(typeof(DashboardDbConfiguration))]
     public class DashBoardDbContext : DbContext
     {
+        private readonly bool delaySave;
+
         public DashBoardDbContext() : base("name=IntegratieDB")
         {
+            Database.SetInitializer<DashBoardDbContext>(new DashboardDbInitializer());
+            delaySave = false;
+        }
 
+        public DashBoardDbContext(bool unitOfWork = false) : base("name=IntegratieDB")
+        {
+            Database.SetInitializer<DashBoardDbContext>(new DashboardDbInitializer());
+            delaySave = unitOfWork;
         }
 
         public DbSet<Subject> Subjects { get; set; }
@@ -55,6 +64,21 @@ namespace Integratie.DAL.EF
                 .HasOptional<Graph>(s => s.Graph)
                 .WithOptionalDependent()
                 .WillCascadeOnDelete(true);
+        }
+
+        public override int SaveChanges()
+        {
+            if (delaySave) return -1;
+            return base.SaveChanges();
+        }
+
+        internal int CommitChanges()
+        {
+            if (delaySave)
+            {
+                return base.SaveChanges();
+            }
+            throw new InvalidOperationException("No UnitOfWork present, use SaveChanges instead");
         }
     }
 }
