@@ -14,11 +14,6 @@ namespace Integratie.MVC.Controllers
     {
         AlertManager alertManager = new AlertManager();
         SubjectManager subjectManager = new SubjectManager();
-        // GET: AlertPartial
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult _CheckAlert(int id)
         {
