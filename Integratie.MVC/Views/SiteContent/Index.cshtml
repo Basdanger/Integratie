@@ -6,91 +6,196 @@
 
 <!-- include summernote css/js -->
 <link href="@Url.Content("~/Content/summernote.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/bootstrap-colorpicker.min.css")" rel="stylesheet" type="text/css" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="@Url.Content("~/Scripts/bootstrap-colorpicker.min.js")"></script>
 
 <div class="TeslaSiteContentContainer">
     <form>
         <div class="form-group">
-            <label for="exampleInputEmail1">Site Title</label>
-            <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+            <label  for="exampleInputEmail1">Site Title</label>
+            <input id="ContentSiteTitle" type="text" class="form-control" aria-describedby="emailHelp" placeholder="">
         </div>
     </form>
 
+    <label for="exampleInputEmail1">Site Colors</label><br/>
+    <div id="PrimaryCP" data-color="@ViewBag.PrimaryColor" style="display:inline-block;">
+        <label for="exampleInputEmail1">Primary Color</label>
+        <input id="PrimaryColorInput" type="text" class="form-control" style="width:auto" /> <br>
+    </div>
+
+    <div id="SecondaryCP" data-color="@ViewBag.SecondaryColor" style="display:inline-block;">
+        <label for="exampleInputEmail1">Secondary Color</label>
+        <input id="SecondaryColorInput" type="text" class="form-control" style="width:auto" /> <br>
+    </div>
+    <br />
+    <br />
+    <label for="exampleInputEmail1">Site Content</label>
     <div id="accordion">
+        <div class="card">
+            <div id="IndexCardHeader" class="card-header" style="color:#4183c4">
+                <a id="IndexCardLink"class="card-link" data-toggle="collapse" href="#collapseZero">
+                    Index
+                </a>
+                <i class="fa fa-fw fa-home"></i>
+            </div>
+            <div id="collapseZero" class="collapse" data-parent="#accordion">
+
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Welkomsbericht </label>
+                    <br />
+                    <div id="summernote"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="card">
-            <div class="card-header">
-                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+            <div id="AlertCardHeader" class="card-header" style="color:#4183c4">
+                <a id="AlertTitle" class="card-link" data-toggle="collapse" href="#collapseOne">
                     Alerts 
                 </a>
-                <i class="fa fa-fw fa-bell" style="color:#4183c4"></i>
+                <i class="fa fa-fw fa-bell"></i>
             </div>
             <div id="collapseOne" class="collapse" data-parent="#accordion">
                 
                 <div class="card-body">
                     <label for="exampleInputEmail1">Alert Alias</label>
-                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+                    <input type="text" class="form-control" id="AlertTitleInput" value="@ViewBag.AlertAlias" aria-describedby="emailHelp" placeholder="">
                     <br/>
-                    <div id="summernote">Hello Summernote</div>
+                    <div id="summernote1"></div>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+            <div id="ThemeCardHeader" style="color:#4183c4" class="card-header">
+                <a id="ThemeTitle"class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+
                     Themes
                 </a>
-                <i class="fa fa-fw fa-globe" style="color:#4183c4"></i>
+                <i class="fa fa-fw fa-globe"></i>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                     <label for="exampleInputEmail1">Theme Alias</label>
-                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
-                    <br /><div id="summernote2">Hello Summernote</div>
+                    <input type="text" class="form-control" id="ThemeInput" value="@ViewBag.ThemeAlias" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote2"></div>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+            <div id="PersonCardHeader"class="card-header" style="color:#4183c4">
+                <a id="PersonTitle" class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
                     Persons
                 </a>
-                <i class="fa fa-fw fa-user" style="color:#4183c4"></i>
+                <i class="fa fa-fw fa-user"></i>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                     <label for="exampleInputEmail1">Person Alias</label>
-                    <input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
-                    <br /><div id="summernote4">Hello Summernote</div>
+                    <input type="text" value="@ViewBag.PersonAlias" class="form-control" id="PersonInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote4"></div>
                 </div>
             </div>
         </div>
+
         <div class="card">
-            <div class="card-header">
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+            <div id="OrganisationCardHeader" class="card-header" style="color:#4183c4">
+                <a id="OrganisationTitle" class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
                    Organisations
                 </a>
-                <i class="fa fa-fw fa-sitemap" style="color:#4183c4"></i>
+                <i class="fa fa-fw fa-sitemap"></i>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                     <label for="exampleInputEmail1">Organisation Alias</label>
-<input type="text" class="form-control" id="TitleInput" aria-describedby="emailHelp" placeholder="">
+                    <input type="text" class="form-control" value="@ViewBag.OrganisationAlias" id="OrganisationInput" aria-describedby="emailHelp" placeholder="">
 
-                    <br /><div id="summernote5">Hello Summernote</div>
+                    <br /><div id="summernote5"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="FAQCardHeader" class="card-header" style="color:#4183c4">
+                <a id="FAQTitle" class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+                    FAQ
+                </a>
+                <i class="fa fa-fw fa-question"></i>
+            </div>
+            <div id="collapseFive" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">FAQ Title</label>
+                    <input type="text" class="form-control" value="@ViewBag.FAQTitle" id="FAQInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote6"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="ContactCardHeader" class="card-header" style="color:#4183c4">
+                <a id="ContactTitle" class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
+                    Contact
+                </a>
+                <i class="fa fa-fw fa-envelope"></i>
+            </div>
+            <div id="collapseSix" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Contact Title</label>
+                    <input type="text" class="form-control" value="@ViewBag.ContactTitle" id="ContactInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote7"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="PrivacyCardHeader" class="card-header" style="color:#4183c4">
+                <a id="PrivacyTitle" class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
+                    Privacy
+                </a>
+                <i class="fa fa-fw fa-user-secret"></i>
+            </div>
+            <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Privacy Title</label>
+                    <input type="text" class="form-control" value="@ViewBag.PrivacyTitle" id="PrivacyInput" aria-describedby="emailHelp" placeholder="">
+                    <br /><div id="summernote8"></div>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <br/>
+    <button id="ContentSave" class="btn btn-success">Save Changes</button>
 </div>
+<!--CONTROL INIT-->
 <script>
+    var PrimaryColor;
+    var SecondaryColor;
+    var IndexContent;
+    var AlertContent;
+    var ThemeContent;
+    var PersonContent;
+    var OrganisationContent;
+    var FaqContent;
+    var ContactContent;
+    var PrivacyContent;
     $(document).ready(function () {
         $('#summernote').summernote({
+        });
+        $('#summernote').summernote('code', '@Html.Raw(ViewBag.IndexContent)');
+        $('#summernote').on('summernote.change', function (customEvent, contents, $editable) {
+            $('#IndexCardHeader').css("color", "orange");
+            $('#IndexCardLink').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            IndexContent = $(this).summernote('code');
+        })
+        IndexContent = $('#summernote').summernote('code');
+
+        $('#summernote1').summernote({
             toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -100,7 +205,17 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ]
-        });
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#AlertCardHeader').css("color", "orange");
+            $('#AlertTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            AlertContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.AlertContent");
+                AlertContent = $(this).summernote('code');
+
+            });
         $('#summernote2').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -111,7 +226,17 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ]
-        });
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#ThemeCardHeader').css("color", "orange");
+            $('#ThemeTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            ThemeContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.ThemeContent");
+                ThemeContent = $(this).summernote('code');
+
+            });
         $('#summernote3').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -122,7 +247,17 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ]
-        });
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#ThemeCardHeader').css("color", "orange");
+            $('#ThemeTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            ThemeContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.ThemeContent");
+                ThemeContent = $(this).summernote('code');
+
+            });
         $('#summernote4').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -133,7 +268,17 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ]
-        });
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#PersonCardHeader').css("color", "orange");
+            $('#PersonTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            PersonContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.PersonContent");
+                PersonContent = $(this).summernote('code');
+
+            });
         $('#summernote5').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -144,6 +289,265 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ]
-        });
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#OrganisationCardHeader').css("color", "orange");
+            $('#OrganisationTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            OrganisationContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code"," @ViewBag.OrganisationContent");
+                OrganisationContent = $(this).summernote('code');
+
+            });
+        $('#summernote6').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#FAQCardHeader').css("color", "orange");
+            $('#FAQTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            FaqContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.FAQContent");
+                FaqContent = $(this).summernote('code');
+
+            });
+        $('#summernote7').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#ContactCardHeader').css("color", "orange");
+            $('#ContactTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            ContactContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.ContactContent");
+                ContactContent = $(this).summernote('code');
+
+            });
+        $('#summernote8').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#PrivacyCardHeader').css("color", "orange");
+            $('#PrivacyTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            PrivacyContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.PrivacyContent");
+                PrivacyContent = $(this).summernote('code');
+
+            });
+
+        $('#PrimaryCP').colorpicker({
+                inline: true,
+                container: true,
+                customClass: 'colorpicker-2x',
+                sliders: {
+                    saturation: {
+                        maxLeft: 200,
+                        maxTop: 200
+                    },
+                    hue: {
+                        maxTop: 200
+                    },
+                    alpha: {
+                        maxTop: 200
+                    }
+                }
+            }).on('changeColor create', function () {
+                $("#PrimaryColorInput").val($(this).colorpicker('getValue', '#ffffff'));
+                PrimaryColor = $(this).colorpicker('getValue', '#ffffff');
+            });
+        $('#SecondaryCP').colorpicker({
+            inline: true,
+            container: true,
+            customClass: 'colorpicker-2x',
+            sliders: {
+                saturation: {
+                    maxLeft: 200,
+                    maxTop: 200
+                },
+                hue: {
+                    maxTop: 200
+                },
+                alpha: {
+                    maxTop: 200
+                }
+            }
+        }).on('changeColor create', function ()
+        {
+            $("#SecondaryColorInput").val($(this).colorpicker('getValue', '#ffffff'));
+            SecondaryColor = $(this).colorpicker('getValue', '#ffffff');
+            });;
+
+    });
+</script>
+<!--CONTROL INIT FILL-->
+<script>
+    $(document).ready(function () {
+        $('#ContentSiteTitle').val("@ViewBag.SiteTitle");
+    });
+</script>
+<!--CONTROL CHANGE-->
+<script>
+    $(document).ready(function () {
+        $('#ContentSiteTitle').change(function () {
+            $(this).css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $('#PrimaryCP').click(function(){
+            $("#PrimaryColorInput").css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $('#SecondaryCP').click(function () {
+            $("#SecondaryColorInput").css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#PrimaryColorInput").change(function () {
+            $("#PrimaryColorInput").css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#SecondaryColorInput").change(function () {
+            $("#SecondaryColorInput").css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $('#IndexTitelInput').change(function () {
+            $('#IndexCardHeader').css("color", "orange");
+            $('#IndexCardLink').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $('#AlertTitleInput').change(function () {
+            $('#AlertCardHeader').css("color", "orange");
+            $('#AlertTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#ThemeInput").change(function (){
+            $('#ThemeCardHeader').css("color", "orange");
+            $('#ThemeTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#PersonInput").change(function (){
+            $('#PersonCardHeader').css("color", "orange");
+            $('#PersonTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#OrganisationInput").change(function (){
+            $('#OrganisationCardHeader').css("color", "orange");
+            $('#OrganisationTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#FAQInput").change(function (){
+            $('#FAQCardHeader').css("color", "orange");
+            $('#FAQTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#ContactInput").change(function (){
+            $('#ContactCardHeader').css("color", "orange");
+            $('#ContactTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#PrivacyInput").change(function (){
+            $('#PrivacyCardHeader').css("color", "orange");
+            $('#PrivacyTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#ContentSave").addClass("disabled");
+    });
+</script>
+<!--SAVE CHANGES-->
+<script>
+    $(document).ready(function () {
+        $('#ContentSave').on('click', function() {
+
+            var x = [];
+            var XTitle = {
+                IdKey: "SiteTitle",
+                value: $('#ContentSiteTitle').val()
+            };
+            var XPrimaryColor = {
+                IdKey: "PrimaryColor",
+                value: PrimaryColor
+            };
+            var XSecondaryColor = {
+                IdKey: "SecondaryColor",
+                value: SecondaryColor
+            }
+            var XIndexContent = {
+                IdKey: "IndexContent",
+                value: IndexContent
+            }
+            var XAlertContent = {
+                IdKey: "AlertContent",
+                value: AlertContent
+            }
+            var XThemeContent = {
+                IdKey: "ThemeContent",
+                value: ThemeContent
+            }
+            var XPersonContent = {
+                IdKey: "PersonContent",
+                value: PersonContent
+            }
+            var XOrganisationContent = {
+                IdKey: "OrganisationContent",
+                value: OrganisationContent
+            }
+            var XFaqContent = {
+                IdKey: "FAQContent",
+                value: FaqContent
+            }
+            var XContactContent = {
+                IdKey: "ContactContent",
+                value: ContactContent
+            }
+            var XPrivacyContent = {
+                IdKey: "PrivacyContent",
+                value: PrivacyContent
+            }
+            x.push(XTitle, XPrimaryColor, XSecondaryColor, XIndexContent, XAlertContent, XThemeContent, XPersonContent, XOrganisationContent, XFaqContent, XContactContent, XPrivacyContent);
+
+
+            x = (JSON.stringify(x));
+            console.log(x);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Index", "SiteContent")',
+                data: x,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Succes")
+                },
+                error: function (ex) {
+                    alert(ex.statusText);
+                }
+            });
+        })
     });
 </script>

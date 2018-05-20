@@ -14,7 +14,15 @@ namespace Integratie.DAL.Repositories
         DashBoardDbContext context = new DashBoardDbContext();
         public SiteContent GetContextById(string id)
         {
-            return context.SiteContents.Where(sc => sc.IdKey == id).First();
+            try
+            {
+                return context.SiteContents.Where(sc => sc.IdKey == id).First();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
         public SiteContent AddSiteContent(SiteContent sc)
         {
@@ -46,17 +54,13 @@ namespace Integratie.DAL.Repositories
         }
         public bool UpdateSiteContent(SiteContent sc)
         {
-            try
-            {
+            if (context.SiteContents.Any(csc => csc.IdKey == sc.IdKey && csc.Value != sc.Value)){
                 context.Entry(sc).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
+            else return false;
+
+}
     }
 }

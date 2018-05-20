@@ -263,8 +263,14 @@
     <Content Include="Content\fonts\slick.svg" />
     <Content Include="Content\icons.svg" />
     <Content Include="Content\Images\Bart.jpg" />
+    <Content Include="Content\bootstrap-colorpicker.min.css" />
     <Content Include="Content\Images\Maggie.jpg" />
     <Content Include="Content\Images\theo.jpg" />
+    <Content Include="Content\Images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\Images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\Images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\Images\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\Images\bootstrap-colorpicker\saturation.png" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\outline-icons.svg" />
@@ -283,6 +289,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Fakes Include="Fakes\Integratie.DAL.fakes" />
+    <Content Include="Scripts\bootstrap-colorpicker.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

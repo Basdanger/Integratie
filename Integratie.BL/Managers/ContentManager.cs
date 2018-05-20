@@ -23,5 +23,14 @@ namespace Integratie.BL.Managers
         {
             return repo.UpdateSiteContent(sc);
         }
+        public SiteContent GetContentByKey(String key)
+        {
+            SiteContent sc =  repo.GetContextById(key);
+            if (sc == null)
+            {
+                return new SiteContent();
+            }
+            else return sc;
+        }
     }
 }
