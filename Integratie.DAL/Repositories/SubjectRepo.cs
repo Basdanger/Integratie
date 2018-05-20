@@ -50,10 +50,7 @@ namespace Integratie.DAL.Repositories
         {
             return context.Subjects.First(s => s.Name.Equals(name.ToUpper()));
         }
-        public IEnumerable<Person> ReadPeopleByName(string name)
-        {
-            return context.People.Where(s => s.Full_Name.Equals(name.ToUpper()));
-        }
+
         public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
             return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();
@@ -77,23 +74,24 @@ namespace Integratie.DAL.Repositories
         }
         public IEnumerable<String> GetOrganisaties()
         {
-            //return context.People.ToList();
             return context.People.Select(o => o.Organisation).Distinct();
+        }
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return context.People.Where(o => o.Organisation.ToUpper().Contains(organisatie)).Select(o => o.Organisation).Distinct();
         }
         public IEnumerable<String> GetGemeente()
         {
-            //return context.People.ToList();
             return context.People.Select(g => g.Town).Distinct();
+        }
+        public IEnumerable<String> GetGemeente(String gemeente)
+        {
+            return context.People.Where(g => g.Town.ToUpper().Contains(gemeente)).Select(g => g.Town).Distinct();
         }
         public Person FeedsByPerson(String Full_Name)
         {
             //return context.People.Where(p => p.Feeds.First(f => f.Persons.ToUpper().Equals(Full_Name)));
             return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
-        }
-
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person.ToUpper()));
         }
 
         public List<string> GetNames()
@@ -127,9 +125,9 @@ namespace Integratie.DAL.Repositories
             }
             context.SaveChanges();
         }
-        public IEnumerable<Person> GetPeopleByGender(String gender)
+        public IEnumerable<Person> ReadPeopleByName(string name)
         {
-            return context.People.Where(p => p.Gender.Equals(gender)).ToList();
+            return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
         }
     }
 }

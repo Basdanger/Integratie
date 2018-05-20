@@ -45,7 +45,7 @@ namespace Integratie.MVC.Controllers
             }
             if(option == "Gender")
             {
-                personen = mgr.GetPeopleByGender(search);
+                //personen = mgr.GetPeopleByGender(search);
             }
             return View(personen);
         }
