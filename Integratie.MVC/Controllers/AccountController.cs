@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using Integratie.MVC.Models;
 using System.Security.Principal;
 using Integratie.BL.Managers;
-using System.Net;
 
 namespace Integratie.MVC.Controllers
 {
@@ -57,7 +56,7 @@ namespace Integratie.MVC.Controllers
             }
         }
 
-                //
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)

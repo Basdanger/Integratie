@@ -1,6 +1,7 @@
 ﻿using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Alerts;
+using Integratie.Domain.Entities.Content;
 using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
@@ -33,6 +34,7 @@ namespace Integratie.DAL.EF
         public DbSet<Person> People { get; set; }
         public DbSet<UserAlert> UserAlerts { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
+        public DbSet<SiteContent> SiteContents{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,7 +56,5 @@ namespace Integratie.DAL.EF
                 .WithOptionalDependent()
                 .WillCascadeOnDelete(true);
         }
-
-        public System.Data.Entity.DbSet<Integratie.Domain.Entities.Subjects.Story> Stories { get; set; }
     }
 }

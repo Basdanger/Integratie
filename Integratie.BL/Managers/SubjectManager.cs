@@ -29,11 +29,6 @@ namespace Integratie.BL.Managers
             return repo.ReadSubjects();
         }
 
-        public List<string> GetSubjectNames()
-        {
-            return repo.GetNames();
-        }
-
         public Subject GetSubjectById(int id)
         {
             return repo.ReadSubjectById(id);
@@ -52,26 +47,19 @@ namespace Integratie.BL.Managers
         {
             return repo.GetPersonen();
         }
-        public Person GetPersoon(int ID)
+        public Person GetPersoon(String Full_Name)
         {
-            return repo.GetPersoon(ID);
+            return repo.GetPersoon(Full_Name);
         }
         public IEnumerable<String> GetOrganisaties()
         {
             return repo.GetOrganisaties();
         }
-        public IEnumerable<String> GetOrganisaties(String organisatie)
+        public IEnumerable<Feed> GetFeeds(String person)
         {
-            return repo.GetOrganisaties(organisatie);
+            return repo.GetFeeds(person);
         }
-        public IEnumerable<String> GetGemeentes()
-        {
-            return repo.GetGemeente();
-        }
-        public IEnumerable<String> GetGemeentes(String gemeente)
-        {
-            return repo.GetGemeente(gemeente);
-        }
+
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {
             return repo.ReadPeopleByTown(town);
@@ -80,9 +68,9 @@ namespace Integratie.BL.Managers
         {
             repo.UpdatePersoon(person);
         }
-        public void DeletePerson(int id)
+        public void DeletePerson(String Full_Name)
         {
-            repo.DeletePersoon(id);
+            repo.DeletePersoon(Full_Name);
         }
         public Person AddPerson(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
         {
@@ -109,14 +97,6 @@ namespace Integratie.BL.Managers
         public void CreatePersons(List<Person> persons)
         {
             repo.CreatePersonen(persons);
-        }
-        public IEnumerable<Person> GetPeopleByName(string name)
-        {
-            return repo.ReadPeopleByName(name);
-        }
-        public IEnumerable<Person> GetPeopleByGender(string gender)
-        {
-            return repo.GetPersonenByGender(gender);
         }
     }
 }

@@ -32,12 +32,6 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
-        public async Task CreateFeeds(List<Feed> feeds)
-        {
-            context.Feeds.AddRange(feeds);
-            await context.SaveChangesAsync();
-        }
-
         public Feed ReadFeed(double id)
         {
             return context.Feeds.Find(id);

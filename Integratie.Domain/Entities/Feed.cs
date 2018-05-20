@@ -49,9 +49,6 @@ namespace Integratie.Domain.Entities
             Retweet = retweet;
         }
 
-        public List<string> GetWords() {
-            return Words.Split(',').Select(s => s.Trim()).ToList();
-        }
         
 
     }

@@ -1,34 +1,22 @@
 ﻿@using Microsoft.AspNet.Identity
-    @if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-        {
-            @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-<ul class="nav navbar-nav navbar-right">
-    <li style="color:white!important;position:absolute; right:200px;top:10px;">
-        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-        {
-            @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
-        }
-    </li>
-    <li style="color:white!important;position:absolute; right:110px;top:10px;">
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", id = "TeslaHello" })
-    </li>
-    <li style="color:white!important; margin-left: 10px;position:absolute; right:50px;top:10px;"><a id="TeslaLogOff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-</ul>
-        }
+    <ul class="nav navbar-nav navbar-right">
+        <li style="color:white!important;position:absolute; right:110px;top:10px;">
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", id= "TeslaHello"  })
+        </li>
+        <li style="color:white!important; margin-left: 10px;position:absolute; right:50px;top:10px;"><a id="TeslaLogOff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li="color:white;>
+    </ul>
     }
-    else
-    {
-                <ul class="nav navbar-nav navbar-right" style="color:white; float:right;">
-                    <li style="color:white!important;position:absolute; right:200px;top:10px;">
-                        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-            {
-                @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
 }
-                    </li>
-                    <li style="color:white!important;position:absolute; right:110px;top:10px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li style="color:white; margin-left: 10px;position:absolute; right:50px;top:10px;">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                </ul>
-    }
+else
+{
+    <ul class="nav navbar-nav navbar-right" style="color:white; float:right;">
+        <li style="color:white!important;position:absolute; right:110px;top:10px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li style="color:white; margin-left: 10px;position:absolute; right:50px;top:10px;">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -12,29 +12,5 @@ namespace Integratie.Domain.Entities.Alerts
         relativeCount,
         pos,
         neg
-    };
-    public static class SubjectExtension
-    {
-        public static string GetSubject(this Enum value)
-        {
-            if (value.Equals(SubjectProperty.count))
-            {
-                return "#";
-            }
-            else if (value.Equals(SubjectProperty.relativeCount))
-            {
-                return "%";
-            }
-            else if (value.Equals(SubjectProperty.pos))
-            {
-                return "+";
-            }
-            else
-            {
-                return "-";
-            }
-            
-        }
     }
 }
-

@@ -18,7 +18,7 @@
     @foreach (var item in Model)
     {
         <li class="item float-item">
-            <a href="@Url.Action("GemeentePage","Subject", new {gemeente=item})"><p>@item</p></a>
+            <a href="@Url.Action("GemeentePage","Home", new {gemeente=item})"><p>@item</p></a>
         </li>
     }
 </ul>

@@ -9,7 +9,7 @@
                 @item.Full_Name
             </td>
             <td>
-                @Html.ActionLink("Detail", "Persoon", new {id = item.ID, Full_Name = item.Full_Name })
+                @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })
             </td>
         </tr>
     }

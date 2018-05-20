@@ -45,9 +45,9 @@ namespace Integratie.DAL.Repositories
             return context.Alerts.ToList<Alert>();
         }
 
-        public UserAlert GetUserAlert(int id)
+        public UserAlert GetUserAlert(string user, int alert)
         {
-            return (UserAlert)context.UserAlerts.Find(id);
+            return (UserAlert)context.UserAlerts.Where(u => u.Account.ID.Equals(user) && u.Alert.AlertID.Equals(alert));
         }
 
         public IEnumerable<UserAlert> GetUserAlerts()
@@ -65,26 +65,6 @@ namespace Integratie.DAL.Repositories
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId)).ToList<UserAlert>();
         }
 
-        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
-        {
-            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is TrendAlert);
-        }
-
-        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
-        {
-            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CheckAlert);
-        }
-
-        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
-        {
-            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is CompareAlert);
-        }
-
-        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
-        {
-            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is SentimentAlert);
-        }
-
         public void RemoveAlert(Alert alert)
         {
             context.Alerts.Remove(alert);
@@ -93,21 +73,6 @@ namespace Integratie.DAL.Repositories
         public void UpdateAlert(Alert alert)
         {
             context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
-        }
-
-        public async Task UpdateAlerts(List<Alert> alerts)
-        {
-            foreach (Alert alert in alerts)
-            {
-                context.Entry(alert).State = System.Data.Entity.EntityState.Modified;
-            }
-            await context.SaveChangesAsync();
-        }
-
-        public void UpdateUserAlert(UserAlert userAlert)
-        {
-            context.Entry(userAlert).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
 
@@ -165,12 +130,6 @@ namespace Integratie.DAL.Repositories
                 return compareAlert;
             }
             return compareAlert;
-        }
-
-        public void RemoveUserAlert(UserAlert userAlert)
-        {
-            context.UserAlerts.Remove(userAlert);
-            context.SaveChanges();
         }
     }
 }

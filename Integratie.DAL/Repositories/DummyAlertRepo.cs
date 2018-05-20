@@ -36,7 +36,7 @@ namespace Integratie.DAL.Repositories
             return alerts;
         }
 
-        public UserAlert GetUserAlert(int id)
+        public UserAlert GetUserAlert(string user, int alert)
         {
             throw new NotImplementedException();
         }

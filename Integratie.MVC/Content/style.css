@@ -22,6 +22,7 @@
     color:white;
 }
 .tesla-container {
+
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -287,6 +288,9 @@ p.TeslaSingleGraph {
     overflow: hidden;
 
 }
+.TeslaSiteContentContainer{
+    color:black;
+}
 .TeslaIndexP {
     color:#007bff ;
 }
@@ -294,42 +298,62 @@ p.TeslaSingleGraph {
     height: 350px;
     object-fit: cover;
     object-position: 70% 35%;
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%) brightness(70%);
+    -webkit-filter: grayscale(100%) brightness(70%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
 }
-
-.TeslaThemesContainer {
-    display: table;
-    width: 100%;
+.TeslaIndexNumber {
+    color: #7dbcff;
+    font-weight: 900;
 }
-.TeslaThemeBlock {
-    display: table-cell;
-    background-color: cyan; 
-    width: 44%;
-    height: 30%;
-    /*margin: 10px;*/
-    border: 2px solid blue;
-    overflow:auto;
+.TeslaIndexSlider {
+    height:auto;
 }
-
-.TeslaThemeImage {
-    /*height: 30%;*/
-    max-width:80%;
-    float: right;
-}
-
-    .TeslaThemeImage img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-
-.TeslaThemeText {
-    float:left;
+.TeslaIndexContainer{
     color: black;
+    margin-top:20px;
+}
+.TeslaIndexIcon {
+    font-size: 40px;
+    color: #7dbcff;
+}
+ul.slick-dots{
+    margin-top:0;
+    margin-top:-30px!important;
+
+    position:absolute;
+}
+.popover-content.note-children-container{
+    display:none;
+}
+.note-popover.popover {
+    display: none;
+}
+.TeslaSiteContentContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.colorpicker-2x .colorpicker-saturation {
+    width: 200px;
+    height: 200px;
 }
 
-.TeslaThemeTest {
-    background-color: cyan;
+.colorpicker-2x .colorpicker-hue,
+.colorpicker-2x .colorpicker-alpha {
+    width: 30px;
+    height: 200px;
 }
 
+.colorpicker-2x .colorpicker-preview,
+.colorpicker-2x .colorpicker-preview div {
+    height: 30px;
+    font-size: 16px;
+    line-height: 160%;
+}
+
+.colorpicker-saturation .colorpicker-guide,
+.colorpicker-saturation .colorpicker-guide i {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+}

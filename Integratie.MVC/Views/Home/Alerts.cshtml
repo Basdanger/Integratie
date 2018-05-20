@@ -1,88 +1,33 @@
-﻿@{
+﻿@model IEnumerable<Integratie.Domain.Entities.Alerts.UserAlert>
+@{
     ViewBag.Title = "Alerts";
 }
 
-<div class="gridsterMenu">
-    <span>Alerts</span>
-
-    <i class="fa fa-fw fa-plus teslaDashboardAdd"></i>
-</div>
-
-<div class="tesla-popup">
-    <div class="tesla-popup-window">
-        <div class="tesla-popup-header">
-            <span style="float:left;margin-left:10px;margin-top:3px;">New Alert</span>
-            <button id="close" style="float:right; margin-top:-3px; color:darkred" type="button" class="btn btn-link"><i class="fa fa-fw fa-close tesla-bar-icon"></i></button>
-        </div>
-        <div class="tesla-popup-container">
-            @{ 
-                Html.RenderAction("_AlertPopUp", "AlertPartial");
-            }
-        </div>
-    </div>
-</div>
-<script>
-    $(document).ready(function () {
-        $('#close').on('click', function () {
-            $('.tesla-popup').removeClass('open');
-            $('.tesla-popup-window').removeClass('open');
-        });
-        $('.teslaDashboardAdd').on('click', function () {
-            $('.tesla-popup').addClass('open');
-            $('.tesla-popup-window').addClass('open');
-        })
-    });
-</script>
-
-@{ 
-    Html.RenderAction("_TrendUserAlerts","AlertPartial");
-    Html.RenderAction("_CompareUserAlerts","AlertPartial");
-    Html.RenderAction("_CheckUserAlerts", "AlertPartial");
-    Html.RenderAction("_SentimentUserAlerts", "AlertPartial");
-}
-
-<script>
-    function SendAlertUpdateSubmit(int) {
-        var web = "[id='Web " + int + "']";
-        var mail = "[id='Mail " + int + "']";
-        var app = "[id='App " + int + "']";
-        var s = {
-            Id: int,
-            Web: $(web).checkbox('is checked'),
-            Mail: $(mail).checkbox('is checked'),
-            App: $(app).checkbox('is checked')
-        };
-
-        s = (JSON.stringify(s));
-
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("UpdateUserAlert", "Home")',
-            data: s,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                //alert("Succes")
-            },
-            error: function (ex) {
-                //alert(ex.statusText);
-            }
-        });
+<h2>Personen</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Alert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Web)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mail)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Web)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+        </tr>
     }
-
-    function SendAlertDeleteSubmit(int) {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("RemoveUserAlert", "Home")',
-            data: JSON.stringify({ id: int }),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                //alert("Succes")
-            },
-            error: function (ex) {
-                //alert(ex.statusText);
-            }
-        });
-    }
-</script>
+</table>

@@ -18,6 +18,6 @@ namespace Integratie.Domain.Entities.Alerts
         {
         }
 
-        public virtual Subject Subject { get; set; }
+        public Subject Subject { get; set; }
     }
 }

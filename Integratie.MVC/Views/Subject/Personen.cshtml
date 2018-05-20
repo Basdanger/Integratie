@@ -7,14 +7,6 @@
     <p>
         @Html.ActionLink("Voeg toe", "CreatePersoon")
     </p>
-    @using (Html.BeginForm("Personen", "Subject", FormMethod.Get))
-    {
-        //the following are search options
-        <b> Search Option: </b>@Html.RadioButton("option", "Name") <text>Name</text> @Html.RadioButton("option", "Gender") <text> Gender </text>
-        @Html.RadioButton("option", "Organisation")<text>Subject</text> @Html.TextBox("search") <input type="submit"
-                                                                                                   name="submit"
-                                                                                                   value="Search" />
-    }
     <div class="col-md-12">
         @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -56,15 +48,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Twitter) <br />
-                    @Html.ActionLink("Detail", "Persoon", new { id = item.ID, Full_Name = item.Full_Name })<br />
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("Admin"))
+                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })<br />
+                    @*@if (User.Identity.IsAuthenticated)
                         {
-                            @Html.ActionLink("Edit", "EditPersoon", new { id = item.ID })
-                            @Html.ActionLink("Delete", "DeletePerson", new { id = item.ID })
-                        }
-                    }
+                            if (User.IsInRole("Admin"))
+                            {*@
+                    @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
+                    @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
+                    @*}
+                        }*@
                 </td>
             </tr>
         }

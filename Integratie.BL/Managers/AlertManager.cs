@@ -16,62 +16,42 @@ namespace Integratie.BL.Managers
 {
     public class AlertManager
     {
+        // test
         private AlertRepo repo = new AlertRepo();
         public void CheckAlerts()
         {
-            NotificationManager notificationManager = new NotificationManager();
-            MailManager mailManager = new MailManager();
             foreach (Alert a in repo.GetAlerts())
             {
-                a.Ring = false;
                 if (a.GetType() == typeof(CheckAlert))
                 {
                     if (CheckCheckAlert((CheckAlert)a))
                     {
                         a.Ring = true;
-                        //a.Graph = UpdateAlertGraph(a);
-                    }
-                    repo.UpdateAlert(a);
+                        repo.UpdateAlert(a);
+                    } 
                 }
                 else if (a.GetType() == typeof(CompareAlert))
                 {
                     if (CheckCompareAlert((CompareAlert)a))
                     {
                         a.Ring = true;
+                        repo.UpdateAlert(a);
                     }
-                    repo.UpdateAlert(a);
                 }
                 else if (a.GetType() == typeof(TrendAlert))
                 {
                     if (CheckTrendAlert((TrendAlert)a))
                     {
                         a.Ring = true;
+                        repo.UpdateAlert(a);
                     }
-                    repo.UpdateAlert(a);
                 }
                 else if (a.GetType() == typeof(SentimentAlert))
                 {
                     if (CheckSentimentAlert((SentimentAlert)a))
                     {
                         a.Ring = true;
-                    }
-                    repo.UpdateAlert(a);
-                }
-                if (a.Ring)
-                {
-                    List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
-                    foreach (UserAlert userAlert in userAlerts)
-                    {
-                        userAlert.Show = true;
-                        repo.UpdateUserAlert(userAlert);
-                        if (userAlert.Mail)
-                        {
-                            mailManager.SendMail("", userAlert.Account.Mail, userAlert.Account.Name);
-                        }
-                        if (userAlert.App)
-                        {
-                            notificationManager.sendNotification("","");
-                        }
+                        repo.UpdateAlert(a);
                     }
                 }
             }
@@ -98,7 +78,7 @@ namespace Integratie.BL.Managers
 
             int feedCount = feeds.Count();
             int posNegFeeds = 0;
-            int result;
+            double result;
 
             if (alert.SubjectProperty.Equals(SubjectProperty.pos))
             {
@@ -124,7 +104,7 @@ namespace Integratie.BL.Managers
                         posNegFeeds++;
                     }
                 }
-                result = (posNegFeeds / feedCount) * 100;
+                result = posNegFeeds / feedCount;
             }
 
             switch (alert.Operator)
@@ -146,7 +126,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckCheckAlert(CheckAlert alert)
+        public bool CheckCheckAlert(CheckAlert alert)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
@@ -191,7 +171,7 @@ namespace Integratie.BL.Managers
 
             if (alert.SubjectProperty.Equals(SubjectProperty.relativeCount))
             {
-                result = (fCNow / fCPast - 1) * 100;
+                result = fCNow / fCPast - 1;
             }
             else
             {
@@ -217,7 +197,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckCompareAlert(CompareAlert alert)
+        public bool CheckCompareAlert(CompareAlert alert)
         {
             Subject subjectA = alert.SubjectA;
             Subject subjectB = alert.SubjectB;
@@ -266,7 +246,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckTrendAlert(TrendAlert alert)
+        public bool CheckTrendAlert(TrendAlert alert)
         {
             Subject subject = alert.Subject;
 
@@ -335,7 +315,7 @@ namespace Integratie.BL.Managers
                 return false;
         }
 
-        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, int value)
+        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
         {
             AccountManager accountManager = new AccountManager(repo.GetContext());
             Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
@@ -344,7 +324,7 @@ namespace Integratie.BL.Managers
             repo.AddUserAlert(userAlert);
         }
 
-        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
+        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
         {
             Alert alert;
             SubjectManager subjectManager = new SubjectManager(repo.GetContext());
@@ -446,47 +426,6 @@ namespace Integratie.BL.Managers
 
             if (!valid)
                 throw new ValidationException("Ticket not valid!");
-        }
-
-        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
-        {
-            List<UserAlert> userAlerts = repo.GetUserTrendAlertsOfUser(userId).ToList();
-            return userAlerts;
-        }
-
-        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
-        {
-            return repo.GetUserCheckAlertsOfUser(userId);
-        }
-
-        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
-        {
-            return repo.GetUserCompareAlertsOfUser(userId);
-        }
-
-        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
-        {
-            return repo.GetUserSentimentAlertsOfUser(userId);
-        }
-
-        public Alert GetAlertById(int id)
-        {
-            return repo.GetAlertById(id);
-        }
-
-        public void UpdateUserAlert(int id, bool web, bool mail, bool app)
-        {
-            UserAlert userAlert = repo.GetUserAlert(id);
-            userAlert.Web = web;
-            userAlert.Mail = mail;
-            userAlert.App = app;
-            repo.UpdateUserAlert(userAlert);
-        }
-
-        public void RemoveUserAlert(int id)
-        {
-            UserAlert userAlert = repo.GetUserAlert(id);
-            repo.RemoveUserAlert(userAlert);
         }
     }
 }

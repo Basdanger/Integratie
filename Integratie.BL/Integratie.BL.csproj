@@ -43,7 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,16 +53,16 @@
   <ItemGroup>
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\AlertManager.cs" />
+    <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\DashboardDbContext.cs" />
     <Compile Include="Managers\DashboardManager.cs" />
     <Compile Include="Managers\FeedManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
     <Compile Include="Managers\Interfaces\IAccountManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
+    <Compile Include="Managers\Interfaces\IMailManager.cs" />
     <Compile Include="Managers\MailManager.cs" />
-    <Compile Include="Managers\NotificationManager.cs" />
     <Compile Include="Managers\SubjectManager.cs" />
-    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
