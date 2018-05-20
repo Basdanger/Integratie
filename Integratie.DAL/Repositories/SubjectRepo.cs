@@ -111,5 +111,30 @@ namespace Integratie.DAL.Repositories
             }
             context.SaveChanges();
         }
+        public IEnumerable<Person> ReadPeopleByName(string name)
+        {
+            return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
+        }
+
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return context.People.Where(o => o.Organisation.ToUpper().Contains(organisatie)).Select(o => o.Organisation).Distinct();
+        }
+
+        public IEnumerable<String> GetGemeente(String gemeente)
+        {
+            return context.People.Where(g => g.Town.ToUpper().Contains(gemeente)).Select(g => g.Town).Distinct();
+        }
+
+
+        public IEnumerable<Feed> ReadWordFeeds(string word)
+        {
+            return context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<Feed> ReadPersonFeeds(string person)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper())).ToList<Feed>();
+        }
     }
 }

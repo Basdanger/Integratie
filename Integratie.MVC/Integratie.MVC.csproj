@@ -242,6 +242,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PersonAndFeeds.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -448,6 +449,7 @@
     <Content Include="Views\Subject\CreatePersoon.cshtml" />
     <Content Include="Views\SiteContent\Index.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

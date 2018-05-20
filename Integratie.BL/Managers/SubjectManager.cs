@@ -98,5 +98,25 @@ namespace Integratie.BL.Managers
         {
             repo.CreatePersonen(persons);
         }
+        public IEnumerable<Person> GetPeopleByName(string name)
+        {
+            return repo.ReadPeopleByName(name);
+        }
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return repo.GetOrganisaties(organisatie);
+        }
+        public IEnumerable<String> GetGemeentes(String gemeente)
+        {
+            return repo.GetGemeente(gemeente);
+        }
+        public IEnumerable<Feed> GetWordFeeds(string word)
+        {
+            return repo.ReadWordFeeds(word);
+        }
+        public IEnumerable<Feed> GetPersonFeeds(string person)
+        {
+            return repo.ReadPersonFeeds(person);
+        }
     }
 }
