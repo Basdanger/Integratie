@@ -1,38 +1,36 @@
-﻿@model IEnumerable<Integratie.Domain.Entities.Account>
+﻿@model IEnumerable<Integratie.MVC.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "GetAdmins";
+    ViewBag.Title = "Administrators";
 }
 
-<h2>GetAdmins</h2>
+<h2>Administrators</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("Export to CSV", "ExportToCSV")
-</p>
-<table class="table">
+
+<table class="table" style="color: black;">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mail)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        @Html.HiddenFor(modelItem => item.Id)
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Mail)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Passwoord aanpassen", "EditAdminPassword", new { id=item.Id }) |
+            @Html.ActionLink("Email aanpassen", "EditEmail", new { id = item.Id }) 
         </td>
     </tr>
 }

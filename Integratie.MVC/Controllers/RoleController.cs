@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,8 +23,8 @@ namespace Integratie.MVC.Controllers
         {
             context = new ApplicationDbContext();
         }
-
-        public ActionResult ConfigPage()
+        
+    public ActionResult ConfigPage()
         {
             if (User.Identity.IsAuthenticated)
             {

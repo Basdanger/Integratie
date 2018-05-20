@@ -1,0 +1,11 @@
+﻿@model Integratie.MVC.Models.ApplicationUser
+<div style="color: black;">
+    <h2>@Html.DisplayFor(model => model.UserName)</h2>
+    <dt>Voornaam:</dt>
+    <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+    <dt>Naam:</dt>
+    <dd>@Html.DisplayFor(model => model.LastName)</dd>
+    <dt>Voornaam:</dt>
+    <dd>@Html.DisplayFor(model => model.Email)</dd>
+</div>
+@Html.ActionLink("Back to List", "GetUsers")

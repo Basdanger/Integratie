@@ -26,11 +26,11 @@ namespace Integratie.DAL.Migrations
                         Ring = c.Boolean(nullable: false),
                         SubjectProperty = c.Int(),
                         Operator = c.Int(),
-                        Value = c.Double(),
+                        Value = c.Int(),
                         Operator1 = c.Int(),
                         SubjectProperty1 = c.Int(),
                         Operator2 = c.Int(),
-                        Value1 = c.Double(),
+                        Value1 = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Subject_ID = c.Int(),
                         SubjectA_ID = c.Int(),
@@ -72,11 +72,8 @@ namespace Integratie.DAL.Migrations
                         Organisation = c.String(),
                         Town = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
-                        BarChartGraph_GraphId = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Graph", t => t.BarChartGraph_GraphId)
-                .Index(t => t.BarChartGraph_GraphId);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Feed",
@@ -140,8 +137,6 @@ namespace Integratie.DAL.Migrations
                         PersonalityFilter = c.Int(nullable: false),
                         PersonFilter = c.String(),
                         GenderFilter = c.Int(nullable: false),
-                        Period = c.Int(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                         Account_ID = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.GraphId)
@@ -173,7 +168,6 @@ namespace Integratie.DAL.Migrations
             DropForeignKey("dbo.UserAlert", "Alert_AlertID", "dbo.Alert");
             DropForeignKey("dbo.UserAlert", "Account_ID", "dbo.Account");
             DropForeignKey("dbo.DashboardItem", "Graph_GraphId", "dbo.Graph");
-            DropForeignKey("dbo.Subject", "BarChartGraph_GraphId", "dbo.Graph");
             DropForeignKey("dbo.Graph", "Account_ID", "dbo.Account");
             DropForeignKey("dbo.Alert", "Subject_ID2", "dbo.Subject");
             DropForeignKey("dbo.Alert", "Subject_ID1", "dbo.Subject");
@@ -186,7 +180,6 @@ namespace Integratie.DAL.Migrations
             DropIndex("dbo.Graph", new[] { "Account_ID" });
             DropIndex("dbo.DashboardItem", new[] { "Graph_GraphId" });
             DropIndex("dbo.Feed", new[] { "Subject_ID" });
-            DropIndex("dbo.Subject", new[] { "BarChartGraph_GraphId" });
             DropIndex("dbo.Alert", new[] { "Subject_ID2" });
             DropIndex("dbo.Alert", new[] { "Subject_ID1" });
             DropIndex("dbo.Alert", new[] { "SubjectB_ID" });
