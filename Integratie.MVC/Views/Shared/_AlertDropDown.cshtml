@@ -27,7 +27,7 @@
                 }
             }
         }
-        @if (!Model.Any())
+        @if (!Model.Where(i => i.Show && i.Web).Any())
         {
             <div class="header">No Alerts</div>
         }
