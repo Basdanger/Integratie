@@ -27,6 +27,7 @@ namespace Integratie.BL.Managers
 
         public async Task CheckAlerts(DateTime now)
         {
+            initNonExistingRepo();
             List<Alert> alerts = repo.GetAlerts().ToList();
             List<Alert> trueAlerts = new List<Alert>();
             foreach (Alert a in alerts)
@@ -397,6 +398,7 @@ namespace Integratie.BL.Managers
             Account account = accountManager.GetAccountById(id);
             UserAlert userAlert = new UserAlert(account, alert, web, mail, app);
             repo.AddUserAlert(userAlert);
+            unitOfWorkManager.Save();
         }
 
         public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
@@ -507,8 +509,7 @@ namespace Integratie.BL.Managers
 
         public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
         {
-            List<UserAlert> userAlerts = repo.GetUserTrendAlertsOfUser(userId).ToList();
-            return userAlerts;
+            return repo.GetUserTrendAlertsOfUser(userId);
         }
 
         public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
@@ -548,20 +549,17 @@ namespace Integratie.BL.Managers
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)
         {
-            if (repo == null)
+            if (createWithUnitOfWork)
             {
-                if (createWithUnitOfWork)
+                if (unitOfWorkManager == null)
                 {
-                    if (unitOfWorkManager == null)
-                    {
-                        unitOfWorkManager = new UnitOfWorkManager();
-                    }
-                    repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+                    unitOfWorkManager = new UnitOfWorkManager();
                 }
-                else
-                {
-                    repo = new AlertRepo();
-                }
+                repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+            }
+            else
+            {
+                repo = new AlertRepo();
             }
         }
     }

@@ -30,6 +30,7 @@ namespace Integratie.BL.Managers
 
         public Account AddAccount(string id, string name, string mail)
         {
+            initNonExistingRepo();
             Account account = new Account(id, name, mail);
             this.Validate(account);
             return repo.CreateAccount(account.ID, account.Name, account.Mail);
@@ -37,6 +38,7 @@ namespace Integratie.BL.Managers
 
         public void ChangeAccount(Account account)
         {
+            initNonExistingRepo();
             this.Validate(account);
             repo.UpdateAccount(account);
         }
@@ -53,6 +55,7 @@ namespace Integratie.BL.Managers
 
         public void RemoveAccount(string id)
         {
+            initNonExistingRepo();
             repo.DeleteAccount(id);
         }
 
@@ -74,10 +77,12 @@ namespace Integratie.BL.Managers
             SubjectManager subjectManager = new SubjectManager(unitOfWorkManager);
             account.Follows.Add(subjectManager.GetSubjectById(subjectId));
             repo.UpdateAccount(account);
+            unitOfWorkManager.Save();
         }
 
         public void RemoveFollow(string accountId, int subjectId)
         {
+            initNonExistingRepo();
             Account account = repo.ReadAccountById(accountId);
             Subject subject = account.Follows.Find(f => f.ID.Equals(subjectId));
             account.Follows.Remove(subject);
@@ -86,20 +91,17 @@ namespace Integratie.BL.Managers
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)
         {
-            if (repo == null)
+            if (createWithUnitOfWork)
             {
-                if (createWithUnitOfWork)
+                if (unitOfWorkManager == null)
                 {
-                    if (unitOfWorkManager == null)
-                    {
-                        unitOfWorkManager = new UnitOfWorkManager();
-                    }
-                    repo = new AccountRepo(unitOfWorkManager.UnitOfWork);
+                    unitOfWorkManager = new UnitOfWorkManager();
                 }
-                else
-                {
-                    repo = new AccountRepo();
-                }
+                repo = new AccountRepo(unitOfWorkManager.UnitOfWork);
+            }
+            else
+            {
+                repo = new AccountRepo();
             }
         }
     }
