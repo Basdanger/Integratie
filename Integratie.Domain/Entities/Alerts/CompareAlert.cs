@@ -19,8 +19,8 @@ namespace Integratie.Domain.Entities.Alerts
         {
         }
 
-        public Subject SubjectA { get; set; }
-        public Subject SubjectB { get; set; }
+        public virtual Subject SubjectA { get; set; }
+        public virtual Subject SubjectB { get; set; }
         public Operator Operator { get; set; }
     }
 }
