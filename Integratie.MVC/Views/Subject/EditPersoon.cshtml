@@ -5,6 +5,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
 <div class="form-horizontal" style="color: black;">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">

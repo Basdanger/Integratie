@@ -45,11 +45,17 @@
                         Subjects
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="/Subject/Personen">Personen</a>
+                        <a class="dropdown-item" href="/Subject/Organisaties">Organisaties</a>
+                        <a class="dropdown-item" href="#">Thema's</a>
+                        <a class="dropdown-item" href="/Subject/Gemeente">Plaatsen</a>
                     </div>
+                </li>
+                <li>
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+                @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
+}
                 </li>
             </ul>
 

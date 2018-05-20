@@ -48,15 +48,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Twitter) <br />
-                    @Html.ActionLink("Detail", "Persoon", new { Full_Name = item.Full_Name })<br />
-                    @*@if (User.Identity.IsAuthenticated)
+                    @Html.ActionLink("Detail", "Persoon", new { id = item.ID, Full_Name = item.Full_Name })<br />
+                    @if (User.Identity.IsAuthenticated)
                         {
                             if (User.IsInRole("Admin"))
-                            {*@
-                    @Html.ActionLink("Edit", "EditPersoon", new { Full_Name = item.Full_Name })
-                    @Html.ActionLink("Delete", "DeletePerson", new { Full_Name = item.Full_Name })
-                    @*}
-                        }*@
+                            {
+                    @Html.ActionLink("Edit", "EditPersoon", new { id = item.ID })
+                    @Html.ActionLink("Delete", "DeletePerson", new { id = item.ID })
+                    }
+                        }
                 </td>
             </tr>
         }

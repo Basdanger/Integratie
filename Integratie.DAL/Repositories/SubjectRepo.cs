@@ -65,10 +65,11 @@ namespace Integratie.DAL.Repositories
         {
             return context.People.ToList().OrderByDescending(p => p.FeedCount);
         }
-        public Person GetPersoon(String Full_Name)
+        public Person GetPersoon(int id)
         {
             //bevat soms geen elementen soms wel gewoon nog eens proberen
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
+            //return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
+            return context.People.Find(id);
 
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
@@ -91,9 +92,9 @@ namespace Integratie.DAL.Repositories
             context.Entry(person).State = EntityState.Modified;
             context.SaveChanges();
         }
-        public void DeletePersoon(String Full_Name)
+        public void DeletePersoon(int id)
         {
-            Person p = GetPersoon(Full_Name);
+            Person p = GetPersoon(id);
             context.People.Remove(p);
             context.SaveChanges();
         }
@@ -110,6 +111,36 @@ namespace Integratie.DAL.Repositories
                 context.People.Add(persons[i]);
             }
             context.SaveChanges();
+        }
+        public IEnumerable<Person> ReadPeopleByName(string name)
+        {
+            return context.People.Where(s => s.Full_Name.Contains(name.ToUpper()));
+        }
+
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return context.People.Where(o => o.Organisation.ToUpper().Contains(organisatie)).Select(o => o.Organisation).Distinct();
+        }
+
+        public IEnumerable<String> GetGemeente(String gemeente)
+        {
+            return context.People.Where(g => g.Town.ToUpper().Contains(gemeente)).Select(g => g.Town).Distinct();
+        }
+
+
+        public IEnumerable<Feed> ReadWordFeeds(string word)
+        {
+            return context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<Feed> ReadPersonFeeds(string person)
+        {
+            return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<String> GetGemeente()
+        {
+            return context.People.Select(g => g.Town).Distinct();
         }
 
         public async Task UpdateSubjects(List<Subject> subjects)

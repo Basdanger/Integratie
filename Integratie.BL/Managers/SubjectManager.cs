@@ -49,9 +49,9 @@ namespace Integratie.BL.Managers
         {
             return repo.GetPersonen();
         }
-        public Person GetPersoon(String Full_Name)
+        public Person GetPersoon(int id)
         {
-            return repo.GetPersoon(Full_Name);
+            return repo.GetPersoon(id);
         }
         public IEnumerable<String> GetOrganisaties()
         {
@@ -70,9 +70,9 @@ namespace Integratie.BL.Managers
         {
             repo.UpdatePersoon(person);
         }
-        public void DeletePerson(String Full_Name)
+        public void DeletePerson(int id)
         {
-            repo.DeletePersoon(Full_Name);
+            repo.DeletePersoon(id);
         }
         public Person AddPerson(String First_Name, String Last_Name, String District, String Level, String Gender, String Twitter, String Site, DateTime DateOfBirth, String Facebook, String Postal_Code, String Full_Name, String Position, String Organisation, String Town)
         {
@@ -123,6 +123,30 @@ namespace Integratie.BL.Managers
             }
 
             await repo.UpdateSubjects(subjects);
+        }
+        public IEnumerable<Person> GetPeopleByName(string name)
+        {
+            return repo.ReadPeopleByName(name);
+        }
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return repo.GetOrganisaties(organisatie);
+        }
+        public IEnumerable<String> GetGemeentes(String gemeente)
+        {
+            return repo.GetGemeente(gemeente);
+        }
+        public IEnumerable<Feed> GetWordFeeds(string word)
+        {
+            return repo.ReadWordFeeds(word);
+        }
+        public IEnumerable<Feed> GetPersonFeeds(string person)
+        {
+            return repo.ReadPersonFeeds(person);
+        }
+        public IEnumerable<String> GetGemeentes()
+        {
+            return repo.GetGemeente();
         }
     }
 }
