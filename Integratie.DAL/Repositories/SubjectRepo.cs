@@ -65,6 +65,10 @@ namespace Integratie.DAL.Repositories
         {
             return context.People.ToList().OrderBy(p => p.First_Name);
         }
+        public IEnumerable<Person> GetPersonenByGender(String gender)
+        {
+            return context.People.Where(p => p.Gender.Equals(gender));
+        }
         public Person GetPersoon(int ID)
         {
             return context.People.Find(ID);

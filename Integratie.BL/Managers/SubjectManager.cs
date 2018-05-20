@@ -114,5 +114,9 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadPeopleByName(name);
         }
+        public IEnumerable<Person> GetPeopleByGender(string gender)
+        {
+            return repo.GetPersonenByGender(gender);
+        }
     }
 }
