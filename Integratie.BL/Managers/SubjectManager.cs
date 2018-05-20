@@ -43,10 +43,6 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadSubjectByName(name);
         }
-        public IEnumerable<Person> GetPeopleByName(string name)
-        {
-            return repo.ReadPeopleByName(name);
-        }
 
         public IEnumerable<Person> GetPeopleByOrganisation(string orginasation)
         {
@@ -64,11 +60,18 @@ namespace Integratie.BL.Managers
         {
             return repo.GetOrganisaties();
         }
+        public IEnumerable<String> GetOrganisaties(String organisatie)
+        {
+            return repo.GetOrganisaties(organisatie);
+        }
         public IEnumerable<String> GetGemeentes()
         {
             return repo.GetGemeente();
         }
-
+        public IEnumerable<String> GetGemeentes(String gemeente)
+        {
+            return repo.GetGemeente(gemeente);
+        }
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {
             return repo.ReadPeopleByTown(town);
@@ -107,9 +110,9 @@ namespace Integratie.BL.Managers
         {
             repo.CreatePersonen(persons);
         }
-        public IEnumerable<Person> GetPeopleByGender(String gender)
+        public IEnumerable<Person> GetPeopleByName(string name)
         {
-            return repo.GetPeopleByGender(gender);
+            return repo.ReadPeopleByName(name);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         AlertManager alertManager = new AlertManager();
+        FeedManager feedManager = new FeedManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -140,6 +141,16 @@ namespace Integratie.MVC.Controllers
         public void RemoveUserAlert(int id)
         {
             alertManager.RemoveUserAlert(id);
+        }
+        public ActionResult Search(String zoek)
+        {
+            Search search = new Search();
+            search.persons = subjectManager.GetPeopleByName(zoek);
+            search.organisaties = subjectManager.GetOrganisaties(zoek);
+            search.steden = subjectManager.GetGemeentes(zoek);
+            search.feeds = feedManager.GetWordFeeds(zoek);
+            search.feedsByPerson = feedManager.GetPersonFeeds(zoek);
+            return View(search);
         }
     }
 }
