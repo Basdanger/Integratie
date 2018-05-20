@@ -3,6 +3,7 @@ using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         FeedManager feedManager = new FeedManager();
+        AlertManager alertManager = new AlertManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
