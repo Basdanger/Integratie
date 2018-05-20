@@ -52,7 +52,10 @@
                     </div>
                 </li>
                 <li>
-
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+                @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
+}
                 </li>
             </ul>
 

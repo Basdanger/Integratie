@@ -65,10 +65,11 @@ namespace Integratie.DAL.Repositories
         {
             return context.People.ToList().OrderByDescending(p => p.FeedCount);
         }
-        public Person GetPersoon(String Full_Name)
+        public Person GetPersoon(int id)
         {
             //bevat soms geen elementen soms wel gewoon nog eens proberen
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
+            //return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
+            return context.People.Find(id);
 
             //return context.Subjects.OfType<Person>().Where(p => p.Full_Name.ToUpper().Equals(Full_Name.ToUpper())).First();
         }
@@ -135,6 +136,11 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Feed> ReadPersonFeeds(string person)
         {
             return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper())).ToList<Feed>();
+        }
+
+        public IEnumerable<String> GetGemeente()
+        {
+            return context.People.Select(g => g.Town).Distinct();
         }
     }
 }

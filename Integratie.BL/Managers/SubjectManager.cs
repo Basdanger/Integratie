@@ -47,9 +47,9 @@ namespace Integratie.BL.Managers
         {
             return repo.GetPersonen();
         }
-        public Person GetPersoon(String Full_Name)
+        public Person GetPersoon(int id)
         {
-            return repo.GetPersoon(Full_Name);
+            return repo.GetPersoon(id);
         }
         public IEnumerable<String> GetOrganisaties()
         {
@@ -117,6 +117,10 @@ namespace Integratie.BL.Managers
         public IEnumerable<Feed> GetPersonFeeds(string person)
         {
             return repo.ReadPersonFeeds(person);
+        }
+        public IEnumerable<String> GetGemeentes()
+        {
+            return repo.GetGemeente();
         }
     }
 }

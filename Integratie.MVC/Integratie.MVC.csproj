@@ -238,7 +238,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CSV.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PersonAndFeeds.cs" />
@@ -415,7 +414,6 @@
     <Content Include="Views\CSV\CSVImport.cshtml" />
     <Content Include="Views\CSV\CSV.cshtml" />
     <Content Include="Views\Home\csvimport.cshtml" />
-    <Content Include="Views\Home\CSV.cshtml" />
     <Content Include="Views\Home\Upload_file.cshtml" />
     <Content Include="Views\Graph Inits\_BarChart.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />

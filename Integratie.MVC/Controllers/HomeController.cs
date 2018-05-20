@@ -18,6 +18,7 @@ namespace Integratie.MVC.Controllers
         GraphManager manager = new GraphManager();
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
+        FeedManager feedManager = new FeedManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
