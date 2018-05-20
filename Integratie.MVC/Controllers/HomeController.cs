@@ -86,5 +86,40 @@ namespace Integratie.MVC.Controllers
             search.feedsByPerson = feedManager.GetPersonFeeds(zoek);
             return View(search);
         }
+
+        public ActionResult Alerts()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddUserAlert(AlertCreation alert)
+        {
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("Alerts", "Home", new { });
+
+            try
+            {
+                alertManager.AddUserAlert(User.Identity.GetUserId(), alert.AlertType, alert.Subject, alert.Web, alert.Mail, alert.App, alert.SubjectB, alert.Compare, alert.SubjectProperty, alert.Value);
+            }
+            catch (Exception)
+            {
+                return Json(new { Url = redirectUrl, status = "Error" });
+            }
+
+            return Json(new { Url = redirectUrl, status = "OK" });
+        }
+
+        [HttpPost]
+        public void UpdateUserAlert(AlertUpdate alert)
+        {
+            alertManager.UpdateUserAlert(alert.Id, alert.Web, alert.Mail, alert.App);
+        }
+
+        [HttpPost]
+        public void RemoveUserAlert(int id)
+        {
+            alertManager.RemoveUserAlert(id);
+        }
     }
 }
