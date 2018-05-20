@@ -95,5 +95,11 @@ namespace Integratie.DAL.Repositories
             }
             return feeds;
         }
+
+        public IEnumerable<Feed> GetFeeds(string full_Name)
+        {
+            
+            return context.Feeds.Where(f=> f.Persons.ToUpper().Equals(full_Name));
+        }
     }
 }
