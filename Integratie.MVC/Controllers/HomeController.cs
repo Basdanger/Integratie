@@ -142,10 +142,11 @@ namespace Integratie.MVC.Controllers
         {
             alertManager.RemoveUserAlert(id);
         }
-        public ActionResult Search(String search)
+        public ActionResult Search(String zoek)
         {
-            //Person person = subjectmgr;
-            return View();
+            Search search = new Search();
+            search.person = subjectmgr.GetPersonen().Where(pers => pers.Full_Name.ToUpper().Equals(zoek)).First();
+            return View(search);
         }
     }
 }

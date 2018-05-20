@@ -1,0 +1,25 @@
+﻿@model Integratie.MVC.Models.Search
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search</title>
+</head>
+<body>
+    <div>
+        <h4>Resultaten:</h4>
+        <hr />
+        @Html.DisplayFor(model => model.person.Full_Name);
+        @Html.DisplayFor(model => model.person.Organisation);
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

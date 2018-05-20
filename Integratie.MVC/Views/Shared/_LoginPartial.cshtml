@@ -17,10 +17,10 @@ else
 {
     <ul class="nav navbar-nav navbar-right" style="color:white; float:right;">
         <li>
-            @using (Html.BeginForm("Home", "Search", FormMethod.Get))
-    { 
-                <input type="submit" name="submit" value="Search" />
-    }
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
+}
         </li>
         <li style="color:white!important;position:absolute; right:110px;top:10px;">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li style="color:white; margin-left: 10px;position:absolute; right:50px;top:10px;">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
