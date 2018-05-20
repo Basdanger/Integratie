@@ -68,7 +68,6 @@
     <Compile Include="Repositories\AlertRepo.cs" />
     <Compile Include="Repositories\ContentRepo.cs" />
     <Compile Include="Repositories\DashboardRepo.cs" />
-    <Compile Include="Repositories\DummyAlertRepo.cs" />
     <Compile Include="Repositories\DummySubjectRepo.cs" />
     <Compile Include="EF\DashboardDbConfiguration.cs" />
     <Compile Include="EF\DashBoardDbContext.cs" />

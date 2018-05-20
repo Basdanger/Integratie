@@ -10,6 +10,9 @@ using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Graph;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Integratie.BL.Managers
 {
