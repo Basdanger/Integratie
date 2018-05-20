@@ -41,6 +41,11 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.ToList<Subject>();
         }
 
+        public List<string> GetNames()
+        {
+            return context.Subjects.Select(s => s.Name).OrderBy(s => s).ToList();
+        }
+
         public void RemoveSubject(Subject subject)
         {
             context.Subjects.Remove(subject);
