@@ -10,6 +10,7 @@ using Integratie.DAL.EF;
 using Integratie.BL.Managers;
 using System.IO;
 using Integratie.Domain.Entities.Subjects;
+using Newtonsoft.Json;
 
 namespace Integratie.UI.Con
 {
@@ -25,12 +26,25 @@ namespace Integratie.UI.Con
             //Console.WriteLine("Alert added");
             //mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
             //Console.WriteLine("Alert added");
-            Person person;
-            subject.GetPersonen();
-            person = subject.GetPersoon("Bart De Wever");
-            person.Full_Name = "Filip De Wever";
-            subject.ChangePerson(person);
-            
+            Dictionary<string, int> valuePairs = new Dictionary<string, int>();
+            List<int> values = new List<int>();
+            int value;
+
+            Random random = new Random(5);
+            value = random.Next(50);
+            valuePairs.Add("one", value);
+            value = random.Next(50);
+            valuePairs.Add("two", value);
+
+            string json = JsonConvert.SerializeObject(valuePairs);
+            Console.WriteLine(json);
+            valuePairs.Clear();
+            valuePairs = JsonConvert.DeserializeObject<Dictionary<string,int>>(json);
+            foreach (string item in valuePairs.Keys)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine(valuePairs[item]);
+            }
             Console.ReadLine();
         }
 

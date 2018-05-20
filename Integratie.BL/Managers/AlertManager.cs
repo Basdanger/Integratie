@@ -11,12 +11,20 @@ using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Integratie.BL.Managers
 {
     public class AlertManager
     {
-        private AlertRepo repo = new AlertRepo();
+        private AlertRepo repo;
+        private UnitOfWorkManager unitOfWorkManager;
+
+        public AlertManager()
+        {
+            repo = new AlertRepo();
+        }
+
         public async Task CheckAlerts(DateTime now)
         {
             List<Alert> alerts = repo.GetAlerts().ToList();
@@ -129,8 +137,9 @@ namespace Integratie.BL.Managers
                 result = (posNegFeeds / feedCount) * 100;
             }
 
-            GraphManager graphManager = new GraphManager(repo.GetContext());
-            alert.GraphId = graphManager.AddAlertBarGraph(valuePairs, start, end);
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             switch (alert.Operator)
             {
@@ -219,8 +228,9 @@ namespace Integratie.BL.Managers
                 result = fCNow - fCPast;
             }
 
-            GraphManager graphManager = new GraphManager(repo.GetContext());
-            alert.GraphId = graphManager.AddAlertLineGraph(valuePairs, start, end);
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             switch (alert.Operator)
             {
@@ -278,8 +288,9 @@ namespace Integratie.BL.Managers
             fcB = feedsB.Count();
             valuePairs.Add(subjectB.Name, fcB);
 
-            GraphManager graphManager = new GraphManager(repo.GetContext());
-            alert.GraphId = graphManager.AddAlertBarGraph(valuePairs, start, end);
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             switch (alert.Operator)
             {
@@ -366,8 +377,9 @@ namespace Integratie.BL.Managers
 
             zScore = ((float)fcToday - avarage) / std;
 
-            GraphManager graphManager = new GraphManager(repo.GetContext());
-            alert.GraphId = graphManager.AddAlertLineGraph(valuePairs, start, end);
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             if (zScore > 2)
             {
@@ -379,7 +391,8 @@ namespace Integratie.BL.Managers
 
         public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, int value)
         {
-            AccountManager accountManager = new AccountManager(repo.GetContext());
+            initNonExistingRepo(true);
+            AccountManager accountManager = new AccountManager(unitOfWorkManager);
             Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
             Account account = accountManager.GetAccountById(id);
             UserAlert userAlert = new UserAlert(account, alert, web, mail, app);
@@ -389,13 +402,15 @@ namespace Integratie.BL.Managers
         public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
         {
             Alert alert;
-            SubjectManager subjectManager = new SubjectManager(repo.GetContext());
+            SubjectManager subjectManager = new SubjectManager(unitOfWorkManager);
+            GraphManager graphManager = new GraphManager(unitOfWorkManager);
             Subject subject = subjectManager.GetSubjectByName(subjectName);
             Alert existingAlert;
 
             if (alertType.Equals("Trend"))
             {
                 alert = new TrendAlert(subject);
+                alert.Graph = graphManager.AddAlertLineGraph();
                 existingAlert = repo.FindTrendAlert((TrendAlert)alert);
             }
             else if (alertType.Equals("Compare"))
@@ -410,8 +425,8 @@ namespace Integratie.BL.Managers
                 {
                     @operator = Operator.LT;
                 }
-
                 alert = new CompareAlert(subject, subjectB, @operator);
+                alert.Graph = graphManager.AddAlertBarGraph();
                 existingAlert = repo.FindCompareAlert((CompareAlert)alert);
             }
             else if (alertType.Equals("Check"))
@@ -436,6 +451,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new CheckAlert(property, @operator, value, subject);
+                alert.Graph = graphManager.AddAlertLineGraph();
                 existingAlert = repo.FindCheckAlert((CheckAlert)alert);
             }
             else
@@ -460,6 +476,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new SentimentAlert(property, @operator, value, subject);
+                alert.Graph = graphManager.AddAlertBarGraph();
                 existingAlert = repo.FindSentimentAlert((SentimentAlert)alert);
             }
 
@@ -527,6 +544,25 @@ namespace Integratie.BL.Managers
         {
             UserAlert userAlert = repo.GetUserAlert(id);
             repo.RemoveUserAlert(userAlert);
+        }
+
+        public void initNonExistingRepo(bool createWithUnitOfWork = false)
+        {
+            if (repo == null)
+            {
+                if (createWithUnitOfWork)
+                {
+                    if (unitOfWorkManager == null)
+                    {
+                        unitOfWorkManager = new UnitOfWorkManager();
+                    }
+                    repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+                }
+                else
+                {
+                    repo = new AlertRepo();
+                }
+            }
         }
     }
 }

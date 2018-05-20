@@ -13,15 +13,17 @@ namespace Integratie.BL.Managers
     public class SubjectManager
     {
         private SubjectRepo repo;
+        private UnitOfWorkManager unitOfWorkManager;
 
         public SubjectManager()
         {
             repo = new SubjectRepo();
         }
 
-        public SubjectManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        public SubjectManager(UnitOfWorkManager unitOfWorkManager)
         {
-            repo = new SubjectRepo(dashboardDbContext);
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new SubjectRepo(unitOfWorkManager.UnitOfWork);
         }
         
         public IEnumerable<Subject> GetSubjects()

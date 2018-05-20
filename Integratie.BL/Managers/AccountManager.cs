@@ -14,16 +14,18 @@ namespace Integratie.BL.Managers
 {
     public class AccountManager : IAccountManager
     {
-        private readonly AccountRepo repo;
+        private AccountRepo repo;
+        private UnitOfWorkManager unitOfWorkManager;
 
         public AccountManager()
         {
             repo = new AccountRepo();
         }
 
-        public AccountManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        public AccountManager(UnitOfWorkManager unitOfWorkManager)
         {
-            repo = new AccountRepo(dashboardDbContext);
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new AccountRepo(unitOfWorkManager.UnitOfWork);
         }
 
         public Account AddAccount(string id, string name, string mail)
@@ -67,8 +69,9 @@ namespace Integratie.BL.Managers
 
         public void AddFollow(string accountId,int subjectId)
         {
+            initNonExistingRepo(true);
             Account account = repo.ReadAccountById(accountId);
-            SubjectManager subjectManager = new SubjectManager(repo.GetContext());
+            SubjectManager subjectManager = new SubjectManager(unitOfWorkManager);
             account.Follows.Add(subjectManager.GetSubjectById(subjectId));
             repo.UpdateAccount(account);
         }
@@ -79,6 +82,25 @@ namespace Integratie.BL.Managers
             Subject subject = account.Follows.Find(f => f.ID.Equals(subjectId));
             account.Follows.Remove(subject);
             repo.UpdateAccount(account);
+        }
+
+        public void initNonExistingRepo(bool createWithUnitOfWork = false)
+        {
+            if (repo == null)
+            {
+                if (createWithUnitOfWork)
+                {
+                    if (unitOfWorkManager == null)
+                    {
+                        unitOfWorkManager = new UnitOfWorkManager();
+                    }
+                    repo = new AccountRepo(unitOfWorkManager.UnitOfWork);
+                }
+                else
+                {
+                    repo = new AccountRepo();
+                }
+            }
         }
     }
 }

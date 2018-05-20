@@ -17,10 +17,10 @@ namespace Integratie.DAL.Repositories
         {
             context = new DashBoardDbContext();
         }
-
-        public DashBoardDbContext GetContext()
+        
+        public AlertRepo(UnitOfWork uow)
         {
-            return context;
+            context = uow.Context;
         }
 
         public void AddAlert(Alert alert)

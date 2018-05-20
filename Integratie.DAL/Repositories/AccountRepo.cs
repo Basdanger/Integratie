@@ -11,23 +11,18 @@ namespace Integratie.DAL.Repositories
 {
     public class AccountRepo : IAccountRepo
     {
-        private DashBoardDbContext context;
+        private readonly DashBoardDbContext context;
 
         public AccountRepo()
         {
             context = new DashBoardDbContext();
         }
 
-        public AccountRepo(DashBoardDbContext context)
+        public AccountRepo(UnitOfWork unitOfWork)
         {
-            this.context = context;
+            context = unitOfWork.Context;
         }
-
-        public DashBoardDbContext GetContext()
-        {
-            return context;
-        }
-
+        
         public Account CreateAccount(string id, string name, string mail)
         {
             Account account = new Account(id, name, mail);

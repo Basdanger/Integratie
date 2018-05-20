@@ -13,16 +13,18 @@ namespace Integratie.BL.Managers
 {
     public class GraphManager
     {
-        IGraphRepo GraphRepo;
+        private IGraphRepo GraphRepo;
+        private UnitOfWorkManager unitOfWorkManager;
 
         public GraphManager()
         {
             GraphRepo = new GraphRepo();
         }
 
-        public GraphManager(DAL.EF.DashBoardDbContext dashboardDbContext)
+        public GraphManager(UnitOfWorkManager unitOfWorkManager)
         {
-            GraphRepo = new GraphRepo(dashboardDbContext);
+            this.unitOfWorkManager = unitOfWorkManager;
+            GraphRepo = new GraphRepo(unitOfWorkManager.UnitOfWork);
         }
 
         FeedManager feedManager = new FeedManager();
@@ -157,27 +159,21 @@ namespace Integratie.BL.Managers
             return graph;
         }
 
-        public int AddAlertLineGraph(Dictionary<string,List<double>> valuePairs,DateTime start,DateTime end)
+        public Graph AddAlertLineGraph()
         {
             Graph graph = new Graph();
-            graph.LineValues = valuePairs;
-            graph.StartDate = start;
-            graph.EndDate = end;
             graph.CalcType = CalcType.AVG;
             graph.IntervalSize = 1;
             graph.GraphType = GraphType.Linechart;
-            return GraphRepo.AddGraph(graph).GraphId;
+            return GraphRepo.AddGraph(graph);
         }
 
-        public int AddAlertBarGraph(Dictionary<string, double> valuePairs, DateTime start, DateTime end)
+        public Graph AddAlertBarGraph()
         {
             Graph graph = new Graph();
-            graph.BarValues = valuePairs;
-            graph.StartDate = start;
-            graph.EndDate = end;
             graph.CalcType = CalcType.Sum;
             graph.GraphType = GraphType.Barchart;
-            return GraphRepo.AddGraph(graph).GraphId;
+            return GraphRepo.AddGraph(graph);
         }
     }
 }

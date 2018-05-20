@@ -60,6 +60,7 @@
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />
     <Compile Include="Managers\MailManager.cs" />
     <Compile Include="Managers\SubjectManager.cs" />
+    <Compile Include="Managers\UnitOfWorkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
