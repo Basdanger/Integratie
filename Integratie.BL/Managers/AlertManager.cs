@@ -264,7 +264,7 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feedsA;
             IEnumerable<Feed> feedsB;
 
-            DateTime end = DateTime.Now;
+            DateTime end = now;
             DateTime start = end.AddDays(-7);
             Dictionary<string, double> valuePairs = new Dictionary<string, double>();
 
@@ -325,7 +325,7 @@ namespace Integratie.BL.Managers
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
-            DateTime end = DateTime.Now;
+            DateTime end = now;
             DateTime start = end.AddDays(-7);
             Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
             List<double> values = new List<double>();
