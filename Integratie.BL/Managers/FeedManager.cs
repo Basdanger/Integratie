@@ -136,5 +136,10 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList());
             return filteredList;
         }
+        public IEnumerable<int> getFeedLocaties()
+        {
+            return repo.getLocatieFeeds();
+        }
     }
 }
+ 

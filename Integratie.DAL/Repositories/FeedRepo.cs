@@ -89,5 +89,16 @@ namespace Integratie.DAL.Repositories
             }
             return feeds;
         }
+        public IEnumerable<int> getLocatieFeeds()
+        {
+            if(context.Feeds.Select(f => f.Geo) == null)
+            {
+                return null;
+            }
+            else
+            {
+                return context.Feeds.Select(f => Convert.ToInt32(f.Geo));
+            }
+        }
     }
 }
