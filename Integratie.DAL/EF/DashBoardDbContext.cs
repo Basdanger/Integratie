@@ -44,6 +44,7 @@ namespace Integratie.DAL.EF
         public DbSet<UserAlert> UserAlerts { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<SiteContent> SiteContents{ get; set; }
+        public DbSet<Story> Stories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

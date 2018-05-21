@@ -230,6 +230,7 @@
     <Compile Include="Controllers\SiteContentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -467,6 +468,12 @@
     <Content Include="Views\Admin\GetUser.cshtml" />
     <Content Include="Views\Admin\DeleteUser.cshtml" />
     <Content Include="Views\Admin\UpdateUser.cshtml" />
+    <Content Include="Views\Theme\Create.cshtml" />
+    <Content Include="Views\Theme\CreateStory.cshtml" />
+    <Content Include="Views\Theme\EditStories.cshtml" />
+    <Content Include="Views\Theme\Index.cshtml" />
+    <Content Include="Views\Theme\Theme.cshtml" />
+    <Content Include="Views\Theme\ThemeConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
