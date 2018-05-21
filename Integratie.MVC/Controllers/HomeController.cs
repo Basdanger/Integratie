@@ -21,6 +21,7 @@ namespace Integratie.MVC.Controllers
         SubjectManager subjectManager = new SubjectManager();
         FeedManager feedManager = new FeedManager();
         AlertManager alertManager = new AlertManager();
+        AccountManager accountManager = new AccountManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -122,6 +123,11 @@ namespace Integratie.MVC.Controllers
         public void RemoveUserAlert(int id)
         {
             alertManager.RemoveUserAlert(id);
+        }
+
+        public ActionResult Follows()
+        {
+            return View(accountManager.GetAccountById(User.Identity.GetUserId()).Follows);
         }
     }
 }

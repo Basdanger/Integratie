@@ -89,6 +89,19 @@ namespace Integratie.BL.Managers
             repo.UpdateAccount(account);
         }
 
+        public void UpdateFollow(string accountId, int subjectId)
+        {
+            Account account = repo.ReadAccountById(accountId);
+            if (account.Follows.Exists(f => f.ID.Equals(subjectId)))
+            {
+                RemoveFollow(accountId, subjectId);
+            }
+            else
+            {
+                AddFollow(accountId, subjectId);
+            }
+        }
+
         public void initNonExistingRepo(bool createWithUnitOfWork = false)
         {
             if (createWithUnitOfWork)

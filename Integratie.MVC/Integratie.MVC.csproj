@@ -475,6 +475,7 @@
     <Content Include="Views\AlertPartial\_CheckAlertDropDown.cshtml" />
     <Content Include="Views\AlertPartial\_CompareAlertDropDown.cshtml" />
     <Content Include="Views\AlertPartial\_SentimentAlertDropDown.cshtml" />
+    <Content Include="Views\Home\Follows.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

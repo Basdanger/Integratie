@@ -5,6 +5,7 @@ using Integratie.Domain.Entities;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
 using LINQtoCSV;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,6 +23,7 @@ namespace Integratie.MVC.Controllers
     {
         private SubjectManager mgr = new SubjectManager();
         private FeedManager feedManager = new FeedManager();
+        private AccountManager accountManager = new AccountManager();
         // GET: Subject
         public ActionResult Index()
         {
@@ -37,6 +39,10 @@ namespace Integratie.MVC.Controllers
             PersonAndFeeds pf = new PersonAndFeeds();
             pf.person = mgr.GetPersoon(id);
             pf.feeds = feedManager.GetPersonFeeds(Full_Name);
+            if (Request.IsAuthenticated)
+            {
+                ViewBag.Follow = accountManager.GetAccountById(User.Identity.GetUserId()).Follows.Exists(f => f.ID.Equals(pf.person.ID));
+            }
             return View(pf);
         }
         [Authorize(Roles = "Admin")]
@@ -169,6 +175,12 @@ namespace Integratie.MVC.Controllers
                 mgr.AddPerson(item.First_Name, item.Last_Name, item.District, item.Level, item.Gender, item.Twitter, item.Site, item.DateOfBirth, item.Facebook, item.Postal_Code, item.Full_Name, item.Position, item.Organisation, item.Town);
             }
             return Redirect("Personen");
+        }
+
+        [HttpPost]
+        public void UpdateFollow(int id)
+        {
+            accountManager.UpdateFollow(User.Identity.GetUserId(), id);
         }
     }
 }

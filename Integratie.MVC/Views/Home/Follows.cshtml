@@ -1,0 +1,65 @@
+﻿@model List<Integratie.Domain.Entities.Subjects.Subject>
+@{
+    ViewBag.Title = "Follows";
+}
+
+<table class="ui collapsing celled table" align="center" style="margin: 0px auto;">
+    <thead>
+        <tr>
+            <th>Follows</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr id="@item.ID">
+            <td>
+                <div class="ui form">
+                    <div class="two fields">
+                        <div class="field">
+                            @item.Name
+                        </div>
+                        <div class="field">
+                            <button id="submit @item.ID" class="ui primary button">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    function SendFollowDeleteSubmit(int) {
+        var s = {
+            id: int
+        };
+
+        s = (JSON.stringify(s));
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateFollow", "Subject")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+</script>
+
+@foreach (var item in Model)
+{
+    <script>
+        $("[id='submit @item.ID']").on('click', function() {
+        SendFollowDeleteSubmit(@item.ID);
+            $('#@item.ID').remove();
+        });
+    </script>
+}

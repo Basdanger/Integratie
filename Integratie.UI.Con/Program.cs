@@ -10,18 +10,23 @@ using Integratie.DAL.EF;
 using Integratie.BL.Managers;
 using System.IO;
 using Integratie.Domain.Entities;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.UI.Con
 {
     class Program
     {
-        private static FeedManager mgr = new FeedManager();
+        private static AccountManager mgr = new AccountManager();
+        private static SubjectManager subjectManager = new SubjectManager();
 
         static void Main(string[] args)
         {
             //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
-            List<Feed> feeds = mgr.GetPersonFeeds("Bart De Wever").ToList();
-            Console.WriteLine(feeds.Count);
+            Subject subject = subjectManager.GetSubjectById(1);
+            mgr.UpdateFollow("0", 1);
+            Console.WriteLine(mgr.GetAccountById("0").Follows.Contains(subject));
+            mgr.UpdateFollow("0", 1);
+            Console.WriteLine(mgr.GetAccountById("0").Follows.Contains(subject));
             Console.ReadLine();
         }
 
