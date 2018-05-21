@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Integratie.BL.Managers
-{ 
+{
 
     public class ThemeManager
     {
@@ -41,26 +41,28 @@ namespace Integratie.BL.Managers
 
         private Theme UpdateTheme(Theme thema)
         {
-            //thema=setTopFive(thema.TermsList,thema);
+            thema = setTopFive(thema.TermsList, thema);
             thema.TermMentions = setTermMentions(thema.TermsList);
-   
+
             return thema;
         }
-       
+
 
         private List<TermMention> setTermMentions(List<string> termsList)
         {
             List<TermMention> termMentionList = new List<TermMention>();
-            foreach(String t in termsList){
+            foreach (String t in termsList)
+            {
                 int counter = 0;
-                TermMention termMention=null;
+                TermMention termMention = null;
                 foreach (Feed f in feedRepo.ReadFeeds())
                 {
-                    if (f.GetWords().Contains(t)) {
+                    if (f.GetWords().Contains(t))
+                    {
                         counter++;
                     }
-                    termMention = new TermMention(t,counter);
-                    
+                    termMention = new TermMention(t, counter);
+
                 }
                 termMentionList.Add(termMention);
             }
@@ -75,14 +77,19 @@ namespace Integratie.BL.Managers
         public void AddStory(Story story, int themaId)
         {
             repo.addStory(story);
-            story.Date = DateTime.Now;
-            Theme thema=repo.GetThema(themaId);
-            if (thema.Stories == null) {
+            Theme thema = repo.GetThema(themaId);
+            if (thema.Stories == null)
+            {
                 thema.Stories = new List<Story>();
             }
             thema.Stories.Add(story);
-            
+
             repo.UpdateThema(thema);
+        }
+
+        public void DeleteTheme(int themaId)
+        {
+            repo.deleteTheme(themaId);
         }
 
         public void DeleteStory(int storyId)
@@ -90,54 +97,54 @@ namespace Integratie.BL.Managers
             repo.deleteStory(storyId);
         }
 
-        //private Theme setTopFive(List<string> termsList, Theme thema)
-        //{
-        //    string topPersons = "";
-        //    string topOrganisations = "";
-        //    Dictionary<Person, int> mapPerson = new Dictionary<Person, int>();
-        //    Dictionary<string, int> mapOrg = new Dictionary<string, int>();
-        //    IEnumerable<Person> personen = subjRepo.GetPersonen();
-        //    foreach (Person p in personen)
-        //    {
-        //        int totalcounter = 0;
-        //        IEnumerable<Feed> feeds = subjRepo.GetFeeds(p.Full_Name);
-        //        foreach (Feed f in feeds)
-        //        {
-        //            totalcounter = totalcounter + f.GetWords().Intersect(termsList).Count();
-        //        }
-        //        mapPerson.Add(p, totalcounter);
-        //    }
-        //    var myList = mapPerson.ToList();
-        //    myList.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+        private Theme setTopFive(List<string> termsList, Theme thema)
+        {
+            string topPersons = "";
+            string topOrganisations = "";
+            Dictionary<Person, int> mapPerson = new Dictionary<Person, int>();
+            Dictionary<string, int> mapOrg = new Dictionary<string, int>();
+            IEnumerable<Person> personen = subjRepo.GetPersonen();
+            foreach (Person p in personen)
+            {
+                int totalcounter = 0;
+                IEnumerable<Feed> feeds = subjRepo.GetFeeds(p.Full_Name);
+                foreach (Feed f in feeds)
+                {
+                    totalcounter = totalcounter + f.GetWords().Intersect(termsList).Count();
+                }
+                mapPerson.Add(p, totalcounter);
+            }
+            var myList = mapPerson.ToList();
+            myList.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
 
-        //    foreach (KeyValuePair<Person, int> p in myList)
-        //    {
-        //        if (mapOrg.ContainsKey(p.Key.Organisation))
-        //        {
-        //            int count;
-        //            mapOrg.TryGetValue(p.Key.Organisation, out count);
-        //            mapOrg[p.Key.Organisation] = count + p.Value;
-        //        }
-        //        else
-        //        {
-        //            mapOrg.Add(p.Key.Organisation, p.Value);
+            foreach (KeyValuePair<Person, int> p in myList)
+            {
+                if (mapOrg.ContainsKey(p.Key.Organisation))
+                {
+                    int count;
+                    mapOrg.TryGetValue(p.Key.Organisation, out count);
+                    mapOrg[p.Key.Organisation] = count + p.Value;
+                }
+                else
+                {
+                    mapOrg.Add(p.Key.Organisation, p.Value);
 
-        //        }
+                }
 
-        //    }
-        //    var myList2 = mapOrg.ToList();
-        //    myList2.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+            }
+            var myList2 = mapOrg.ToList();
+            myList2.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
 
-        //    for (int i = 0; i < 5; i++)
-        //    {
-        //        topPersons = topPersons + myList.ElementAt(i).Key.Full_Name + ',';
-        //        topOrganisations = topOrganisations + myList2.ElementAt(i).Key + ',';
-        //    }
-        //    topPersons = topPersons.Remove(topPersons.Length - 1);
-        //    topOrganisations = topOrganisations.Remove(topOrganisations.Length - 1);
-        //    thema.TopPersons = topPersons;
-        //    thema.TopOrganisations = topOrganisations;
-        //    return thema;
-        //}
+            for (int i = 0; i < 5; i++)
+            {
+                topPersons = topPersons + myList.ElementAt(i).Key.Full_Name + ',';
+                topOrganisations = topOrganisations + myList2.ElementAt(i).Key + ',';
+            }
+            topPersons = topPersons.Remove(topPersons.Length - 1);
+            topOrganisations = topOrganisations.Remove(topOrganisations.Length - 1);
+            thema.TopPersons = topPersons;
+            thema.TopOrganisations = topOrganisations;
+            return thema;
+        }
     }
 }
