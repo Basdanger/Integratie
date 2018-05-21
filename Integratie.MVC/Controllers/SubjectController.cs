@@ -21,6 +21,7 @@ namespace Integratie.MVC.Controllers
     public class SubjectController : Controller
     {
         private SubjectManager mgr = new SubjectManager();
+        private FeedManager feedManager = new FeedManager();
         // GET: Subject
         public ActionResult Index()
         {
@@ -35,7 +36,7 @@ namespace Integratie.MVC.Controllers
         {
             PersonAndFeeds pf = new PersonAndFeeds();
             pf.person = mgr.GetPersoon(id);
-            pf.feeds = mgr.GetFeeds(Full_Name);
+            pf.feeds = feedManager.GetPersonFeeds(Full_Name);
             return View(pf);
         }
         [Authorize(Roles = "Admin")]

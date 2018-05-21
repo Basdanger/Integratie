@@ -83,15 +83,6 @@ namespace Integratie.DAL.Repositories
             //return context.People.ToList();
             return context.People.Select(o => o.Organisation).Distinct();
         }
-        public Person FeedsByPerson(String Full_Name)
-        {
-            //return context.People.Where(p => p.Feeds.First(f => f.Persons.ToUpper().Equals(Full_Name)));
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
-        }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person));
-        }
         public void UpdatePersoon(Person person)
         {
             context.Entry(person).State = EntityState.Modified;

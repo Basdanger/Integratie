@@ -62,10 +62,6 @@ namespace Integratie.BL.Managers
         {
             return repo.GetOrganisaties();
         }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return repo.GetFeeds(person);
-        }
 
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {
@@ -144,10 +140,6 @@ namespace Integratie.BL.Managers
         public IEnumerable<Feed> GetWordFeeds(string word)
         {
             return repo.ReadWordFeeds(word);
-        }
-        public IEnumerable<Feed> GetPersonFeeds(string person)
-        {
-            return repo.ReadPersonFeeds(person);
         }
         public IEnumerable<String> GetGemeentes()
         {
