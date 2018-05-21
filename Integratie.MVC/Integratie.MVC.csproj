@@ -473,7 +473,7 @@
     <Content Include="Views\Theme\EditStories.cshtml" />
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\Theme.cshtml" />
-    <Content Include="Views\Theme\ThemeConfig.cshtml" />
+    <Content Include="Views\Theme\EditThemes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
