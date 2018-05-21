@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201805180912363_MigrationB.Designer.cs">
       <DependentUpon>201805180912363_MigrationB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805201546113_JuanMigration.cs" />
+    <Compile Include="Migrations\201805201546113_JuanMigration.Designer.cs">
+      <DependentUpon>201805201546113_JuanMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
@@ -107,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805180912363_MigrationB.resx">
       <DependentUpon>201805180912363_MigrationB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201546113_JuanMigration.resx">
+      <DependentUpon>201805201546113_JuanMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
