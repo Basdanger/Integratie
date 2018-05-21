@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Managers\ContentManager.cs" />
     <Compile Include="Managers\DashboardManager.cs" />
     <Compile Include="Managers\FeedManager.cs" />
+    <Compile Include="Managers\FireBaseManager.cs" />
     <Compile Include="Managers\GraphManager.cs" />
     <Compile Include="Managers\Interfaces\IAccountManager.cs" />
     <Compile Include="Managers\Interfaces\IFeedManager.cs" />

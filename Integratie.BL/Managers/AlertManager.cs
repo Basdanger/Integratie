@@ -43,6 +43,7 @@ namespace Integratie.BL.Managers
 
             foreach (Alert a in trueAlerts)
             {
+                FireBaseManager fireBaseManager = new FireBaseManager();
                 MailManager mailManager = new MailManager();
                 List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
                 foreach (UserAlert uA in userAlerts)
@@ -54,7 +55,7 @@ namespace Integratie.BL.Managers
                     }
                     if (uA.App && uA.Account.DeviceId != null)
                     {
-
+                        fireBaseManager.SendNotification("test",uA.Account.DeviceId);
                     }
                 }
             }
