@@ -14,54 +14,69 @@
         <h2>Personen:</h2>
         <table class="table">
             @foreach (var item in Model.persons)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Full_Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Organisation)</td>
-                    <td><a href="http://localhost:51548/Subject/Persoon/@Url.Content(item.ID.ToString())?Full_Name=@Url.Content(item.Full_Name)">Lees meer</a></td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Full_Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Organisation)</td>
+                <td><a href="http://localhost:51548/Subject/Persoon/@Url.Content(item.ID.ToString())?Full_Name=@Url.Content(item.Full_Name)">Lees meer</a></td>
+            </tr>
+    }
         </table>
         <h2>Organisaties:</h2>
         <table class="table">
             @foreach (var item in Model.organisaties)
-            {
-                <tr>
-                    <td>
-                        @item
-                    </td>
-                    <td><a href="http://localhost:51548/Subject/Organisaties">Lees meer</a></td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td><a href="http://localhost:51548/Subject/Organisaties">Lees meer</a></td>
+            </tr>
+    }
         </table>
         <h2>Steden:</h2>
         <table class="table">
             @foreach (var item in Model.steden)
-            {
-                <tr>
-                    <td>
-                        @item
-                    </td>
-                    <td><a href="http://localhost:51548/Subject/GemeentePage?gemeente=@Url.Content(item)">Lees meer</a></td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @item
+                </td>
+                <td><a href="http://localhost:51548/Subject/GemeentePage?gemeente=@Url.Content(item)">Lees meer</a></td>
+            </tr>
+    }
         </table>
         <h2>Feeds:</h2>
         <table class="table">
             @foreach (var item in Model.feeds)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Words)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Hashtags)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Persons)
-                    </td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Words)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hashtags)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Persons)
+                </td>
+            </tr>
+    }
+        </table>
+        <h2>Themas:</h2>
+        <table class="table">
+            @foreach (var item in Model.themas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TopPersons)
+                </td>
+                <td><a href="http://localhost:51548/Theme)">Lees meer</a></td>
+            </tr>
+    }
         </table>
     </div>
     <p>
