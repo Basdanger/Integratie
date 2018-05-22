@@ -20,12 +20,12 @@ namespace Integratie.MVC.Controllers.Api
         {
             return new string[] { "value1", "value2" };
         }
-        [HttpGet]
-        public IHttpActionResult GetLocaties()
-        {
-            var locaties = mgr.getFeedLocaties();
-            return Ok(locaties);
-        }
+        //[HttpGet]
+        //public IHttpActionResult GetLocaties()
+        //{
+        //    var locaties = mgr.getFeedLocaties();
+        //    return Ok(locaties);
+        //}
         // GET api/<controller>/5
         public string Get(int id)
         {
