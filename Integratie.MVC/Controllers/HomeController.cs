@@ -19,6 +19,7 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         FeedManager feedManager = new FeedManager();
+        ThemeManager themeManager = new ThemeManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -76,7 +77,7 @@ namespace Integratie.MVC.Controllers
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
-        public ActionResult Search(String zoek)
+        public ActionResult Search(String zoek)     
         {
             Search search = new Search();
             search.persons = subjectManager.GetPeopleByName(zoek);
@@ -84,6 +85,7 @@ namespace Integratie.MVC.Controllers
             search.steden = subjectManager.GetGemeentes(zoek);
             search.feeds = feedManager.GetWordFeeds(zoek);
             search.feedsByPerson = feedManager.GetPersonFeeds(zoek);
+            search.themas = themeManager.GetThemas();
             return View(search);
         }
     }

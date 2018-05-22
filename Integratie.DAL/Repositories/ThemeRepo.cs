@@ -59,10 +59,17 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public void deleteTermMention(int termMentionId) {
+            TermMention termMention = context.TermMentions.Find(termMentionId);
+            context.TermMentions.Remove(termMention);
+            context.SaveChanges();
+        }
+
         public void deleteTheme(int themaId)
         {
             Theme t = (Theme)context.Subjects.Find(themaId);
             context.Subjects.Remove(t);
+            context.SaveChanges();
         }
     }
 }

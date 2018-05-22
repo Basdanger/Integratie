@@ -12,6 +12,7 @@ namespace Integratie.Domain.Entities.Subjects
         public String Term { get; set; }
         public int Count { get; set; }
 
+        public TermMention(){}
         public TermMention(string term, int count)
         {
             Term = term;

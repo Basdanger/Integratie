@@ -45,7 +45,7 @@ namespace Integratie.DAL.EF
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<SiteContent> SiteContents{ get; set; }
         public DbSet<Story> Stories { get; set; }
-
+        public DbSet<TermMention> TermMentions { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

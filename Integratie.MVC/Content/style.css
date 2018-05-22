@@ -22,7 +22,7 @@
     color:white;
 }
 .tesla-container {
-
+    color:black;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -317,6 +317,8 @@ p.TeslaSingleGraph {
     font-size: 40px;
     color: #7dbcff;
 }
+
+
 ul.slick-dots{
     margin-top:0;
     margin-top:-30px!important;
@@ -356,4 +358,9 @@ ul.slick-dots{
     height: 10px;
     width: 10px;
     border-radius: 10px;
+}
+
+.tesla-title {
+    border-bottom: 2px solid #e5efff;
+    padding: 2px
 }
