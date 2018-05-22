@@ -25,6 +25,12 @@ namespace Integratie.BL.Managers
             repo = new AlertRepo();
         }
 
+        public AlertManager(UnitOfWorkManager unitOfWorkManager)
+        {
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+        }
+
         public async Task CheckAlerts(DateTime now)
         {
             initNonExistingRepo();
@@ -32,10 +38,8 @@ namespace Integratie.BL.Managers
             List<Alert> trueAlerts = new List<Alert>();
             foreach (Alert a in alerts)
             {
-                a.Ring = false;
                 if (CheckAlert(a,now))
                 {
-                    a.Ring = true;
                     trueAlerts.Add(a);
                 }
             }
@@ -57,6 +61,7 @@ namespace Integratie.BL.Managers
 
                     }
                 }
+                await repo.UpdateUserAlerts(userAlerts);
             }
         }
 
@@ -208,7 +213,7 @@ namespace Integratie.BL.Managers
             fCPast = (fCPast == 0) ? 1 : fCPast;
 
             int fCNow = 0;
-            foreach (Feed f in subject.Feeds)
+            foreach (Feed f in feeds)
             {
                 if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
@@ -527,6 +532,17 @@ namespace Integratie.BL.Managers
             return repo.GetUserSentimentAlertsOfUser(userId);
         }
 
+        public UserAlert GetUserWeeklyAlert(string userId)
+        {
+            return repo.GetUserWeeklyAlert(userId);
+        }
+
+        public void AddUserWeeklyAlert(Account account)
+        {
+            UserAlert userAlert = new UserAlert(account, repo.FindWeeklyAlert(), true, false, true);
+            repo.AddUserAlert(userAlert);
+        }
+
         public Alert GetAlertById(int id)
         {
             return repo.GetAlertById(id);
@@ -545,6 +561,17 @@ namespace Integratie.BL.Managers
         {
             UserAlert userAlert = repo.GetUserAlert(id);
             repo.RemoveUserAlert(userAlert);
+        }
+
+        public async Task ShowUserWeeklyAlerts()
+        {
+            List<UserAlert> userAlerts = repo.GetWeeklyUserAlets().ToList();
+            foreach (UserAlert userAlert in userAlerts)
+            {
+                userAlert.Show = true;
+            }
+
+            await repo.UpdateUserAlerts(userAlerts);
         }
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)

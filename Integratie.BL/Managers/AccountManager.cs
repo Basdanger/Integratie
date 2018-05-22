@@ -30,10 +30,14 @@ namespace Integratie.BL.Managers
 
         public Account AddAccount(string id, string name, string mail)
         {
-            initNonExistingRepo();
+            initNonExistingRepo(true);
+            AlertManager alertManager = new AlertManager(unitOfWorkManager);
             Account account = new Account(id, name, mail);
             this.Validate(account);
-            return repo.CreateAccount(account.ID, account.Name, account.Mail);
+            account = repo.CreateAccount(account.ID, account.Name, account.Mail);
+            alertManager.AddUserWeeklyAlert(account);
+            unitOfWorkManager.Save();
+            return account;
         }
 
         public void ChangeAccount(Account account)

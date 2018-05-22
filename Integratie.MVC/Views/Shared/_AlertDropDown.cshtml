@@ -21,9 +21,13 @@
                 {
                     Html.RenderAction("_CompareAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.CompareAlert)item.Alert });
                 }
-                else
+                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.SentimentAlert)))
                 {
                     Html.RenderAction("_SentimentAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.SentimentAlert)item.Alert });
+                }
+                else
+                {
+                    <div class="item">New Weekly Review</div>
                 }
             }
         }

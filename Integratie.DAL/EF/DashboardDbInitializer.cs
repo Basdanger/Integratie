@@ -83,6 +83,9 @@ namespace Integratie.DAL.EF
             //context.Alerts.Add(CO2);
             //context.Alerts.Add(TR1);
 
+            WeeklyAlert weeklyAlert = new WeeklyAlert();
+            context.Alerts.Add(weeklyAlert);
+
             //ACCOUNTS
             Account A1 = new Account("0", "JanVH", "jvanhoye@hotmail.com");
             Account A2 = new Account("1", "Jorno", "DenJorno@hotmail.com");
