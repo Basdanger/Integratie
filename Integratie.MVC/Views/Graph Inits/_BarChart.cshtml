@@ -1,22 +1,32 @@
 ﻿
 <form>
-    <div id="test" class="form-group">
-        <label for="exampleSelect1"><b>Select Graph</b></label>
-        <br />
-        <label>Graph</label>
-        <div class="ui fluid dropdown selection" id="GraphSelect">
-            <input type="hidden" name="gender">
-            <div class="text"></div>
-            <i class="dropdown icon"></i>
+        <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#GraphSelectContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Graph
+        </a>
+    <div id="GraphSelectContainer" class="TeslaGraphPopupContent collapse show">
+        <div id="test" class="form-group">
+            <label for="exampleSelect1"><b>Select Graph</b></label>
+            <br />
+            <label>Graph</label>
+            <div class="ui fluid dropdown selection" id="GraphSelect">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+            <label>Calculation</label>
+            <div class="ui fluid dropdown selection" id="CalcSelect">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
         </div>
-        <label>Calculation</label>
-        <div class="ui fluid dropdown selection" id="CalcSelect">
-        <input type="hidden" name="gender">
-        <div class="text"></div>
-        <i class="dropdown icon"></i>
     </div>
-    </div>
+
         <!--DATA-->
+    <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#DataContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Dates
+    </a>
+    <div id="DataContainer" class="TeslaGraphPopupContent collapse">
         <div id="" class="form-group">
             <b><label for="exampleSelect2">Data</label></b>
             <div class="form-group">
@@ -33,7 +43,7 @@
                         <span style="color:black" class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
-                <label id="GraphEndDateLabel"for="exampleSelect2">End Date</label>
+                <label id="GraphEndDateLabel" for="exampleSelect2">End Date</label>
                 <div class='input-group date datetimepicker1' id='GraphEndDate'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
@@ -41,13 +51,18 @@
                     </span>
                 </div>
                 <label id="DaysDateLabel" for="exampleSelect2"># Days</label>
-                <input type="number" class="form-control" id="DaysDate">
+                <input type="number" class="form-control" id="DaysDate" value="5">
 
                 <label style="display:none" id="IntervalLabel" for="exampleSelect2">Interval</label>
                 <input type="number" class="form-control" id="IntervalSelect">
             </div>
         </div>
+        </div>
         <!--FILTERS-->
+    <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#FilterContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Filters
+    </a>
+    <div id="FilterContainer" class="TeslaGraphPopupContent collapse">
         <div class="form-group">
             <b><label for="exampleSelect2">Filters</label></b>
             <br />
@@ -82,7 +97,12 @@
                 <i class="dropdown icon"></i>
             </div>
         </div>
+        </div>
         <!--COMPARE-->
+    <a id="CompareContainerHeader" class="TeslaGraphPopupHeader" data-toggle="collapse" href="#CompareContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Compare
+    </a>
+    <div id="CompareContainer" class="TeslaGraphPopupContent collapse">
         <div class="form-group" style="display:none" id="CompareForm">
             <b><label for="exampleSelect2">Compare</label></b>
 
@@ -91,14 +111,16 @@
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
-            <br/>
+            <br />
             <div id="personCompareDropdown" class="ui fluid dropdown multiple search selection">
                 <input type="hidden" name="gender">
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
         </div>
-        <button id="GraphSubmit" type="button" class="btn btn-success">Create Graph</button>
+    </div>
+        <button id="GraphSubmit" type="button" class="btn btn-success" style="margin-top:20px;">Create Graph</button>
+        
         <!--ERRORS-->
         <div id="GraphErrors">
 
@@ -133,12 +155,12 @@
         values: [
             {
                 name: 'Fixed Period',
-                value: 'Fixed',
-                selected: true
+                value: 'Fixed'
             },
             {
                 name: 'Flex Period',
-                value: 'Flex'
+                value: 'Flex',
+                selected: true
             }
         ],
         onChange: function (val) {
@@ -170,6 +192,10 @@
                 name: 'Single Value',
                 value: 'Single',
                 selected: true
+            },
+            {
+                name: 'Single Trend Value',
+                value: 'SingleTrend',
             },
             {
                 name: 'Barchart',
@@ -262,6 +288,7 @@
         }
     });
     $('#personDropdown').dropdown({
+        placeholder:"All",
         values: [
             @foreach(string s in ViewBag.persons)
             {
@@ -319,6 +346,7 @@
             switch (val) {
                 case "Barchart": SetBarChart(); break;
                 case "Single": SetSingle(); break;
+                case "SingleTrend": SetSingle(); break;
                 case "Linechart": SetLine(); break;
 
             }
@@ -358,6 +386,8 @@
         $('#IntervalSelect').css('display', 'none');
         $('#IntervalLabel').css('display', 'none');
         $('#CompareForm').css('display', 'none');
+        $('#CompareContainerHeader').css('display', 'none');
+        $('#CompareContainer').removeClass('show');
 
     }
     function SetLine() {
@@ -367,8 +397,10 @@
         $('#IntervalSelect').css('display', 'block');
         $('#IntervalLabel').css('display', 'block');
         $('#CompareForm').css('display', 'block');
+        $('#CompareContainerHeader').css('display', 'block');
 
     }
+    SetSingle();
    
 </script>
 

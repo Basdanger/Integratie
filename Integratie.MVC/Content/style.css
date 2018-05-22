@@ -2,7 +2,8 @@
     background-color:white;
 }
 .content-wrapper{
-    background-color:white;
+    height:100vh;
+    margin-top:-80px;
 
 }
 .tesla-nav {
@@ -22,7 +23,8 @@
     color:white;
 }
 .tesla-container {
-
+    height: 100%;
+    padding-top: 80px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -79,17 +81,16 @@ a {
     opacity:0;
 }
 .tesla-popup-window {
-    height: 70vh;
+    height: auto;
     width: 70vw;
     position: absolute;
-    top: -100vh;
+    top: 15vh;
     left: 15vw;
     z-index: 9999;
     border-radius: 10px;
     background-color: white;
-    padding:0;
-    overflow:hidden;
-
+    max-height: 70%;
+    padding: 0;
 }
 .tesla-popup-header {
     width: 100%;
@@ -106,15 +107,15 @@ a {
 }
 .tesla-popup-window.open {
     animation: tesla-popup-window-open;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
 @-webkit-keyframes tesla-popup-window-open{
     from {
-        top: -100vh;
+        transform:scale(0.3);
     }
     to {
-        top: 15vh;
+        transform: scale(1);
     }
 }
 @-webkit-keyframes tesla-popup-open {
@@ -129,12 +130,13 @@ a {
 }
 .tesla-popup-container {
     margin-top: 30px;
+    max-height:65vh;
     padding: 7px;
     color: #007bff;
-    font-size:14px;
-    overflow:scroll;
-    height:95%;
-    overflow-x:hidden;
+    font-size: 14px;
+    overflow: auto;
+    height: 95%;
+    overflow: auto;
 }
 .TeslaGraphDelete {
     width: 20px;
@@ -159,16 +161,19 @@ a {
     display: none;
 }
 .gridster{
-    overflow-x:auto;
-    overflow-y:hidden;
+    overflow:auto;
     padding-top:10px;
+}
+.gridsterContainer {
+    padding-left:30px;
+width:100%;
 }
 .gridsterMenu {
     margin-left: -20px;
-    padding-left: 20px;
+    padding-left: 60px;
     padding-right: 10px;
     font-size: 20px;
-    margin-top:10px;
+    margin-top: 10px;
     height: auto;
     width: auto;
     display: inline-block;
@@ -356,4 +361,66 @@ ul.slick-dots{
     height: 10px;
     width: 10px;
     border-radius: 10px;
+}
+.TeslaGraphPopupHeader {
+    width: 100%;
+    padding: 3px;
+    padding-left: 10px;
+    background-color: #c9e2ff;
+    display: block;
+    border-radius: 5px;
+    color: #007bff;
+    font-weight:bold;
+    margin-top:15px;
+}
+.TeslaGraphPopupContent {
+    width: 100%;
+    padding: 3px;
+    padding-left: 10px;
+    margin-top: 5px;
+    background-color: #eef6ff;
+    border-radius: 5px;
+}
+.TeslaSingleTrendValue {
+    color: #007bff;
+    font-size: 50px;
+    display: inline-block;
+    padding-bottom: 0;
+    margin-bottom: -10px;
+}
+.TeslaSingleTrendValueContainer {
+    
+    
+}
+.TeslaTrendArrow{
+    font-size:20px!important;
+    line-height:0px;
+    margin-left:8px;
+    padding:3px;
+    border-radius:10px;
+}
+.TeslaTrendArrowContainer {
+    font-size: 20px !important;
+    line-height: 0px;
+    margin-left: 8px;
+    padding: 3px;
+    border-radius: 10px;
+    margin-bottom:-5px;
+}
+.TeslaDashboardContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    /*
+    background-image: url(./Images/flag-of-belgium.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;transform:rotateY(180deg);
+    -webkit-filter: blur(300px) brightness(1) saturate(1);
+    -moz-filter: blur(300px) brightness(2);
+    -o-filter: blur(300px) brightness(2);
+    -ms-filter: blur(300px) brightness(2);
+    filter: blur(300px) brightness(2);
+    opacity: 0.5;*/
 }

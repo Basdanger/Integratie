@@ -22,8 +22,24 @@ namespace Integratie.Domain.Entities.Graph
 
         //TIME
         public PeriodSort PeriodSort { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        private DateTime _StartDate;
+        private DateTime _EndDate;
+        public DateTime StartDate {
+            get {
+                if (PeriodSort == PeriodSort.Fixed) return _StartDate;
+                else return DateTime.Now.AddDays(PeriodLength * -1);
+            }
+            set { _StartDate = value; }
+        }
+        public DateTime EndDate {
+            get
+            {
+                if (PeriodSort == PeriodSort.Fixed) return _EndDate;
+                else return DateTime.Now;
+
+            }
+            set { _EndDate = value; }
+        }
         public int PeriodLength { get; set; }
 
         //INTERVAL
@@ -44,7 +60,12 @@ namespace Integratie.Domain.Entities.Graph
         public Dictionary<string, double> BarValues { get; set; }
         [NotMapped]
         public Dictionary<string, List<double>> LineValues { get; set; }
+        [NotMapped]
+        public double TrendValue { get; set; } //-100 to 100
+        [NotMapped]
+        public double TrendArrowValue { get; set; }
 
+        //CONSTRUCTORS
         public Graph(Account account)
         {
             Account = account;
@@ -72,6 +93,7 @@ namespace Integratie.Domain.Entities.Graph
     public enum GraphType
     {
         Single,
+        SingleTrend,
         Barchart,
         Linechart
     }

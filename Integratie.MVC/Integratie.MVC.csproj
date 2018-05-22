@@ -264,6 +264,7 @@
     <Content Include="Content\icons.svg" />
     <Content Include="Content\Images\Bart.jpg" />
     <Content Include="Content\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\Images\flag-of-belgium.jpg" />
     <Content Include="Content\Images\Maggie.jpg" />
     <Content Include="Content\Images\theo.jpg" />
     <Content Include="Content\Images\bootstrap-colorpicker\alpha-horizontal.png" />
