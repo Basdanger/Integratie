@@ -85,6 +85,11 @@ namespace Integratie.DAL.Repositories
             return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is SentimentAlert);
         }
 
+        public UserAlert GetUserWeeklyAlert(string userId)
+        {
+            return context.UserAlerts.Where(u => u.Account.ID.Equals(userId) && u.Alert is WeeklyAlert).First();
+        }
+
         public void RemoveAlert(Alert alert)
         {
             context.Alerts.Remove(alert);
@@ -109,6 +114,15 @@ namespace Integratie.DAL.Repositories
         {
             context.Entry(userAlert).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public async Task UpdateUserAlerts(List<UserAlert> userAlerts)
+        {
+            foreach (UserAlert userAlert in userAlerts)
+            {
+                context.Entry(userAlert).State = System.Data.Entity.EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
         }
 
         public CheckAlert FindCheckAlert(CheckAlert alert)
@@ -165,6 +179,16 @@ namespace Integratie.DAL.Repositories
                 return compareAlert;
             }
             return compareAlert;
+        }
+
+        public WeeklyAlert FindWeeklyAlert()
+        {
+            return context.Alerts.OfType<WeeklyAlert>().First();
+        }
+
+        public IEnumerable<UserAlert> GetWeeklyUserAlets()
+        {
+            return context.UserAlerts.Where(u => u.Alert.AlertID.Equals(FindWeeklyAlert().AlertID)).ToList<UserAlert>();
         }
 
         public void RemoveUserAlert(UserAlert userAlert)

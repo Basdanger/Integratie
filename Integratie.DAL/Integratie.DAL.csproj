@@ -51,6 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201805231134502_JuanMigrant.cs" />
+    <Compile Include="Migrations\201805231134502_JuanMigrant.Designer.cs">
+      <DependentUpon>201805231134502_JuanMigrant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
     <Compile Include="Repositories\ContentRepo.cs" />
@@ -85,6 +90,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805231134502_JuanMigrant.resx">
+      <DependentUpon>201805231134502_JuanMigrant.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

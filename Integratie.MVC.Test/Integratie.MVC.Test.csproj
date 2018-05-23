@@ -165,6 +165,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\demo.css" />
     <Content Include="Content\gridstack.css" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\style.css" />

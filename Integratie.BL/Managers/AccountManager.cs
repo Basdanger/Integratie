@@ -30,10 +30,14 @@ namespace Integratie.BL.Managers
 
         public Account AddAccount(string id, string name, string mail)
         {
-            initNonExistingRepo();
+            initNonExistingRepo(true);
+            AlertManager alertManager = new AlertManager(unitOfWorkManager);
             Account account = new Account(id, name, mail);
             this.Validate(account);
-            return repo.CreateAccount(account.ID, account.Name, account.Mail);
+            account = repo.CreateAccount(account.ID, account.Name, account.Mail);
+            alertManager.AddUserWeeklyAlert(account);
+            unitOfWorkManager.Save();
+            return account;
         }
 
         public void ChangeAccount(Account account)
@@ -87,6 +91,19 @@ namespace Integratie.BL.Managers
             Subject subject = account.Follows.Find(f => f.ID.Equals(subjectId));
             account.Follows.Remove(subject);
             repo.UpdateAccount(account);
+        }
+
+        public void UpdateFollow(string accountId, int subjectId)
+        {
+            Account account = repo.ReadAccountById(accountId);
+            if (account.Follows.Exists(f => f.ID.Equals(subjectId)))
+            {
+                RemoveFollow(accountId, subjectId);
+            }
+            else
+            {
+                AddFollow(accountId, subjectId);
+            }
         }
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)

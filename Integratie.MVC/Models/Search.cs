@@ -15,5 +15,6 @@ namespace Integratie.MVC.Models
         public IEnumerable<String> steden { get; set; }
         public IEnumerable<Feed> feeds { get; set; }
         public IEnumerable<Feed> feedsByPerson { get; set; }
+        public IEnumerable<Theme> themas { get; set; }
     }
 }

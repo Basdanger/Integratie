@@ -33,6 +33,10 @@ namespace Integratie.BL.Managers
 
                     dbi.Graph = graphManager.GetFilledLineGraph(dbi.Graph);
                 }
+                if (dbi.Graph.GraphType == GraphType.SingleTrend)
+                {
+                    dbi.Graph = graphManager.GetFilledSingleTrendGraph(dbi.Graph);
+                }
             }
             return dbis;
         }

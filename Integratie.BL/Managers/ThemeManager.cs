@@ -89,7 +89,20 @@ namespace Integratie.BL.Managers
 
         public void DeleteTheme(int themaId)
         {
+            List<Story> stories = repo.GetThema(themaId).Stories;
+            List<TermMention> termMentions = repo.GetThema(themaId).TermMentions.ToList();
+            foreach (Story story in stories) {
+                DeleteStory(story.Id);
+            }
+            foreach (TermMention term in termMentions) {
+                DeleteTermMention(term.Id);
+            }
             repo.deleteTheme(themaId);
+        }
+
+        private void DeleteTermMention(int id)
+        {
+            repo.deleteTermMention(id);
         }
 
         public void DeleteStory(int storyId)
@@ -107,7 +120,7 @@ namespace Integratie.BL.Managers
             foreach (Person p in personen)
             {
                 int totalcounter = 0;
-                IEnumerable<Feed> feeds = subjRepo.GetFeeds(p.Full_Name);
+                IEnumerable<Feed> feeds = feedRepo.ReadPersonFeeds(p.Full_Name);
                 foreach (Feed f in feeds)
                 {
                     totalcounter = totalcounter + f.GetWords().Intersect(termsList).Count();
