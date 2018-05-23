@@ -27,7 +27,6 @@ namespace Integratie.MVC.Controllers
         {
             ViewBag.Message = "Your contact page.";
             ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
-            ViewBag.persons = subjectManager. .Select(p => p.Full_Name);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }

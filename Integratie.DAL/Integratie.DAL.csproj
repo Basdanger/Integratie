@@ -51,25 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805131241571_InitialCreate.cs" />
-    <Compile Include="Migrations\201805131241571_InitialCreate.Designer.cs">
-      <DependentUpon>201805131241571_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805131255444_MigrationA.cs" />
-    <Compile Include="Migrations\201805131255444_MigrationA.Designer.cs">
-      <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805180912363_MigrationB.cs" />
-    <Compile Include="Migrations\201805180912363_MigrationB.Designer.cs">
-      <DependentUpon>201805180912363_MigrationB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805201546113_JuanMigration.cs" />
-    <Compile Include="Migrations\201805201546113_JuanMigration.Designer.cs">
-      <DependentUpon>201805201546113_JuanMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805211050033_JuanMigrant.cs" />
-    <Compile Include="Migrations\201805211050033_JuanMigrant.Designer.cs">
-      <DependentUpon>201805211050033_JuanMigrant.cs</DependentUpon>
+    <Compile Include="Migrations\201805231134502_JuanMigrant.cs" />
+    <Compile Include="Migrations\201805231134502_JuanMigrant.Designer.cs">
+      <DependentUpon>201805231134502_JuanMigrant.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
@@ -108,20 +92,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805131241571_InitialCreate.resx">
-      <DependentUpon>201805131241571_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805131255444_MigrationA.resx">
-      <DependentUpon>201805131255444_MigrationA.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805180912363_MigrationB.resx">
-      <DependentUpon>201805180912363_MigrationB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805201546113_JuanMigration.resx">
-      <DependentUpon>201805201546113_JuanMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805211050033_JuanMigrant.resx">
-      <DependentUpon>201805211050033_JuanMigrant.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805231134502_JuanMigrant.resx">
+      <DependentUpon>201805231134502_JuanMigrant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
