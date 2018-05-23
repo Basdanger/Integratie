@@ -272,6 +272,7 @@
     <Content Include="Content\Images\bootstrap-colorpicker\hue-horizontal.png" />
     <Content Include="Content\Images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\Images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\outline-icons.svg" />
@@ -347,6 +348,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\jquery.gridster.js" />

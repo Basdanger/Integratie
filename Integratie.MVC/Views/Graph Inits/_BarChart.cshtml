@@ -1,7 +1,7 @@
 ﻿
 <form>
         <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#GraphSelectContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Graph
+            <span class="teslaExplainGraphPopup">Step 1: select </span>Graph
         </a>
     <div id="GraphSelectContainer" class="TeslaGraphPopupContent collapse show">
         <div id="test" class="form-group">
@@ -24,7 +24,7 @@
 
         <!--DATA-->
     <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#DataContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Dates
+        <span class="teslaExplainGraphPopup">Step 2: select </span>Dates
     </a>
     <div id="DataContainer" class="TeslaGraphPopupContent collapse">
         <div id="" class="form-group">
@@ -60,7 +60,7 @@
         </div>
         <!--FILTERS-->
     <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#FilterContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Filters
+        <span class="teslaExplainGraphPopup">Step 3: select </span>Filters
     </a>
     <div id="FilterContainer" class="TeslaGraphPopupContent collapse">
         <div class="form-group">
@@ -73,6 +73,25 @@
                 <div class="text"></div>
                 <i class="dropdown icon"></i>
             </div>
+
+            <label for="exampleSelect1">Partijen</label>
+
+            <div id="partijDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+
+            <label for="exampleSelect1">Thema's</label>
+
+            <div id="themaDropdown" class="ui fluid dropdown multiple search selection">
+                <input type="hidden" name="gender">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+            </div>
+            <label for="exampleSelect1">Sentiment</label>
+            <span id="sentimentALabel">15</span><span> .. </span><span id="sentimentBLabel">30</span>
+            <div id="slider-range"></div>
 
             <label for="exampleSelect1">Gender</label>
 
@@ -100,7 +119,7 @@
         </div>
         <!--COMPARE-->
     <a id="CompareContainerHeader" class="TeslaGraphPopupHeader" data-toggle="collapse" href="#CompareContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Compare
+        <span class="teslaExplainGraphPopup">Step 4: select </span>Compare
     </a>
     <div id="CompareContainer" class="TeslaGraphPopupContent collapse">
         <div class="form-group" style="display:none" id="CompareForm">
@@ -119,7 +138,7 @@
             </div>
         </div>
     </div>
-        <button id="GraphSubmit" type="button" class="btn btn-success" style="margin-top:20px;">Create Graph</button>
+        <button id="GraphSubmit" type="button" class="btn btn-success teslaAddGraphButton" style="margin-top:20px;">Create Graph</button>
         
         <!--ERRORS-->
         <div id="GraphErrors">
@@ -335,7 +354,42 @@
     ],
 
     });
+    $('#partijDropdown').dropdown({values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
+                },
+            </text>
+            }
+    ],
 
+    });
+        $('#themaDropdown').dropdown({values: [
+            @foreach(string s in ViewBag.persons)
+            {
+                <text>{
+            name: '@s',
+            value: '@s'
+                },
+            </text>
+            }
+    ],
+
+    });
+    $( "#slider-range" ).slider({
+      range: true,
+      min: -1,
+      max: 1,
+      step:0.01,
+      values: [ -0.5, 0.5 ],
+      slide: function (event, ui) {
+          $("#sentimentALabel").empty(); $("#sentimentALabel").append(ui.values[0]);
+          $("#sentimentBLabel").empty(); $("#sentimentBLabel").append(ui.values[1]);
+        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
 
 </script>
 
@@ -491,6 +545,8 @@
         s = (JSON.stringify(s));
         console.log(s);
 
+        $('#GraphSubmit').empty();
+        $('#GraphSubmit').append('<div class="teslaLoader"></div>');
         $.ajax({
             type: "POST",
             url: '@Url.Action("AddGraph", "Home")',
@@ -501,11 +557,13 @@
                 $('.tesla-popup').removeClass('open');
                 $('.tesla-popup-window').removeClass('open');
                 location.reload();
+                $('#GraphSubmit').append('Create Graph');
             },
             error: function (ex) {
                 $('.tesla-popup').removeClass('open');
                 $('.tesla-popup-window').removeClass('open');
                 location.reload();
+                $('#GraphSubmit').append('Create Graph');
             }
         });
     }

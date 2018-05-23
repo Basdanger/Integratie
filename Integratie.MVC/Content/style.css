@@ -424,3 +424,33 @@ ul.slick-dots{
     filter: blur(300px) brightness(2);
     opacity: 0.5;*/
 }
+.teslaLoader {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #004f12; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: teslaspin 2s linear infinite;
+    display:inline-block;
+    
+}
+
+@keyframes teslaspin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.teslaAddGraphButton {
+    max-height: 33.5px;
+    max-width: 107.83px;
+    min-height: 33.5px;
+    min-width: 107.83px;
+    text-align: center;
+}
+.teslaExplainGraphPopup {
+    color: #79b4ff;
+}

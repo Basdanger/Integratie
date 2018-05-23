@@ -23,6 +23,7 @@ namespace Integratie.MVC.Controllers
         {
             ViewBag.Message = "Your contact page.";
             ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
+            ViewBag.persons = subjectManager. .Select(p => p.Full_Name);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
@@ -69,12 +70,14 @@ namespace Integratie.MVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddGraph(Graph graph)
+        public RedirectResult AddGraph(Graph graph)
         {
-            DashboardItem dbi = new DashboardItem(0, 1, 1000, 3, 2, graph);
+            DashboardItem dbi;
+            if (graph.GraphType == GraphType.Single || graph.GraphType == GraphType.SingleTrend) dbi = new DashboardItem(0, 1, 1000, 8, 5, graph);
+            else dbi = new DashboardItem(0, 1, 1000, 15, 9, graph);
             dbmanager.AddDashboardItem(dbi);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
-            return View(dbitems);
+            return Redirect("Index");
         }
         public ActionResult Search(String zoek)
         {
