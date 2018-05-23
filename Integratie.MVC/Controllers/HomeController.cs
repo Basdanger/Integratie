@@ -3,6 +3,7 @@ using Integratie.Domain.Entities.Dashboard;
 using Integratie.Domain.Entities.Graph;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ namespace Integratie.MVC.Controllers
         DashboardManager dbmanager = new DashboardManager();
         SubjectManager subjectManager = new SubjectManager();
         FeedManager feedManager = new FeedManager();
+        ThemeManager themeManager = new ThemeManager();
+        AlertManager alertManager = new AlertManager();
+        AccountManager accountManager = new AccountManager();
         public ActionResult Index()
         {
             ViewBag.Message = "Your contact page.";
@@ -76,7 +80,7 @@ namespace Integratie.MVC.Controllers
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
-        public ActionResult Search(String zoek)
+        public ActionResult Search(String zoek)     
         {
             Search search = new Search();
             search.persons = subjectManager.GetPeopleByName(zoek);
@@ -84,7 +88,48 @@ namespace Integratie.MVC.Controllers
             search.steden = subjectManager.GetGemeentes(zoek);
             search.feeds = feedManager.GetWordFeeds(zoek);
             search.feedsByPerson = feedManager.GetPersonFeeds(zoek);
+            search.themas = themeManager.GetThemas();
             return View(search);
+        }
+
+        public ActionResult Alerts()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddUserAlert(AlertCreation alert)
+        {
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("Alerts", "Home", new { });
+
+            try
+            {
+                alertManager.AddUserAlert(User.Identity.GetUserId(), alert.AlertType, alert.Subject, alert.Web, alert.Mail, alert.App, alert.SubjectB, alert.Compare, alert.SubjectProperty, alert.Value);
+            }
+            catch (Exception)
+            {
+                return Json(new { Url = redirectUrl, status = "Error" });
+            }
+
+            return Json(new { Url = redirectUrl, status = "OK" });
+        }
+
+        [HttpPost]
+        public void UpdateUserAlert(AlertUpdate alert)
+        {
+            alertManager.UpdateUserAlert(alert.Id, alert.Web, alert.Mail, alert.App);
+        }
+
+        [HttpPost]
+        public void RemoveUserAlert(int id)
+        {
+            alertManager.RemoveUserAlert(id);
+        }
+
+        public ActionResult Follows()
+        {
+            return View(accountManager.GetAccountById(User.Identity.GetUserId()).Follows);
         }
     }
 }

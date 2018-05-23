@@ -1,4 +1,5 @@
 ﻿using Integratie.BL.Managers;
+using Integratie.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,13 @@ namespace Integratie.MVC.Controllers.Api
         // DELETE api/<controller>/5
         public void Delete(int id)
         {
+        }
+
+        //DeviceId toevoegen
+        public void PutDeviceId(string id, string deviceId) {
+            Account account=accManager.GetAccountById(id);
+            account.DeviceId = (deviceId);
+            accManager.ChangeAccount(account);
         }
     }
 }

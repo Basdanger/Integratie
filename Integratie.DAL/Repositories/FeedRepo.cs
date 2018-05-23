@@ -32,6 +32,12 @@ namespace Integratie.DAL.Repositories
             context.SaveChanges();
         }
 
+        public async Task CreateFeeds(List<Feed> feeds)
+        {
+            context.Feeds.AddRange(feeds);
+            await context.SaveChangesAsync();
+        }
+
         public Feed ReadFeed(double id)
         {
             return context.Feeds.Find(id);
@@ -88,6 +94,17 @@ namespace Integratie.DAL.Repositories
 
             }
             return feeds;
+        }
+        public IEnumerable<int> getLocatieFeeds()
+        {
+            if(context.Feeds.Select(f => f.Geo) == null)
+            {
+                return null;
+            }
+            else
+            {
+                return context.Feeds.Select(f => Convert.ToInt32(f.Geo));
+            }
         }
     }
 }

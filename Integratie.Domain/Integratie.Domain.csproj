@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,12 +61,15 @@
     <Compile Include="Entities\Alerts\SubjectProperty.cs" />
     <Compile Include="Entities\Alerts\TrendAlert.cs" />
     <Compile Include="Entities\Alerts\UserAlert.cs" />
+    <Compile Include="Entities\Alerts\WeeklyAlert.cs" />
     <Compile Include="Entities\Content\SiteContent.cs" />
     <Compile Include="Entities\Dashboard\DashboardItem.cs" />
     <Compile Include="Entities\Feed.cs" />
     <Compile Include="Entities\Graph\Graph.cs" />
     <Compile Include="Entities\Subjects\Organisation.cs" />
     <Compile Include="Entities\Subjects\Person.cs" />
+    <Compile Include="Entities\Subjects\Story.cs" />
+    <Compile Include="Entities\Subjects\TermMention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Subjects\Subject.cs" />
     <Compile Include="Entities\Subjects\Theme.cs" />

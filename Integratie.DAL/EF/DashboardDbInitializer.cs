@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Integratie.DAL.EF
 {
-    public class DashboardDbInitializer : DropCreateDatabaseAlways<DashBoardDbContext>
+    public class DashboardDbInitializer : CreateDatabaseIfNotExists<DashBoardDbContext>
     {
         public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
@@ -82,6 +82,9 @@ namespace Integratie.DAL.EF
             //context.Alerts.Add(CO1);
             //context.Alerts.Add(CO2);
             //context.Alerts.Add(TR1);
+
+            WeeklyAlert weeklyAlert = new WeeklyAlert();
+            context.Alerts.Add(weeklyAlert);
 
             //ACCOUNTS
             Account A1 = new Account("0", "JanVH", "jvanhoye@hotmail.com");

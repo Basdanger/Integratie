@@ -13,7 +13,20 @@ namespace Integratie.BL.Managers
 {
     public class GraphManager
     {
-        IGraphRepo GraphRepo = new GraphRepo();
+        private IGraphRepo GraphRepo;
+        private UnitOfWorkManager unitOfWorkManager;
+
+        public GraphManager()
+        {
+            GraphRepo = new GraphRepo();
+        }
+
+        public GraphManager(UnitOfWorkManager unitOfWorkManager)
+        {
+            this.unitOfWorkManager = unitOfWorkManager;
+            GraphRepo = new GraphRepo(unitOfWorkManager.UnitOfWork);
+        }
+
         FeedManager feedManager = new FeedManager();
         public void AddGraph(int userId, Graph graph)
         {
@@ -146,13 +159,21 @@ namespace Integratie.BL.Managers
             return graph;
         }
 
-        //public PieGraph GetPieGraph(int id)
-        //{
-        //    PieGraph graph = (PieGraph)GraphRepo.GetGraphById(id);
-        //    FeedManager feedManager = new FeedManager();
-        //    graph.Values.Add("Male", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.m).Count());
-        //    graph.Values.Add("Female", feedManager.GetPersonFeedsGender(graph.Subject.Name, Domain.Entities.Gender.f).Count());
-        //    return graph;
-        //}
+        public Graph AddAlertLineGraph()
+        {
+            Graph graph = new Graph();
+            graph.CalcType = CalcType.AVG;
+            graph.IntervalSize = 1;
+            graph.GraphType = GraphType.Linechart;
+            return GraphRepo.AddGraph(graph);
+        }
+
+        public Graph AddAlertBarGraph()
+        {
+            Graph graph = new Graph();
+            graph.CalcType = CalcType.Sum;
+            graph.GraphType = GraphType.Barchart;
+            return GraphRepo.AddGraph(graph);
+        }
     }
 }

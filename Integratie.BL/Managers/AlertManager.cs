@@ -11,74 +11,107 @@ using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Integratie.BL.Managers
 {
     public class AlertManager
     {
-        // test
-        private AlertRepo repo = new AlertRepo();
-        public void CheckAlerts()
+        private AlertRepo repo;
+        private UnitOfWorkManager unitOfWorkManager;
+
+        public AlertManager()
         {
-            foreach (Alert a in repo.GetAlerts())
+            repo = new AlertRepo();
+        }
+
+        public AlertManager(UnitOfWorkManager unitOfWorkManager)
+        {
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+        }
+
+        public async Task CheckAlerts(DateTime now)
+        {
+            initNonExistingRepo();
+            List<Alert> alerts = repo.GetAlerts().ToList();
+            List<Alert> trueAlerts = new List<Alert>();
+            foreach (Alert a in alerts)
             {
-                if (a.GetType() == typeof(CheckAlert))
+                if (CheckAlert(a,now))
                 {
-                    if (CheckCheckAlert((CheckAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    } 
+                    trueAlerts.Add(a);
                 }
-                else if (a.GetType() == typeof(CompareAlert))
+            }
+            await repo.UpdateAlerts(alerts);
+
+            foreach (Alert a in trueAlerts)
+            {
+                FireBaseManager fireBaseManager = new FireBaseManager();
+                MailManager mailManager = new MailManager();
+                List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
+                foreach (UserAlert uA in userAlerts)
                 {
-                    if (CheckCompareAlert((CompareAlert)a))
+                    uA.Show = true;
+                    if (uA.Mail)
                     {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
+                        await mailManager.SendMail("test",uA.Account.Mail,uA.Account.Name);
+                    }
+                    if (uA.App && uA.Account.DeviceId != null)
+                    {
+                        fireBaseManager.SendNotification("test",uA.Account.DeviceId);
                     }
                 }
-                else if (a.GetType() == typeof(TrendAlert))
-                {
-                    if (CheckTrendAlert((TrendAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    }
-                }
-                else if (a.GetType() == typeof(SentimentAlert))
-                {
-                    if (CheckSentimentAlert((SentimentAlert)a))
-                    {
-                        a.Ring = true;
-                        repo.UpdateAlert(a);
-                    }
-                }
+                await repo.UpdateUserAlerts(userAlerts);
             }
         }
 
-        private bool CheckSentimentAlert(SentimentAlert alert)
+        private bool CheckAlert(Alert alert,DateTime now)
+        {
+            if (alert.GetType() == typeof(CheckAlert))
+            {
+                return CheckCheckAlert((CheckAlert)alert,now);
+            }
+            else if (alert.GetType() == typeof(CompareAlert))
+            {
+                return CheckCompareAlert((CompareAlert)alert,now);
+            }
+            else if (alert.GetType() == typeof(TrendAlert))
+            {
+                return CheckTrendAlert((TrendAlert)alert,now);
+            }
+            else
+            {
+                return CheckSentimentAlert((SentimentAlert)alert,now);
+            }
+        }
+
+        private bool CheckSentimentAlert(SentimentAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, double> valuePairs = new Dictionary<string, double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             int feedCount = feeds.Count();
             int posNegFeeds = 0;
-            double result;
+            int result;
 
             if (alert.SubjectProperty.Equals(SubjectProperty.pos))
             {
@@ -91,6 +124,8 @@ namespace Integratie.BL.Managers
                         posNegFeeds++;
                     }
                 }
+                valuePairs.Add("Positive", posNegFeeds);
+                valuePairs.Add("Negative", feedCount - posNegFeeds);
                 result = posNegFeeds / feedCount;
             }
             else
@@ -103,9 +138,15 @@ namespace Integratie.BL.Managers
                     {
                         posNegFeeds++;
                     }
+                    valuePairs.Add("Positive", feedCount - posNegFeeds);
+                    valuePairs.Add("Negative", posNegFeeds);
                 }
-                result = posNegFeeds / feedCount;
+                result = (posNegFeeds / feedCount) * 100;
             }
+
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             switch (alert.Operator)
             {
@@ -122,36 +163,50 @@ namespace Integratie.BL.Managers
                     }
                     break;
             }
-
+            
             return false;
         }
 
-        public bool CheckCheckAlert(CheckAlert alert)
+        private bool CheckCheckAlert(CheckAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
+            List<double> values = new List<double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name,DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name,start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             int fCPast = 0;
-            foreach (Feed f in feeds)
+            
+            int fc = 0;
+
+            for (int i = 6; i > 0; i--)
             {
-                if (f.Date.Ticks < DateTime.Now.AddDays(-1).Ticks)
+                foreach (Feed f in feeds)
                 {
-                    fCPast++;
+                    if (start.AddDays(6 - i).Ticks <= f.Date.Ticks && f.Date.Ticks < end.AddDays(-i).Ticks)
+                    {
+                        fc++;
+                    }
                 }
+                fCPast += fc;
+                values.Add(fc);
+                fc = 0;
             }
 
             fCPast = fCPast / 6;
@@ -159,25 +214,31 @@ namespace Integratie.BL.Managers
             fCPast = (fCPast == 0) ? 1 : fCPast;
 
             int fCNow = 0;
-            foreach (Feed f in subject.Feeds)
+            foreach (Feed f in feeds)
             {
-                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
                     fCNow++;
                 }
             }
+            values.Add(fCNow);
+            valuePairs.Add(subject.Name, values);
 
             int result;
 
             if (alert.SubjectProperty.Equals(SubjectProperty.relativeCount))
             {
-                result = fCNow / fCPast - 1;
+                result = (fCNow / fCPast - 1) * 100;
             }
             else
             {
                 result = fCNow - fCPast;
             }
-            
+
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
+
             switch (alert.Operator)
             {
                 case Operator.GT:
@@ -197,7 +258,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        public bool CheckCompareAlert(CompareAlert alert)
+        private bool CheckCompareAlert(CompareAlert alert,DateTime now)
         {
             Subject subjectA = alert.SubjectA;
             Subject subjectB = alert.SubjectB;
@@ -209,24 +270,34 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feedsA;
             IEnumerable<Feed> feedsB;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, double> valuePairs = new Dictionary<string, double>();
+
             if (subjectA.GetType() == typeof(Person))
             {
-                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, start);
             }
             else if (subjectA.GetType() == typeof(Organisation))
             {
-                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, start);
             }
             else
             {
-                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, DateTime.Now.AddDays(-7));
-                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, DateTime.Now.AddDays(-7));
+                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, start);
+                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, start);
             }
 
             fcA = feedsA.Count();
+            valuePairs.Add(subjectA.Name, fcA);
             fcB = feedsB.Count();
+            valuePairs.Add(subjectB.Name, fcB);
+
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             switch (alert.Operator)
             {
@@ -246,7 +317,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        public bool CheckTrendAlert(TrendAlert alert)
+        private bool CheckTrendAlert(TrendAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
 
@@ -254,51 +325,57 @@ namespace Integratie.BL.Managers
             int fcToday = 0;
             int fcHistory = 0;
             float avarage = 0;
-            float[] avarages = new float[days];
             double std = 0;
             double zScore = 0;
 
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
+            DateTime end = now;
+            DateTime start = end.AddDays(-7);
+            Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
+            List<double> values = new List<double>();
+
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, DateTime.Now.AddDays(-7));
+                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
             }
 
             foreach (Feed f in feeds)
             {
-                if (f.Date.Ticks >= DateTime.Now.AddDays(-1).Ticks)
+                if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
                     fcToday++;
                 }
             }
 
-            for (int i = 0; i < days; i++)
+            for (int i = 6; i > 0; i--)
             {
                 foreach (Feed f in feeds)
                 {
-                    if (f.Date.Ticks >= DateTime.Now.AddDays(-2 - i).Ticks && f.Date.Ticks < DateTime.Now.AddDays(-1 - i).Ticks)
+                    if (start.AddDays(6 - i).Ticks <= f.Date.Ticks && f.Date.Ticks < end.AddDays(-i).Ticks)
                     {
                         fcHistory++;
                     }
                 }
-                avarages[i] = fcHistory;
                 avarage += fcHistory;
+                values.Add(fcHistory);
                 fcHistory = 0;
             }
 
+            valuePairs.Add(subject.Name, values);
+
             avarage = (float)avarage / days;
 
-            foreach (float item in avarages)
+            foreach (float item in values)
             {
                 std += Math.Pow(item - avarage, 2);
             }
@@ -306,6 +383,10 @@ namespace Integratie.BL.Managers
             std = Math.Sqrt(std / days);
 
             zScore = ((float)fcToday - avarage) / std;
+
+            alert.Graph.EndDate = end;
+            alert.Graph.StartDate = start;
+            alert.JsonValues = JsonConvert.SerializeObject(valuePairs);
 
             if (zScore > 2)
             {
@@ -315,25 +396,29 @@ namespace Integratie.BL.Managers
                 return false;
         }
 
-        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, double value)
+        public void AddUserAlert(string id, string alertType, string subject, bool web, bool mail, bool app, string subjectB, string compare, string subjectProperty, int value)
         {
-            AccountManager accountManager = new AccountManager(repo.GetContext());
+            initNonExistingRepo(true);
+            AccountManager accountManager = new AccountManager(unitOfWorkManager);
             Alert alert = AddAlert(subject, alertType, subjectB, compare, subjectProperty, value);
             Account account = accountManager.GetAccountById(id);
             UserAlert userAlert = new UserAlert(account, alert, web, mail, app);
             repo.AddUserAlert(userAlert);
+            unitOfWorkManager.Save();
         }
 
-        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, double value)
+        public Alert AddAlert(string subjectName, string alertType, string subjectBName, string compare, string subjectProperty, int value)
         {
             Alert alert;
-            SubjectManager subjectManager = new SubjectManager(repo.GetContext());
+            SubjectManager subjectManager = new SubjectManager(unitOfWorkManager);
+            GraphManager graphManager = new GraphManager(unitOfWorkManager);
             Subject subject = subjectManager.GetSubjectByName(subjectName);
             Alert existingAlert;
 
             if (alertType.Equals("Trend"))
             {
                 alert = new TrendAlert(subject);
+                alert.Graph = graphManager.AddAlertLineGraph();
                 existingAlert = repo.FindTrendAlert((TrendAlert)alert);
             }
             else if (alertType.Equals("Compare"))
@@ -348,8 +433,8 @@ namespace Integratie.BL.Managers
                 {
                     @operator = Operator.LT;
                 }
-
                 alert = new CompareAlert(subject, subjectB, @operator);
+                alert.Graph = graphManager.AddAlertBarGraph();
                 existingAlert = repo.FindCompareAlert((CompareAlert)alert);
             }
             else if (alertType.Equals("Check"))
@@ -374,6 +459,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new CheckAlert(property, @operator, value, subject);
+                alert.Graph = graphManager.AddAlertLineGraph();
                 existingAlert = repo.FindCheckAlert((CheckAlert)alert);
             }
             else
@@ -398,6 +484,7 @@ namespace Integratie.BL.Managers
                 }
 
                 alert = new SentimentAlert(property, @operator, value, subject);
+                alert.Graph = graphManager.AddAlertBarGraph();
                 existingAlert = repo.FindSentimentAlert((SentimentAlert)alert);
             }
 
@@ -419,13 +506,89 @@ namespace Integratie.BL.Managers
 
         private void Validate(Alert alert)
         {
-            //Validator.ValidateObject(ticket, new ValidationContext(ticket), validateAllProperties: true);
-
             List<ValidationResult> errors = new List<ValidationResult>();
             bool valid = Validator.TryValidateObject(alert, new ValidationContext(alert), errors, validateAllProperties: true);
 
             if (!valid)
                 throw new ValidationException("Ticket not valid!");
+        }
+
+        public IEnumerable<UserAlert> GetUserTrendAlertsOfUser(string userId)
+        {
+            return repo.GetUserTrendAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserCheckAlertsOfUser(string userId)
+        {
+            return repo.GetUserCheckAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserCompareAlertsOfUser(string userId)
+        {
+            return repo.GetUserCompareAlertsOfUser(userId);
+        }
+
+        public IEnumerable<UserAlert> GetUserSentimentAlertsOfUser(string userId)
+        {
+            return repo.GetUserSentimentAlertsOfUser(userId);
+        }
+
+        public UserAlert GetUserWeeklyAlert(string userId)
+        {
+            return repo.GetUserWeeklyAlert(userId);
+        }
+
+        public void AddUserWeeklyAlert(Account account)
+        {
+            UserAlert userAlert = new UserAlert(account, repo.FindWeeklyAlert(), true, false, true);
+            repo.AddUserAlert(userAlert);
+        }
+
+        public Alert GetAlertById(int id)
+        {
+            return repo.GetAlertById(id);
+        }
+
+        public void UpdateUserAlert(int id, bool web, bool mail, bool app)
+        {
+            UserAlert userAlert = repo.GetUserAlert(id);
+            userAlert.Web = web;
+            userAlert.Mail = mail;
+            userAlert.App = app;
+            repo.UpdateUserAlert(userAlert);
+        }
+
+        public void RemoveUserAlert(int id)
+        {
+            UserAlert userAlert = repo.GetUserAlert(id);
+            repo.RemoveUserAlert(userAlert);
+        }
+
+        public async Task ShowUserWeeklyAlerts()
+        {
+            List<UserAlert> userAlerts = repo.GetWeeklyUserAlets().ToList();
+            foreach (UserAlert userAlert in userAlerts)
+            {
+                userAlert.Show = true;
+            }
+
+            await repo.UpdateUserAlerts(userAlerts);
+        }
+
+        public void initNonExistingRepo(bool createWithUnitOfWork = false)
+        {
+            if (createWithUnitOfWork)
+            {
+                if (unitOfWorkManager == null)
+                {
+                    unitOfWorkManager = new UnitOfWorkManager();
+                }
+                repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+            }
+            else
+            {
+                repo = new AlertRepo();
+            }
         }
     }
 }

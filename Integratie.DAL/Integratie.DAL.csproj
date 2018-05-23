@@ -72,7 +72,6 @@
     <Compile Include="Repositories\AlertRepo.cs" />
     <Compile Include="Repositories\ContentRepo.cs" />
     <Compile Include="Repositories\DashboardRepo.cs" />
-    <Compile Include="Repositories\DummyAlertRepo.cs" />
     <Compile Include="Repositories\DummySubjectRepo.cs" />
     <Compile Include="EF\DashboardDbConfiguration.cs" />
     <Compile Include="EF\DashBoardDbContext.cs" />
@@ -87,7 +86,9 @@
     <Compile Include="Repositories\Interfaces\ISubjectRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SubjectRepo.cs" />
+    <Compile Include="Repositories\ThemeRepo.cs" />
     <Compile Include="ResourcesInit\SubjectStrings.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integratie.Domain\Integratie.Domain.csproj">

@@ -1,0 +1,60 @@
+﻿@model Integratie.Domain.Entities.Subjects.Theme
+@{
+    ViewBag.Title = "Theme";
+}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    html, body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto", sans-serif
+    }
+</style>
+<div class="jumbotron" style="background-image: url(@Model.GetImageSrc())">
+    <h2>@Model.Name</h2>
+</div>
+<div class="w3-content w3-margin top" style="max-width:1400px;position:center">
+    <div class="w3-row-padding">
+        <div class="w3-third w3-container">
+            <div class="w3-white w3-text-grey w3-card-4">
+
+                <h2 class="tesla-title">Top 5 politici die betrokken zijn in dit thema</h2>
+                @foreach (var topPerson in Model.TopPersonsList)
+                {
+                    <a href="@Url.Action("Persoon","Subject",new {Full_Name=topPerson})">
+                        <h5>@topPerson</h5>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="w3-third w3-container">
+            <div class="w3-white w3-text-grey w3-card-4">
+                <h2 class="tesla-title">Top 5 Partijen die betrokken zijn in dit thema</h2>
+                @foreach (var topOrg in Model.TopOrganisationsList)
+                {
+                    <h5>@topOrg</h5>
+                }
+            </div>
+        </div>
+        @if (Model.Stories != null)
+        {
+            foreach (var story in Model.Stories)
+            {
+                <div class="w3-third w3-container">
+                    <div class="w3-white w3-text-grey w3-card-4">
+
+                        <h1 class="tesla-story-title tesla-title">@story.Titel</h1>
+
+                        <p>@story.StoryString</p>
+                        @if (story.Link != null)
+                        {
+                            <a href="@story.Link">Link</a>
+
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+</div>

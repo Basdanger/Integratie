@@ -10,6 +10,9 @@ using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories;
 using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Graph;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Integratie.BL.Managers
 {
@@ -135,6 +138,53 @@ namespace Integratie.BL.Managers
             }
             IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList());
             return filteredList;
+        }
+
+        public async Task UpdateFeeds(DateTime now)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://kdg.textgain.com/query");
+            httpWebRequest.Method = "POST";
+            httpWebRequest.Headers.Add("X-API-Key", "aEN3K6VJPEoh3sMp9ZVA73kkr");
+            httpWebRequest.ContentType = "application/json; charset=utf-8";
+            httpWebRequest.Accept = "application/json; charset=utf-8";
+            
+            using (var streamWriter = new StreamWriter(await httpWebRequest.GetRequestStreamAsync()))
+            {
+                string date = String.Format("{0:yyyy MM dd HH:mm:ss}", now.AddDays(-1));
+                string json = "{ \"since\":\"" + date + "\" }";
+
+                streamWriter.Write(json);
+            }
+
+            string stream;
+
+            var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                stream = await streamReader.ReadToEndAsync();
+
+                stream.Replace("\"geo\": false", "\"geo\": [null, null]").Replace("[", "\"[").Replace("]", "]\"").Trim('"');
+
+                char[] test = new char[] { '[', ']' };
+                string[] filter = stream.Split(test);
+
+                for (int i = 2; i < filter.Length; i = i + 2)
+                {
+                    filter[i] = filter[i].Replace("\"", string.Empty);
+                }
+
+                stream = "[" + string.Join("", filter) + "]";
+            }
+
+            IEnumerable<Feed> resultsFeed = JsonConvert.DeserializeObject<IEnumerable<Feed>>(stream);
+            List<Feed> feeds = new List<Feed>();
+
+            foreach (Feed item in resultsFeed)
+            {
+                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+            }
+
+            await repo.CreateFeeds(feeds);
         }
     }
 }

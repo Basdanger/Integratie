@@ -12,7 +12,7 @@ namespace Integratie.DAL.Repositories
 {
     public class SubjectRepo : ISubjectRepo
     {
-        private DashBoardDbContext context;
+        private readonly DashBoardDbContext context;
 
         public SubjectRepo()
         {
@@ -20,9 +20,9 @@ namespace Integratie.DAL.Repositories
             context.Database.Initialize(false);
         }
 
-        public SubjectRepo(DashBoardDbContext context)
+        public SubjectRepo(UnitOfWork unitOfWork)
         {
-            this.context = context;
+            context = unitOfWork.Context;
         }
 
         public void AddSubject(Subject subject)
@@ -39,6 +39,11 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Subject> ReadSubjects()
         {
             return context.Subjects.ToList<Subject>();
+        }
+
+        public List<string> GetNames()
+        {
+            return context.Subjects.Select(s => s.Name).OrderBy(s => s).ToList();
         }
 
         public void RemoveSubject(Subject subject)
@@ -77,15 +82,6 @@ namespace Integratie.DAL.Repositories
         {
             //return context.People.ToList();
             return context.People.Select(o => o.Organisation).Distinct();
-        }
-        public Person FeedsByPerson(String Full_Name)
-        {
-            //return context.People.Where(p => p.Feeds.First(f => f.Persons.ToUpper().Equals(Full_Name)));
-            return context.People.Include(p => p.Feeds).First(p => p.Full_Name.ToUpper().Equals(Full_Name));
-        }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return context.Feeds.Where(f => f.Persons.ToUpper().Equals(person));
         }
         public void UpdatePersoon(Person person)
         {
@@ -141,6 +137,15 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<String> GetGemeente()
         {
             return context.People.Select(g => g.Town).Distinct();
+        }
+
+        public async Task UpdateSubjects(List<Subject> subjects)
+        {
+            foreach (Subject subject in subjects)
+            {
+                context.Entry(subject).State = System.Data.Entity.EntityState.Modified;
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

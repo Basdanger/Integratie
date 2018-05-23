@@ -1,0 +1,44 @@
+﻿@model List<Integratie.Domain.Entities.Alerts.UserAlert>
+
+<div class="ui icon top right dropdown button" style="margin-left: 10px;position:absolute; right:5px;top:5px;">
+    <i class="bell icon"></i>
+    <div class="menu">
+        <div class="header">Alerts</div>
+        <div class="ui divider"></div>
+        @foreach (var item in Model)
+        {
+            if (item.Web && item.Show)
+            {
+                if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.TrendAlert)))
+                {
+                    Html.RenderAction("_TrendAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.TrendAlert)item.Alert });
+                }
+                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.CheckAlert)))
+                {
+                    Html.RenderAction("_CheckAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.CheckAlert)item.Alert });
+                }
+                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.CompareAlert)))
+                {
+                    Html.RenderAction("_CompareAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.CompareAlert)item.Alert });
+                }
+                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.SentimentAlert)))
+                {
+                    Html.RenderAction("_SentimentAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.SentimentAlert)item.Alert });
+                }
+                else
+                {
+                    <div class="item">New Weekly Review</div>
+                }
+            }
+        }
+        @if (!Model.Where(i => i.Show && i.Web).Any())
+        {
+            <div class="header">No Alerts</div>
+        }
+        <div class="ui divider"></div>
+        <div class="item">Mark all as viewed</div>
+    </div>
+</div>
+<script>
+    $('.ui.dropdown').dropdown();
+</script>

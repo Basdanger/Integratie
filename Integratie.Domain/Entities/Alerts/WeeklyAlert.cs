@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Integratie.BL.Managers.Interfaces
+namespace Integratie.Domain.Entities.Alerts
 {
-    public interface IMailManager
+    public class WeeklyAlert : Alert
     {
-        void SendMail(string Body);
+
     }
 }
