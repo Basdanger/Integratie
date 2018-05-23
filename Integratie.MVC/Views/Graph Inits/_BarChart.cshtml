@@ -1,6 +1,6 @@
 ﻿
 <form>
-        <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#GraphSelectContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="TeslaGraphPopupHeader" data-toggle="collapse" href="#GraphSelectContainer" role="button" aria-expanded="false" aria-controls="collapseExample">
             <span class="teslaExplainGraphPopup">Step 1: select </span>Graph
         </a>
     <div id="GraphSelectContainer" class="TeslaGraphPopupContent collapse show">
@@ -141,7 +141,7 @@
         <button id="GraphSubmit" type="button" class="btn btn-success teslaAddGraphButton" style="margin-top:20px;">Create Graph</button>
         
         <!--ERRORS-->
-        <div id="GraphErrors">
+    <div id="GraphErrors">
 
         </div>
 
@@ -163,6 +163,11 @@
     var PeriodSort;
     var Compare;
     var PersonCompare;
+    var PartijFilter;
+    var ThemeFilter;
+    var SentimentStart = -1;
+    var SentimentEnd = 1;
+
     $(document).off('.datepicker.data-api');
     var d = new Date();
 
@@ -342,7 +347,8 @@
                 Compare = val;
             }
     });
-    $('#personCompareDropdown').dropdown({values: [
+    $('#personCompareDropdown').dropdown({
+        values: [
             @foreach(string s in ViewBag.persons)
             {
                 <text>{
@@ -354,8 +360,11 @@
     ],
 
     });
-    $('#partijDropdown').dropdown({values: [
-            @foreach(string s in ViewBag.persons)
+
+    $('#partijDropdown').dropdown({
+        placeholder: "All",
+        values: [
+            @foreach(string s in ViewBag.partijen)
             {
                 <text>{
             name: '@s',
@@ -363,11 +372,14 @@
                 },
             </text>
             }
-    ],
+        ], onChange: function (val) {
+            PartijFilter = val;
+        }
 
     });
-        $('#themaDropdown').dropdown({values: [
-            @foreach(string s in ViewBag.persons)
+    $('#themaDropdown').dropdown({
+        placeholder: "All",values: [
+            @foreach(string s in ViewBag.themas)
             {
                 <text>{
             name: '@s',
@@ -375,7 +387,9 @@
                 },
             </text>
             }
-    ],
+        ], onChange: function (val) {
+            ThemeFilter = val;
+        }
 
     });
     $( "#slider-range" ).slider({
@@ -383,11 +397,12 @@
       min: -1,
       max: 1,
       step:0.01,
-      values: [ -0.5, 0.5 ],
+      values: [ -1, 1 ],
       slide: function (event, ui) {
           $("#sentimentALabel").empty(); $("#sentimentALabel").append(ui.values[0]);
           $("#sentimentBLabel").empty(); $("#sentimentBLabel").append(ui.values[1]);
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+          SentimentStart = ui.values[0];
+          SentimentEnd = ui.values[1];
       }
     });
 
@@ -536,8 +551,11 @@
             PeriodLength: $('#DaysDate').val(),
             ComparePersons: PersonCompare,
             CompareSort: Compare,
-            IntervalSize: $('#IntervalSelect').val()
-
+            IntervalSize: $('#IntervalSelect').val(),
+            PartijFilter: PartijFilter,
+            ThemeFilter: ThemeFilter,
+            SentimentStart: SentimentStart,
+            SentimentEnd: SentimentEnd
         };
         if (Compare == "Politicians" && GraphSort == "Barchart") s.PersonFilter = "";
         if (Compare == "Politicians" && GraphSort == "LineChart") s.PersonFilter = "";
