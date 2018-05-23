@@ -28,6 +28,16 @@
             </td>
         </tr>
     }
+    @if (!Model.Any())
+    {
+        <tr>
+            <td>
+                <div class="field">
+                    No Follows
+                </div>
+            </td>
+        </tr>
+    }
 </table>
 
 <script>
