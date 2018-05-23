@@ -25,6 +25,12 @@ namespace Integratie.BL.Managers
             repo = new AlertRepo();
         }
 
+        public AlertManager(UnitOfWorkManager unitOfWorkManager)
+        {
+            this.unitOfWorkManager = unitOfWorkManager;
+            repo = new AlertRepo(unitOfWorkManager.UnitOfWork);
+        }
+
         public async Task CheckAlerts(DateTime now)
         {
             initNonExistingRepo();
@@ -32,10 +38,8 @@ namespace Integratie.BL.Managers
             List<Alert> trueAlerts = new List<Alert>();
             foreach (Alert a in alerts)
             {
-                a.Ring = false;
                 if (CheckAlert(a,now))
                 {
-                    a.Ring = true;
                     trueAlerts.Add(a);
                 }
             }
@@ -58,6 +62,7 @@ namespace Integratie.BL.Managers
                         fireBaseManager.SendNotification("test",uA.Account.DeviceId);
                     }
                 }
+                await repo.UpdateUserAlerts(userAlerts);
             }
         }
 
@@ -209,7 +214,7 @@ namespace Integratie.BL.Managers
             fCPast = (fCPast == 0) ? 1 : fCPast;
 
             int fCNow = 0;
-            foreach (Feed f in subject.Feeds)
+            foreach (Feed f in feeds)
             {
                 if (f.Date.Ticks >= end.AddDays(-1).Ticks)
                 {
@@ -265,7 +270,7 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feedsA;
             IEnumerable<Feed> feedsB;
 
-            DateTime end = DateTime.Now;
+            DateTime end = now;
             DateTime start = end.AddDays(-7);
             Dictionary<string, double> valuePairs = new Dictionary<string, double>();
 
@@ -326,7 +331,7 @@ namespace Integratie.BL.Managers
             FeedManager feedManager = new FeedManager();
             IEnumerable<Feed> feeds;
 
-            DateTime end = DateTime.Now;
+            DateTime end = now;
             DateTime start = end.AddDays(-7);
             Dictionary<string, List<double>> valuePairs = new Dictionary<string, List<double>>();
             List<double> values = new List<double>();
@@ -528,6 +533,17 @@ namespace Integratie.BL.Managers
             return repo.GetUserSentimentAlertsOfUser(userId);
         }
 
+        public UserAlert GetUserWeeklyAlert(string userId)
+        {
+            return repo.GetUserWeeklyAlert(userId);
+        }
+
+        public void AddUserWeeklyAlert(Account account)
+        {
+            UserAlert userAlert = new UserAlert(account, repo.FindWeeklyAlert(), true, false, true);
+            repo.AddUserAlert(userAlert);
+        }
+
         public Alert GetAlertById(int id)
         {
             return repo.GetAlertById(id);
@@ -546,6 +562,17 @@ namespace Integratie.BL.Managers
         {
             UserAlert userAlert = repo.GetUserAlert(id);
             repo.RemoveUserAlert(userAlert);
+        }
+
+        public async Task ShowUserWeeklyAlerts()
+        {
+            List<UserAlert> userAlerts = repo.GetWeeklyUserAlets().ToList();
+            foreach (UserAlert userAlert in userAlerts)
+            {
+                userAlert.Show = true;
+            }
+
+            await repo.UpdateUserAlerts(userAlerts);
         }
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)

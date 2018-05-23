@@ -113,7 +113,9 @@ namespace Integratie.Scheduler
         {
             DateTime date = DateTime.Now;
             SubjectManager subjectManager = new SubjectManager();
+            AlertManager alertManager = new AlertManager();
             await subjectManager.WeeklyReview(date);
+            await alertManager.ShowUserWeeklyAlerts();
             await Console.Out.WriteLineAsync("Weekly Review Updated");
         }
     }

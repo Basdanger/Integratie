@@ -67,5 +67,30 @@ namespace Integratie.MVC.Controllers
         {
             return PartialView(subjectManager.GetSubjectNames());
         }
+
+        public ActionResult _SentimentAlertDropDown(SentimentAlert alert)
+        {
+            ViewBag.Operator = alert.Operator.GetOperator();
+            ViewBag.Property = alert.SubjectProperty.GetSubject();
+            return PartialView(alert);
+        }
+
+        public ActionResult _CompareAlertDropDown(CompareAlert alert)
+        {
+            ViewBag.Operator = alert.Operator.GetOperator();
+            return PartialView(alert);
+        }
+
+        public ActionResult _CheckAlertDropDown(CheckAlert alert)
+        {
+            ViewBag.Operator = alert.Operator.GetOperator();
+            ViewBag.Property = alert.SubjectProperty.GetSubject();
+            return PartialView(alert);
+        }
+
+        public ActionResult _TrendAlertDropDown(TrendAlert alert)
+        {
+            return PartialView(alert);
+        }
     }
 }

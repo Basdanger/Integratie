@@ -62,10 +62,6 @@ namespace Integratie.BL.Managers
         {
             return repo.GetOrganisaties();
         }
-        public IEnumerable<Feed> GetFeeds(String person)
-        {
-            return repo.GetFeeds(person);
-        }
 
         public IEnumerable<Subject> GetPeopleByTown(string town)
         {
@@ -113,18 +109,73 @@ namespace Integratie.BL.Managers
 
             foreach(Subject subject in subjects)
             {
+                int days = 6;
+                int fcToday = 0;
+                int fcHistory = 0;
+                float avarage = 0;
+                double std = 0;
+                double zScore = 0;
+                
+                IEnumerable<Feed> feeds;
+
+                DateTime end = now;
+                DateTime start = end.AddDays(-7);
+                List<double> values = new List<double>();
+
                 if (subject.GetType().Equals(typeof(Person)))
                 {
-                    subject.FeedCount = feedManager.GetPersonFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                    feeds = feedManager.GetPersonFeedsSince(subject.Name, now.AddDays(-7));
+                    subject.FeedCount = feeds.Count();
                 }
                 else if (subject.GetType().Equals(typeof(Organisation)))
                 {
-                    subject.FeedCount = feedManager.GetOrganisationFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                    feeds = feedManager.GetOrganisationFeedsSince(subject.Name, now.AddDays(-7));
+                    subject.FeedCount = feeds.Count();
                 }
                 else
                 {
-                    subject.FeedCount = feedManager.GetWordFeedsSince(subject.Name,now.AddDays(-7)).Count();
+                    feeds = feedManager.GetWordFeedsSince(subject.Name, now.AddDays(-7));
+                    subject.FeedCount = feeds.Count();
                 }
+
+                foreach (Feed f in feeds)
+                {
+                    if (f.Date.Ticks >= end.AddDays(-1).Ticks)
+                    {
+                        fcToday++;
+                    }
+                }
+
+                for (int i = 6; i > 0; i--)
+                {
+                    foreach (Feed f in feeds)
+                    {
+                        if (start.AddDays(6 - i).Ticks <= f.Date.Ticks && f.Date.Ticks < end.AddDays(-i).Ticks)
+                        {
+                            fcHistory++;
+                        }
+                    }
+                    avarage += fcHistory;
+                    values.Add(fcHistory);
+                    fcHistory = 0;
+                }
+
+                avarage = (float)avarage / days;
+
+                foreach (float item in values)
+                {
+                    std += Math.Pow(item - avarage, 2);
+                }
+
+                std = Math.Sqrt(std / days);
+
+                zScore = ((float)fcToday - avarage) / std;
+
+                if (zScore > 2)
+                {
+                    subject.Trending = true;
+                }
+                else subject.Trending = false;
             }
 
             await repo.UpdateSubjects(subjects);
@@ -144,10 +195,6 @@ namespace Integratie.BL.Managers
         public IEnumerable<Feed> GetWordFeeds(string word)
         {
             return repo.ReadWordFeeds(word);
-        }
-        public IEnumerable<Feed> GetPersonFeeds(string person)
-        {
-            return repo.ReadPersonFeeds(person);
         }
         public IEnumerable<String> GetGemeentes()
         {

@@ -9,20 +9,24 @@ using System.Threading.Tasks;
 using Integratie.DAL.EF;
 using Integratie.BL.Managers;
 using System.IO;
+using Integratie.Domain.Entities;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.UI.Con
 {
     class Program
     {
-        private static AlertManager mgr = new AlertManager();
+        private static AccountManager mgr = new AccountManager();
+        private static SubjectManager subjectManager = new SubjectManager();
 
         static void Main(string[] args)
         {
             //Console.WriteLine(mgr.GetFeed(982262187350573060).Profile.Age + mgr.GetFeed(982262187350573060).Geo);
-            mgr.AddUserAlert("0", "Trend", "Bart De Wever", true, true, true, "", "", "",0);
-            Console.WriteLine("Alert added");
-            mgr.AddUserAlert("1", "Trend", "Bart De Wever", true, true, true, "", "", "", 0);
-            Console.WriteLine("Alert added");
+            Subject subject = subjectManager.GetSubjectById(1);
+            mgr.UpdateFollow("0", 1);
+            Console.WriteLine(mgr.GetAccountById("0").Follows.Contains(subject));
+            mgr.UpdateFollow("0", 1);
+            Console.WriteLine(mgr.GetAccountById("0").Follows.Contains(subject));
             Console.ReadLine();
         }
 

@@ -31,7 +31,21 @@
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Facebook)</p>
                     <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Twitter)</p>
                     <hr>
-                    <br>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div id="follow" class="ui field toggle checkbox">
+                            @if (ViewBag.Follow)
+                            {
+                                <label>Followed</label>
+                                <input checked="checked" type="checkbox">
+                            }
+                            else
+                            {
+                                <label>Follow</label>
+                                <input type="checkbox">
+                            }
+                        </div>
+                    }
                 </div>
             </div><br>
 
@@ -45,13 +59,13 @@
                 <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Tweets</h2>
                 @foreach (var feeds in Model.feeds)
                 {
-            <div class="w3-container">
-                <h5 class="w3-opacity"><b>@feeds.Hashtags</b></h5>
-                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@feeds.Date</h6>
-                <p>@feeds.Words</p>
-                <p>@feeds.Urls</p>
-                <hr>
-            </div>
+                    <div class="w3-container">
+                        <h5 class="w3-opacity"><b>@feeds.Hashtags</b></h5>
+                        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@feeds.Date</h6>
+                        <p>@feeds.Words</p>
+                        <p>@feeds.Urls</p>
+                        <hr>
+                    </div>
                 }
             </div>
 
@@ -65,3 +79,42 @@
 
     <!-- End Page Container -->
 </div>
+
+
+@if (Request.IsAuthenticated)
+{
+    <script>
+    function SendFollowUpdateSubmit(int) {
+        var s = {
+            id: int
+        };
+
+        s = (JSON.stringify(s));
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateFollow", "Subject")',
+            data: s,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+
+    $('#follow').checkbox({
+        onChecked: function () {
+            $('#follow label').html("Followed");
+            SendFollowUpdateSubmit(@Model.person.ID);
+        },
+        onUnchecked: function () {
+            $('#follow label').html("Follow");
+            SendFollowUpdateSubmit(@Model.person.ID);
+        }
+    });
+    </script>
+}

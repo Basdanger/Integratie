@@ -241,6 +241,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AlertCreation.cs" />
+    <Compile Include="Models\AlertUpdate.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PersonAndFeeds.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Content\jquery.gridster.css" />
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\outline-icons.svg" />
+    <Content Include="Content\range.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\menu.css" />
@@ -363,6 +366,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\range.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -469,6 +473,11 @@
     <Content Include="Views\Admin\GetUser.cshtml" />
     <Content Include="Views\Admin\DeleteUser.cshtml" />
     <Content Include="Views\Admin\UpdateUser.cshtml" />
+    <Content Include="Views\AlertPartial\_TrendAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_CheckAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_CompareAlertDropDown.cshtml" />
+    <Content Include="Views\AlertPartial\_SentimentAlertDropDown.cshtml" />
+    <Content Include="Views\Home\Follows.cshtml" />
     <Content Include="Views\Theme\Create.cshtml" />
     <Content Include="Views\Theme\CreateStory.cshtml" />
     <Content Include="Views\Theme\EditStories.cshtml" />
