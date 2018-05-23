@@ -9,19 +9,19 @@
         {
             if (item.Web && item.Show)
             {
-                if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.TrendAlert)))
+                if (item.Alert is Integratie.Domain.Entities.Alerts.TrendAlert)
                 {
                     Html.RenderAction("_TrendAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.TrendAlert)item.Alert });
                 }
-                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.CheckAlert)))
+                else if (item.Alert is Integratie.Domain.Entities.Alerts.CheckAlert)
                 {
                     Html.RenderAction("_CheckAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.CheckAlert)item.Alert });
                 }
-                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.CompareAlert)))
+                else if (item.Alert is Integratie.Domain.Entities.Alerts.CompareAlert)
                 {
                     Html.RenderAction("_CompareAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.CompareAlert)item.Alert });
                 }
-                else if (item.GetType().Equals(typeof(Integratie.Domain.Entities.Alerts.SentimentAlert)))
+                else if (item.Alert is Integratie.Domain.Entities.Alerts.SentimentAlert)
                 {
                     Html.RenderAction("_SentimentAlertDropDown", "AlertPartial", new { alert = (Integratie.Domain.Entities.Alerts.SentimentAlert)item.Alert });
                 }
