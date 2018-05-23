@@ -120,7 +120,7 @@ namespace Integratie.BL.Managers
             foreach (Person p in personen)
             {
                 int totalcounter = 0;
-                IEnumerable<Feed> feeds = subjRepo.GetFeeds(p.Full_Name);
+                IEnumerable<Feed> feeds = feedRepo.ReadPersonFeeds(p.Full_Name);
                 foreach (Feed f in feeds)
                 {
                     totalcounter = totalcounter + f.GetWords().Intersect(termsList).Count();
