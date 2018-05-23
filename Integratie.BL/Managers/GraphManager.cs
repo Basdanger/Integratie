@@ -158,6 +158,29 @@ namespace Integratie.BL.Managers
             }
             return graph;
         }
+        public Graph GetFilledSingleTrendGraph(Graph graph)
+        {
+            Graph graphB = new Graph
+            {
+                StartDate = graph.StartDate.AddDays(-1),
+                EndDate = graph.EndDate.AddDays(-1),
+                AgeFilter = graph.AgeFilter,
+                PersonalityFilter = graph.PersonalityFilter,
+                PersonFilter = graph.PersonFilter,
+                GenderFilter = graph.GenderFilter,
+                PeriodSort = PeriodSort.Fixed
+                
+            };
+            double valA = GetFilledSingleGraph(graph).SingleValue;
+            double valB = GetFilledSingleGraph(graphB).SingleValue;
+            graph.SingleValue = valA;
+            if (valB != 0) graph.TrendValue = (valA / valB) - 1;
+            else graph.TrendValue = 0;
+            graph.TrendArrowValue = graph.TrendValue * 100;
+            if (graph.TrendArrowValue > 100) graph.TrendArrowValue = 100;
+            if (graph.TrendArrowValue < -100) graph.TrendArrowValue = -100;
+            return graph;
+        }
 
         public Graph AddAlertLineGraph()
         {
