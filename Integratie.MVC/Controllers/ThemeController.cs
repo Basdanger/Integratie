@@ -1,7 +1,9 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities.Subjects;
+using LINQtoCSV;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -81,6 +83,24 @@ namespace Integratie.MVC.Controllers
         {
             themeManager.DeleteTheme(themaId);
             return RedirectToAction("EditThemes");
+        }
+
+        [HttpPost]
+        public ActionResult CSVOpladen(HttpPostedFileBase attachmentcsv)
+        {
+            CsvFileDescription csvFileDescription = new CsvFileDescription
+            {
+                SeparatorChar = ',',
+                FirstLineHasColumnNames = true
+            };
+            CsvContext csvContext = new CsvContext();
+            StreamReader streamReader = new StreamReader(attachmentcsv.InputStream);
+            IEnumerable<Theme> list = csvContext.Read<Theme>(streamReader, csvFileDescription);
+            foreach (var item in list)
+            {
+                themeManager.AddTheme(item.Name,item.Image,item.Terms);
+            }
+            return Redirect("Index");
         }
     }
 }

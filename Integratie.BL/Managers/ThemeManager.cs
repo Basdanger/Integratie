@@ -110,6 +110,16 @@ namespace Integratie.BL.Managers
             repo.deleteStory(storyId);
         }
 
+        public void AddTheme(string name, byte[] image, string terms)
+        {
+            Theme thema = new Theme();
+            thema.Name = name;
+            thema.Image = image;
+            thema.Terms = terms;
+            thema = UpdateTheme(thema);
+            repo.addTheme(thema);
+        }
+
         private Theme setTopFive(List<string> termsList, Theme thema)
         {
             string topPersons = "";
