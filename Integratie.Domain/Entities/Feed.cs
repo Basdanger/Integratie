@@ -26,7 +26,7 @@ namespace Integratie.Domain.Entities
         public String Mentions { get; set; }
         public String Geo { get; set; }
         public bool Retweet { get; set; }
-        public virtual List<Theme> themas { get; set;}
+        
 
         public double SentimentMean()
         {
