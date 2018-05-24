@@ -1,48 +1,162 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
-<link href="@Url.Content("~/Content/slick.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/slick-theme.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/slick.min.js")"></script>
+﻿<div class="slideshow">
+    <div class="fotos" style="background-image:url('@Url.Content("~/Content/Images/Bart.jpg")')">
+        <h2 class="rotitle">''Bart De Wever werd 12 keer vermeld op twitter''</h2>
+    </div>
+    <div class="container rofloGraphContainer">
+        <div class="row spacing">
+            <div class="col-sm-4 rofloGraphOuter">
+                <div class="rofloGraph">
+                    <p class="TeslaSingleGraph" id="myChartA"></p>
+                    <div class="rofloTagContainer">
+                        <center>
+                            <span class="teslaTag">Bart De Wever</span>
+                            <span class="teslaTag">5 dagen</span>
+                            <p class="rofloInfo">Er is de afgelopen 5 dagen @(ViewBag.graphA.SingleValue) keer over Bart De Wever getweet, dat is een daling van 30%.</p>
 
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 rofloGraphOuter">
+                <div class="rofloGraph">
+                    <p class="TeslaSingleGraph" id="myChartB"></p>
+                    <div class="rofloTagContainer">
+                        <center>
+                            <span class="teslaTag">Maggie De Block</span>
+                            <span class="teslaTag">5 dagen</span>
+                            <p class="rofloInfo">Er is de afgelopen 5 dagen @(ViewBag.graphB.SingleValue) keer over Maggie De Block getweet, dat is een daling van 30%.</p>
 
-<section class="regular slider TeslaIndexSlider" style="height:350px; margin:0;margin-top:-28px;">
-    <div>
-        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Bart.jpg")">
-        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Bart De wever</h1>
-        <h2 style="color:White;position:absolute; width:100vw; top:180px;"><span class="TeslaIndexNumber">103 Positive tweets</span> in the last 3 days.</h2>
-    </div>
-    <div>
-        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/Maggie.jpg")">
-        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Maggie De Block</h1>
-        <h2 style="color:White;position:absolute; width:100vw; top:180px;"><span class="TeslaIndexNumber">Trending now</span> among 25+ females.</h2>
-    </div>
-    <div>
-        <img style="width:100%;" class="TeslaIndexFoto" src="@Url.Content("~/Content/Images/theo.jpg")">
-        <h1 style="color:White;position:absolute; width:100vw; top:150px;">Theo Francken</h1>
-        <h2 style="color:White;position:absolute; width:100vw; top:180px;">An <span class="TeslaIndexNumber">AVG of 3</span> tweets per day.</h2>
-    </div>
-</section>
-<div class="container TeslaIndexContainer">
-<div class="row">
-    <div class="col-sm TeslaIndexIcon">
-        <center><i class="fa fa-fw fa-tachometer "></i></center>
-    </div>
-    <div class="col-sm TeslaIndexIcon">
-        <center><i class="fa fa-fw fa-wrench"></i></center>
-    </div>
-    <div class="col-sm TeslaIndexIcon">
-        <center><i class="fa fa-fw fa-safari"></i></center>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 rofloGraphOuter">
+                <div class="rofloGraph">
+                    <p class="TeslaSingleGraph" id="myChartC"></p>
+                    <div class="rofloTagContainer">
+                        <center>
+                            <span class="teslaTag">Theo Francken</span>
+                            <span class="teslaTag">5 dagen</span>
+                            <p class="rofloInfo">Er is de afgelopen 5 dagen @(ViewBag.graphC.SingleValue) keer over Theo Francken getweet, dat is een daling van 30%.</p>
+
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<div class="rofloContainer">
+    <div class="dashboard">
+        <div class="imac"></div>
+        <p class="dash">Kies zelf wat u in het oog houdt!</p>
+        <p class="spek">Met uw persoonlijk dashboard kan u zelf bepalen welke trends, activiteiten en ontwikkelingen u volgt. Dit kan u aan de hand van bar- en linecharts of gewoon eenvoudige cijfers. Mis geen enkele moment en stel uw eigen dashboard samen!</p>
+        <button class="dashknop">Uw persoonlijk dashboard</button>
+    </div>
+</div>
+<div class="subjects">
+    <div class="one">
+        <div class="content">
+            <h1>THEMA'S</h1>
+            <br>
+            <p>"216 tweets over het BAM-Tracé"</p>
+            <br>
+            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
+        </div>
+    </div>
+    <div class="two">
+        <div class="content">
+            <h1>POLITICI</h1>
+            <br>
+            <p>"4 tweets van Jan Jambon"</p>
+            <br>
+            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
+        </div>
+    </div>
+    <div class="three">
+        <div class="content">
+            <h1>PARTIJEN</h1>
+            <br>
+            <p>"143 nieuwe tweets over GROEN"</p>
+            <br>
+            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
+        </div>
+    </div>
+</div>
+<div class="app">
+    <div class="oneplus"></div>
+    <div class="uitleg">
+        <p class="titel">Blijf overal steeds op de hoogte via de app!</p>
+        <p class="expl">Raadpleeg vanaf nu ook de politieke barometer op een handige mobiele app. Log in met je bestaand profiel en bekijk je persoonlijk dashboard waar en wanneer je maar wil. Blijf steeds op de hoogte van de laatste updates door meldingen in te schakelen!</p>
+        <button class="download">App downloaden</button>
+    </div>
+</div>
+<div class="footer">
+    <p>Politieke Barometer 2018</p>
 </div>
 <script>
-    $(".regular").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
-</script>
+     $(document).ready(function () {
+                    var color =
+                        @if (ViewBag.graphA.TrendArrowValue > 0) { <text> "#39ac00" </text>}
+                        @if (ViewBag.graphA.TrendArrowValue < 0) { <text> "#ff3838" </text>}
+                        @if (ViewBag.graphA.TrendArrowValue == 0) { <text> '#000000'</text>};
+                    var rotation =
+                        @if (ViewBag.graphA.TrendArrowValue > 0) { <text> -90 </text>}
+                        @if (ViewBag.graphA.TrendArrowValue < 0) { <text> 90 </text>}
+                        @if (ViewBag.graphA.TrendArrowValue == 0) { <text> 0 </text>};
+                        var bg =
+                        @if (ViewBag.graphA.TrendArrowValue > 0) { <text> '#00ff8717' </text>}
+                        @if (ViewBag.graphA.TrendArrowValue < 0) { <text> "#ff150017" </text>}
+                        @if (ViewBag.graphA.TrendArrowValue == 0) { <text> '#00000017' </text>};
 
+                        $('#myChartA').append(
+                            '<center><table style="text-align:center"><tr><td>'
+                            + '<p class="TeslaSingleTrendValue">@(ViewBag.graphA.SingleValue)</p></td></tr><tr><td class="TeslaTrendArrowContainer" style="heigt:auto; background-color:' + bg +'!important">'
+                            + '<span class="TeslaTrendArrow" style="color:' + color + '!important;">@(Math.Round(ViewBag.graphA.TrendValue*100,0))%</span>'
+                            + '<i class="fa fa-fw fa-arrow-right TeslaTrendArrow" style="color:' + color + '!important; transform:rotate(' + rotation + 'deg);"></i></td></tr></center>');
+                });
+</script>
+<script>
+     $(document).ready(function () {
+                    var color =
+                        @if (ViewBag.graphB.TrendArrowValue > 0) { <text> "#39ac00" </text>}
+                        @if (ViewBag.graphB.TrendArrowValue < 0) { <text> "#ff3838" </text>}
+                        @if (ViewBag.graphB.TrendArrowValue == 0) { <text> '#000000'</text>};
+                    var rotation =
+                        @if (ViewBag.graphB.TrendArrowValue > 0) { <text> -90 </text>}
+                        @if (ViewBag.graphB.TrendArrowValue < 0) { <text> 90 </text>}
+                        @if (ViewBag.graphB.TrendArrowValue == 0) { <text> 0 </text>};
+                        var bg =
+                        @if (ViewBag.graphB.TrendArrowValue > 0) { <text> '#00ff8717' </text>}
+                        @if (ViewBag.graphB.TrendArrowValue < 0) { <text> "#ff150017" </text>}
+                        @if (ViewBag.graphB.TrendArrowValue == 0) { <text> '#00000017' </text>};
+
+                        $('#myChartB').append(
+                            '<center><table style="text-align:center"><tr><td>'
+                            + '<p class="TeslaSingleTrendValue">@(ViewBag.graphB.SingleValue)</p></td></tr><tr><td class="TeslaTrendArrowContainer" style="heigt:auto; background-color:' + bg +'!important">'
+                            + '<span class="TeslaTrendArrow" style="color:' + color + '!important;">@(Math.Round(ViewBag.graphB.TrendValue*100,0))%</span>'
+                            + '<i class="fa fa-fw fa-arrow-right TeslaTrendArrow" style="color:' + color + '!important; transform:rotate(' + rotation + 'deg);"></i></td></tr></center>');
+                });
+</script>
+<script>
+     $(document).ready(function () {
+                    var color =
+                        @if (ViewBag.graphC.TrendArrowValue > 0) { <text> "#39ac00" </text>}
+                        @if (ViewBag.graphC.TrendArrowValue < 0) { <text> "#ff3838" </text>}
+                        @if (ViewBag.graphC.TrendArrowValue == 0) { <text> '#000000'</text>};
+                    var rotation =
+                        @if (ViewBag.graphC.TrendArrowValue > 0) { <text> -90 </text>}
+                        @if (ViewBag.graphC.TrendArrowValue < 0) { <text> 90 </text>}
+                        @if (ViewBag.graphC.TrendArrowValue == 0) { <text> 0 </text>};
+                        var bg =
+                        @if (ViewBag.graphC.TrendArrowValue > 0) { <text> '#00ff8717' </text>}
+                        @if (ViewBag.graphC.TrendArrowValue < 0) { <text> "#ff150017" </text>}
+                        @if (ViewBag.graphC.TrendArrowValue == 0) { <text> '#00000017' </text>};
+
+                        $('#myChartC').append(
+                            '<center><table style="text-align:center"><tr><td>'
+                            + '<p class="TeslaSingleTrendValue">@(ViewBag.graphC.SingleValue)</p></td></tr><tr><td class="TeslaTrendArrowContainer" style="heigt:auto; background-color:' + bg +'!important">'
+                            + '<span class="TeslaTrendArrow" style="color:' + color + '!important;">@(Math.Round(ViewBag.graphC.TrendValue*100,0))%</span>'
+                            + '<i class="fa fa-fw fa-arrow-right TeslaTrendArrow" style="color:' + color + '!important; transform:rotate(' + rotation + 'deg);"></i></td></tr></center>');
+                });
+</script>
