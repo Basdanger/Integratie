@@ -4,61 +4,100 @@
 }
 <div style="color: black">
     <h2>Personen</h2>
-    <p>
-        @Html.ActionLink("Voeg toe", "CreatePersoon")
-    </p>
-    <div class="col-md-12">
-        @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <div class="form-group">
-                <label for="attachment">Select a Csv File</label>
-                <label class="btn btn-default btn-file">
-                    <input type="file" name="attachmentcsv" id="attachmentcsv">
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        }
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Voeg toe", "CreatePersoon")
+        </p>
+        <div class="col-md-12">
+            @using (Html.BeginForm("CSVOpladen", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="attachment">Select a Csv File</label>
+                    <label class="btn btn-default btn-file">
+                        <input type="file" name="attachmentcsv" id="attachmentcsv">
+                    </label>
+                    <button id="CSV" type="submit" class="btn btn-primary" disabled>Upload</button>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="ui icon input">
+        <input placeholder="Persoon zoeken..." type="text"  id="search">
+        <i class="search icon"></i>
     </div>
-    <table class="table">
-        <tr>
-            <th>
-                Naam
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Organisation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Site)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Twitter)
-            </th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr id="elementen">
-                <td id="naam">
-                    @Html.DisplayFor(modelItem => item.Full_Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Organisation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Site)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Twitter) <br />
-                    @Html.ActionLink("Detail", "Persoon", new { id = item.ID, Full_Name = item.Full_Name })<br />
-                    @if (User.Identity.IsAuthenticated)
-                        {
-                            if (User.IsInRole("Admin"))
-                            {
-                    @Html.ActionLink("Edit", "EditPersoon", new { id = item.ID })
-                    @Html.ActionLink("Delete", "DeletePerson", new { id = item.ID })
-                    }
-                        }
-                </td>
+
+    <table class="ui striped sortable celled table" id="persontable">
+        <thead>
+            <tr>
+                <th class="">Naam</th>
+                <th class="">Organisatie</th>
+                <th class="">Site</th>
+                <th class="">Twitter</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Full_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Organisation)
+                    </td>
+                    <td>
+                        <a href="@Html.DisplayFor(modelItem => item.Site)">@Html.DisplayFor(modelItem => item.Site)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Twitter)<br />
+                        @Html.ActionLink("Detail", "Persoon", new { id = item.ID, Full_Name = item.Full_Name })<br />
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            Html.ActionLink("Edit", "EditPersoon", new { id = item.ID });
+                            Html.ActionLink("Delete", "DeletePerson", new { id = item.ID });
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <script>
+        $(document).ready(
+            function () {
+                $('input:file').change(
+                    function () {
+                        if ($(this).val()) {
+                            $('#CSV').attr('disabled', false);
+                        }
+                    }
+                );
+            });
+    </script>
+}
+<script>
+    $('table').tablesort();
+    
+    $('#search').keyup(function () {
+        var input, filter, table, tr, td, i;
+        input = $('#search');
+        filter = input.val().toUpperCase();
+        table = $('#persontable');
+        tr = $('table tbody tr');
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName('td')[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    });
+</script>
