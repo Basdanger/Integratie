@@ -91,7 +91,7 @@
                         {
                             @Html.AntiForgeryToken()
                             
-                                <li class="teslaUserLabel"><a href="@Url.Action("Index", "Manage")" class="rc">Hallo @(User.Identity.GetUserName())</a></li>
+                                <li class="teslaUserLabel"><a href="@Url.Action("Index", "Manage")" class="rc">@(User.Identity.GetUserName())</a></li>
                                 <li class="teslaUserLabel"><a id="TeslaLogOff" href="javascript:document.getElementById('logoutForm').submit()">Meld af</a></li>
 
                         }

@@ -497,3 +497,49 @@ ul.slick-dots{
     margin-right:20px;
     color:black;
 }
+.TeslaThemesContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #F0F0F0;
+    color: black;
+    padding-top: 100px;
+    padding-left: 30px;
+    padding-right: 40px;
+    z-index: 5;
+}
+.teslaThemeCarcContainer{
+    margin-top:10px;
+    height:250px;
+    width:100%;
+    background-size:cover;
+    border:2px solid #007bff;
+    border-radius:10px;
+    box-shadow:2px 2px 10px gray;
+    filter:brightness(90%);
+    cursor:pointer;
+    transition:0.3s;
+    overflow:hidden;
+}
+.teslaThemeCarcContainer:hover {
+    filter: brightness(110%);
+    transform:scale(1.025);
+}
+.TeslaThemeCardText {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding:1px;
+    color: white;
+    font-size: 22px;
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    height:auto;
+    background-color:#007bff;
+    left:0;
+    line-height:32px
+
+}
