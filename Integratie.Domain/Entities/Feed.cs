@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Integratie.Domain.Entities.Subjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,6 +26,8 @@ namespace Integratie.Domain.Entities
         public String Mentions { get; set; }
         public String Geo { get; set; }
         public bool Retweet { get; set; }
+        
+
         public double SentimentMean()
         {
                 if (Sentiment != "")
