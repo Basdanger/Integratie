@@ -57,8 +57,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index", "theme")">Thema's</a></li>
-                            <li><a href="@Url.Action("Index", "subject")">Politici</a></li>
-                            <li><a href="@Url.Action("Index", "subject")">Partijen</a></li>
+                            <li><a href="@Url.Action("Index", "Subject","Personen")">Politici</a></li>
+                            <li><a href="@Url.Action("Index", "subject","Organisaties")">Partijen</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -72,7 +72,7 @@
                             <li><a href="#">Privacy</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" hidden>
                         <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
                             Administrator
                             <span class="caret"></span>

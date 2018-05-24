@@ -1,12 +1,7 @@
 /*! gridster.js - v0.6.10 - 2015-05-31
 * https://dsmorse.github.io/gridster.js/
 * Copyright (c) 2015 ducksboard; Licensed MIT */
-body {
-    font-size: 16px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #ffffff;
-    margin: 0;
-  }
+
   h1,
   h2,
   h3,
@@ -31,9 +26,9 @@ body {
     -ms-transition: opacity .6s;
     transition: opacity .6s;
   }
-  .content {
+  /*.content {
     color: white;
-  }
+  }*/
   .gridster .gs-w {
       border-radius:6px;
     background: white;

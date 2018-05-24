@@ -18,7 +18,7 @@
         <div class="w3-third w3-container">
             <div class="w3-white w3-text-grey w3-card-4">
 
-                <h2 class="tesla-title">Top 5 politici die betrokken zijn in dit thema</h2>
+                <h2 class="tesla-title">Top 5 Politici</h2>
                 @foreach (var topPerson in Model.TopPersonsList)
                 {
                     <a href="@Url.Action("Persoon","Subject",new {Full_Name=topPerson})">
@@ -29,7 +29,7 @@
         </div>
         <div class="w3-third w3-container">
             <div class="w3-white w3-text-grey w3-card-4">
-                <h2 class="tesla-title">Top 5 Partijen die betrokken zijn in dit thema</h2>
+                <h2 class="tesla-title">Top 5 Partijen</h2>
                 @foreach (var topOrg in Model.TopOrganisationsList)
                 {
                     <h5>@topOrg</h5>
@@ -45,7 +45,7 @@
 
                         <h1 class="tesla-story-title tesla-title">@story.Titel</h1>
 
-                        <p>@story.StoryString</p>
+                        <p class="tesla-story-text">@story.StoryString</p>
                         @if (story.Link != null)
                         {
                             <a href="@story.Link">Link</a>

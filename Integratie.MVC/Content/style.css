@@ -26,6 +26,10 @@
     height: 100%;
     padding-top: 140px;
 }
+
+.tesla-story-text {
+    color: black;
+}
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
         color: #007bff;
