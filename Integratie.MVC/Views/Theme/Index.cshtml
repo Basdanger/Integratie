@@ -6,7 +6,8 @@
 }
 
 <div class="TeslaThemesContainer">
-    <ul>
+    <h1 class="TeslaTitle">Thema's</h1>
+    <!--ul>
         @foreach (Theme t in Model)
         {
             <li data-id="'+@t.ID+'" class="d-inline-block TeslaThemeBlock flex-column">
@@ -18,5 +19,20 @@
                 </a>
             </li>
         }
-    </ul>
+    </!--ul-->
+    <div class="">
+        <div class="row">
+    @foreach (Theme t in Model)
+            {
+        <div class="col-sm-4 col-md-3 col-xl-2">
+            <a href="@Url.Action("Theme", "Theme",new { id = t.ID })">
+
+                <div href="" class="teslaThemeCarcContainer" style="background-image:url('@t.GetImageSrc()')">
+                    <div class="TeslaThemeCardText"> @t.Name</div>
+                </div>
+            </a>
+        </div>
+    }
+        </div>
+    </div>
 </div>

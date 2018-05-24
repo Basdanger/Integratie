@@ -5,6 +5,8 @@
     <div class="menu">
         <div class="header">Alerts</div>
         <div class="ui divider"></div>
+        <div class="item"><a href="@Url.Action("Alerts", "Home")">Manage Alerts</a></div>
+        <div class="ui divider"></div>
         @foreach (var item in Model)
         {
             if (item.Web && item.Show)
