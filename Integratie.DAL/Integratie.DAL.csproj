@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201805231333032_JuanMigrant2.Designer.cs">
       <DependentUpon>201805231333032_JuanMigrant2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805240913235_JuanMigrantC.cs" />
+    <Compile Include="Migrations\201805240913235_JuanMigrantC.Designer.cs">
+      <DependentUpon>201805240913235_JuanMigrantC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AccountRepo.cs" />
     <Compile Include="Repositories\AlertRepo.cs" />
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805231333032_JuanMigrant2.resx">
       <DependentUpon>201805231333032_JuanMigrant2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805240913235_JuanMigrantC.resx">
+      <DependentUpon>201805240913235_JuanMigrantC.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
