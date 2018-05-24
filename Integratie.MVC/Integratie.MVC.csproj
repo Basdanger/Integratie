@@ -239,10 +239,6 @@
     <Compile Include="Migrations\201805080808369_InitialCreate.Designer.cs">
       <DependentUpon>201805080808369_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805221448217_InitialCreate1.cs" />
-    <Compile Include="Migrations\201805221448217_InitialCreate1.Designer.cs">
-      <DependentUpon>201805221448217_InitialCreate1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlertCreation.cs" />
@@ -526,9 +522,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805080808369_InitialCreate.resx">
       <DependentUpon>201805080808369_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805221448217_InitialCreate1.resx">
-      <DependentUpon>201805221448217_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
