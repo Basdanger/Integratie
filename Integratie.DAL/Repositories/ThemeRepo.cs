@@ -45,6 +45,10 @@ namespace Integratie.DAL.Repositories
         {
             return context.Subjects.OfType<Theme>().First(t => t.ID.Equals(id));
         }
+        public Theme GetThemaByName(string name)
+        {
+            return context.Subjects.OfType<Theme>().First(t => t.Name == name);
+        }
 
         public void UpdateThema(Theme thema)
         {

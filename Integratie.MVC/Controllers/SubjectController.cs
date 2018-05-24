@@ -2,6 +2,7 @@
 using ExcelDataReader;
 using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
+using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Subjects;
 using Integratie.MVC.Models;
 using LINQtoCSV;
@@ -45,6 +46,13 @@ namespace Integratie.MVC.Controllers
             }
             return View(pf);
         }
+
+        public ActionResult PersoonAlert(Subject subject,Alert alert)
+        {
+            ViewBag.Alert = alert;
+            return Persoon(subject.ID, subject.Name);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult EditPersoon(int id)
         {

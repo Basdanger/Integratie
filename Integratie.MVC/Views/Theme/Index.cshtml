@@ -24,15 +24,26 @@
         <div class="row">
     @foreach (Theme t in Model)
             {
-        <div class="col-sm-4 col-md-3 col-xl-2">
+        <div class="col-sm-4 col-md-3 col-lg-2">
             <a href="@Url.Action("Theme", "Theme",new { id = t.ID })">
 
                 <div href="" class="teslaThemeCarcContainer" style="background-image:url('@t.GetImageSrc()')">
-                    <div class="TeslaThemeCardText"> @t.Name</div>
+                    <div class="TeslaThemeCardText"> @t.Name </div>
+                    @{
+                        if (t.TrendIndex > 0)
+                        {
+                            <text><div class="TeslaThemeSucces">@(t.TrendIndex)%</div></text>
+                        }
+                        else
+                        {
+
+                            <text><div class="TeslaThemeFail">@(t.TrendIndex)%</div></text>
+                        }
+                    }
                 </div>
             </a>
         </div>
-    }
+                        }
         </div>
     </div>
 </div>

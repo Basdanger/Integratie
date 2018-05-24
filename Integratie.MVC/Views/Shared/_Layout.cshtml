@@ -20,7 +20,6 @@
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/semantic.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/demo.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/jquery.gridster.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/dropdown.min.css")" rel="stylesheet" type="text/css" />
@@ -34,6 +33,7 @@
     <script src="@Url.Content("~/Scripts/dropdown.js")"></script>
     <script src="@Url.Content("~/Scripts/transition.js")"></script>
     <script src="@Url.Content("~/Scripts/range.js")"></script>
+    <script src="@Url.Content("~/Scripts/tablesort.js")"></script>
 
 </head>
 <body>
@@ -57,8 +57,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Index", "theme")">Thema's</a></li>
-                            <li><a href="@Url.Action("Index", "Subject","Personen")">Politici</a></li>
-                            <li><a href="@Url.Action("Index", "subject","Organisaties")">Partijen</a></li>
+                            <li><a href="@Url.Action("Personen", "Subject")">Politici</a></li>
+                            <li><a href="@Url.Action("Organisaties", "Subject")">Partijen</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -72,7 +72,7 @@
                             <li><a href="#">Privacy</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown" hidden>
+                    <li class="dropdown">
                         <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
                             Administrator
                             <span class="caret"></span>

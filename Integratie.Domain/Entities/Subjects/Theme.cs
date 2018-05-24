@@ -56,7 +56,8 @@ namespace Integratie.Domain.Entities.Subjects
                 TopOrganisations = String.Join(", ", value.ToArray());
             }
         }
-
+        [NotMapped]
+        public double TrendIndex { get; set; }
         public Theme()
         {
 

@@ -1,0 +1,57 @@
+﻿@model Integratie.Domain.Entities.Alerts.Alert
+
+@using Newtonsoft.Json;
+<canvas id="@Model.Graph.GraphId" style="max-height:100%"></canvas>
+<script>
+    var colors = [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)'];
+    @{
+        int i = 0;
+    }
+    var ctx = document.getElementById("@Model.Graph.GraphId").getContext("2d");
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            @{
+                DateTime dt = Model.Graph.StartDate;
+                <text>labels:[ </text>while (dt < Model.Graph.EndDate.AddDays(Model.Graph.IntervalSize))
+                {
+                    <text>"@dt.ToShortDateString()",</text>
+                    dt = dt.AddDays(Model.Graph.IntervalSize);
+                }
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            },
+            tooltips: {
+                mode: 'index'
+            }
+        }
+    });
+    chart.data.datasets = [
+        @foreach (var item in Model.Graph.LineValues)
+        {
+            <text>
+            {
+                label: '@item.Key',
+                data: @Html.Raw(JsonConvert.SerializeObject(item.Value)),
+                borderColor: colors[@i],
+                borderWidth: 2,
+                fill: false
+            },
+            </text>
+            i++;
+        }
+    ];
+    chart.update();
+</script>

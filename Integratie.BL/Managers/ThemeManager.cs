@@ -32,6 +32,10 @@ namespace Integratie.BL.Managers
         {
             return repo.GetThema(id);
         }
+        public Theme GetThemeByName(string name)
+        {
+            return repo.GetThemaByName(name);
+        }
 
         public void AddTheme(Theme thema)
         {
