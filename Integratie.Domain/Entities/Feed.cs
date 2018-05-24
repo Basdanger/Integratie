@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Integratie.Domain.Entities.Subjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +26,24 @@ namespace Integratie.Domain.Entities
         public String Mentions { get; set; }
         public String Geo { get; set; }
         public bool Retweet { get; set; }
-        
+        public virtual List<Theme> themas { get; set;}
+
+        public double SentimentMean()
+        {
+                if (Sentiment != "")
+                {
+                var format = new NumberFormatInfo();
+                format.NegativeSign = "-";
+                format.NumberDecimalSeparator = ".";
+                List<String> strings = Sentiment.Split(',').ToList();
+                double a = double.Parse(strings[0], format);
+                double b = double.Parse(strings[1], format);
+                double x = (a + b) / 2;
+                return x;
+                }
+                else return -2;
+        }
+
         public Feed()
         {
 

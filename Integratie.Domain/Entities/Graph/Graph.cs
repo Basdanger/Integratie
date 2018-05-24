@@ -52,6 +52,10 @@ namespace Integratie.Domain.Entities.Graph
         public PersonalityFilter PersonalityFilter { get; set; }
         public String PersonFilter { get; set; }
         public GenderFilter GenderFilter { get; set; }
+        public String PartijFilter { get; set; }
+        public String ThemeFilter { get; set; }
+        public double SentimentStart { get; set; }
+        public double SentimentEnd { get; set; }
 
         //VALUES
         [NotMapped]
