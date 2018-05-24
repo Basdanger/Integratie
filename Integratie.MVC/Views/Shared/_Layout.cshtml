@@ -95,6 +95,11 @@
                                 <li class="teslaUserLabel"><a id="TeslaLogOff" href="javascript:document.getElementById('logoutForm').submit()">Meld af</a></li>
 
                         }
+                        <li class="teslaUserLabel">
+                            @{
+                                Html.RenderAction("_AlertDropDown", "Shared");
+                            }
+                        </li>
                     }
                     else
                     {
@@ -102,7 +107,6 @@
                         <li><a href="@Url.Action("Login", "Account")", routeValues: null, class="rc"><span class="glyphicon glyphicon-log-in rc"></span> Login</a></li>
 
                     }
-
                 </ul>
             </div>
         </div>
