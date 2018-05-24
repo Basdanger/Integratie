@@ -24,7 +24,7 @@
 }
 .tesla-container {
     height: 100%;
-    padding-top: 80px;
+    padding-top: 140px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -181,7 +181,6 @@ width:100%;
     color: #007bff;
 }
 .teslaDashboardEdit {
-    margin-left: 100px;
     cursor: pointer;
     transition: .5s;
     padding:2px;
@@ -231,12 +230,6 @@ a#registerLink{
 a#loginLink{
     color:black;
     float:right;
-}
-a#TeslaHello{
-    color:white;
-}
-a#TeslaLogOff{
-    color:white;
 }
 .TeslaSingleContainer {
     height: 100%;
@@ -415,6 +408,7 @@ ul.slick-dots{
     width: 100%;
     top: 0;
     z-index: -1;
+    background-color: #F0F0F0;
     /*
     background-image: url(./Images/flag-of-belgium.jpg);
     background-repeat: no-repeat;
@@ -460,4 +454,92 @@ ul.slick-dots{
 .tesla-title {
     border-bottom: 2px solid #e5efff;
     padding: 2px
+}
+.TeslaRegisterContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #F0F0F0;
+    color:black;
+    padding-top:100px;
+    padding-right:40px;
+    z-index:5;
+}
+.TeslaManageContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #F0F0F0;
+    color: black;
+    padding-top: 100px;
+    padding-left:30px;
+    padding-right: 40px;
+    z-index: 5;
+}
+.TeslaLoginContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #F0F0F0;
+    color: black;
+    padding-top: 100px;
+    padding-left: 30px;
+    padding-right: 40px;
+    z-index: 5;
+}
+.teslaUserLabel > a{
+    margin-right:20px;
+    color:black;
+}
+.TeslaThemesContainer {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #F0F0F0;
+    color: black;
+    padding-top: 100px;
+    padding-left: 30px;
+    padding-right: 40px;
+    z-index: 5;
+}
+.teslaThemeCarcContainer{
+    margin-top:10px;
+    height:250px;
+    width:100%;
+    background-size:cover;
+    border:2px solid #007bff;
+    border-radius:10px;
+    box-shadow:2px 2px 10px gray;
+    filter:brightness(90%);
+    cursor:pointer;
+    transition:0.3s;
+    overflow:hidden;
+}
+.teslaThemeCarcContainer:hover {
+    filter: brightness(110%);
+    transform:scale(1.025);
+}
+.TeslaThemeCardText {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding:1px;
+    color: white;
+    font-size: 22px;
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    height:auto;
+    background-color:#007bff;
+    left:0;
+    line-height:32px
+
 }

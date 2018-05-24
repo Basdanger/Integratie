@@ -27,24 +27,18 @@ namespace Integratie.MVC.Controllers
         {
             ViewBag.Message = "Your contact page.";
             ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
+            ViewBag.partijen = subjectManager.GetOrganisaties();
+            ViewBag.themas = themeManager.GetThemas().Select(t => t.Name);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
             return View(dbitems);
         }
 
         [HttpPost]
-        public ActionResult Index(List<DashboardItem> dbis)
+        public RedirectResult Index(List<DashboardItem> dbis)
         {
             dbmanager.UpdateDashboard(dbis);
             List<DashboardItem> dbitems = dbmanager.GetAllDashboardItems();
-            //foreach (DashboardItem dbi in dbis)
-            //{
-            //    dbi.Graph = dbitems.ToList().Where(e => e.Id == dbi.Id).First().Graph;
-            //}
-            //dbmanager.Update(dbis);
-            //dbitems = dbmanager.GetAllDashboardItems();
-
-            ViewBag.persons = subjectManager.GetPersonen().Select(p => p.Full_Name);
-            return View(dbitems);
+            return Redirect("Index");
         }
        [HttpPost]
         public ActionResult RemoveDashboardItem(DashboardItem dbi)

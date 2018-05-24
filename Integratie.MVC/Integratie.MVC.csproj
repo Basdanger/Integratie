@@ -239,10 +239,6 @@
     <Compile Include="Migrations\201805080808369_InitialCreate.Designer.cs">
       <DependentUpon>201805080808369_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805221448217_InitialCreate1.cs" />
-    <Compile Include="Migrations\201805221448217_InitialCreate1.Designer.cs">
-      <DependentUpon>201805221448217_InitialCreate1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlertCreation.cs" />
@@ -274,6 +270,7 @@
     <Content Include="Content\Images\Bart.jpg" />
     <Content Include="Content\bootstrap-colorpicker.min.css" />
     <Content Include="Content\Images\flag-of-belgium.jpg" />
+    <Content Include="Content\Images\imac.png" />
     <Content Include="Content\Images\Maggie.jpg" />
     <Content Include="Content\Images\theo.jpg" />
     <Content Include="Content\Images\bootstrap-colorpicker\alpha-horizontal.png" />
@@ -286,6 +283,7 @@
     <Content Include="Content\jquery.gridster.min.css" />
     <Content Include="Content\outline-icons.svg" />
     <Content Include="Content\range.css" />
+    <Content Include="Content\roflo.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\dragdrop.css" />
     <Content Include="Content\menu.css" />
@@ -524,9 +522,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805080808369_InitialCreate.resx">
       <DependentUpon>201805080808369_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805221448217_InitialCreate1.resx">
-      <DependentUpon>201805221448217_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

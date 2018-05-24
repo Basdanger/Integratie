@@ -1,9 +1,9 @@
-namespace Integratie.MVC.Migrations
+namespace Integratie.DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate1 : DbMigration
+    public partial class JuanMigrantC : DbMigration
     {
         public override void Up()
         {

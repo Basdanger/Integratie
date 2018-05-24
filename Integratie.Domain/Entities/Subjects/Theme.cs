@@ -23,7 +23,9 @@ namespace Integratie.Domain.Entities.Subjects
         {
             get
             {
-                return Terms.Split(',').Select(s => s.Trim()).ToList();
+                if (Terms != null)
+                    return Terms.Split(',').Select(s => s.Trim()).ToList();
+                else return new List<string>();
             }
             set
             {
