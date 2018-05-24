@@ -1,13 +1,16 @@
-﻿<canvas id="@ViewBag.id" style="max-height:100%"></canvas>
+﻿@model Integratie.Domain.Entities.Alerts.Alert
+
+@using Newtonsoft.Json;
+<canvas id="@Model.Graph.GraphId" style="max-height:100%"></canvas>
 <script>
-    var ctx = document.getElementById("@ViewBag.id").getContext("2d");
+    var ctx = document.getElementById("@Model.Graph.GraphId").getContext("2d");
     var chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: @Html.Raw(ViewBag.Keys),
+            labels: @Html.Raw(JsonConvert.SerializeObject(Model.Graph.BarValues.Keys.ToList())),
             datasets: [{
-                label: '# of Votes',
-                data: @Html.Raw(ViewBag.Values),
+                label: '# Tweets',
+                data: @Html.Raw(JsonConvert.SerializeObject(Model.Graph.BarValues.Values.ToList())),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
