@@ -11,10 +11,16 @@ namespace Integratie.MVC.Controllers
     public class ThemeController : Controller
     {
         ThemeManager themeManager = new ThemeManager();
+        GraphManager manager = new GraphManager();
         // GET: Theme
         public ActionResult Index()
         {
             IEnumerable<Theme> themas = themeManager.GetThemas();
+            foreach(Theme t in themas)
+            {
+                t.TrendIndex = manager.GetFilledSingleTrendGraph(new Domain.Entities.Graph.Graph { PeriodSort = Domain.Entities.Graph.PeriodSort.Flex, PeriodLength = 5, ThemeFilter = t.Name }).TrendValue;
+
+            }
             return View(themas);
         }
 
@@ -43,7 +49,7 @@ namespace Integratie.MVC.Controllers
         public ActionResult Theme(int id)
         {
             Theme thema = themeManager.GetThemeById(id);
-
+            thema.TrendIndex = manager.GetFilledSingleTrendGraph(new Domain.Entities.Graph.Graph { PeriodSort = Domain.Entities.Graph.PeriodSort.Flex, PeriodLength = 5, ThemeFilter = thema.Name }).TrendValue;
             return View(thema);
         }
 

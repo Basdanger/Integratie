@@ -62,11 +62,41 @@
     -->
 <div class="TeslaThemesContainer">
     <a href="@Url.Action("Index","Theme")">Bekijk alle Thema's</a>
-        <div class="row" style="width:100%;">
-            <div class="TeslaThemeDetailFoto">
+    <div class="TeslaCenterContainer">
+            <div class="TeslaThemeDetailFoto col-centered">
                 <div href="" class="teslaThemeCarcContainer" style="background-image:url('@Model.GetImageSrc()')">
                     <div class="TeslaThemeCardText"> @Model.Name</div>
                 </div>
             </div>
-        </div>
+        @{ 
+            if (Model.TrendIndex > 0)
+            {
+                <span class="teslaSingleThemeTrendInfo positive">@(Model.TrendIndex)% Trending</span>
+            }
+            else
+            {
+                <span class="teslaSingleThemeTrendInfo negative">@(Model.TrendIndex)% Trending</span>
+            }
+        }
+            <h1 class="teslaThemeTitle">Top gerelateerde gegevens</h1>
+            <div class=" TeslaThemeInfo">
+                <h2 class="tesla-title">Politici</h2>
+                @foreach (var topPerson in Model.TopPersonsList)
+                {
+                    <a href="@Url.Action("Persoon","Subject",new {Full_Name=topPerson})">
+                        <h5>@topPerson</h5>
+                    </a>
+                }
+            </div>
+            <div class=" TeslaThemeInfo">
+                <h2 class="tesla-title">Partijen</h2>
+                @foreach (var topOrg in Model.TopOrganisationsList)
+                {
+                    <a>
+                        <h5>@topOrg</h5>
+                    </a>
+                }
+            </div>
+
+    </div>
 </div>

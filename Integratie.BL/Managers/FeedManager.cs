@@ -131,7 +131,22 @@ namespace Integratie.BL.Managers
             }
             if (graph.PersonFilter == null) graph.PersonFilter = "";
 
-            IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList(),graph.SentimentStart,graph.SentimentEnd);
+            ThemeManager tm = new ThemeManager();
+            List<string> Terms = new List<string>();
+            if(graph.ThemeFilter != null)
+            foreach(string theme in graph.ThemeFilter.Split(',').Select(w=>w.Trim()))
+            {
+                foreach (string s in tm.GetThemeByName(theme).TermsList)
+                {
+                    if (!Terms.Contains(s))
+                    {
+                        Terms.Add(s);
+                    }
+                }
+            }
+            
+
+            IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList(),graph.SentimentStart,graph.SentimentEnd,Terms);
             return filteredList;
         }
 
