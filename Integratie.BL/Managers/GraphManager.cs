@@ -168,7 +168,9 @@ namespace Integratie.BL.Managers
                 PersonalityFilter = graph.PersonalityFilter,
                 PersonFilter = graph.PersonFilter,
                 GenderFilter = graph.GenderFilter,
-                PeriodSort = PeriodSort.Fixed
+                PeriodSort = PeriodSort.Fixed,
+                SentimentStart = graph.SentimentStart,
+                SentimentEnd = graph.SentimentEnd
                 
             };
             double valA = GetFilledSingleGraph(graph).SingleValue;

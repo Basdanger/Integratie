@@ -1,4 +1,5 @@
-﻿    <!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity    
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -10,11 +11,12 @@
     @*<link rel="stylesheet" href="~/Content/menu.css" type="text/css" />*@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/Chart.min.js")
     <link href="~/Content/style.css" rel="stylesheet">
-    <link href="~/Content/bootstrap2.min.css" rel="stylesheet">
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/semantic.min.css")" rel="stylesheet" type="text/css" />
@@ -23,6 +25,7 @@
     <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/dropdown.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/range.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/roflo.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.gridster.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
@@ -34,57 +37,79 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="@Url.Action("Index", "Index")">Politieke Barometer</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid bg-light">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand rc" href="@Url.Action("Index", "Index")">Politieke Barometer</a>
+            </div>
+            <div class="collapse navbar-collapse teslanav" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index", "home")" class="rc">Dashboard</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
+                            Topics
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "theme")">Thema's</a></li>
+                            <li><a href="@Url.Action("Index", "subject")">Politici</a></li>
+                            <li><a href="@Url.Action("Index", "subject")">Partijen</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
+                            Info
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
+                            Administrator
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "SiteContent")">Content Management</a></li>
+                            <li><a href="#">Eet</a></li>
+                            <li><a href="#">Kaas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            
+                                <li class="teslaUserLabel"><a href="@Url.Action("Index", "Manage")" class="rc">Hallo @(User.Identity.GetUserName())</a></li>
+                                <li class="teslaUserLabel"><a id="TeslaLogOff" href="javascript:document.getElementById('logoutForm').submit()">Meld af</a></li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="@Url.Action("Index", "Home")">Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Subjects
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/Subject/Personen">Personen</a>
-                        <a class="dropdown-item" href="/Subject/Organisaties">Organisaties</a>
-                        <a class="dropdown-item" href="/Theme">Thema's</a>
-                        <a class="dropdown-item" href="/Subject/Gemeente">Plaatsen</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("EditThemes", "Theme")">ThemaConfig</a>
-                </li>
-                <li>
-                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-        {
-            @Html.TextBox("zoek") <input type="submit" name="submit" value="zoek" />
-}
-                </li>
-                @if (Request.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Alerts","Home")">Alerts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Follows","Home")">Follows</a>
-                    </li>
-                }
-            </ul>
-            @Html.Partial("_LoginPartial")
-            @if (Request.IsAuthenticated)
-            {
-                Html.RenderAction("_AlertDropDown", "Shared");
-            }
+                        }
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Register", "Account")" class="rc"><span class="glyphicon glyphicon-user rc"></span> Sign Up</a></li>
+                        <li><a href="@Url.Action("Login", "Account")", routeValues: null, class="rc"><span class="glyphicon glyphicon-log-in rc"></span> Login</a></li>
+
+                    }
+
+                </ul>
+            </div>
         </div>
     </nav>
 
 
-    @Url.Action("Index", "Home")
+    
 
 
     <div class="content-wrapper">

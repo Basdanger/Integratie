@@ -131,7 +131,7 @@ namespace Integratie.BL.Managers
             }
             if (graph.PersonFilter == null) graph.PersonFilter = "";
 
-            IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList());
+            IEnumerable<Feed> filteredList = repo.ReadFilteredFeed(graph.StartDate, graph.EndDate, Agefilter, Personalityfilter, Genderfilter, graph.PersonFilter.Split(',').Select(s=>s.Trim()).ToList(),graph.SentimentStart,graph.SentimentEnd);
             return filteredList;
         }
 
