@@ -50,6 +50,11 @@ namespace Integratie.DAL.Repositories
             return (UserAlert)context.UserAlerts.Find(id);
         }
 
+        public UserAlert GetUserAlertByUserAndAlert(string userId, int alertId)
+        {
+            return context.UserAlerts.Single(u => u.Account.ID.Equals(userId) && u.Alert.AlertID.Equals(alertId));
+        }
+
         public IEnumerable<UserAlert> GetUserAlerts()
         {
             return context.UserAlerts.ToList<UserAlert>();

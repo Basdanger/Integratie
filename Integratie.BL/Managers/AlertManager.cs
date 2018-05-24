@@ -575,6 +575,20 @@ namespace Integratie.BL.Managers
             await repo.UpdateUserAlerts(userAlerts);
         }
 
+        public void UserAlertsViewed(string userId)
+        {
+            List<UserAlert> userAlerts = repo.GetUserAlertsOfUser(userId).ToList();
+            userAlerts.ForEach(u => u.Show = false);
+            userAlerts.ForEach(u => repo.UpdateUserAlert(u));
+        }
+
+        public void UserAlertViewed(string userId, int alertId)
+        {
+            UserAlert userAlert = repo.GetUserAlertByUserAndAlert(userId, alertId);
+            userAlert.Show = false;
+            repo.UpdateUserAlert(userAlert);
+        }
+
         public void initNonExistingRepo(bool createWithUnitOfWork = false)
         {
             if (createWithUnitOfWork)
