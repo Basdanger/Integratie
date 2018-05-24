@@ -73,7 +73,7 @@ namespace Integratie.DAL.Repositories
             return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper()) && f.Profile.Gender.Equals(gender)).ToList<Feed>();
         }
 
-        public IEnumerable<Feed> ReadFilteredFeed(DateTime StartDate, DateTime Enddate, List<String> AgeFilter, List<String> PersonalityFilter, List<String> GenderFilter, List<String> PersonFilter, double StartSentiment, double EndSentiment)
+        public IEnumerable<Feed> ReadFilteredFeed(DateTime StartDate, DateTime Enddate, List<String> AgeFilter, List<String> PersonalityFilter, List<String> GenderFilter, List<String> PersonFilter, double StartSentiment, double EndSentiment, List<String> ThemeWords)
         {
 
             IEnumerable<Feed> feeds;
@@ -82,7 +82,11 @@ namespace Integratie.DAL.Repositories
             .Where(f => AgeFilter.Any(AF => AF == f.Profile.Age))
             .Where(f => PersonalityFilter.Any(PF => PF == f.Profile.Personality))
             .Where(f => GenderFilter.Any(t => t == f.Profile.Gender.ToString()));
-            if(StartSentiment != -1 || EndSentiment != 1)
+
+            if(ThemeWords !=null && ThemeWords.Count > 0)
+            feeds = feeds.Where(f => ThemeWords.Any(t=> f.Words.Contains(t.ToLower())));
+
+            if (StartSentiment != -1 || EndSentiment != 1)
                 feeds = feeds.Where(delegate (Feed f) {
                     if (f.SentimentMean() == -2) return false;
                 double x = f.SentimentMean();

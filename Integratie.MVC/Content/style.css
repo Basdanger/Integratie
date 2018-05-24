@@ -509,6 +509,7 @@ ul.slick-dots{
     padding-left: 30px;
     padding-right: 40px;
     z-index: 5;
+    text-align:center;
 }
 .teslaThemeCarcContainer{
     margin-top:10px;
@@ -522,10 +523,12 @@ ul.slick-dots{
     cursor:pointer;
     transition:0.3s;
     overflow:hidden;
+    position:relative;
 }
 .teslaThemeCarcContainer:hover {
     filter: brightness(110%);
     transform:scale(1.025);
+
 }
 .TeslaThemeCardText {
     width: 100%;
@@ -544,5 +547,82 @@ ul.slick-dots{
 
 }
 .TeslaThemeDetailFoto{
+    width:300px;
+    position:relative;
+}
+.TeslaThemeInfo {
+    border: 1px solid #007bff;
+    background-color: #e1f0ff;
+    margin-right: 20px;
+    border-radius: 10px;
+    height: 180px;
+    box-shadow: 2px 2px 5px gray;
+    display: inline-block;
+    width: 30%;
+}
+@media only screen and (max-width:1445px) {
+    .TeslaThemeInfo {
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 10px;
+    }
+}
+.teslaThemeTitle{
 
+    margin-top:20px;
+    font-size:20px;
+    color:#007bff;
+    margin-left:5px;
+}
+
+.TeslaCenterContainer{
+    text-align:center;
+    width:auto;
+}
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+.TeslaThemeSucces {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    padding: 5px;
+    border-radius: 180px;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    filter: brightness(120%);
+    background-color: #8afa81ab;
+}
+.TeslaThemeFail {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    padding: 5px;
+    border-radius: 180px;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    filter: brightness(120%);
+    background-color: #fa8181ab;
+}
+.teslaSingleThemeTrendInfo.positive {
+    display: inline-block;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 6px;
+    font-size: 20px;
+    color: darkgreen;
+    background-color: #8afa81ab;
+}
+.teslaSingleThemeTrendInfo.negative {
+    display:inline-block;
+    border-radius:15px;
+    margin-top:10px;
+    padding:6px;
+    font-size:20px;
+    color: darkred;
+    background-color: #fa8181ab;
 }
