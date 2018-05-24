@@ -382,6 +382,7 @@
     <Content Include="Scripts\semantic.min.js" />
     <Content Include="Scripts\summernote.min.js" />
     <Content Include="Scripts\slick.min.js" />
+    <Content Include="Scripts\tablesort.js" />
     <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -489,6 +490,7 @@
     <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Theme\Theme.cshtml" />
     <Content Include="Views\Theme\EditThemes.cshtml" />
+    <Content Include="Views\GraphPartial\_LineChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
