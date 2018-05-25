@@ -59,43 +59,44 @@ namespace Integratie.MVC.Controllers
             var user = context.Users.Where(u => u.UserName.Equals(username)).First();
             return View(user);
         }
-        public ActionResult DeleteUser(string id)
-        {
-            //ApplicationUser user = _userManager.FindByName(username);
-            //var user = _userManager.FindById(id);
-            var user = context.Users.Find(id);
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //DeleteUserViewModel model = new DeleteUserViewModel() { Id = id };
-            return View(user);
-        }
+
+        //public ActionResult DeleteUser(string id)
+        //{
+        //    //ApplicationUser user = _userManager.FindByName(username);
+        //    //var user = _userManager.FindById(id);
+        //    var user = context.Users.Find(id);
+        //    //if (id == null)
+        //    //{
+        //    //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    //}
+        //    //DeleteUserViewModel model = new DeleteUserViewModel() { Id = id };
+        //    return View(user);
+        //}
+
         // POST: /Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteUser(DeleteUserViewModel model, FormCollection collection)
+        public async Task<ActionResult> DeleteUser(string userId)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            if (model.Id == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //var user = _userManager.FindById(id);
-            var user = context.Users.Find(model.Id);
+            //get User Data from Userid
+            var user = await UserManager.FindByIdAsync(userId);
+
+            //List Logins associated with user
             var logins = user.Logins;
-            //var rolesForUser = context.Roles.Where(r => r.Users.Where(u => u.UserId).Equals(user.Id));
-            var rolesForUser = await _userManager.GetRolesAsync(user.Id);
+
+            //Gets list of Roles associated with current user
+            var rolesForUser = await UserManager.GetRolesAsync(userId);
 
             using (var transaction = context.Database.BeginTransaction())
             {
                 foreach (var login in logins.ToList())
                 {
-                    await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                    await UserManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
                 }
 
                 if (rolesForUser.Count() > 0)
@@ -103,16 +104,65 @@ namespace Integratie.MVC.Controllers
                     foreach (var item in rolesForUser.ToList())
                     {
                         // item should be the name of the role
-                        var result = await _userManager.RemoveFromRoleAsync(user.Id, item);
+                        var result = await UserManager.RemoveFromRoleAsync(user.Id, item);
                     }
                 }
 
-                await _userManager.DeleteAsync(user);
-                transaction.Commit();
+                //Delete User
+                await UserManager.DeleteAsync(user);
+
+                TempData["Message"] = "User Deleted Successfully. ";
+                TempData["MessageValue"] = "1";
+                //transaction.commit();
             }
 
-            return RedirectToAction("GetUsers");
+            return RedirectToAction("UsersWithRoles", "ManageUsers", new { area = "", });
         }
+
+
+
+        //// POST: /Users/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteUser(DeleteUserViewModel model, FormCollection collection)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    if (model.Id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    //var user = _userManager.FindById(id);
+        //    var user = context.Users.Find(model.Id);
+        //    var logins = user.Logins;
+        //    //var rolesForUser = context.Roles.Where(r => r.Users.Where(u => u.UserId).Equals(user.Id));
+        //    var rolesForUser = await _userManager.GetRolesAsync(user.Id);
+
+        //    using (var transaction = context.Database.BeginTransaction())
+        //    {
+        //        foreach (var login in logins.ToList())
+        //        {
+        //            await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+        //        }
+
+        //        if (rolesForUser.Count() > 0)
+        //        {
+        //            foreach (var item in rolesForUser.ToList())
+        //            {
+        //                // item should be the name of the role
+        //                var result = await _userManager.RemoveFromRoleAsync(user.Id, item);
+        //            }
+        //        }
+
+        //        await _userManager.DeleteAsync(user);
+        //        transaction.Commit();
+        //    }
+
+        //    return RedirectToAction("GetUsers");
+        //}   
 
         public ActionResult UpdateUser(String username)
         {
