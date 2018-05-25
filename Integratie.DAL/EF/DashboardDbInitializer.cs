@@ -18,9 +18,9 @@ namespace Integratie.DAL.EF
 {
     public class DashboardDbInitializer : DropCreateDatabaseIfModelChanges<DashBoardDbContext>
     {
-        public DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
         protected override void Seed(DashBoardDbContext context)
         {
+            DashBoardDbTextGain dashBoardDbTextGain = new DashBoardDbTextGain();
             List<Feed> feeds = new List<Feed>();
             IEnumerable<Feed> resultsFeed = JsonConvert.DeserializeObject<IEnumerable<Feed>>(dashBoardDbTextGain.postJson());
 

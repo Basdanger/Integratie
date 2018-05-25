@@ -41,6 +41,11 @@ namespace Integratie.DAL.Repositories
             return context.Subjects.ToList<Subject>();
         }
 
+        public async Task<List<Subject>> ReadSubjectsAsync()
+        {
+            return await context.Subjects.ToListAsync();
+        }
+
         public List<string> GetNames()
         {
             return context.Subjects.Select(s => s.Name).OrderBy(s => s).ToList();
@@ -59,6 +64,11 @@ namespace Integratie.DAL.Repositories
         public IEnumerable<Person> ReadPeopleByOrganisation(string organisation)
         {
             return context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToList();
+        }
+
+        public async Task<List<Person>> ReadPeopleByOrganisationAsync(string organisation)
+        {
+            return await context.Subjects.OfType<Person>().Where(p => p.Organisation.ToUpper().Equals(organisation.ToUpper())).ToListAsync();
         }
 
         public IEnumerable<Subject> ReadPeopleByTown(string town)

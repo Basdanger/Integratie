@@ -8,6 +8,7 @@ using Integratie.Domain;
 using Integratie.Domain.Entities;
 using Integratie.DAL.Repositories.Interfaces;
 using Integratie.Domain.Entities.Subjects;
+using System.Data.Entity;
 
 namespace Integratie.DAL.Repositories
 {
@@ -63,9 +64,19 @@ namespace Integratie.DAL.Repositories
             return context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper()) && f.Date.CompareTo(date) >= 0).ToList<Feed>();
         }
 
+        public async Task<List<Feed>> ReadPersonFeedsSinceAsync(string person, DateTime date)
+        {
+            return await context.Feeds.Where(f => f.Persons.ToUpper().Contains(person.ToUpper()) && f.Date.CompareTo(date) >= 0).ToListAsync();
+        }
+
         public IEnumerable<Feed> ReadWordFeedsSince(string word, DateTime date)
         {
             return context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper()) && f.Date.CompareTo(date) >= 0).ToList<Feed>();
+        }
+
+        public async Task<List<Feed>> ReadWordFeedsSinceAsync(string word, DateTime date)
+        {
+            return await context.Feeds.Where(f => f.Words.ToUpper().Contains(word.ToUpper()) && f.Date.CompareTo(date) >= 0).ToListAsync();
         }
 
         public IEnumerable<Feed> ReadPersonFeedsGender(string person, Gender gender)
