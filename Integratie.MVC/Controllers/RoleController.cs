@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace Integratie.MVC.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
-    public class RoleController : Controller
+    public class RoleController : TeslaBaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

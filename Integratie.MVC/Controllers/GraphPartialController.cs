@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class GraphPartialController : Controller
+    public class GraphPartialController : TeslaBaseController
     {
         GraphManager graphManager = new GraphManager();
         AlertManager alertManager = new AlertManager();

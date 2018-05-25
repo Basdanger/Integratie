@@ -96,6 +96,12 @@ namespace Integratie.DAL.EF
             //UserAlert UA1 = new UserAlert(A1, CH1, true, false, false);
             //context.UserAlerts.Add(UA1);
 
+            //SITECONTENT
+            context.SiteContents.Add(new Domain.Entities.Content.SiteContent { IdKey = "SiteTitle", Value = "Politieke Barometer" });
+            context.SiteContents.Add(new Domain.Entities.Content.SiteContent { IdKey = "PrimaryColor", Value = "#007bff" });
+            context.SiteContents.Add(new Domain.Entities.Content.SiteContent { IdKey = "SecondaryColor", Value = "#c9e2ff" });
+            context.SiteContents.Add(new Domain.Entities.Content.SiteContent { IdKey = "TertiaryColor", Value = "#cce2ff" });
+
             context.SaveChanges();
         }
     }

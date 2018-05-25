@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class SuperAdminController : Controller
+    public class SuperAdminController : TeslaBaseController
     {
         private AccountManager mgr = new AccountManager();
         // GET: SuperAdmin

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class ThemeController : Controller
+    public class ThemeController : TeslaBaseController
     {
         ThemeManager themeManager = new ThemeManager();
         GraphManager manager = new GraphManager();

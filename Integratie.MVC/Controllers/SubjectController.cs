@@ -20,7 +20,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class SubjectController : Controller
+    public class SubjectController : TeslaBaseController
     {
         private SubjectManager mgr = new SubjectManager();
         private FeedManager feedManager = new FeedManager();

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class SharedController : Controller
+    public class SharedController : TeslaBaseController
     {
         AlertManager alertManager = new AlertManager();
 

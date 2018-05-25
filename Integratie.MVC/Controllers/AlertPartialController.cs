@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class AlertPartialController : Controller
+    public class AlertPartialController : TeslaBaseController
     {
         AlertManager alertManager = new AlertManager();
         SubjectManager subjectManager = new SubjectManager();

@@ -1,7 +1,22 @@
-﻿<div class="slideshow">
-    <div class="fotos" style="background-image:url('@Url.Content("~/Content/Images/Bart.jpg")')">
-        <h2 class="rotitle">''Bart De Wever werd 12 keer vermeld op twitter''</h2>
+﻿<style>
+    .rofloGraph {
+        background-color: @(ViewBag.SecondaryColor);
+    }
+
+    .TeslaSingleTrendValue{
+    color:@(ViewBag.PrimaryColor);
+    }
+    .teslaTag{
+    background-color:@(ViewBag.TertiaryColor);
+    }
+    .rofloInfo{
+    color:@(ViewBag.TertiaryColor);
+    }
+</style>
+    <div class="slideshow-foto">
+        <p class=slideshow-tekst>@(Html.Raw(ViewBag.IndexContent))</p>
     </div>
+
     <div class="container rofloGraphContainer">
         <div class="row spacing">
             <div class="col-sm-4 rofloGraphOuter">
@@ -45,55 +60,84 @@
             </div>
         </div>
     </div>
-</div>
-<div class="rofloContainer">
-    <div class="dashboard">
-        <div class="imac"></div>
-        <p class="dash">Kies zelf wat u in het oog houdt!</p>
-        <p class="spek">Met uw persoonlijk dashboard kan u zelf bepalen welke trends, activiteiten en ontwikkelingen u volgt. Dit kan u aan de hand van bar- en linecharts of gewoon eenvoudige cijfers. Mis geen enkele moment en stel uw eigen dashboard samen!</p>
-        <button class="dashknop">Uw persoonlijk dashboard</button>
-    </div>
-</div>
-<div class="subjects">
-    <div class="one">
-        <div class="content">
-            <h1>THEMA'S</h1>
-            <br>
-            <p>"216 tweets over het BAM-Tracé"</p>
-            <br>
-            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
-        </div>
-    </div>
-    <div class="two">
-        <div class="content">
-            <h1>POLITICI</h1>
-            <br>
-            <p>"4 tweets van Jan Jambon"</p>
-            <br>
-            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
-        </div>
-    </div>
-    <div class="three">
-        <div class="content">
-            <h1>PARTIJEN</h1>
-            <br>
-            <p>"143 nieuwe tweets over GROEN"</p>
-            <br>
-            <a href="#" target="_blank"><button type="button" class="bekijk">Bekijk meer</button></a>
+
+<div class="mantel-dashboard">
+    <div class="foto-dashboard"></div>
+    <div class="tekst-dashboard">
+        <div class="align-dashboard">
+            <h1 class="titel-dashboard">Kies zelf wat u in het oog houdt!</h1>
+            <p class="uitleg-dashboard">Met uw persoonlijk dashboard kan u zelf bepalen welke trends, activiteiten en ontwikkelingen u volgt. Dit kan u aan de hand van bar- en linecharts of gewoon eenvoudige cijfers. Mis geen enkele moment en stel uw eigen dashboard samen!</p>
+            <a class="knop-dashboard"href="@Url.Action("Index","Home")">Uw Persoonlijk Dashboard</a>
         </div>
     </div>
 </div>
-<div class="app">
-    <div class="oneplus"></div>
-    <div class="uitleg">
-        <p class="titel">Blijf overal steeds op de hoogte via de app!</p>
-        <p class="expl">Raadpleeg vanaf nu ook de politieke barometer op een handige mobiele app. Log in met je bestaand profiel en bekijk je persoonlijk dashboard waar en wanneer je maar wil. Blijf steeds op de hoogte van de laatste updates door meldingen in te schakelen!</p>
-        <button class="download">App downloaden</button>
+<div class="mantel-subjects">
+    <div class="subject-thema">
+        <div class="content">
+            <h1 class="titel-subjects">THEMA'S</h1>
+            <p class="uitleg-subjects">"23 tweets over het BAM-Tracé"</p>
+            <a class="knop-dashboard" href="@Url.Action("Index","Theme")">Bekijk meer thema's</a>
+</div>
+    </div>
+    <div class="subject-partijen">
+        <div class="content">
+            <h1 class="titel-subjects">PARTIJEN</h1>
+            <p class="uitleg-subjects">"15 tweets over GROEN"</p>
+            <a class="knop-dashboard" href="@Url.Action("Organisaties","Subject")">Bekijk meer partijen</a>
+</div>
+    </div>
+    <div class="subject-politici">
+        <div class="content">
+            <h1 class="titel-subjects">POLITICI</h1>
+            <p class="uitleg-subjects">"56 Tweets over Theo Francken"</p>
+            <a class="knop-dashboard" href="@Url.Action("Personen","Subject")">Bekijk meer politici</a>
+        </div>
     </div>
 </div>
-<div class="footer">
-    <p>Politieke Barometer 2018</p>
+<div class="mantel-app">
+    <div class="app">
+        <div class="align-app">
+            <h1 class="titel-app">Blijf steeds op de hoogte via de app!</h1>
+            <p class="uitleg-app">Raadpleeg de politieke barometer vanaf nu ook op een handige mobiele app. Log in met je bestaand profiel en bekijk je persoonlijk dashboard waar en wanneer je maar wil. Blijf steeds op de hoogte van de laatste updates door meldingen in te schakelen!</p>
+            <button class="knop-app">Download App</button>
+        </div>
+    </div>
+    <div class="foto-app">
+    </div>
 </div>
+<div class="mantel-alerts-newsletter">
+    <div class="alerts">
+        <div class="align-alerts">
+            <h1 class="titel-alerts">Krijg meldingen!</h1>
+            <p class="uitleg-alerts">Kies zelf wanneer u meldingen krijgt over uw favoriete politci, thema of partij. Zo blijft u steeds op de hoogte van de laatste ontwikkelingen en trends.</p>
+            <button class="knop-alerts">Get Alerts</button>
+        </div>
+    </div>
+    <div class="newsletter">
+        <div class="align-newsletter">
+            <h1 class="titel-newsletter">Blijf op de hoogte</h1>
+            <p class="uitleg-newsletter">Dolor sit amet, consectetur adipiscing elit. Morbi mi lectus, consectetur iaculis convallis in. </p><br>
+            <form action="/action_page.php" class="invulstrook">
+                Voornaam + Naam:<br>
+                <input type="text" class="form-control" name="firstname" value=""><br><br> E-mailadres:
+                <br>
+                <input type="text" class="form-control" name="firstname" value="">
+            </form>
+            <br>
+            <button class="knop-newsletter">Subscribe</button>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer">
+        <p class="credits">
+            Politieke Barometer 2018
+            <a href="https://www.facebook.com/kareldegrotehogeschool/" target="_blank" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/kdghogeschool" target="_blank" class="fa fa-twitter"></a>
+            <a href="https://www.instagram.com/kdghogeschool/" target="_blank" class="fa fa-instagram"></a>
+        </p>
+    </div>
+</footer>
 <script>
      $(document).ready(function () {
                     var color =

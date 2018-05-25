@@ -4,7 +4,14 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    .TeslaThemeCardText{
+        background-color:@(ViewBag.PrimaryColor);
+    }
+    .teslaThemeCarcContainer{
+    border:2px solid @(ViewBag.PrimaryColor);
+    }
+</style>
 <div class="TeslaThemesContainer">
     <h1 class="TeslaTitle">Thema's</h1>
     <!--ul>
