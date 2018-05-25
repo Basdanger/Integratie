@@ -79,17 +79,22 @@
                             <li><a href="#">Privacy</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
-                            Administrator
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index", "SiteContent")">Content Management</a></li>
-                            <li><a href="#">Eet</a></li>
-                            <li><a href="#">Kaas</a></li>
-                        </ul>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle rc" data-toggle="dropdown" href="#">
+                                    Administrator
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "SiteContent")">Content Management</a></li>
+                                    <li><a href="@Url.Action("GetUsers", "Admin")">User management</a></li>
+                                    </ul>
+                            </li>
+                        }
+                    }  
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("SuperAdmin"))

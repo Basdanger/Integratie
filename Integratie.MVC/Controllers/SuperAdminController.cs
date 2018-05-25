@@ -15,6 +15,7 @@ using static Integratie.MVC.Controllers.ManageController;
 
 namespace Integratie.MVC.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class SuperAdminController : TeslaBaseController
     {
         private AccountManager mgr;
