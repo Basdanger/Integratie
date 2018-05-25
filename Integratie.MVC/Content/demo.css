@@ -12,11 +12,12 @@
     border-collapse: collapse;
     border-spacing: 0;
   }
-  .demo {
+
+.demo {
     margin: 3em 0;
     padding: 7.5em 0 5.5em;
     background: #26941f;
-  }
+}
   .demo:hover .gridster {
     margin: 0 auto;
     opacity: .8;
@@ -26,9 +27,9 @@
     -ms-transition: opacity .6s;
     transition: opacity .6s;
   }
-  /*.content {
-    color: white;
-  }*/
+  .content {
+    color: black;
+  }
   .gridster .gs-w {
       border-radius:6px;
     background: white;

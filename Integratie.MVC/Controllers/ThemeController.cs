@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace Integratie.MVC.Controllers
 {
@@ -23,6 +24,12 @@ namespace Integratie.MVC.Controllers
             }
             return View(themas);
         }
+
+        public async Task Mail() {
+            MailManager mm = new MailManager();
+            await mm.SendMail("Bart De Wever is nu trending! Kom snel terug naar Politieke Barometer voor meer trends en statistieken.","jorne.reynders@student.kdg.be","Jorne");
+        }
+
 
         //[Authorize(Roles = "Admin")]
         public ActionResult EditThemes()

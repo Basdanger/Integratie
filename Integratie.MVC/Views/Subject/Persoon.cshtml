@@ -41,27 +41,33 @@
                 </div>
                 <div class="w3-container">
                     <h2>@Html.DisplayFor(model => model.person.Full_Name)</h2>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Organisation)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Position)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Site)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Facebook)</p>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Twitter)</p>
-                    <hr>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <div id="follow" class="ui field toggle checkbox">
-                            @if (ViewBag.Follow)
-                            {
-                                <label>Followed</label>
-                                <input checked="checked" type="checkbox">
-                            }
-                            else
-                            {
-                                <label>Follow</label>
-                                <input type="checkbox">
-                            }
-                        </div>
-                    }
+                    <p style="color: black;"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Organisation)</p>
+                    @if (Model.person.Position != null)
+    {
+                <p style="color: black;"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Position)</p>}
+                    @if (Model.person.Site != null)
+    {
+                <p style="color: black;"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Site)</p>}
+                    @if (Model.person.Facebook != null)
+    {
+                <p style="color: black;"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Facebook)</p>}
+                <p style="color: black;"><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>@Html.DisplayFor(model => model.person.Twitter)</p>
+                <hr>
+                @if (Request.IsAuthenticated)
+{
+                <div id="follow" class="ui field toggle checkbox">
+                    @if (ViewBag.Follow)
+    {
+                <label>Followed</label>
+                <input checked="checked" type="checkbox">
+}
+else
+{
+                <label>Follow</label>
+                <input type="checkbox">
+}
+                </div>
+}
                 </div>
             </div><br>
 
@@ -78,8 +84,8 @@
                     <div class="w3-container">
                         <h5 class="w3-opacity"><b>@feeds.Hashtags</b></h5>
                         <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@feeds.Date</h6>
-                        <p>@feeds.Words</p>
-                        <p>@feeds.Urls</p>
+                        <p style="color: black;">@feeds.Words</p>
+                        <p style="color: black;">@feeds.Urls</p>
                         <hr>
                     </div>
                 }

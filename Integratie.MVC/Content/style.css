@@ -13,7 +13,7 @@
     position:absolute;
 }
 .tesla-brand{
-     color:white!important;
+     color:black!important;
 }
 .tesla-nav-toggle{
     color:white;
@@ -51,7 +51,7 @@ a {
 .collapse.show > ul > li > *,
 .collapse.show > ul > li > ul > li > *,
 .collapse.show > ul > li > ul > li > ul > li > * {
-    color:white;
+    color:black;
 }
 /* width */
 ::-webkit-scrollbar {

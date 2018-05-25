@@ -47,6 +47,18 @@ namespace Integratie.MVC.Controllers
             return View(pf);
         }
 
+        //public ActionResult Persoon(String Full_Name)
+        //{
+        //    PersonAndFeeds pf = new PersonAndFeeds();
+        //    pf.person = (Person) mgr.GetSubjectByName(Full_Name);
+        //    pf.feeds = feedManager.GetPersonFeeds(Full_Name);
+        //    if (Request.IsAuthenticated)
+        //    {
+        //        ViewBag.Follow = accountManager.GetAccountById(User.Identity.GetUserId()).Follows.Exists(f => f.ID.Equals(pf.person.ID));
+        //    }
+        //    return View(pf);
+        //}
+
         public ActionResult PersoonAlert(Subject subject,Alert alert)
         {
             ViewBag.Alert = alert;
