@@ -25,6 +25,7 @@ namespace Integratie.MVC.Controllers
         private SubjectManager mgr = new SubjectManager();
         private FeedManager feedManager = new FeedManager();
         private AccountManager accountManager = new AccountManager();
+        private AlertManager alertManager = new AlertManager();
         // GET: Subject
         public ActionResult Index()
         {
@@ -35,8 +36,10 @@ namespace Integratie.MVC.Controllers
             IEnumerable<Person> personen = mgr.GetPersonen();
             return View(personen);
         }
-        public ActionResult Persoon(int id, String Full_Name)
+        public ActionResult Persoon(int id, String Full_Name, int alertId = 0, string type = "")
         {
+            ViewBag.Alert = alertId;
+            ViewBag.Type = type;
             PersonAndFeeds pf = new PersonAndFeeds();
             pf.person = mgr.GetPersoon(id);
             pf.feeds = feedManager.GetPersonFeeds(Full_Name);
@@ -45,12 +48,6 @@ namespace Integratie.MVC.Controllers
                 ViewBag.Follow = accountManager.GetAccountById(User.Identity.GetUserId()).Follows.Exists(f => f.ID.Equals(pf.person.ID));
             }
             return View(pf);
-        }
-
-        public ActionResult PersoonAlert(Subject subject,Alert alert)
-        {
-            ViewBag.Alert = alert;
-            return Persoon(subject.ID, subject.Name);
         }
 
         [Authorize(Roles = "Admin")]

@@ -14,15 +14,15 @@
     }
 </style>
 
-@if (ViewBag.Alert != null)
+@if (ViewBag.Alert != 0)
 {
-    if (ViewBag.Alert.Graph.GraphType == GraphType.Barchart)
+    if (ViewBag.Type == "Bar")
     {
-        Html.RenderAction("_BarChart", "GraphPartial", new { alert = ViewBag.Alert });
+        Html.RenderAction("_BarChart", "GraphPartial", new { alertId = ViewBag.Alert });
     }
     else
     {
-        Html.RenderAction("_LineChart", "GraphPartial", new { alert = ViewBag.Alert });
+        Html.RenderAction("_LineChart", "GraphPartial", new { alertId = ViewBag.Alert });
     }
 }
 

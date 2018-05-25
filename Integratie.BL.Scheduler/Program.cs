@@ -49,7 +49,7 @@ namespace Integratie.Scheduler
                 // Trigger the job to run now, and then repeat every 10 seconds
                 ITrigger trigger = TriggerBuilder.Create()
                     .WithIdentity("trigger1", "group1")
-                    .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(2,0))
+                    .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(3,0))
                     .Build();
                 ITrigger trigger2 = TriggerBuilder.Create()
                     .WithIdentity("trigger2", "group2")

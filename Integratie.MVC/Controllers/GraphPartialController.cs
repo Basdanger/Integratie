@@ -1,6 +1,7 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities.Alerts;
 using Integratie.Domain.Entities.Graph;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,20 @@ namespace Integratie.MVC.Controllers
     public class GraphPartialController : Controller
     {
         GraphManager graphManager = new GraphManager();
+        AlertManager alertManager = new AlertManager();
         // GET: GraphPartial
-        public ActionResult _BarChart(Alert alert)
+        public ActionResult _BarChart(int alertId)
         {
+            Alert alert = alertManager.GetAlertById(alertId);
+            alertManager.UserAlertViewed(User.Identity.GetUserId(), alertId);
             alert.Graph.BarValues = JsonConvert.DeserializeObject<Dictionary<string,double>>(alert.JsonValues);
             return PartialView(alert);
         }
 
-        public ActionResult _LineChart(Alert alert)
+        public ActionResult _LineChart(int alertId)
         {
+            Alert alert = alertManager.GetAlertById(alertId);
+            alertManager.UserAlertViewed(User.Identity.GetUserId(), alertId);
             alert.Graph.LineValues = JsonConvert.DeserializeObject<Dictionary<string, List<double>>>(alert.JsonValues);
             return PartialView(alert);
         }
