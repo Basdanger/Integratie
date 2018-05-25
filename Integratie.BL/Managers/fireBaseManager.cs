@@ -12,7 +12,7 @@ namespace Integratie.BL.Managers
 {
     class FireBaseManager
     {
-        public void SendNotification(string tekst, string deviceId)
+        public async Task SendNotification(string tekst, string deviceId)
         {
             try
             {
@@ -42,16 +42,16 @@ namespace Integratie.BL.Managers
                 tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
                 tRequest.ContentLength = byteArray.Length;
 
-                using (Stream dataStream = tRequest.GetRequestStream())
+                using (Stream dataStream = await tRequest.GetRequestStreamAsync())
                 {
-                    dataStream.Write(byteArray, 0, byteArray.Length);
-                    using (WebResponse tResponse = tRequest.GetResponse())
+                    await dataStream.WriteAsync(byteArray, 0, byteArray.Length);
+                    using (WebResponse tResponse = await tRequest.GetResponseAsync())
                     {
                         using (Stream dataStreamResponse = tResponse.GetResponseStream())
                         {
                             using (StreamReader tReader = new StreamReader(dataStreamResponse))
                             {
-                                String sResponseFromServer = tReader.ReadToEnd();
+                                String sResponseFromServer = await tReader.ReadToEndAsync();
                                 string str = sResponseFromServer;
                             }
                         }

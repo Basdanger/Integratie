@@ -50,6 +50,12 @@ namespace Integratie.BL.Managers
         {
             return repo.ReadPeopleByOrganisation(orginasation);
         }
+
+        public async Task<List<Person>> GetPeopleByOrganisationAsync(string orginasation)
+        {
+            return await repo.ReadPeopleByOrganisationAsync(orginasation);
+        }
+
         public IEnumerable<Person> GetPersonen()
         {
             return repo.GetPersonen();
@@ -105,7 +111,7 @@ namespace Integratie.BL.Managers
         public async Task WeeklyReview(DateTime now)
         {
             FeedManager feedManager = new FeedManager();
-            List<Subject> subjects = repo.ReadSubjects().ToList();
+            List<Subject> subjects = await repo.ReadSubjectsAsync();
 
             foreach(Subject subject in subjects)
             {
@@ -116,7 +122,7 @@ namespace Integratie.BL.Managers
                 double std = 0;
                 double zScore = 0;
                 
-                IEnumerable<Feed> feeds;
+                List<Feed> feeds;
 
                 DateTime end = now;
                 DateTime start = end.AddDays(-7);
@@ -124,17 +130,17 @@ namespace Integratie.BL.Managers
 
                 if (subject.GetType().Equals(typeof(Person)))
                 {
-                    feeds = feedManager.GetPersonFeedsSince(subject.Name, now.AddDays(-7));
+                    feeds = await feedManager.GetPersonFeedsSinceAsync(subject.Name, now.AddDays(-7));
                     subject.FeedCount = feeds.Count();
                 }
                 else if (subject.GetType().Equals(typeof(Organisation)))
                 {
-                    feeds = feedManager.GetOrganisationFeedsSince(subject.Name, now.AddDays(-7));
+                    feeds = await feedManager.GetOrganisationFeedsSinceAsync(subject.Name, now.AddDays(-7));
                     subject.FeedCount = feeds.Count();
                 }
                 else
                 {
-                    feeds = feedManager.GetWordFeedsSince(subject.Name, now.AddDays(-7));
+                    feeds = await feedManager.GetWordFeedsSinceAsync(subject.Name, now.AddDays(-7));
                     subject.FeedCount = feeds.Count();
                 }
 

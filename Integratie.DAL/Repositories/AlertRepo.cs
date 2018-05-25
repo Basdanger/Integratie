@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,12 @@ namespace Integratie.DAL.Repositories
 
         public IEnumerable<Alert> GetAlerts()
         {
-            return context.Alerts.ToList<Alert>();
+            return context.Alerts.ToList();
+        }
+
+        public async Task<List<Alert>> GetAlertsAsync()
+        {
+            return await context.Alerts.ToListAsync();
         }
 
         public UserAlert GetUserAlert(int id)
@@ -50,14 +56,24 @@ namespace Integratie.DAL.Repositories
             return (UserAlert)context.UserAlerts.Find(id);
         }
 
+        public UserAlert GetUserAlertByUserAndAlert(string userId, int alertId)
+        {
+            return context.UserAlerts.Single(u => u.Account.ID.Equals(userId) && u.Alert.AlertID.Equals(alertId));
+        }
+
         public IEnumerable<UserAlert> GetUserAlerts()
         {
-            return context.UserAlerts.ToList<UserAlert>();
+            return context.UserAlerts.ToList();
         }
 
         public IEnumerable<UserAlert> GetUserAlertsOfAlert(int alertId)
         {
             return context.UserAlerts.Where(u => u.Alert.AlertID.Equals(alertId)).ToList<UserAlert>();
+        }
+
+        public async Task<List<UserAlert>> GetUserAlertsOfAlertAsync(int alertId)
+        {
+            return await context.UserAlerts.Where(u => u.Alert.AlertID.Equals(alertId)).ToListAsync();
         }
 
         public IEnumerable<UserAlert> GetUserAlertsOfUser(string userId)

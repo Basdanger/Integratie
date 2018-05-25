@@ -13,6 +13,7 @@ using Integratie.Domain.Entities.Graph;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using Integratie.Domain.Entities.Subjects;
 
 namespace Integratie.BL.Managers
 {
@@ -62,9 +63,19 @@ namespace Integratie.BL.Managers
             return repo.ReadPersonFeedsSince(person,date);
         }
 
+        public async Task<List<Feed>> GetPersonFeedsSinceAsync(string person, DateTime date)
+        {
+            return await repo.ReadPersonFeedsSinceAsync(person, date);
+        }
+
         public IEnumerable<Feed> GetWordFeedsSince(string word, DateTime date)
         {
             return repo.ReadWordFeedsSince(word,date);
+        }
+
+        public async Task<List<Feed>> GetWordFeedsSinceAsync(string word, DateTime date)
+        {
+            return await repo.ReadWordFeedsSinceAsync(word, date);
         }
 
         public IEnumerable<Feed> GetOrganisationFeedsSince(string orginasation, DateTime date)
@@ -72,6 +83,16 @@ namespace Integratie.BL.Managers
             IEnumerable<Feed> feeds = new List<Feed>();
             SubjectManager subjectManager = new SubjectManager();
             subjectManager.GetPeopleByOrganisation(orginasation).ToList().ForEach(s => feeds.Union(repo.ReadPersonFeedsSince(s.Name,date)));
+            return feeds;
+        }
+
+        public async Task<List<Feed>> GetOrganisationFeedsSinceAsync(string orginasation, DateTime date)
+        {
+            List<Feed> feeds = new List<Feed>();
+            List<Person> people = new List<Person>();
+            SubjectManager subjectManager = new SubjectManager();
+            people = await subjectManager.GetPeopleByOrganisationAsync(orginasation);
+            people.ForEach(async p => feeds.Union(await repo.ReadPersonFeedsSinceAsync(p.Name, date)));
             return feeds;
         }
 
@@ -186,15 +207,18 @@ namespace Integratie.BL.Managers
                 stream = "[" + string.Join("", filter) + "]";
             }
 
-            IEnumerable<Feed> resultsFeed = JsonConvert.DeserializeObject<IEnumerable<Feed>>(stream);
-            List<Feed> feeds = new List<Feed>();
-
-            foreach (Feed item in resultsFeed)
+            if (stream != "[]")
             {
-                feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
-            }
+                IEnumerable<Feed> resultsFeed = JsonConvert.DeserializeObject<IEnumerable<Feed>>(stream);
+                List<Feed> feeds = new List<Feed>();
 
-            await repo.CreateFeeds(feeds);
+                foreach (Feed item in resultsFeed)
+                {
+                    feeds.Add(new Feed(new Profile(item.Profile.Gender, item.Profile.Age, item.Profile.Education, item.Profile.Language, item.Profile.Personality), item.Words, item.Sentiment, item.Source, item.Hashtags, item.ID, item.Themes, item.Persons, item.Urls, item.Date, item.Mentions, item.Geo, item.Retweet));
+                }
+
+                await repo.CreateFeeds(feeds);
+            }
         }
     }
 }
