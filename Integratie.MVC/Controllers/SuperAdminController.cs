@@ -63,6 +63,44 @@ namespace Integratie.MVC.Controllers
 
         #endregion
 
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("SuperAdmin"))
+                .ToList(), "Name", "Name");
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var userRole = model.UserRoles = "Admin";
+                    await this.UserManager.AddToRoleAsync(user.Id, userRole);
+
+                    return RedirectToAction("ConfigPage", "Role");
+                }
+                else
+                {
+                    ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("SuperAdmin"))
+                        .ToList(), "Name", "Name");
+                    AddErrors(result);
+                }
+            }
+            return View(model);
+        }
+
         public ActionResult GetAdmins(string roleName = "Admin")
         {
             var roleManager =
