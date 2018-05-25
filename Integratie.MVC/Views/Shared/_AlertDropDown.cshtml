@@ -37,10 +37,38 @@
         {
             <div class="header">No Alerts</div>
         }
-        <div class="ui divider"></div>
-        <div class="item">Mark all as viewed</div>
+        else {
+            <div class="ui divider"></div>
+            <div class="item" id="markviewed">Mark all as viewed</div>
+        }
     </div>
 </div>
 <script>
     $('.ui.dropdown').dropdown();
+
+    function SendUserAlertViewed() {
+        $.ajax({
+            url: '@Url.Action("UpdateUserAlerts", "Shared")',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                //alert("Succes")
+            },
+            error: function (ex) {
+                //alert(ex.statusText);
+            }
+        });
+    }
+
+    $("#markviewed").click(function () {
+        SendUserAlertViewed();
+        var items = $('.menu .item');
+        for (var i = 1; i < items.length; i++) {
+            items[i].remove();
+        }
+        var dividers = $('.menu .divider');
+        dividers[dividers.length -1].remove();
+        var menu = $('.menu');
+        menu.append('<div class="header">No Alerts</div>');
+    });
 </script>

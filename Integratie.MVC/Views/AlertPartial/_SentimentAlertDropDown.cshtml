@@ -1,3 +1,15 @@
 ﻿@model Integratie.Domain.Entities.Alerts.SentimentAlert
 
-<div class="item">@Html.DisplayFor(model => model.Subject.Name) @ViewBag.Operator @Html.DisplayFor(model => model.Value)% @ViewBag.Property</div>
+@{
+    string type;
+}
+
+@if (Model.Graph.GraphType == Integratie.Domain.Entities.Graph.GraphType.Barchart)
+{
+    type = "Bar";
+}
+else
+{
+    type = "Line";
+}
+<div class="item"><a href="@Url.Action("Persoon","Subject",new { @id = Model.Subject.ID, @Full_Name = Model, @alertId = Model.AlertID, @type = type })">@Html.DisplayFor(model => model.Subject.Name) @ViewBag.Operator @Html.DisplayFor(model => model.Value)% @ViewBag.Property</a></div>

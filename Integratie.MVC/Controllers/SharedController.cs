@@ -16,5 +16,10 @@ namespace Integratie.MVC.Controllers
         {
             return PartialView(alertManager.GetUserAlertsOfUser(User.Identity.GetUserId()));
         }
+
+        public void UpdateUserAlerts()
+        {
+            alertManager.UserAlertsViewed(User.Identity.GetUserId());
+        }
     }
 }

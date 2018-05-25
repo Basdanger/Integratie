@@ -33,12 +33,11 @@ namespace Integratie.BL.Managers
 
         public async Task CheckAlerts(DateTime now)
         {
-            initNonExistingRepo();
-            List<Alert> alerts = repo.GetAlerts().ToList();
+            List<Alert> alerts = await repo.GetAlertsAsync();
             List<Alert> trueAlerts = new List<Alert>();
             foreach (Alert a in alerts)
             {
-                if (CheckAlert(a,now))
+                if (await CheckAlert(a,now))
                 {
                     trueAlerts.Add(a);
                 }
@@ -49,7 +48,7 @@ namespace Integratie.BL.Managers
             {
                 FireBaseManager fireBaseManager = new FireBaseManager();
                 MailManager mailManager = new MailManager();
-                List<UserAlert> userAlerts = repo.GetUserAlertsOfAlert(a.AlertID).ToList();
+                List<UserAlert> userAlerts = await repo.GetUserAlertsOfAlertAsync(a.AlertID);
                 foreach (UserAlert uA in userAlerts)
                 {
                     uA.Show = true;
@@ -59,38 +58,38 @@ namespace Integratie.BL.Managers
                     }
                     if (uA.App && uA.Account.DeviceId != null)
                     {
-                        fireBaseManager.SendNotification("test",uA.Account.DeviceId);
+                        await fireBaseManager.SendNotification("test",uA.Account.DeviceId);
                     }
                 }
                 await repo.UpdateUserAlerts(userAlerts);
             }
         }
 
-        private bool CheckAlert(Alert alert,DateTime now)
+        private async Task<bool> CheckAlert(Alert alert,DateTime now)
         {
             if (alert.GetType() == typeof(CheckAlert))
             {
-                return CheckCheckAlert((CheckAlert)alert,now);
+                return await CheckCheckAlert((CheckAlert)alert,now);
             }
             else if (alert.GetType() == typeof(CompareAlert))
             {
-                return CheckCompareAlert((CompareAlert)alert,now);
+                return await CheckCompareAlert((CompareAlert)alert,now);
             }
             else if (alert.GetType() == typeof(TrendAlert))
             {
-                return CheckTrendAlert((TrendAlert)alert,now);
+                return await CheckTrendAlert((TrendAlert)alert,now);
             }
             else
             {
-                return CheckSentimentAlert((SentimentAlert)alert,now);
+                return await CheckSentimentAlert((SentimentAlert)alert,now);
             }
         }
 
-        private bool CheckSentimentAlert(SentimentAlert alert,DateTime now)
+        private async Task<bool> CheckSentimentAlert(SentimentAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
-            IEnumerable<Feed> feeds;
+            List<Feed> feeds;
 
             DateTime end = now;
             DateTime start = end.AddDays(-7);
@@ -98,15 +97,15 @@ namespace Integratie.BL.Managers
 
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetPersonFeedsSinceAsync(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetOrganisationFeedsSinceAsync(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetWordFeedsSinceAsync(subject.Name, start);
             }
 
             int feedCount = feeds.Count();
@@ -167,11 +166,11 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckCheckAlert(CheckAlert alert,DateTime now)
+        private async Task<bool> CheckCheckAlert(CheckAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
             FeedManager feedManager = new FeedManager();
-            IEnumerable<Feed> feeds;
+            List<Feed> feeds;
 
             DateTime end = now;
             DateTime start = end.AddDays(-7);
@@ -180,15 +179,15 @@ namespace Integratie.BL.Managers
 
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name,start);
+                feeds = await feedManager.GetPersonFeedsSinceAsync(subject.Name,start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetOrganisationFeedsSinceAsync(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetWordFeedsSinceAsync(subject.Name, start);
             }
 
             int fCPast = 0;
@@ -258,7 +257,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckCompareAlert(CompareAlert alert,DateTime now)
+        private async Task<bool> CheckCompareAlert(CompareAlert alert,DateTime now)
         {
             Subject subjectA = alert.SubjectA;
             Subject subjectB = alert.SubjectB;
@@ -267,8 +266,8 @@ namespace Integratie.BL.Managers
             int fcB = 0;
 
             FeedManager feedManager = new FeedManager();
-            IEnumerable<Feed> feedsA;
-            IEnumerable<Feed> feedsB;
+            List<Feed> feedsA;
+            List<Feed> feedsB;
 
             DateTime end = now;
             DateTime start = end.AddDays(-7);
@@ -276,18 +275,18 @@ namespace Integratie.BL.Managers
 
             if (subjectA.GetType() == typeof(Person))
             {
-                feedsA = feedManager.GetPersonFeedsSince(subjectA.Name, start);
-                feedsB = feedManager.GetPersonFeedsSince(subjectB.Name, start);
+                feedsA = await feedManager.GetPersonFeedsSinceAsync(subjectA.Name, start);
+                feedsB = await feedManager.GetPersonFeedsSinceAsync(subjectB.Name, start);
             }
             else if (subjectA.GetType() == typeof(Organisation))
             {
-                feedsA = feedManager.GetOrganisationFeedsSince(subjectA.Name, start);
-                feedsB = feedManager.GetOrganisationFeedsSince(subjectB.Name, start);
+                feedsA = await feedManager.GetOrganisationFeedsSinceAsync(subjectA.Name, start);
+                feedsB = await feedManager.GetOrganisationFeedsSinceAsync(subjectB.Name, start);
             }
             else
             {
-                feedsA = feedManager.GetWordFeedsSince(subjectA.Name, start);
-                feedsB = feedManager.GetWordFeedsSince(subjectB.Name, start);
+                feedsA = await feedManager.GetWordFeedsSinceAsync(subjectA.Name, start);
+                feedsB = await feedManager.GetWordFeedsSinceAsync(subjectB.Name, start);
             }
 
             fcA = feedsA.Count();
@@ -317,7 +316,7 @@ namespace Integratie.BL.Managers
             return false;
         }
 
-        private bool CheckTrendAlert(TrendAlert alert,DateTime now)
+        private async Task<bool> CheckTrendAlert(TrendAlert alert,DateTime now)
         {
             Subject subject = alert.Subject;
 
@@ -338,15 +337,15 @@ namespace Integratie.BL.Managers
 
             if (subject.GetType() == typeof(Person))
             {
-                feeds = feedManager.GetPersonFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetPersonFeedsSinceAsync(subject.Name, start);
             }
             else if (subject.GetType() == typeof(Organisation))
             {
-                feeds = feedManager.GetOrganisationFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetOrganisationFeedsSinceAsync(subject.Name, start);
             }
             else
             {
-                feeds = feedManager.GetWordFeedsSince(subject.Name, start);
+                feeds = await feedManager.GetWordFeedsSinceAsync(subject.Name, start);
             }
 
             foreach (Feed f in feeds)
@@ -573,6 +572,20 @@ namespace Integratie.BL.Managers
             }
 
             await repo.UpdateUserAlerts(userAlerts);
+        }
+
+        public void UserAlertsViewed(string userId)
+        {
+            List<UserAlert> userAlerts = repo.GetUserAlertsOfUser(userId).ToList();
+            userAlerts.ForEach(u => u.Show = false);
+            userAlerts.ForEach(u => repo.UpdateUserAlert(u));
+        }
+
+        public void UserAlertViewed(string userId, int alertId)
+        {
+            UserAlert userAlert = repo.GetUserAlertByUserAndAlert(userId, alertId);
+            userAlert.Show = false;
+            repo.UpdateUserAlert(userAlert);
         }
 
         public void initNonExistingRepo(bool createWithUnitOfWork = false)
