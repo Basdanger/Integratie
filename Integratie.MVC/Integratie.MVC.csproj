@@ -503,6 +503,7 @@
     <Content Include="Views\GraphPartial\_LineChart.cshtml" />
     <Content Include="Views\SuperAdmin\EditAdminPassword.cshtml" />
     <Content Include="Views\SuperAdmin\EditEmail.cshtml" />
+    <Content Include="Views\SuperAdmin\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

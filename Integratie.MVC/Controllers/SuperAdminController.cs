@@ -89,7 +89,7 @@ namespace Integratie.MVC.Controllers
                     var userRole = model.UserRoles = "Admin";
                     await this.UserManager.AddToRoleAsync(user.Id, userRole);
 
-                    return RedirectToAction("ConfigPage", "Role");
+                    return RedirectToAction("GetAdmins", "SuperAdmin");
                 }
                 else
                 {
