@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : TeslaBaseController
     {
         GraphManager manager = new GraphManager();
         DashboardManager dbmanager = new DashboardManager();

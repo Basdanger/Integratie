@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Integratie.MVC.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : TeslaBaseController
     {
         private ApplicationDbContext context;
         RoleController rc = new RoleController();

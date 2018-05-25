@@ -11,7 +11,7 @@ using Integratie.MVC.Models;
 namespace Integratie.MVC.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : TeslaBaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

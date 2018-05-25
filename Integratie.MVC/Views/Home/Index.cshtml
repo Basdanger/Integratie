@@ -4,9 +4,23 @@
 @model List<DashboardItem>
 @{int counter = 0; }
 
-<!-- MARNICK CHART-->
-<!-- Jan -->
-    <div class="TeslaDashboardContainer"></div>
+<style>
+    .gridsterMenu{
+        color:@(ViewBag.PrimaryColor);
+    }
+    .TeslaSingleGraph{
+        color:@(ViewBag.PrimaryColor);
+    }
+    .TeslaSingleTrendValue{
+        color:@(ViewBag.PrimaryColor);
+    }
+    .TeslaSingleContainer{
+    background-color:@(ViewBag.SecondaryColor);
+    }
+    .teslaTag{
+    background-color:@(ViewBag.TertiaryColor);
+    }
+</style>
 <div class="gridsterMenu">
     <i class="fa fa-fw fa-wrench teslaDashboardEdit"></i>
     <i class="fa fa-fw fa-plus teslaDashboardAdd"></i>
@@ -26,7 +40,6 @@
             @Html.Partial("~/Views/Graph Inits/_BarChart.cshtml")
         </div>
     </div>
-</div>
 <script>
     $(document).ready(function () {
         $('#js3').on('click', function () {
@@ -68,7 +81,7 @@
 
             if (x.Graph.GraphType == GraphType.Barchart) {
                 <text>
-        var widget = ['<li data-id="' + @x.Graph.GraphId  +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
+        var widget = ['<li data-id="' + @x.Id   +'" data-graphid="' + @x.Graph.GraphId  +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
                 + '<div class="TeslaBarInformation">'
                 +'<span class="teslaTag">@x.Graph.CalcType</span>'
                 @{
@@ -99,7 +112,7 @@
             if (x.Graph.GraphType == GraphType.Single)
             {
                 <text>
-                var widget = ['<li data-id="' + @x.Graph.GraphId + '" data-graphid="' + @x.Graph.GraphId + '">'
+                var widget = ['<li data-id="' + @x.Id  + '" data-graphid="' + @x.Graph.GraphId  + '">'
 
                 + '<div class="TeslaGraphDelete hide">X</div>'
                 + '<div class="TeslaSingleContainer">'
@@ -136,7 +149,7 @@
             if (x.Graph.GraphType == GraphType.Linechart)
             {
                 <text>
-                var widget = ['<li data-id="' + @x.Graph.GraphId +'" data-graphid="' + @x.Graph.GraphId +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
+                var widget = ['<li data-id="' + @x.Id  +'" data-graphid="' + @x.Graph.GraphId  +  '"><div class="TeslaGraphDelete hide">X</div><canvas id="myChart' + @x.Id +'" style="max-height:100%;"></canvas>'
                 + '<div class="TeslaBarInformation">'
                 +'<span class="teslaTag">@x.Graph.CalcType</span>'
                 @{
@@ -168,10 +181,10 @@
             if (x.Graph.GraphType == GraphType.SingleTrend)
             {
                                <text>
-                var widget = ['<li data-id="' + @x.Graph.GraphId + '" data-graphid="' + @x.Graph.GraphId + '">'
+                var widget = ['<li data-id="' + @x.Id + '" data-graphid="' + @x.Graph.GraphId + '">'
                 + '<div class="TeslaGraphDelete hide">X</div>'
                 + '<div class="TeslaSingleContainer">'
-                + '<p class="TeslaSingleGraph" id="myChart' + @x.Graph.GraphId +'"></p>'
+                + '<p class="TeslaSingleGraph" id="myChart' + @x.Id +'"></p>'
                 + '<div class="TeslaSingleValueInformation">'
                 +'<span class="teslaTag">@x.Graph.CalcType</span>'
                 @{
@@ -444,7 +457,7 @@
                         @if (dbi.Graph.TrendArrowValue < 0) { <text> "#ff150017" </text>}
                         @if (dbi.Graph.TrendArrowValue == 0) { <text> '#00000017' </text>};
 
-                        $('#myChart</text>@dbi.Graph.GraphId<text>').append(
+                        $('#myChart</text>@dbi.Id<text>').append(
                             '<center><table style="text-align:center"><tr><td>'
                             + '<p class="TeslaSingleTrendValue">@dbi.Graph.SingleValue</p></td></tr><tr><td class="TeslaTrendArrowContainer" style="heigt:auto; background-color:' + bg +'!important">'
                             + '<span class="TeslaTrendArrow" style="color:' + color + '!important;">@(Math.Round(dbi.Graph.TrendValue*100,0))%</span>'

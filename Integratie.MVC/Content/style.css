@@ -1,8 +1,12 @@
-﻿body {
-    background-color:white;
+﻿html {
+    height: 100%;
+}
+body {
+    background-color: #f9f9f9;
+    height: 100%;
 }
 .content-wrapper{
-    height:100vh;
+    height:100%;
     margin-top:-80px;
 
 }
@@ -24,7 +28,7 @@
 }
 .tesla-container {
     height: 100%;
-    padding-top: 140px;
+    padding-top: 80px;
 }
 @media only screen and (min-width: 992px){
     .tesla-side-nav {
@@ -452,7 +456,6 @@ ul.slick-dots{
 }
 
 .tesla-title {
-    border-bottom: 2px solid #e5efff;
     padding: 2px
 }
 .TeslaRegisterContainer {
@@ -499,11 +502,9 @@ ul.slick-dots{
 }
 .TeslaThemesContainer {
     position: absolute;
-    height: 100vh;
     width: 100%;
     top: 0;
     z-index: -1;
-    background-color: #F0F0F0;
     color: black;
     padding-top: 100px;
     padding-left: 30px;
@@ -551,12 +552,11 @@ ul.slick-dots{
     position:relative;
 }
 .TeslaThemeInfo {
-    border: 1px solid #007bff;
-    background-color: #e1f0ff;
+    background-color: #eeeeee;
     margin-right: 20px;
     border-radius: 10px;
     height: 180px;
-    box-shadow: 2px 2px 5px gray;
+    box-shadow: 2px 4px 5px lightgray;
     display: inline-block;
     width: 30%;
 }
@@ -572,7 +572,7 @@ ul.slick-dots{
 
     margin-top:20px;
     font-size:20px;
-    color:#007bff;
+    color:black;
     margin-left:5px;
 }
 
@@ -594,7 +594,7 @@ ul.slick-dots{
     font-size: 20px;
     font-weight: 700;
     filter: brightness(120%);
-    background-color: #8afa81ab;
+    background-color: #cfe4d5;
 }
 .TeslaThemeFail {
     position: absolute;
@@ -606,7 +606,7 @@ ul.slick-dots{
     font-size: 20px;
     font-weight: 700;
     filter: brightness(120%);
-    background-color: #fa8181ab;
+    background-color: #f3d3d9;
 }
 .teslaSingleThemeTrendInfo.positive {
     display: inline-block;
@@ -618,11 +618,30 @@ ul.slick-dots{
     background-color: #8afa81ab;
 }
 .teslaSingleThemeTrendInfo.negative {
-    display:inline-block;
-    border-radius:15px;
-    margin-top:10px;
-    padding:6px;
-    font-size:20px;
+    display: inline-block;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 6px;
+    font-size: 20px;
     color: darkred;
-    background-color: #fa8181ab;
+    background-color: #f3d3d9;
+}
+.TeslaThemeWoordenGrafiek {
+    margin-right: 20px;
+    border-radius: 10px;
+
+    padding: 5px;
+    display: inline-block;
+    background-color: #eeeeee;
+    margin-top: 20px;
+    width: 30%;
+    box-shadow: 2px 4px 5px lightgray;
+}
+@media only screen and (max-width:1445px) {
+    .TeslaThemeWoordenGrafiek {
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 10px;
+    }
 }

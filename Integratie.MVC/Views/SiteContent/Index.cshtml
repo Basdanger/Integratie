@@ -30,6 +30,10 @@
         <label for="exampleInputEmail1">Secondary Color</label>
         <input id="SecondaryColorInput" type="text" class="form-control" style="width:auto" /> <br>
     </div>
+    <div id="TertiaryCP" data-color="@ViewBag.TertiaryColor" style="display:inline-block;">
+        <label for="exampleInputEmail1">Tertiary Color</label>
+        <input id="TertiaryColorInput" type="text" class="form-control" style="width:auto" /> <br>
+    </div>
     <br />
     <br />
     <label for="exampleInputEmail1">Site Content</label>
@@ -47,6 +51,24 @@
                     <label for="exampleInputEmail1">Welkomsbericht </label>
                     <br />
                     <div id="summernote"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="AlertCardHeader" class="card-header" style="color:#4183c4">
+                <a id="AlertTitle" class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Dashboard
+                </a>
+                <i class="fa fa-fw fa-dashboard"></i>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
+
+                <div class="card-body">
+                    <label for="exampleInputEmail1">Dashboard Title</label>
+                    <input type="text" class="form-control" id="FashboardTitleInput" value="@ViewBag.AlertAlias" aria-describedby="emailHelp" placeholder="">
+                    <br />
+                    <div id="summernoteA"></div>
                 </div>
             </div>
         </div>
@@ -176,6 +198,7 @@
 <script>
     var PrimaryColor;
     var SecondaryColor;
+    var TertiaryColor;
     var IndexContent;
     var AlertContent;
     var ThemeContent;
@@ -186,6 +209,11 @@
     var PrivacyContent;
     $(document).ready(function () {
         $('#summernote').summernote({
+            toolbar: [
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc',['undo','redo','codeview','fullscreen']]
+            ]
         });
         $('#summernote').summernote('code', '@Html.Raw(ViewBag.IndexContent)');
         $('#summernote').on('summernote.change', function (customEvent, contents, $editable) {
@@ -198,13 +226,9 @@
 
         $('#summernote1').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#AlertCardHeader').css("color", "orange");
@@ -219,13 +243,9 @@
             });
         $('#summernote2').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#ThemeCardHeader').css("color", "orange");
@@ -240,13 +260,9 @@
             });
         $('#summernote3').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#ThemeCardHeader').css("color", "orange");
@@ -261,13 +277,9 @@
             });
         $('#summernote4').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#PersonCardHeader').css("color", "orange");
@@ -282,13 +294,9 @@
             });
         $('#summernote5').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#OrganisationCardHeader').css("color", "orange");
@@ -303,13 +311,9 @@
             });
         $('#summernote6').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#FAQCardHeader').css("color", "orange");
@@ -324,13 +328,9 @@
             });
         $('#summernote7').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#ContactCardHeader').css("color", "orange");
@@ -345,13 +345,9 @@
             });
         $('#summernote8').summernote({
             toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
             ]
         }).on('summernote.change', function (customEvent, contents, $editable) {
             $('#PrivacyCardHeader').css("color", "orange");
@@ -364,7 +360,23 @@
                 PrivacyContent = $(this).summernote('code');
 
             });
+        $('#summernoteA').summernote({
+            toolbar: [
+                ['style', ['fontname', 'fontsize', 'color', 'bold', 'italic', 'underline', 'clear']],
+                ['insert', ['table', 'picture', 'link', 'video', 'hr']],
+                ['misc', ['undo', 'redo', 'codeview', 'fullscreen']]
+            ]
+        }).on('summernote.change', function (customEvent, contents, $editable) {
+            $('#PrivacyCardHeader').css("color", "orange");
+            $('#PrivacyTitle').css("color", "orange");
+            $("#ContentSave").removeClass("disabled");
+            DashboardContent = $(this).summernote('code');
+        })
+            .on('summernote.create', function () {
+                $(this).summernote("code", "@ViewBag.DashboardContent");
+                DashboardContent = $(this).summernote('code');
 
+            });
         $('#PrimaryCP').colorpicker({
                 inline: true,
                 container: true,
@@ -407,6 +419,28 @@
             SecondaryColor = $(this).colorpicker('getValue', '#ffffff');
             });;
 
+        $('#TertiaryCP').colorpicker({
+        inline: true,
+        container: true,
+        customClass: 'colorpicker-2x',
+        sliders: {
+            saturation: {
+                maxLeft: 200,
+                maxTop: 200
+            },
+            hue: {
+                maxTop: 200
+            },
+            alpha: {
+                maxTop: 200
+            }
+        }
+        }).on('changeColor create', function ()
+        {
+            $("#TertiaryColorInput").val($(this).colorpicker('getValue', '#ffffff'));
+            TertiaryColor = $(this).colorpicker('getValue', '#ffffff');
+            });;
+
     });
 </script>
 <!--CONTROL INIT FILL-->
@@ -436,6 +470,10 @@
         })
         $("#SecondaryColorInput").change(function () {
             $("#SecondaryColorInput").css("border", "1px solid orange");
+            $("#ContentSave").removeClass("disabled");
+        })
+        $("#TertiaryColorInput").change(function () {
+            $("#TertiaryColorInput").css("border", "1px solid orange");
             $("#ContentSave").removeClass("disabled");
         })
         $('#IndexTitelInput').change(function () {
@@ -499,6 +537,10 @@
                 IdKey: "SecondaryColor",
                 value: SecondaryColor
             }
+            var XTertiaryColor = {
+                IdKey: "TertiaryColor",
+                value: TertiaryColor
+            }
             var XIndexContent = {
                 IdKey: "IndexContent",
                 value: IndexContent
@@ -531,7 +573,7 @@
                 IdKey: "PrivacyContent",
                 value: PrivacyContent
             }
-            x.push(XTitle, XPrimaryColor, XSecondaryColor, XIndexContent, XAlertContent, XThemeContent, XPersonContent, XOrganisationContent, XFaqContent, XContactContent, XPrivacyContent);
+            x.push(XTitle, XPrimaryColor, XSecondaryColor, XTertiaryColor, XIndexContent, XAlertContent, XThemeContent, XPersonContent, XOrganisationContent, XFaqContent, XContactContent, XPrivacyContent);
 
 
             x = (JSON.stringify(x));
@@ -543,10 +585,10 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function () {
-                    alert("Succes")
+                    location.reload();
                 },
                 error: function (ex) {
-                    alert(ex.statusText);
+                    location.reload();
                 }
             });
         })

@@ -46,29 +46,20 @@ namespace Integratie.BL.Managers
         private Theme UpdateTheme(Theme thema)
         {
             thema = setTopFive(thema.TermsList, thema);
-            thema.TermMentions = setTermMentions(thema.TermsList);
+            thema.TermMentions = SetTermMentions(thema.TermsList);
 
             return thema;
         }
 
 
-        private List<TermMention> setTermMentions(List<string> termsList)
+        private List<TermMention> SetTermMentions(List<string> termsList)
         {
             List<TermMention> termMentionList = new List<TermMention>();
             foreach (String t in termsList)
             {
-                int counter = 0;
-                TermMention termMention = null;
-                foreach (Feed f in feedRepo.ReadFeeds())
-                {
-                    if (f.GetWords().Contains(t))
-                    {
-                        counter++;
-                    }
-                    termMention = new TermMention(t, counter);
+                    TermMention termMention = new TermMention(t, feedRepo.ReadFeedsForKeyWord(t).Count());
+                    termMentionList.Add(termMention);
 
-                }
-                termMentionList.Add(termMention);
             }
             return termMentionList;
         }

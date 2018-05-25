@@ -25,6 +25,11 @@ namespace Integratie.DAL.Repositories
             IEnumerable<Feed> feeds = context.Feeds.ToList<Feed>();
             return feeds;
         }
+        public IEnumerable<Feed> ReadFeedsForKeyWord(String keyword)
+        {
+            IEnumerable<Feed> feeds = context.Feeds.Where(f => f.Words.Contains(keyword.ToLower()));
+            return feeds;
+        }
 
         public void CreateFeed(Feed feed)
         {
