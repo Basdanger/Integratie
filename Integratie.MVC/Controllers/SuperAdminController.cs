@@ -1,39 +1,142 @@
 ﻿using Integratie.BL.Managers;
 using Integratie.Domain.Entities;
+using Integratie.MVC.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using static Integratie.MVC.Controllers.ManageController;
 
 namespace Integratie.MVC.Controllers
 {
     public class SuperAdminController : TeslaBaseController
     {
-        private AccountManager mgr = new AccountManager();
+        private AccountManager mgr;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        private ApplicationDbContext context;
         // GET: SuperAdmin
-        public ActionResult GetAdmins()
+
+        public SuperAdminController()
         {
-            IEnumerable<Account> accounts = mgr.GetAccounts();
-            return View(accounts);
+            mgr = new AccountManager();
+            context = new ApplicationDbContext();
         }
-        public void ExportToCSV()
+
+        public SuperAdminController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
-            StringWriter sw = new StringWriter();
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachement; filename=ExportedUsersList.csv");
-            Response.ContentType = "text/csv";
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
 
-            var users = mgr.GetAccounts();
-
-            foreach (var item in users)
+        #region managers
+        public ApplicationSignInManager SignInManager
+        {
+            get
             {
-                sw.WriteLine(String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\"", item.ID, item.Name, item.Mail, item.Password));
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            Response.Write(sw.ToString());
-            Response.End();
+            private set
+            {
+                _signInManager = value;
+            }
         }
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        #endregion
+
+        public ActionResult GetAdmins(string roleName = "Admin")
+        {
+            var roleManager =
+                new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            IQueryable<ApplicationUser> users = null;
+            if (roleManager.RoleExists("Admin"))
+            {
+                var idsWithPermission = roleManager.FindByName("Admin").Users.Select(iur => iur.UserId);
+                users = context.Users.Where(u => idsWithPermission.Contains(u.Id));
+            }
+            return View(users);
+        }
+
+        // GET: /SuperAdmin/ChangePassworOfAdmin
+        public ActionResult EditAdminPassword(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ChangePasswordAdminViewModel model = new ChangePasswordAdminViewModel() { Id = id };
+            return View(model);
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdminPassword(ChangePasswordAdminViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var removePassword = UserManager.RemovePassword(model.Id);
+            if (removePassword.Succeeded)
+            {
+                //Removed Password Success
+                var AddPassword = UserManager.AddPassword(model.Id, model.NewPassword);
+                if (AddPassword.Succeeded)
+                {
+                    return View();
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
+        public ActionResult EditEmail(string id, string email)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ChangeEmailViewModel model = new ChangeEmailViewModel() { Id = id };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditEmail(ChangeEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var changeEmail = UserManager.SetEmail(model.Id, model.NewEmail);
+            return View();
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
     }
 }
